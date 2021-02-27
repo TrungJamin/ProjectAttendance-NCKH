@@ -15,7 +15,6 @@ db.collection("Students2")
 
 function setList(group) {
   clearList();
-  let count = 0;
   for (const person of group) {
     const tr = document.createElement("tr");
     const td_ONumbers = document.createElement("td");
@@ -172,6 +171,7 @@ function setList(group) {
       edit.classList.add("open");
     });
   }
+  setOrdinalNumbers();
   if (group.length == 0) {
     setNoResult();
   }
