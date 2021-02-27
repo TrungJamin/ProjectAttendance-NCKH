@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>SB Admin 2 - Color Utilities</title>
+
+    <!-- Custom styles for this template-->
+    <link href="./../css/sb-admin-2.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./../css/admin.css">
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-firestore.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <script src="https://kit.fontawesome.com/33d2189f35.js" crossorigin="anonymous"></script>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+
+</head>
+
+<body id="page-top">
+    <!-- EDIT FORM -->
+    <div class="edit">
+        <div class="box">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title" style="text-align: center;">Edit Student's Information</h3>
+                </div>
+                <div class="panel-body">
+                    <form id="edit-form">
+                        <div class="form-group">
+                            <label for="student-id">ID </label>
+                            <input readonly name="studentID" type="text" class="form-control" id="student-id"
+                                placeholder="ID...">
+                            <label for="student-name">Name</label>
+                            <input name="studentName" type="text" class="form-control" id="student-name"
+                                placeholder="Name..." onkeypress="isAlphabetAndSpaces(event)" required>
+                            <br>
+                            <span id="lblValue" style="display: none; color: red; font-size: x-small;">Only Alphabets
+                                and spaces</span>
+
+                            <script>
+                                // Only enter alphabets and spaces
+                                function isAlphabetAndSpaces(event) {
+                                    var VIETNAMESE_DIACRITIC_CHARACTERS = "ẮẰẲẴẶĂẤẦẨẪẬÂÁÀÃẢẠĐẾỀỂỄỆÊÉÈẺẼẸÍÌỈĨỊỐỒỔỖỘÔỚỜỞỠỢƠÓÒÕỎỌỨỪỬỮỰƯÚÙỦŨỤÝỲỶỸỴ";
+                                    var ch = String.fromCharCode(event.which);
+                                    console.log(event.which);
+                                    console.log(ch);
+                                    if ((/[A-Za-z\s]/.test(ch)) || VIETNAMESE_DIACRITIC_CHARACTERS.toLocaleLowerCase().includes(ch.toLocaleLowerCase())) {
+                                        document.getElementById("lblValue").style.display = "none";
+                                    } else {
+
+                                        document.getElementById("lblValue").style.display = "block";
+                                        event.preventDefault();
+                                    }
+                                }    
+                            </script>
+
+
+
+                            <div class="row">
+                                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+                                    <label for="student-dob">Data Of Birth</label>
+                                    <input name="Dob" type="date" class="form-control dateOfBirth" id="student-dob"
+                                        placeholder="DateOfBirth" required>&nbsp;
+                                    <b style="font-size: xx-small;"> *mm/dd/yyy</b>
+                                </div>
+                                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                    <label for="inputGender">Gender</label>
+                                    <select name="Gender" id="inputGender" class="form-control" required>
+                                        <option value="" selected>Gender</option>
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                    </select>
+
+                                    <!-- <input name="Gender" type="text" class="form-control" id="student-gender"
+                                        placeholder="Gender" required> -->
+                                </div>
+                                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                                    <label for="student-class">Class</label>
+                                    <input name="Class" type="text" class="form-control" id="student-class"
+                                        placeholder="Class" required>
+                                </div>
+                            </div>
+
+                            <br>
+
+                            <label for="student-address">Address</label>
+                            <input name="Address" type="text" class="form-control" id="student-address"
+                                placeholder="Address" required>
+                            <br>
+                            <label for="student-phone">Phone Number</label>
+                            <input name="Phone" type="text" class="form-control" id="student-phone" placeholder="Phone"
+                                onkeypress="isNumber(event)" required>
+                            <span id="lblValue2" style="display: none; color: red; font-size: x-small;">Only numbers
+                            </span>
+
+                            <script>
+                                // Only enter alphabets and spaces
+                                function isNumber(event) {
+                                    var ch = String.fromCharCode(event.which);
+                                    console.log(event.which);
+                                    console.log(ch);
+                                    if (!(/[0-9]/.test(ch))) {
+                                        document.getElementById("lblValue2").style.display = "block";
+                                        event.preventDefault();
+                                    } else {
+                                        document.getElementById("lblValue2").style.display = "none";
+                                    }
+                                }    
+                            </script>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+
+                        <button id="cancel" type="button" class="btn btn-danger ml-280">Cancel</button>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                    <!-- Sidebar Toggle (Topbar) -->
+                    <form class="form-inline">
+                        <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                    </form>
+
+                    <!-- Topbar Search -->
+                    <form
+                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                        <div class="input-group">
+                            <input type="text" class="form-control bg-light border-0 small"
+                                placeholder="Search student..." aria-label="Search" aria-describedby="basic-addon2"
+                                id="Student-search">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="button">
+                                    <i class="fas fa-search fa-sm"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+
+                </nav>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- DataTales of Student -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">DataTables Of Student</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>ID</th>
+                                            <th>
+                                                Name
+                                            </th>
+                                            <th>DataOfBirth</th>
+                                            <th>Gender</th>
+                                            <th>Class</th>
+                                            <th>Address</th>
+                                            <th>Phone number</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>ID</th>
+                                            <th>
+                                                Name
+                                            </th>
+                                            <th>DataOfBirth</th>
+                                            <th>Gender</th>
+                                            <th>Class</th>
+                                            <th>Address</th>
+                                            <th>Phone number</th>
+                                            <th></th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody id="body-table">
+
+
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!-- /.container -->
+
+        </div>
+        <!-- End of Main Content -->
+
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <script>
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        var firebaseConfig = {
+            apiKey: "AIzaSyC3Yc52SF8cjOhM7jcskIkYTa3ViuCNijM",
+            authDomain: "attendance-aae4c.firebaseapp.com",
+            projectId: "attendance-aae4c",
+            storageBucket: "attendance-aae4c.appspot.com",
+            messagingSenderId: "215982681476",
+            appId: "1:215982681476:web:423a0e5b2d3a6cb6af41d1",
+            measurementId: "G-6S2QJD5SKB"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        var db = firebase.firestore();
+
+
+    </script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="./../js/sb-admin-2.js"></script>
+    <script src="./../js/sb-admin-2.min.js"></script>
+
+
+    <!-- Functions -->
+    <script src="./../js/functions/constants.js"></script>
+    <script src="./../js/functions/setList.js"></script>
+    <script src="./../js/functions/search.js"></script>
+    <script src="./../js/functions/edit.js"></script>
+    <script src="./../js/functions/onSnapshot.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title> Admin </title>
+
+    <!-- Custom fonts for this template-->
+    <!-- <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css"> -->
+
+    <!--  css table edit and add teacher  -->
+    <link rel="stylesheet" href="./../../css/teacherStyle.css">
+
+
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="./../../css/sb-admin-2.min.css" rel="stylesheet">
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+    <!-- firebase -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-firestore.js"></script>
+    <script>
+        var firebaseConfig = {
+            apiKey: "AIzaSyC3Yc52SF8cjOhM7jcskIkYTa3ViuCNijM",
+            authDomain: "attendance-aae4c.firebaseapp.com",
+            projectId: "attendance-aae4c",
+            storageBucket: "attendance-aae4c.appspot.com",
+            messagingSenderId: "215982681476",
+            appId: "1:215982681476:web:423a0e5b2d3a6cb6af41d1",
+            measurementId: "G-6S2QJD5SKB",
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+    </script>
+
+</head>
+
+
+<body>
+
+
+    <!-- Main Content -->
+
+
+    <div class="row text-white">
+        <div class="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto text-center form p-4">
+            <h1 class="display-4 py-2 text-success">Input teacher</h1>
+            <div class="px-2">
+                <form onsubmit="return mySubmitFunction(event)" class="justify-content-center" id="myForm">
+                    <div class="form-group">
+                        <label class="sr-only">Name</label>
+                        <input id="name" type="text" name="name" class="form-control" placeholder="Name"
+                            onkeyup="locKiTu(value,'name')" required />
+                    </div>
+                    <div class="form-group">
+                        <select class="form-control" name="group" id="group" required>
+                            <option value="nation">nation</option>
+                            <option value="sociocultural" selected="selected">sociocultural</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <select class="form-control" name="gender" id="gender" required>
+                            <option value="true">nam</option>
+                            <option value="false">nữ</option>
+                        </select>
+                    </div>
+
+                    <div class=" ">
+                        <div class="row">
+
+                            <div class="dropdown" style="padding: 1rem">
+                                <button class="btn btn-success dropdown-toggle" type="button" id="triggerId"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    danh sách lớp dạy
+                                </button>
+                                <div class="dropdown-menu" style="min-width: 20rem; padding: 2rem"
+                                    aria-labelledby="triggerId">
+                                    <div class="row" id="classTeach">
+                                        <div class="col-xs-4-12" style="padding: 0.5rem">
+                                            <!-- <h6 class="text-center">
+                                          lớp 11
+                                          </h6>                              
+                                           <div class="form-check">
+                                              <label class="form-check-label">
+                                              <input type="checkbox" class="form-check-input" value="101">Option 1
+                                               </label>
+                                          </div> -->
+                                        </div>
+
+                                        <div class="col-xs-4-12" style="padding: 0.5rem"></div>
+
+                                        <div class="col-xs-4-12" style="padding: 0.5rem"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="dropdown" style="padding: 1rem">
+                                <button class="btn btn-success dropdown-toggle" type="button" id="triggerId"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    danh sách môn dạy
+                                </button>
+                                <div class="dropdown-menu" style=" padding: 2rem" aria-labelledby="triggerId">
+                                    <div id='subjectTeach'>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <select class="form-control" name="classLeader" id="classLeader"
+                            aria-placeholder="chọn lớp chủ nhiệm" required></select>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="sr-only">Name</label>
+                        <input type="date" class="form-control" name="dataOfBirth" placeholder="ngày sinh" required />
+                    </div>
+                    <div class="form-group">
+                        <label class="sr-only">Email</label>
+                        <input id="address" type="text" class="form-control" name="address" placeholder="địa chỉ"
+                            onkeyup="locKiTu(value,'address')" required />
+                    </div>
+                    <button type="submit" class="btn btn-success">
+                        Add
+                    </button>
+
+                </form>
+            </div>
+        </div>
+
+    </div>
+    </div>
+    <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="./../../js/admin.js"></script>
+
+    <script src="./../../js/functions/Teacher/add_remove_editTeacher.js"></script>
+    <!-- <script src="xoaKhiTuThua.js"></script> -->
+
+</body>
+
+</html>

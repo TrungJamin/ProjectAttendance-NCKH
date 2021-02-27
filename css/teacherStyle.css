@@ -1,0 +1,40 @@
+#cover {
+  background: #222;
+  /* background-size: cover; */
+  height: 100%;
+  /* text-align: center; */
+  /* display: flex; */
+  position: absolute;
+  left: 100px;
+  top: 0px;
+}
+
+#backgroundgray {
+  background-color: rgba(126, 126, 126, 0.568);
+}
+
+.hide {
+  display: none;
+}
+
+#cover-caption {
+  width: 100%;
+  /* position: relative; */
+  z-index: 1;
+  position: absolute;
+  left: 0px;
+  top: 30px;
+}
+
+/* only used for background overlay not needed for centering */
+form:before {
+  content: "";
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  background-color: rgba(59, 59, 59, 0.767);
+  z-index: -1;
+  border-radius: 10px;
+}
