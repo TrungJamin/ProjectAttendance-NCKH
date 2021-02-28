@@ -1,5 +1,16 @@
+table,
+th,
+td {
+  border: 1px solid black;
+}
+thead,
+tfoot {
+  background-color: #337ab7;
+  color: #fff;
+}
+
 #cover {
-  background: #222;
+  background: #fff;
   /* background-size: cover; */
   height: 100%;
   /* text-align: center; */
@@ -10,7 +21,7 @@
 }
 
 #backgroundgray {
-  background-color: rgba(126, 126, 126, 0.568);
+  background-color: #fff(126, 126, 126, 0.568);
 }
 
 .hide {
