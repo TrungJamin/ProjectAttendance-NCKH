@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>SB Admin 2 - Border Utilities</title>
+
+    <!-- Custom styles for this template-->
+    <link href="/css/sb-admin-2.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/admin.css">
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-firestore.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <script src="https://kit.fontawesome.com/33d2189f35.js" crossorigin="anonymous"></script>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+
+                </nav>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+
+                <div class="container-fluid">
+
+                    <!-- DataTales of Student -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3" style="background-color: black;">
+                            <h6 class="m-0 font-weight-bold text-white">Add Student</h6>
+                        </div>
+                        <div class="card-body">
+
+                            <form id="adding-form" method="POST" class="form-horizontal" role="form">
+                                <div class="form-group">
+                                    <!-- Input Full Name -->
+                                    <div class="row">
+
+                                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                            <label for="student-name">Full Name</label>
+
+                                            <div class="col-sm-13">
+                                                <input name="name" type="text" class="form-control" id="student-name"
+                                                    placeholder="Name..." onkeypress="isAlphabetAndSpaces(event)"
+                                                    required>
+                                                <br>
+                                                <span id="lblValue"
+                                                    style="display: none; color: red; font-size: x-small;">
+                                                    Only Alphabets and spaces
+                                                </span>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                            <label for="dob">Date Of Birth</label>
+                                            <div class="col-sm-4">
+                                                <input name="dob" type="date" class="form-control" id="dob"
+                                                    placeholder="Input field" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <!-- Select : Gender, Grade, Class -->
+                                <div class="form-group">
+
+                                    <div class="row">
+                                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                            <label for="gender">Gender</label>
+                                            <div class="col-sm-9">
+                                                <select name="gender" id="selecGrade" class="form-control" required>
+                                                    <option value="">Gender</option>
+                                                    <option value="female">Female</option>
+                                                    <option value="male">Male</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                            <label for="grade">Grade</label>
+                                            <div class="col-sm-12">
+                                                <select name="grade" id="selectGrade" class="form-control" required>
+                                                    <option value="" selected>Choose Grade</option>
+                                                    <option value="10"> 10 </option>
+                                                    <option value="11"> 11 </option>
+                                                    <option value="12"> 12 </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                            <label for="class">Class</label>
+                                            <div class="col-sm-5">
+                                                <select name="class" id="selectClass" class="form-control" required>
+                                                    <option value="">Choose Class</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <!-- Address -->
+                                <div class="form-group">
+                                    <label for="address">Address</label>
+                                    <div class="col-sm-4">
+                                        <input name="address" type="text" class="form-control" id="address"
+                                            placeholder="Address..." required>
+                                    </div>
+
+                                </div>
+                                <!-- Phone number -->
+                                <div class="form-group">
+                                    <label for="phone_number">Phone number</label>
+                                    <div class="col-sm-4">
+                                        <input name="phone" type="text" class="form-control" id="phone_number"
+                                            placeholder="Phone number..." onkeypress="isNumber(event)">
+                                        <br>
+                                        <span id="lblValue2" style="display: none; color: red; font-size: x-small;">Only
+                                            numbers
+                                        </span>
+                                    </div>
+                                </div>
+                                <!-- Add-Button -->
+                                <div class="form-group">
+
+                                    <!-- <div class="row">
+                                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                                            <button type="submit" class="btn btn-primary">Add Student</button>
+                                        </div>
+                                    </div> -->
+                                    <div class="col-sm-10 col-sm-offset-2">
+                                        <button type="submit" class="deeper-button button-accent medium">Add
+                                            Student
+                                            <span class="hover-effect" style="left: 3.19998px; top: 57px;"></span>
+                                        </button>
+                                    </div>
+
+                                </div>
+
+
+
+                            </form>
+
+                        </div>
+                    </div>
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; Your Website 2020</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+    <script>
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        var firebaseConfig = {
+            apiKey: "AIzaSyC3Yc52SF8cjOhM7jcskIkYTa3ViuCNijM",
+            authDomain: "attendance-aae4c.firebaseapp.com",
+            projectId: "attendance-aae4c",
+            storageBucket: "attendance-aae4c.appspot.com",
+            messagingSenderId: "215982681476",
+            appId: "1:215982681476:web:423a0e5b2d3a6cb6af41d1",
+            measurementId: "G-6S2QJD5SKB"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        var db = firebase.firestore();
+
+
+    </script>
+
+    <script src="/js/functions/Student/add.js"></script>
+    <script src="/js/events/inputEvents.js"></script>
+
+</body>
+
+</html>
