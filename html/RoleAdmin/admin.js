@@ -50,16 +50,16 @@ firebase.auth().onAuthStateChanged((user) => {
 });
 
 addStudent.addEventListener("click", (event) => {
-  iFrame.src = "/html/Student/addStudent.html";
+  iFrame.src = "./Student/addStudent.html";
 });
 
 allStudents.addEventListener("click", (event) => {
-  iFrame.src = "/html/Student/allStudent.html";
+  iFrame.src = "./Student/allStudent.html";
 });
 
 addTeacher.addEventListener("click", (event) => {
-  iFrame.src = "/html/Teacher/addTeacher.html";
+  iFrame.src = "./Teacher/addTeacher.html";
 });
 listTeacher.addEventListener("click", (event) => {
-  iFrame.src = "/html/Teacher/allTeacher.html";
+  iFrame.src = "./Teacher/allTeacher.html";
 });
