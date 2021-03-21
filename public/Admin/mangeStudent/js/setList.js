@@ -55,7 +55,11 @@ function setList(group) {
 
     let doc_ID;
     // set Attribute cho từng "<tr> tag"
+<<<<<<< HEAD:public/Admin/mangeStudent/js/setList.js
     // console.log(studentTempList); // [] and (6) [{…}, {…}, {…}, {…}, {…}, {…}]
+=======
+    // console.log(studentTempList); // [] and (6) [{…}, {…}, {…}, {…}, {…}, {…}]
+>>>>>>> be3b45501560ea4288d2a177083db8f8814a8078:js/functions/Student/setList.js
     studentTempList.every((doc) => {
       if (
         doc.data.id === person.id &&
