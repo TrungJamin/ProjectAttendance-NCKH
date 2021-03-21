@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <!-- Latest compiled and minified CSS -->
+    <title>Admin</title>
+
+
+    <link rel="stylesheet" href="./../css/teacherStyle.css" />
+
+
+    <link href="./../../sb-admin-2.css" rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/2348ec6f34.js" crossorigin="anonymous"></script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+    <!-- firebase -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
+    <script>
+        var firebaseConfig = {
+            apiKey: "AIzaSyC3Yc52SF8cjOhM7jcskIkYTa3ViuCNijM",
+            authDomain: "attendance-aae4c.firebaseapp.com",
+            projectId: "attendance-aae4c",
+            storageBucket: "attendance-aae4c.appspot.com",
+            messagingSenderId: "215982681476",
+            appId: "1:215982681476:web:423a0e5b2d3a6cb6af41d1",
+            measurementId: "G-6S2QJD5SKB",
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+    </script>
+</head>
+
+<body>
+    <div id="cover-caption" class="hide">
+        <div class="container">
+            <div class="row text-white">
+                <div class="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto text-center form p-4">
+                    <h1 class="display-4 py-2 text-truncate"> Edit Teacher </h1>
+                    <div class="px-2">
+                        <form onsubmit="return mySubmitFunction(event)" class="justify-content-center" id="myForm">
+                            <div class="form-group">
+                                <label class="sr-only">Name</label>
+                                <input id="name" type="text" name="name" class="form-control" placeholder="Name"
+                                    onkeyup="locKiTu(value,'name')" required />
+                            </div>
+                            <div class="form-group">
+                                <select class="form-control" name="group" id="group">
+                                    <option value="nation">nation</option>
+                                    <option value="sociocultural" selected="selected">
+                                        sociocultural
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <select class="form-control" name="gender" id="gender">
+                                    <option value="true">nam</option>
+                                    <option value="false">nữ</option>
+                                </select>
+                            </div>
+
+                            <div class=" ">
+                                <div class="row">
+
+                                    <div class="dropdown" style="padding: 1rem">
+                                        <button class="btn btn-success dropdown-toggle" type="button" id="triggerId"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            danh sách lớp dạy
+                                        </button>
+                                        <div class="dropdown-menu" style="min-width: 20rem; padding: 2rem"
+                                            aria-labelledby="triggerId">
+                                            <div class="row" id="classTeach">
+                                                <div class="col-xs-4-12" style="padding: 0.5rem">
+                                                    <!-- <h6 class="text-center">
+                                lớp 11
+                                </h6>                              
+                                 <div class="form-check">
+                                    <label class="form-check-label">
+                                    <input type="checkbox" class="form-check-input" value="101">Option 1
+                                     </label>
+                                </div> -->
+                                                </div>
+
+                                                <div class="col-xs-4-12" style="padding: 0.5rem"></div>
+
+                                                <div class="col-xs-4-12" style="padding: 0.5rem"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="dropdown" style="padding: 1rem">
+                                        <button class="btn btn-success dropdown-toggle" type="button" id="triggerId"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            danh sách môn dạy
+                                        </button>
+                                        <div class="dropdown-menu" style=" padding: 2rem" aria-labelledby="triggerId">
+                                            <div id='subjectTeach'>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <select class="form-control" name="classLeader" id="classLeader"
+                                    aria-placeholder="chọn lớp chủ nhiệm"></select>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label class="sr-only">Name</label>
+                                <input type="date" class="form-control" name="dataOfBirth" placeholder="ngày sinh" />
+                            </div>
+                            <div class="form-group">
+                                <label class="sr-only">Email</label>
+                                <input id="address" type="text" class="form-control" name="address"
+                                    placeholder="địa chỉ" onkeyup="locKiTu(value,'address')" required />
+                            </div>
+
+
+                            <button type="submit" class="btn btn-success">
+                                Add
+                            </button>
+                            <button type="button" class="btn btn-danger" onclick="closeFormInput('cover-caption')">
+                                Cancel
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="wrapper">
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                    <!-- Sidebar Toggle (Topbar) -->
+                    <form class="form-inline">
+                        <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                    </form>
+
+                    <!-- Topbar Search -->
+                    <form
+                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                        <div class="input-group">
+                            <input type="text" class="form-control bg-light border-0 small"
+                                placeholder="Search teacher..." aria-label="Search" aria-describedby="basic-addon2"
+                                id="Teacher-search">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="button">
+                                    <i class="fas fa-search fa-sm"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+
+                </nav>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- DataTales of Teacher -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">DataTable Of Teacher</h6>
+                        </div>
+                        <!-- LOADING GIFT -->
+                        <!-- <div class="row" id="loading-gift">
+                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+
+                            </div>
+                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                <br>
+                                <img src="./../../img/loading.gif" style="margin-right: 100%;">
+
+                            </div>
+                        </div> -->
+                        <!-- End loading gift -->
+                        <div class="card-body">
+                            <div class="table-responsive">
+
+                                <table class="table table-bordered hidden" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr role="row">
+                                            <th>#</th>
+                                            <th>ID</th>
+                                            <th>Name</th>
+                                            <th>Team</th>
+                                            <th>Classes</th>
+                                            <th>Profession</th>
+                                            <th>Address</th>
+                                            <th>DateOfBirth</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr role="row">
+                                            <th>#</th>
+                                            <th>ID</th>
+                                            <th>Name</th>
+                                            <th>Team</th>
+                                            <th>Classes</th>
+                                            <th>Profession</th>
+                                            <th>Address</th>
+                                            <th>DateOfBirth</th>
+                                            <th></th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody id="upload">
+
+                                    </tbody>
+                                </table>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!-- /.container -->
+
+        </div>
+        <!-- End of Main Content -->
+    </div>
+    <!-- End of Content Wrapper -->
+
+
+
+
+
+
+    <!-- Bootstrap core JavaScript-->
+    <!-- <script src="./../../../js/InterfaceAdmin.js"></script> -->
+    <script src="./js/indexTeacher.js"></script>
+    <script src="./js/add_remove_editTeacher.js"></script>
+    <script src="./js/search.js"></script>
+    <!-- <script src="xoaKhiTuThua.js"></script> -->
+</body>
+
+</html>
