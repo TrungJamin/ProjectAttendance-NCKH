@@ -1,13 +1,20 @@
+const body_table = document.querySelector("#body-table");
+const listOfStudent = [];
+
+// FOR SETLIST and EDIT
+var docID;
+console.log("RUN - 3");
 const studentTempList = [];
 db.collection("Students2")
   .get()
   .then((snapShot) => {
+    console.log("Run - 1");
     snapShot.docs.forEach((doc) => {
-      let doc1 = {
+      let _doc = {
         id: doc.id,
         data: doc.data(),
       };
-      studentTempList.push(doc1);
+      studentTempList.push(_doc);
     });
   });
 
@@ -48,6 +55,7 @@ function setList(group) {
 
     let doc_ID;
     // set Attribute cho từng "<tr> tag"
+    // console.log(studentTempList); // [] and (6) [{…}, {…}, {…}, {…}, {…}, {…}]
     studentTempList.every((doc) => {
       if (
         doc.data.id === person.id &&
@@ -136,38 +144,6 @@ function setList(group) {
         setOptions(gradeTemp);
       }
       edit_form.Class1.value = tr.getElementsByTagName("td")[5].textContent;
-
-      /*  edit_form.studentID.value = person.id;
-
-      edit_form.studentName.value = person.name;
-
-      edit_form.Dob.value = person.dateOfBirth.split("/").reverse().join("-");
-      edit_form.Gender.value = person.gender;
-      // edit_form.Class.value = person.class;
-      edit_form.Address.value = person.address;
-      edit_form.Phone.value = person.phone;
-
-      // FIND GRADE's and set value for Grade Selection
-      let grade = person.class.slice(0, 2);
-      if (grade == "10") {
-        edit_form.grade.value = "10";
-      } else if (grade == "11") {
-        edit_form.grade.value = "11";
-      } else {
-        edit_form.grade.value = "12";
-      }
-
-      let gradeTemp = [];
-      gradeTemp = listOfClasses.find((item) => {
-        return gradeSelect.value == item.grade;
-      });
-      if (gradeTemp) {
-        setOptions(gradeTemp.classes);
-      } else {
-        setOptions(gradeTemp);
-      }
-      edit_form.Class1.value = person.class; */
-
       edit.classList.add("open");
     });
   }
@@ -205,3 +181,73 @@ function setOrdinalNumbers() {
     i++;
   }
 }
+
+// SORT
+function sortAtoZ() {
+  if (listOfStudent.length > 0) {
+    listOfStudent.sort((student1, student2) => {
+      return getLastName(student1.name) - getLastName(student2.name);
+    });
+    setList(listOfStudent);
+  }
+}
+
+function sortZtoA() {
+  if (listOfStudent.length > 0) {
+    listOfStudent.sort((student1, student2) => {
+      return getLastName(student2.name) - getLastName(student1.name);
+    });
+    setList(listOfStudent);
+  }
+}
+function getLastName(name) {
+  let temp = name.split(" ");
+
+  return temp[temp.length - 1].toLowerCase().charCodeAt(0);
+}
+// let a = [5, 3, 9, 2];
+// console.log(a);
+// a.sort((a, b) => a - b);
+// console.log(a);
+// console.log(listOfStudent);
+
+// SEARCH
+// SEARCH
+const search = document.getElementById("Student-search");
+// Get data form firebase
+
+/*  db.collection("Students2")
+    .get()
+    .then((snapShot) => {
+      snapShot.docs.forEach((doc) => {
+        listOfStudent.push(doc.data());
+      });
+    })
+    .then(() => {
+      setList(listOfStudent);
+    }); */
+
+// SEARCH
+search.addEventListener("input", (e) => {
+  let value = e.target.value;
+
+  if (value && value.trim().length > 0) {
+    value = value
+      .split(" ")
+      .filter((item) => item != "")
+      .join(" ")
+      .toLowerCase();
+    let tmp = listOfStudent.filter((student) => {
+      return (
+        student.name.toLowerCase().includes(value) ||
+        student.id.toString().toLowerCase().includes(value) ||
+        student.class.toLowerCase().includes(value) ||
+        student.gender.toLowerCase().includes(value) ||
+        student.phone.toLowerCase().includes(value)
+      );
+    });
+    setList(tmp);
+  } else {
+    setList(listOfStudent);
+  }
+});

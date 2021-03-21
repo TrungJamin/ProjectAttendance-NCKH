@@ -14,13 +14,11 @@ function indexOf(id) {
 // onSnapshot ( - onSnapshot se chay cuoi cung)
 db.collection("Students2").onSnapshot((snapShot) => {
   let changes = snapShot.docChanges();
+  console.log("Run - 2");
   changes.forEach((change) => {
     // Edit data
     if (change.type == "modified") {
-      console.log("RUN modified");
-      console.log(change.doc.id, change.doc.data());
       let tr = document.getElementById(change.doc.id);
-      console.log(change.doc.id);
       // tr.innerHTML = " ";
       // tr.innerHTML = `
       //   <td> 1 </td>
@@ -63,7 +61,6 @@ db.collection("Students2").onSnapshot((snapShot) => {
         // Nếu element vừa xóa có id trong listSubject thì xóa luôn phần tử đó trong listOfSubject
         listOfStudent.splice(index, 1);
       }
-
       let tr = document.getElementById(change.doc.id);
       body_table.removeChild(tr);
     }
