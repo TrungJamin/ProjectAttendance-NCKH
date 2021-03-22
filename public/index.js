@@ -32,3 +32,5 @@ login[0].addEventListener("submit", (event) => {
       alert(error.massages);
     });
 });
+console.log("789");
+console.log("123");

@@ -54,8 +54,6 @@ function setList(group) {
     i_edit.setAttribute("style", "color: green;");
 
     let doc_ID;
-    // set Attribute cho từng "<tr> tag"
-    // console.log(studentTempList); // [] and (6) [{…}, {…}, {…}, {…}, {…}, {…}]
     studentTempList.every((doc) => {
       if (
         doc.data.id === person.id &&

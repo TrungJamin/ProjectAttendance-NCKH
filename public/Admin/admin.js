@@ -14,11 +14,11 @@ const btnLogout = document.querySelector("#btnLogout"); // button hien thi form
 const agreeLogout = document.querySelector("#agreeLogout"); // dong y dang xuat
 const auth = firebase.auth();
 const makeAdmin = document.querySelector(".makeAdmin");
-makeAdmin.addEventListener("submit", (event) => {
-  event.preventDefault();
-  let email = makeAdmin["email"].value;
-  auth.getUserByEmail({ email }).then((res) => console.log(res));
-});
+// makeAdmin.addEventListener("submit", (event) => {
+//   event.preventDefault();
+//   let email = makeAdmin["email"].value;
+//   auth.getUserByEmail({ email }).then((res) => console.log(res));
+// });
 btnLogout.addEventListener("click", (event) => {
   console.log("chay btn");
   formLogout.classList.add("open"); // hien thi forms
@@ -35,7 +35,7 @@ agreeLogout.addEventListener("click", (event) => {
     .auth()
     .signOut()
     .then(() => {
-      location.assign("./../../index.html");
+      location.assign("./../index.html");
     })
     .catch((error) => {
       // An error happened.
@@ -43,7 +43,7 @@ agreeLogout.addEventListener("click", (event) => {
 });
 firebase.auth().onAuthStateChanged((user) => {
   if (!user) {
-    location.assign("./../../index.html");
+    location.assign("./../index.html");
   } else {
     homepage.classList.remove("non_active");
   }
