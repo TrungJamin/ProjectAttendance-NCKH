@@ -13,8 +13,11 @@
 
     <!-- Custom styles for this template-->
     <link href="./../../css/sb-admin-2.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./../css/main.css">
     <link rel="stylesheet" href="./../Admin/css/admin.css">
     <link rel="stylesheet" href="./../css/base.css">
+    <link rel="stylesheet" href="./../css/week.css">
+   
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-firestore.js"></script>
     <!-- Latest compiled and minified CSS -->
@@ -39,7 +42,7 @@
 
 <body id="page-top">
     <!--view1student-->
-    <div class="view open">
+    <div class="view grid">
         <div class="box">
             <div class="view-student">
                 
@@ -202,9 +205,9 @@
                 <!-- select view -->
                 <div class="select">
                     <ul class="select-lists">
-                        <li> <span class="list"><a class="link" href="#">Ngày</a> </span></li>
+                        <li> <span class="list "><a class="link" href="./ListStudentADay.html">Ngày</a> </span></li>
                         <li> <span class="list chose"><a class="link" href="#">Tuần</a></span></li>
-                        <li> <span class="list"><a class="link" href="#">Tháng</a></span></li>
+                        
                     </ul>
                 </div>
                 <!-- Begin Page Content -->
@@ -232,7 +235,7 @@
                  <!-- table danh sach-->
                 <div class="table">
                     <table class="table-bordered" id="dataTable" cellspacing="0">
-                                    
+
                         <thead>
                             
                             
@@ -807,16 +810,17 @@
                         </tbody>
                        
                     </table>
+                  
                 </div>
-                <button class="export">Export</button>
                
-                
+               
+        
 
             </div>
             <!-- /.container -->
 
     </div>
-    
+     <div > <button class="export">Export</button></div>
         <!--footer-->
     <footer class="footer">
         <div >
