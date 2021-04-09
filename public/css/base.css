@@ -14,7 +14,7 @@
     
     left: 22px;
     bottom: -20px;
-    height: 20px;
+    height: 34px;
     width: 350px;
 }
 .input-group-append{
@@ -49,7 +49,7 @@ select view
     display: inline-flex;
     float: right;
     position: absolute;
-    bottom:-10px;
+  
     right:50px ;
     list-style: none;
     padding: 10px;
@@ -72,77 +72,6 @@ select view
     text-decoration: none;
 }
 
-/* table*/
-  .table{
-      position: relative;
-      margin-top: 10px;
-      padding: 30px 5px;
-      background-clip: padding-box;
-      background-color:#fff;
-
-  }
-  table.table-bordered{
-      position: relative;
-      left: 50px;
-    width: 1161px;
-   background-color: #f8f6f6;
-   border: solid #AAA;
-   box-shadow: 7px 5px 7px 7px #AAA;
-   
-  }
-
-  .thfixed{
-    position: relative;
-  }
-  table.table-bordered tbody { display:block; max-height:450px; overflow-y:scroll; }
-  table.table-bordered thead, table tbody tr { display:table; width:100%; table-layout:fixed; }
-  table.table-bordered tbody td,
-  table.table-bordered thead th {
-    height: 30px;
-     border: 1px solid #7c6f6f;
-  }
-  thead tr th , td { 
-    height: 30px;
-    line-height: 30px;
-    text-align: center;
-}
-tbody td:last-child, thead th:last-child {
-    
-    border-right: none !important;
-}
-
-th:nth-child(1),td:nth-child(1){
-    width: 140px;
-}
-th:nth-child(2),td:nth-child(2){
-    width: 210px;
-}
-th:nth-child(3),td:nth-child(3){
-    width: 140px;
-}
-.first th:nth-child(4){
-    width: 656px;
-    width: calc(width-16px);
-}
-.last th:nth-child(1), td:nth-child(4){
-    width: 90px;
-}
-.last th:nth-child(2), td:nth-child(5){
-    width: 90px;
-}
-.last th:nth-child(3), td:nth-child(6){
-    width: 90px;
-}
-.last th:nth-child(4), td:nth-child(7){
-    width: 90px;
-}
-.last th:nth-child(5), td:nth-child(8){
-    width: 90px;
-}
-.last th:nth-child(6), td:nth-child(9){
-    width: 90px;
-}
-
 
 .h2{
     position: relative;
@@ -156,27 +85,23 @@ th:nth-child(3),td:nth-child(3){
     color:#637eb4;
 }
 
-.week{
-    display: flex;
-}
-.ngay{
-    margin: auto;
-}
+
 .havenote{
     color: red;
 }
 .non{
     color: #6d5d5d;
 }
-.non , .havenote{
+.alink{
     text-decoration: none;
 }
 /*export*/
 .export{
+   position: relative;
+   top: 80px;
+   right: 50px;
     float: right;
     background-color:#2c6ae6;
-    margin: 30px;
-    margin-right: 70px;
     height: 30px;
     width: 80px;
     border: 1.5px solid transparent;
@@ -190,12 +115,9 @@ th:nth-child(3),td:nth-child(3){
   
 }
 .export:active{
-    float: right;
+   
     background-color:#6d6e70;
-    margin: 30px;
-    margin-right: 70px;
-    height: 30px;
-    width: 80px;
+   
     border: 1.5px solid transparent;
    
     color: #fff;
@@ -205,10 +127,10 @@ th:nth-child(3),td:nth-child(3){
 .footer{
     position: relative;
     color: #6c7470;
-    margin-top: 30px;
-    left: 80px;
+    top: 150px;
+    margin-left: 80px;
     text-align: center;
-    padding: 40px;
+ 
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -218,6 +140,9 @@ h4{
 }
 .fab, .fa-facebook{
     cursor: text;
+}
+.conect{
+    margin-bottom: 50px;
 }
 .link-conect{
    
@@ -233,12 +158,14 @@ h4{
     display: block;
     width: 100%;
     height: 100%;
+
     position: fixed;
     top: 0;
     background: rgba(255, 255, 255, 0.856);
     z-index: 1;
+    
 }
-.view.none{
+.view{
  display: none;
 }
 .box{
@@ -247,11 +174,13 @@ h4{
     height: 700px;
     top: -80px;
    background-color: #e9fed1;
+   
 }
 .view-student{
     position: relative;
     width: 100%;
-   
+    height: 600px;
+    
 }
 .header{  
     position: relative;
@@ -268,51 +197,6 @@ h4{
 }
 .last-head{
     text-align: center;
-}
-.table-responsive{
-    position: relative;
-    height: 550px;
-}
-
-.table1  tr{
-    display: table-row;
-    width: 100%;
-    table-layout: fixed;
-}
-.table1{
-    border: #6d5d5d solid;
-    background-color: #eef7ea;
-    width: 95%;
-    margin: 40px 30px;
-    height: 100%;
-    box-shadow: 7px 5px 7px 7px #AAA;
-}
-
-.table1 tbody th,
-.table1 tbody td{
-    border: tan solid 1px;
-}
-.table1 thead th{
-    border: white solid 1px;
-}
-.table1 th:nth-child(1), .table1 td:nth-child(1){
-    width: 50px;
-}
-.table1 th:nth-child(2), .table1 td:nth-child(2){
-    width: 50px;
-}
-.table1 th:nth-child(3), .table1 td:nth-child(3){
-    width: 60px;
-}
-.table1 .thead-first th:nth-child(4){
-    width: 200px;
-}
-.table1 .thead-first th:nth-child(5){
-    width: 600px;
-}
-
-h2{
-    margin: 0;
 }
 
 
