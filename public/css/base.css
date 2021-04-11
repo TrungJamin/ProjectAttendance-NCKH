@@ -173,7 +173,7 @@ h4{
     width: 90%;
     height: 700px;
     top: -80px;
-   background-color: #e9fed1;
+   background-color: #eaf3f8;
    
 }
 .view-student{
@@ -199,4 +199,68 @@ h4{
     text-align: center;
 }
 
-
+/* note */
+a{
+    position: relative;
+    top: -5px;
+    text-align: center;
+    text-decoration: none;
+   
+  }
+  
+  .comat, .vangphep, .vang{
+  
+    margin: 0 auto;
+    width: 40px;
+    height: 20px;
+  }
+  .comat{
+    background-color: lawngreen;
+  }
+  .vangphep{
+    background-color: rgb(237, 240, 90);
+  }
+  .vang{
+    background-color: rgb(241, 118, 35);
+  }
+  .navhead{
+    display: inline-flex;
+    width: 100%;
+    justify-content: space-between;
+    
+}
+.navhead h3{
+    margin: 0;
+  
+}
+.multChoose{
+    position: relative;
+    top: 7px;
+    width: 150px;
+    margin-left: 5PX;
+}
+.month{
+    width: 50%;
+}
+.previous{
+    width: 50%;
+}
+.now{
+    margin-left: 5px;
+}
+.boder{
+    display: block;
+    border: 2px solid red;
+    box-shadow: 7px 5px 8px 7px rgb(243, 240, 240);
+    height:520px ;
+    margin: auto;
+   
+}
+.box-boder{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    width: 800px;
+   
+    
+}

@@ -38,9 +38,13 @@
     text-align: center;
 }
 
+
 .Table tbody { display:block; max-height:350px; overflow-y:scroll; }
 .Table thead, .Table tbody tr { display:table; width:100%; table-layout:fixed; }
-.Table th:nth-child(1), .Table td:nth-child(1){
+.Table thead {
+    width: calc(100% - 17px);
+}
+/* .Table th:nth-child(1), .Table td:nth-child(1){
     width: 110px;
 }
 .Table th:nth-child(2), .Table td:nth-child(2){
@@ -66,7 +70,7 @@
 }
 .Table td:nth-child(8){
     width: 74.34px
-}
+} */
 
 /* view note */
 .note.open {
@@ -106,4 +110,17 @@
     box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0), 0 6.7px 5.3px rgba(0, 0, 0, 0.048),
     0 12.5px 10px rgba(0, 0, 0, 0.06), 0 17.3px 17.9px rgba(0, 0, 0, 0.072),
     0 41.8px 33.4px rgba(0, 0, 0, 0.086), 0 100px 80px rgba(0, 0, 0, 0.12);
+}
+.noted{
+    cursor:default;
+}
+
+.navhead{
+    display: block;
+    width: 140px;
+    padding-bottom: 5px;
+    position: relative;
+    top:78px;
+    border: 1px solid rgb(245, 201, 201);
+    background:rgb(252, 244, 227);
 }
