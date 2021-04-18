@@ -59,3 +59,9 @@
 .danhsach{
     margin-left: 30px;
 }
+a{
+    top: 0;
+}
+.multChoose a{
+    top: -5px;
+}

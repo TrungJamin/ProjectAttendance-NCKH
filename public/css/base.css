@@ -209,10 +209,11 @@ a{
   }
   
   .comat, .vangphep, .vang{
-  
+    
     margin: 0 auto;
     width: 40px;
     height: 20px;
+    text-align: center;
   }
   .comat{
     background-color: lawngreen;

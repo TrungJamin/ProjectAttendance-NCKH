@@ -72,6 +72,7 @@
     width: 74.34px
 } */
 
+
 /* view note */
 .note.open {
     display: block;
@@ -123,4 +124,15 @@
     top:78px;
     border: 1px solid rgb(245, 201, 201);
     background:rgb(252, 244, 227);
+}
+.noted{
+    position: relative;
+  top: -5px;
+  text-align: center;
+}
+.a{
+    top: 0;
+}
+.alink{
+    text-align: center;
 }
