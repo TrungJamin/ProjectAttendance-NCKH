@@ -9,6 +9,7 @@ login[0].addEventListener("submit", (event) => {
     .auth()
     .signInWithEmailAndPassword(email, password)
     .then(async function (response) {
+      // check admin
       await db
         .collection("admin")
         .get()
@@ -20,17 +21,16 @@ login[0].addEventListener("submit", (event) => {
               check = true;
             }
           });
+
           return check; // can suy nghi
         })
         .then((res) => {
           res
             ? location.assign("./Admin/admin.html")
-            : location.assign("./Teacher/HompageTeacher.html");
+            : location.assign("./Teacher/screen/HompageTeacher.html");
         });
     })
     .catch(function (error) {
       alert(error.massages);
     });
 });
-console.log("789");
-console.log("123");
