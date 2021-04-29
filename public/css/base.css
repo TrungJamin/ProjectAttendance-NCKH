@@ -94,7 +94,7 @@ select view
 /*export*/
 .export {
   position: relative;
-  top: 80px;
+ 
   right: 50px;
   float: right;
   background-color: #2c6ae6;
@@ -242,11 +242,39 @@ a {
   /* border: 2px solid red; */
   box-shadow: 7px 5px 8px 7px rgb(243, 240, 240);
   height: 520px;
-  margin: auto;
+  margin: 0 auto;
 }
 .box-boder {
   position: relative;
   display: flex;
   justify-content: center;
   width: 800px;
+}
+h4{
+  margin:15px 0 0 10px;
+}
+p{
+  margin: 8px 0 0 20px;
+}
+.co, .phep, .kPhep{
+  width: 40px;
+  height: 20px;
+  margin-top: 15px;
+  
+}
+.co{
+  background-color: lawngreen;
+  margin-left:  90px;
+}
+.phep {
+  background-color: rgb(237, 240, 90);
+  margin-left:  43px;
+}
+.kPhep {
+  background-color: rgb(241, 118, 35);
+  margin-left:  15px;
+}
+.chuthich{
+  position: relative;
+  top: 8px;
 }

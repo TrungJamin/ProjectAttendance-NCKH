@@ -4460,6 +4460,8 @@ input[type="button"].btn-block {
   background-clip: border-box;
   border: 1px solid #e3e6f0;
   border-radius: 0.35rem;
+  width: 70%;
+  margin: 0 auto;
 }
 
 .card > hr {
@@ -7609,6 +7611,7 @@ button.bg-dark:focus {
 }
 
 .m-0 {
+  text-align: center;
   margin: 0 !important;
 }
 
