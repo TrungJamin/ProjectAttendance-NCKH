@@ -1,4 +1,4 @@
-const view = document.querySelector(".view");
+const view = document.querySelector(".view-awmonth");
 const notes = document.querySelectorAll(".noted");
 
 for (var i = 0; i < notes.length; i++) {

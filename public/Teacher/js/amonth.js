@@ -1,4 +1,4 @@
-const view = document.querySelector(".view");
+const view = document.querySelector(".view-aweek");
 const notes = document.querySelectorAll(".havenote");
 
 for (var i = 0; i < notes.length; i++) {
