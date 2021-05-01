@@ -44,43 +44,43 @@
 
 <body id="page-top">
    <!-- Main Content -->
-         <div id="content">
+    <div id="content">
 
-            <!-- Topbar -->
-            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-                <!-- Sidebar Toggle (Topbar) -->
-                <h2 class="h2">Danh Sách Điểm Danh Lớp 10A1</h2>
+        <!-- Topbar -->
+        <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+            <!-- Sidebar Toggle (Topbar) -->
+            <h2 class="h2">Danh Sách Điểm Danh Lớp 10A1</h2>
 
-            </nav>
-            <form
-                class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                <div class="input-group">
-                    <input type="text" class="form-control bg-light border-0 small"
-                        placeholder="Search student..." aria-label="Search" aria-describedby="basic-addon2"
-                        id="Student-search">
-                    <div class="input-group-append">
-                        <button class="btn btn-primary" type="button">
-                            <i class="fas fa-search fa-lg" style="color: rgb(252, 251, 247);"></i>
-                        </button>
-                    </div>
+        </nav>
+        <form
+            class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+            <div class="input-group">
+                <input type="text" class="form-control bg-light border-0 small"
+                    placeholder="Search student..." aria-label="Search" aria-describedby="basic-addon2"
+                    id="Student-search">
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="button">
+                        <i class="fas fa-search fa-lg" style="color: rgb(252, 251, 247);"></i>
+                    </button>
                 </div>
-            </form>
-
-            <!-- select view -->
-            <div class="select">
-                <ul class="select-lists">
-                    <li> <span class="list chose"><a class="link" id="link-ngay" href="">Ngày</a> </span>
-                    </li>
-                    <li> <span class="list"><a class="link" id="link-tuan" href="">Tuần</a></span></li>
-                    <li> <span class="list"><a class="link" id="link-thang" href="">Tháng</a> </span></li>
-                </ul>
             </div>
-          
+        </form>
 
+        <!-- select view -->
+        <div class="select">
+            <ul class="select-lists">
+                <li> <span class="list"><a class="link" id="link-ngay">Ngày</a> </span>
+                </li>
+                <li> <span class="list chose"><a class="link" id="link-tuan">Tuần</a></span></li>
+                <li> <span class="list"><a class="link" id="link-thang">Tháng</a> </span></li>
+            </ul>
         </div>
+        
+
+    </div>
     <div class="container">
          
-        <div class="view-week non_active">
+        <div class="view-week ">
             <div class="view view-aweek grid">
                 <div class="box">
                     <div class="view-student">
@@ -285,9 +285,9 @@
                         <div class="boder">
                             <div class="navhead">
                                 <div class="multChoose">
-                                    <a href="#" class="previous"><i class="fas fa-chevron-circle-left fa-lg"></i></a>
-                                    <a href="#" class="next"><i class="fas fa-chevron-circle-right fa-lg"></i></a>
-                                    <a href="#" class="now">Hôm nay</a>
+                                    <a class="previous"><i class="fas fa-chevron-circle-left fa-lg"></i></a>
+                                    <a class="next"><i class="fas fa-chevron-circle-right fa-lg"></i></a>
+                                    <a class="now">Hôm nay</a>
                                 </div>
                                 <div class="month">
                                     <h3>Tuần 3, tháng 2/ 2021</h3>
@@ -808,7 +808,7 @@
             <div> <button class="export">Export</button></div>
         </div>
 
-        <div class="view-Day ">
+        <div class="view-day non_active">
             <div class="note grid">
                 <div class="view-note">
                     <div class="noteforone">
@@ -1219,7 +1219,6 @@
                         </ul>
                     </div>
                 </div>
-
             </div>
 
             <!--  -->
@@ -1533,9 +1532,11 @@
 
 
     </script>
+     <script src="./../js/list.js"></script>
     <script src="./../js/aWeek.js"></script>
     <script src="./../js/amonth.js"></script>
     <script src="./../js/aday.js"></script>
+
     <!-- Functions -->
 
 </body>

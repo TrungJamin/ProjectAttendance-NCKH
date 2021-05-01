@@ -1,17 +1,17 @@
-const view = document.querySelector(".view-aweek");
+const viewMont = document.querySelector(".view-amonth");
 const notes = document.querySelectorAll(".havenote");
 
 for (var i = 0; i < notes.length; i++) {
   notes[i].addEventListener("click", (e) => {
     e.preventDefault();
-    view.classList.add("open");
-    console.log(view.classList);
+    viewMont.classList.add("open");
+    console.log(viewMont.classList);
   });
 }
-view.addEventListener("click", (e) => {
+viewMont.addEventListener("click", (e) => {
   e.preventDefault();
-  if (view.classList.contains("open")) {
-    view.classList.remove("open");
+  if (viewMont.classList.contains("open")) {
+    viewMont.classList.remove("open");
   }
 });
 

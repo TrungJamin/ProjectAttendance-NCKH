@@ -1,4 +1,4 @@
-.view-Day .sang{
+.view-day .sang{
     position: relative;
     top: 80px;
     max-width: 1500px;
@@ -10,7 +10,7 @@
     width: 100%;
     height: 500px;
 }
-.view-Day .chieu{
+.view-day .chieu{
     position: relative;
     top: 110px;
     max-width: 1500px;
@@ -22,10 +22,10 @@
     width: 100%;
     height: 670px;
 }
-.view-Day .label{
+.view-day .label{
     text-align: center;
 }
-.view-Day .Table{
+.view-day .Table{
     position: relative;
     margin: 0 auto;
     width: inherit;
@@ -39,14 +39,14 @@
 }
 
 
-.view-Day .Table tbody { display:block; max-height:350px; overflow-y:scroll; }
-.view-Day .Table thead, .Table tbody tr { display:table; width:100%; table-layout:fixed; }
-.view-Day .Table thead {
+.view-day .Table tbody { display:block; max-height:350px; overflow-y:scroll; }
+.view-day .Table thead, .Table tbody tr { display:table; width:100%; table-layout:fixed; }
+.view-day .Table thead {
     width: calc(100% - 17px);
 }
 
 /* view note */
-.view-Day .note.open {
+.view-day .note.open {
     display: block;
     width: 100%;
     height: 100%;
@@ -55,10 +55,10 @@
     background: rgba(243, 245, 245, 0.86);
     z-index: 1;
 }
-.view-Day .note{
+.view-day .note{
     display: none;
 }
-.view-Day .view-note{
+.view-day .view-note{
     box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0), 0 6.7px 5.3px rgba(0, 0, 0, 0.048),
     0 12.5px 10px rgba(0, 0, 0, 0.06), 0 22.3px 17.9px rgba(0, 0, 0, 0.072),
     0 41.8px 33.4px rgba(0, 0, 0, 0.086), 0 100px 80px rgba(0, 0, 0, 0.12);
@@ -70,11 +70,11 @@
     background: white;
     border-radius: 5px;
 }
-.view-Day .note-sang{
+.view-day .note-sang{
     text-align: center;
 }
 
-.view-Day .table-hover{
+.view-day .table-hover{
     position: relative;
     width:  90%;
     margin: 0 auto;
@@ -84,11 +84,11 @@
     0 12.5px 10px rgba(0, 0, 0, 0.06), 0 17.3px 17.9px rgba(0, 0, 0, 0.072),
     0 41.8px 33.4px rgba(0, 0, 0, 0.086), 0 100px 80px rgba(0, 0, 0, 0.12);
 }
-.view-Day .noted{
+.view-day .noted{
     cursor:default;
 }
 
-.view-Day .navhead{
+.view-day .navhead{
     display: block;
     width: 140px;
     padding-bottom: 5px;
@@ -97,14 +97,15 @@
     border: 1px solid rgb(245, 201, 201);
     background:#edfaf2;
 }
-.view-Day .noted{
+.view-day .noted{
     position: relative;
   top: -5px;
   text-align: center;
 }
-.view-Day .a{
+.view-day a{
     top: 0;
+    color: #050505;
 }
-.view-Day .alink{
+.view-day .alink{
     text-align: center;
 }
