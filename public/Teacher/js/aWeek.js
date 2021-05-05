@@ -1,17 +1,18 @@
-const view = document.querySelector(".view");
-const notes = document.querySelectorAll(".noted");
+const viewMonth = document.querySelector(".view-aweek");
+const Notes = document.querySelectorAll(".noted");
 
-for (var i = 0; i < notes.length; i++) {
-  notes[i].addEventListener("click", (e) => {
+for (var i = 0; i < Notes.length; i++) {
+  Notes[i].addEventListener("click", (e) => {
     e.preventDefault();
-    view.classList.add("open");
-    console.log(view.classList);
+    console.log("chay");
+    viewMonth.classList.add("open");
+    console.log(viewMonth.classList);
   });
 }
-view.addEventListener("click", (e) => {
+viewMonth.addEventListener("click", (e) => {
   e.preventDefault();
-  if (view.classList.contains("open")) {
-    view.classList.remove("open");
+  if (viewMonth.classList.contains("open")) {
+    viewMonth.classList.remove("open");
   }
 });
 const listStudents = [];
