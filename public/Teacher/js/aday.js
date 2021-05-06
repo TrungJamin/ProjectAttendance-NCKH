@@ -8,7 +8,7 @@ const DateNowAfternoon = document.querySelector(".date-now-afternoon");
 
 function getDateNow() {
   let d = new Date();
-  let tmp = d.getDate() + "-" + (d.getMonth() + 1) + "-" + d.getFullYear();
+  let tmp = d.getMonth() + 1 + "-" + d.getDate() + "-" + d.getFullYear();
   return tmp;
 }
 DateNowMorning.innerText = "Sáng " + getDateNow();

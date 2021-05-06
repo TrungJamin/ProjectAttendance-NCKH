@@ -1,6 +1,8 @@
 const viewMonth = document.querySelector(".view-aweek");
 const Notes = document.querySelectorAll(".noted");
 const weekNow = document.querySelector(".week-now");
+const viewDayInWeek = document.querySelector(".last");
+
 function maxDay(month, year) {
   if (
     month == 12 ||
@@ -46,15 +48,16 @@ function differentDays(date, date2) {
   return sum + diff - 1;
 }
 
-function getWeekNow() {
-  let date = new Date();
+function getWeekNow(date) {
+  console.log(parseInt(differentDays(new Date("5-3-2021"), date) / 7));
+  console.log(parseInt(differentDays(new Date("5-3-2021"), date) / 7) + 1);
   return parseInt(differentDays(new Date("5-3-2021"), date) / 7) + 1;
 }
 function WeekNow() {
   let d = new Date();
   return (
     "Week " +
-    getWeekNow() +
+    getWeekNow(new Date()) +
     ", Month :" +
     (d.getMonth() + 1) +
     "/" +
@@ -77,3 +80,30 @@ viewMonth.addEventListener("click", (e) => {
     viewMonth.classList.remove("open");
   }
 });
+function getTypeDay(zeller) {
+  switch (zeller) {
+    case 1:
+      return "Mon";
+    case 2:
+      return "Tue";
+    case 3:
+      return "Wed";
+    case 4:
+      return "Thu";
+    case 5:
+      return "Fri";
+    case 6:
+      return "Sat";
+    case 0:
+      return "Sun";
+  }
+}
+
+renderWeek = (listStudents) => {
+  console.log(listStudents);
+  let viewDay = listStudents.map((student) => {
+    if (getWeekNow(new Date()) == student.week) {
+    }
+  });
+};
+console.log(differentDays(new Date("5-3-2021"), new Date("5-10-2021")));
