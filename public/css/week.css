@@ -1,130 +1,140 @@
-
 /* table*/
-.table{
-    position: relative;
-    top:80px;
-    padding: 30px 5px;
-    background-clip: padding-box;
-    background-color:#fff;
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    height: 680px;
+.view-week .table {
+  position: relative;
+  top: 80px;
+  padding: 30px 5px;
+  background-clip: padding-box;
+  background-color: #fff;
+  justify-content: center;
+  width: 100%;
+  height: 800px;
 }
-.table-bordered{
-
-    position: relative;
-     width: 100%;
-     height: 542px;
- background-color: #f8f6f6;
- border: solid #AAA;
-
- 
+.view-week .table-bordered {
+  position: relative;
+  width: 100%;
+  height: 542px;
+  background-color: #f8f6f6;
+  border: solid #aaa;
 }
-.boder{
+.view-week .boder {
   width: 90%;
   height: 570px;
 }
-.thfixed{
+.view-week .thfixed {
   position: relative;
 }
-.table-bordered tbody { display:block; max-height:450px; overflow-y:scroll; }
-.table-bordered thead, table tbody tr { display:table; width:100%; table-layout:fixed; }
-.table-bordered tbody td,
-.table-bordered thead th {
-  height: 30px;
-   border: 1px solid #7c6f6f;
-   text-decoration: none;
+.view-week .table-bordered tbody {
+  display: block;
+  max-height: 450px;
+  overflow-y: scroll;
 }
-thead tr th , td { 
+.view-week .table-bordered thead,
+.view-week table tbody tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+.view-week .table-bordered tbody td,
+.view-week .table-bordered thead th {
+  height: 30px;
+  border: 1px solid #375dcd;
+  text-decoration: none;
+}
+.view-week thead tr th,
+.view-week td {
   height: 30px;
   line-height: 30px;
   text-align: center;
 }
-tbody td:last-child, thead th:last-child {
-  
+.view-week tbody td:last-child,
+.view-week thead th:last-child {
   border-right: none !important;
 }
-.table-bordered thead {
+.view-week .table-bordered thead {
   width: calc(100% - 17px);
 }
-.table-bordered thead tr th:nth-child(1), .table-bordered tbody tr td:nth-child(1){
+.view-week .table-bordered thead tr th:nth-child(1),
+.view-week .table-bordered tbody tr td:nth-child(1) {
   width: 15%;
 }
-.table-bordered thead tr th:nth-child(2), .table-bordered tbody tr td:nth-child(2){
+.view-week .table-bordered thead tr th:nth-child(2),
+.view-week .table-bordered tbody tr td:nth-child(2) {
   width: 20%;
 }
-.table-bordered thead tr th:nth-child(3), .table-bordered tbody tr td:nth-child(3){
+.view-week .table-bordered thead tr th:nth-child(3),
+.view-week .table-bordered tbody tr td:nth-child(3) {
   width: 10%;
 }
-.non, .havenote{
+.view-week .non,
+.view-week .havenote {
   text-decoration: none;
 }
-.table-responsive{
+.view-week .table-responsive {
   position: relative;
   max-height: 470px;
   width: 100%;
 }
 
-.table1  tr{
+.view-week .table1 tr {
   display: table-row;
   width: 100%;
   table-layout: fixed;
 }
-.table1{
+.view-week .table1 {
   border: #6d5d5d solid;
   background-color: #eef7ea;
   width: 95%;
   margin: 40px 30px;
   height: 100%;
-  box-shadow: 7px 5px 7px 7px #AAA;
+  box-shadow: 7px 5px 7px 7px #aaa;
 }
 
-.table1 tbody th,
-.table1 tbody td{
+.view-week .table1 tbody th,
+.view-week .table1 tbody td {
   border: tan solid 1px;
 }
-.table1 thead th{
+.view-week .table1 thead th {
   border: white solid 1px;
 }
-.table1 thead th:last-child, .table1 tbody td:last-child{
+.view-week .table1 thead th:last-child,
+.view-week .table1 tbody td:last-child {
   width: 750px;
 }
-tbody td{
+.view-week tbody td {
   max-height: 70px;
 }
 
-.last-head h2{
+.view-week .last-head h2 {
   margin: 0;
 }
 
-a{
+.view-week a {
   position: relative;
   top: -5px;
   text-align: center;
   text-decoration: none;
- 
 }
 
-.comat, .vangphep, .vang{
-
+.view-week .comat,
+.view-week .vangphep,
+.view-week .vang {
   margin: 0 auto;
   width: 40px;
   height: 20px;
 }
-.comat{
+.view-week .comat {
   background-color: lawngreen;
 }
-.vangphep{
+
+.view-week .vangphep {
   background-color: rgb(237, 240, 90);
 }
-.vang{
+.view-week .vang {
   background-color: rgb(241, 118, 35);
 }
-.choose.none {
+.view-week .choose.none {
   display: none;
 }
-.far{
-  cursor:unset;
+.view-week .far {
+  cursor: unset;
 }
-

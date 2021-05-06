@@ -1,4 +1,4 @@
-.sang{
+.view-day .sang{
     position: relative;
     top: 80px;
     max-width: 1500px;
@@ -10,7 +10,7 @@
     width: 100%;
     height: 500px;
 }
-.chieu{
+.view-day .chieu{
     position: relative;
     top: 110px;
     max-width: 1500px;
@@ -20,12 +20,12 @@
     background-color: #fff;
    
     width: 100%;
-    height: 500px;
+    height: 670px;
 }
-.label{
+.view-day .label{
     text-align: center;
 }
-.Table{
+.view-day .Table{
     position: relative;
     margin: 0 auto;
     width: inherit;
@@ -39,41 +39,14 @@
 }
 
 
-.Table tbody { display:block; max-height:350px; overflow-y:scroll; }
-.Table thead, .Table tbody tr { display:table; width:100%; table-layout:fixed; }
-.Table thead {
+.view-day .Table tbody { display:block; max-height:350px; overflow-y:scroll; }
+.view-day .Table thead, .Table tbody tr { display:table; width:100%; table-layout:fixed; }
+.view-day .Table thead {
     width: calc(100% - 17px);
 }
-/* .Table th:nth-child(1), .Table td:nth-child(1){
-    width: 110px;
-}
-.Table th:nth-child(2), .Table td:nth-child(2){
-    width: 140px;
-}
-.Table th:nth-child(3), .Table td:nth-child(3){
-    width: 100px;
-}
-.Table th:nth-child(4), .Table td:nth-child(4){
-    width: 90px;
-}
-.Table th:nth-child(5), .Table td:nth-child(5){
-    width: 90px;
-}
-.Table th:nth-child(6), .Table td:nth-child(6){
-    width: 90px;
-}
-.Table th:nth-child(7), .Table td:nth-child(7){
-    width: 90px;
-}
-.Table th:nth-child(8){
-    width: 87px;
-}
-.Table td:nth-child(8){
-    width: 74.34px
-} */
 
 /* view note */
-.note.open {
+.view-day .note.open {
     display: block;
     width: 100%;
     height: 100%;
@@ -82,10 +55,10 @@
     background: rgba(243, 245, 245, 0.86);
     z-index: 1;
 }
-.note{
+.view-day .note{
     display: none;
 }
-.view-note{
+.view-day .view-note{
     box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0), 0 6.7px 5.3px rgba(0, 0, 0, 0.048),
     0 12.5px 10px rgba(0, 0, 0, 0.06), 0 22.3px 17.9px rgba(0, 0, 0, 0.072),
     0 41.8px 33.4px rgba(0, 0, 0, 0.086), 0 100px 80px rgba(0, 0, 0, 0.12);
@@ -97,11 +70,11 @@
     background: white;
     border-radius: 5px;
 }
-.note-sang{
+.view-day .note-sang{
     text-align: center;
 }
 
-.table-hover{
+.view-day .table-hover{
     position: relative;
     width:  90%;
     margin: 0 auto;
@@ -111,16 +84,28 @@
     0 12.5px 10px rgba(0, 0, 0, 0.06), 0 17.3px 17.9px rgba(0, 0, 0, 0.072),
     0 41.8px 33.4px rgba(0, 0, 0, 0.086), 0 100px 80px rgba(0, 0, 0, 0.12);
 }
-.noted{
+.view-day .noted{
     cursor:default;
 }
 
-.navhead{
+.view-day .navhead{
     display: block;
     width: 140px;
     padding-bottom: 5px;
     position: relative;
     top:78px;
     border: 1px solid rgb(245, 201, 201);
-    background:rgb(252, 244, 227);
+    background:#edfaf2;
+}
+.view-day .noted{
+    position: relative;
+  top: -5px;
+  text-align: center;
+}
+.view-day a{
+    top: 0;
+    color: #050505;
+}
+.view-day .alink{
+    text-align: center;
 }

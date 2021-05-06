@@ -1,61 +1,72 @@
+.view-month .table {
+  position: relative;
+  top: 80px;
+  padding: 30px 5px;
+  background-clip: padding-box;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 670px;
+}
+.view-month .boder {
+  display: block;
+  /* border: 2px solid red; */
+  box-shadow: 7px 5px 8px 7px rgb(243, 240, 240);
+  height: 520px;
+  width: 80%;
+}
+.view-month .box-boder {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+.view-month .table-bordered {
+  position: absolute;
+  top: 30px;
+  width: 100%;
+  background-color: #f8f6f6;
+  border: solid #aaa;
+  text-align: center;
+}
+.view-month .table-bordered tbody {
+  display: block;
+  max-height: 450px;
+  overflow-y: scroll;
+}
+.view-month .table-bordered thead,
+.view-month .table tbody tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+.view-month .table-bordered thead {
+  width: calc(100% - 17px);
+}
 
-.table{
-    position: relative;
-    top:80px;
-    padding: 30px 5px;
-    background-clip: padding-box;
-    background-color:#fff;
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    height: 600px;
-}
-.boder{
-    display: block;
-    border: 2px solid red;
-    box-shadow: 7px 5px 8px 7px rgb(243, 240, 240);
-    height:520px ;
-    width: 80%;
-}
-.box-boder{
-    position: relative;
-    display: flex;
-    justify-content: center;
-    width: 100%;
-   
-    
-}
-.table-bordered{
-    position: absolute;
-   top: 30px;
-    width: 100%;
-    background-color: #f8f6f6;
-    border: solid #AAA;
-    text-align: center;
-}
-.table-bordered tbody { display:block; max-height:450px; ; overflow-y:scroll; }
-.table-bordered thead, table tbody tr { display:table; width:100%; table-layout:fixed; }
- .table-bordered thead {
-    width: calc(100% - 17px);
-}
+.view-month .box {
+  width: 30%;
+  height: auto;
+  top: auto;
 
-.box{
-    
-    width: 30%;
-    height: auto;
-    top: auto;
-
-    padding-bottom: 50px;
-    max-height: 500px;
+  padding-bottom: 50px;
+  max-height: 500px;
 }
-.first-head{
-    display: block;
-    margin-left: 20px;
+.view-month .first-head {
+  display: block;
+  margin-left: 20px;
 }
-.header{
-    margin: auto;
-    position: -ms-page;
+.view-month .header {
+  margin: auto;
+  position: -ms-page;
 }
-.danhsach{
-    margin-left: 30px;
+.view-month .danhsach {
+  margin-left: 30px;
+}
+.view-month a {
+  top: 0;
+}
+.view-month .multChoose a {
+  top: -5px;
 }
