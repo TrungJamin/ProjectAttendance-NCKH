@@ -16,7 +16,9 @@
     <link rel="stylesheet" href="./../../css/main.css">
     <link rel="stylesheet" href="./../../Admin/css/admin.css">
     <link rel="stylesheet" href="./../../css/base.css">
+    <link rel="stylesheet" href="./../../css/week.css">
     <link rel="stylesheet" href="./../../css/listADay.css">
+    <link rel="stylesheet" href="./../../css/amonth.css">
 
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-firestore.js"></script>
@@ -41,16 +43,7 @@
 </head>
 
 <body id="page-top">
-<<<<<<< HEAD
-    <div class="note grid">
-        <div class="view-note">
-            <div class="noteforone">
-                <div class="header">
-                    <div class="first-head">
-                        <div>
-                            <h2>MSSV : 01</h2>
-=======
-   <!-- Main Content -->
+    <!-- Main Content -->
     <div id="content">
 
         <!-- Topbar -->
@@ -59,12 +52,10 @@
             <h2 class="h2">Danh Sách Điểm Danh Lớp 10A1</h2>
 
         </nav>
-        <form
-            class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+        <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
             <div class="input-group">
-                <input type="text" class="form-control bg-light border-0 small"
-                    placeholder="Search student..." aria-label="Search" aria-describedby="basic-addon2"
-                    id="Student-search">
+                <input type="text" class="form-control bg-light border-0 small" placeholder="Search student..."
+                    aria-label="Search" aria-describedby="basic-addon2" id="Student-search">
                 <div class="input-group-append">
                     <button class="btn btn-primary" type="button">
                         <i class="fas fa-search fa-lg" style="color: rgb(252, 251, 247);"></i>
@@ -82,11 +73,11 @@
                 <li> <span class="list"><a class="link" id="link-thang">Tháng</a> </span></li>
             </ul>
         </div>
-        
+
 
     </div>
     <div class="container">
-         
+
         <div class="view-week ">
             <div class="view view-aweek grid">
                 <div class="box">
@@ -104,263 +95,185 @@
                             <div class="last-head">
                                 <h2>Ngày 22/3/2021</h2>
                             </div>
->>>>>>> 8668ebad0882a9d9d6300684f3cb59ec1aa7028c
                         </div>
-                        <div>
-                            <h2> Họ & Tên : Hoàng Đình Bảo</h2>
+                        <div class="body-content">
+                            <div class="table-responsive">
+                                <table class="table1 table-hover" style=" overflow: scroll;" cellspacing="0">
+                                    <thead>
+                                        <tr class="thead-first">
+                                            <th>Buổi</th>
+                                            <th>Tiết</th>
+                                            <th>Có Mặt</th>
+                                            <th>Vắng Có Phép</th>
+                                            <th>Note</th>
+                                        </tr>
+
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td rowspan="5">Sáng</td>
+                                            <td>1</td>
+                                            <td>
+                                                <div class="choose none">
+                                                    <i class="far fa-check-square fa-lg"></i>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="choose">
+                                                    <i class="far fa-check-square fa-lg"></i>
+                                                </div>
+                                            </td>
+                                            <td>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</td>
+                                        </tr>
+                                        <tr>
+
+                                            <td>2</td>
+                                            <td>
+                                                <div class="choose">
+                                                    <i class="far fa-check-square fa-lg"></i>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="choose none">
+                                                    <i class="far fa-check-square fa-lg"></i>
+                                                </div>
+                                            </td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+
+                                            <td>3</td>
+                                            <td>
+                                                <div class="choose">
+                                                    <i class="far fa-check-square fa-lg"></i>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="choose none">
+                                                    <i class="far fa-check-square fa-lg"></i>
+                                                </div>
+                                            </td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+
+                                            <td>4</td>
+                                            <td>
+                                                <div class="choose">
+                                                    <i class="far fa-check-square fa-lg"></i>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="choose none">
+                                                    <i class="far fa-check-square fa-lg"></i>
+                                                </div>
+                                            </td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+
+                                            <td>5</td>
+                                            <td>
+                                                <div class="choose">
+                                                    <i class="far fa-check-square fa-lg"></i>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="choose none">
+                                                    <i class="far fa-check-square fa-lg"></i>
+                                                </div>
+                                            </td>
+                                            <td>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</td>
+                                        </tr>
+                                        <tr>
+                                            <td rowspan="5">Chiều</td>
+                                            <td>1</td>
+                                            <td>
+                                                <div class="choose none">
+                                                    <i class="far fa-check-square fa-lg"></i>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="choose">
+                                                    <i class="far fa-check-square fa-lg"></i>
+                                                </div>
+                                            </td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+
+                                            <td>2</td>
+                                            <td>
+                                                <div class="choose none">
+                                                    <i class="far fa-check-square fa-lg"></i>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="choose">
+                                                    <i class="far fa-check-square fa-lg"></i>
+                                                </div>
+                                            </td>
+                                            <td>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</td>
+                                        </tr>
+                                        <tr>
+
+                                            <td>3</td>
+                                            <td>
+                                                <div class="choose none">
+                                                    <i class="far fa-check-square fa-lg"></i>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="choose">
+                                                    <i class="far fa-check-square fa-lg"></i>
+                                                </div>
+                                            </td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+
+                                            <td>4</td>
+                                            <td>
+                                                <div class="choose ">
+                                                    <i class="far fa-check-square fa-lg"></i>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="choose none">
+                                                    <i class="far fa-check-square fa-lg"></i>
+                                                </div>
+                                            </td>
+                                            <td>a</td>
+                                        </tr>
+                                        <tr>
+
+                                            <td>5</td>
+                                            <td>
+                                                <div class="choose">
+                                                    <i class="far fa-check-square fa-lg"></i>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="choose none">
+                                                    <i class="far fa-check-square fa-lg"></i>
+                                                </div>
+                                            </td>
+                                            <td>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+
                         </div>
+
                     </div>
-                    <div class="note-sang">
-                        <h3>Ghi Chú Sáng 23/2/2021</h3>
-                    </div>
+
                 </div>
-                <div class="table-note">
-                    <table class="table-hover">
-                        <thead>
-                            <tr>
-                                <th>Tiết</th>
-                                <th>Note</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti?</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti?</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti?</td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti?</td>
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti?</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+
             </div>
-        </div>
-    </div>
-    <div id="wrapper grid">
-        <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
-
-            <!-- Main Content -->
-            <div id="content">
-
-                <!-- Topbar -->
-                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-                    <!-- Sidebar Toggle (Topbar) -->
-                    <h2 class="h2">Danh Sách Điểm Danh Lớp 10A1</h2>
-
-                </nav>
-                <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                    <div class="input-group">
-                        <input type="text" class="form-control bg-light border-0 small" placeholder="Search student..."
-                            aria-label="Search" aria-describedby="basic-addon2" id="Student-search">
-                        <div class="input-group-append">
-                            <button class="btn btn-primary" type="button">
-                                <i class="fas fa-search fa-lg" style="color: rgb(252, 251, 247);"></i>
-                            </button>
-                        </div>
-                    </div>
-                </form>
-                <!-- Topbar Search -->
-
-                <!-- select view -->
-                <div class="select">
-                    <ul class="select-lists">
-                        <li> <span class="list"><a class="link chose" href="#">Ngày</a> </span></li>
-                        <li> <span class="list"><a class="link" href="./ListStudentLeader.html">Tuần</a></span></li>
-                        <li> <span class="list"><a class="link" href="./listAMonth.html">Tháng</a> </span></li>
-                    </ul>
-                </div>
-                <div class="navhead">
-                    <div class="multChoose">
-                        <a href="#" class="previous"><i class="fas fa-chevron-circle-left fa-lg"></i></a>
-                        <a href="#" class="next"><i class="fas fa-chevron-circle-right fa-lg"></i></a>
-                        <a href="#" class="now">Hôm nay</a>
-                    </div>
-                </div>
-                <!-- Begin Page Content -->
-                <div class="container-fluid">
 
 
-<<<<<<< HEAD
-                    <!-- LOADING GIFT -->
-                    <!-- <div class="row" id="loading-gift">
-                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                            </div>
-                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                                <br>
-                                <img src="./../../img/loading.gif" style="margin-right: 100%;">
-                            </div>
-                        </div> -->
-                    <!-- End loading gift -->
-                    <!-- <div class="card-body">
-                            <div class="table_head"> -->
-
-
-
-                </div>
-                <!-- table danh sach-->
-                <div class="tableADay">
-
-                    <div class="sang">
-                        <div class="label" id="Sang">
-                            <h3>Sáng Ngày 23/2/2021<h3></h3>
-                        </div>
-                        <table class="Table" id="tSang" cellspacing="0">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>First Name</th>
-                                    <th>Last Name</th>
-                                    <th>Tiết 1</th>
-                                    <th>Tiết 2</th>
-                                    <th>Tiết 3</th>
-                                    <th>Tiết 4</th>
-                                    <th>Tiết 5</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-
-                                <tr>
-                                    <td> <a class="alink" href="#">01</a> </td>
-                                    <td>Hoàng Đình Minh</td>
-                                    <td>Bảo</td>
-                                    <td>
-                                        <div class="comat"><span class="noted">n</span></div>
-                                    </td>
-                                    <td>
-                                        <div class="comat"></div>
-                                    </td>
-                                    <td>
-                                        <div class="vangphep"><span class="noted">n</span></div>
-                                    </td>
-                                    <td>
-                                        <div class="comat"></div>
-                                    </td>
-                                    <td>
-                                        <div class="comat"></div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td> <a class="alink" href="#">01</a> </td>
-                                    <td>Hoàng Đình Minh</td>
-                                    <td>Bảo</td>
-                                    <td>
-                                        <div class="comat"><span class="noted">n</span></div>
-                                    </td>
-                                    <td>
-                                        <div class="comat"></div>
-                                    </td>
-                                    <td>
-                                        <div class="vangphep"></div>
-                                    </td>
-                                    <td>
-                                        <div class="comat"></div>
-                                    </td>
-                                    <td>
-                                        <div class="comat"></div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td> <a class="alink" href="#">01</a> </td>
-                                    <td>Hoàng Đình Minh</td>
-                                    <td>Bảo</td>
-                                    <td>
-                                        <div class="comat"><span class="noted">n</span></div>
-                                    </td>
-                                    <td>
-                                        <div class="comat"><span class="noted">n</span></div>
-                                    </td>
-                                    <td>
-                                        <div class="vangphep"></div>
-                                    </td>
-                                    <td>
-                                        <div class="comat"></div>
-                                    </td>
-                                    <td>
-                                        <div class="comat"></div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td> <a class="alink" href="#">01</a> </td>
-                                    <td>Hoàng Đình Minh</td>
-                                    <td>Bảo</td>
-                                    <td>
-                                        <div class="comat"><span class="noted">n</span></div>
-                                    </td>
-                                    <td>
-                                        <div class="comat"></div>
-                                    </td>
-                                    <td>
-                                        <div class="vangphep"><span class="noted">n</span></div>
-                                    </td>
-                                    <td>
-                                        <div class="comat"></div>
-                                    </td>
-                                    <td>
-                                        <div class="comat"></div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td> <a class="alink" href="#">01</a> </td>
-                                    <td>Hoàng Đình Minh</td>
-                                    <td>Bảo</td>
-                                    <td>
-                                        <div class="comat"></div>
-                                    </td>
-                                    <td>
-                                        <div class="comat"></div>
-                                    </td>
-                                    <td>
-                                        <div class="vangphep"><span class="noted">n</span></div>
-                                    </td>
-                                    <td>
-                                        <div class="comat"></div>
-                                    </td>
-                                    <td>
-                                        <div class="comat"></div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td> <a class="alink" href="#">01</a> </td>
-                                    <td>Hoàng Đình Minh</td>
-                                    <td>Bảo</td>
-                                    <td>
-                                        <div class="comat"></div>
-                                    </td>
-                                    <td>
-                                        <div class="comat"></div>
-                                    </td>
-                                    <td>
-                                        <div class="vangphep"></div>
-                                    </td>
-                                    <td>
-                                        <div class="comat"><span class="noted">n</span></div>
-                                    </td>
-                                    <td>
-                                        <div class="comat"></div>
-                                    </td>
-                                </tr>
-
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="chieu">
-                        <div class="label" id="Chieu">
-                            <h3>Chiều Ngày 23/2/2021<h3></h3>
-=======
             <div id="wrapper">
                 <!-- Content Wrapper -->
                 <div id="content-wrapper" class="d-flex flex-column">
@@ -375,7 +288,7 @@
                                     <a class="now">Hôm nay</a>
                                 </div>
                                 <div class="month">
-                                    <h3>Tuần 3, tháng 2/ 2021</h3>
+                                    <h3 class="week-now">Tuần 3, tháng 2/ 2021</h3>
                                 </div>
                             </div>
                             <table class="table-bordered" id="dataTable" cellspacing="0">
@@ -865,165 +778,7 @@
                                 </tbody>
 
                             </table>
->>>>>>> 8668ebad0882a9d9d6300684f3cb59ec1aa7028c
                         </div>
-                        <table class="Table" id="tChieu" cellspacing="0">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>First Name</th>
-                                    <th>Last Name</th>
-                                    <th>Tiết 1</th>
-                                    <th>Tiết 2</th>
-                                    <th>Tiết 3</th>
-                                    <th>Tiết 4</th>
-                                    <th>Tiết 5</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td> <a class="alink" href="#">01</a> </td>
-                                    <td>Hoàng Đình Minh</td>
-                                    <td>Bảo</td>
-                                    <td>
-                                        <div class="comat"></div>
-                                    </td>
-                                    <td>
-                                        <div class="comat"></div>
-                                    </td>
-                                    <td>
-                                        <div class="vangphep"></div>
-                                    </td>
-                                    <td>
-                                        <div class="comat"><span class="noted">n</span></div>
-                                    </td>
-                                    <td>
-                                        <div class="comat"></div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td> <a class="alink" href="#">01</a> </td>
-                                    <td>Hoàng Đình Minh</td>
-                                    <td>Bảo</td>
-                                    <td>
-                                        <div class="comat"></div>
-                                    </td>
-                                    <td>
-                                        <div class="comat"></div>
-                                    </td>
-                                    <td>
-                                        <div class="vangphep"></div>
-                                    </td>
-                                    <td>
-                                        <div class="comat"></div>
-                                    </td>
-                                    <td>
-                                        <div class="comat"></div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td> <a class="alink" href="#">01</a> </td>
-                                    <td>Hoàng Đình Minh</td>
-                                    <td>Bảo</td>
-                                    <td>
-                                        <div class="comat"></div>
-                                    </td>
-                                    <td>
-                                        <div class="comat"></div>
-                                    </td>
-                                    <td>
-                                        <div class="comat"></div>
-                                    </td>
-                                    <td>
-                                        <div class="vangphep"></div>
-                                    </td>
-                                    <td>
-                                        <div class="vang"><span class="noted">n</span></div>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td> <a class="alink" href="#">01</a> </td>
-                                    <td>Hoàng Đình Minh</td>
-                                    <td>Bảo</td>
-                                    <td>
-                                        <div class="comat"></div>
-                                    </td>
-                                    <td>
-                                        <div class="comat"><span class="noted">n</span></div>
-                                    </td>
-                                    <td>
-                                        <div class="comat"></div>
-                                    </td>
-                                    <td>
-                                        <div class="vangphep"><span class="noted">n</span></div>
-                                    </td>
-                                    <td>
-                                        <div class="vang"><span class="noted">n</span></div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td> <a class="alink" href="#">01</a> </td>
-                                    <td>Hoàng Đình Minh</td>
-                                    <td>Bảo</td>
-                                    <td>
-                                        <div class="comat"><span class="noted">n</span></div>
-                                    </td>
-                                    <td>
-                                        <div class="comat"></div>
-                                    </td>
-                                    <td>
-                                        <div class="vangphep"><span class="noted">n</span></div>
-                                    </td>
-                                    <td>
-                                        <div class="comat"></div>
-                                    </td>
-                                    <td>
-                                        <div class="comat"></div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td> <a class="alink" href="#">01</a> </td>
-                                    <td>Hoàng Đình Minh</td>
-                                    <td>Bảo</td>
-                                    <td>
-                                        <div class="comat"></div>
-                                    </td>
-                                    <td>
-                                        <div class="comat"></div>
-                                    </td>
-                                    <td>
-                                        <div class="vangphep"></div>
-                                    </td>
-                                    <td>
-                                        <div class="comat"></div>
-                                    </td>
-                                    <td>
-                                        <div class="comat"></div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td> <a class="alink" href="#">01</a> </td>
-                                    <td>Hoàng Đình Minh</td>
-                                    <td>Bảo</td>
-                                    <td>
-                                        <div class="comat"></div>
-                                    </td>
-                                    <td>
-                                        <div class="comat"></div>
-                                    </td>
-                                    <td>
-                                        <div class="vangphep"><span class="noted">n</span></div>
-                                    </td>
-                                    <td>
-                                        <div class="comat"></div>
-                                    </td>
-                                    <td>
-                                        <div class="comat"></div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
                         <div class="chuthich">
                             <h4>Chú thích :</h4>
                             <div style="display :flex">
@@ -1038,11 +793,6 @@
                                 <p>Vắng không phép: </p>
                                 <div class="kPhep"></div>
                             </div>
-<<<<<<< HEAD
-                            <div style="margin: 15px 0 0 21px;">n : có ghi chú</div>
-                        </div>
-                    </div>
-=======
                             <div style="margin: 10px 0 0 21px;">n : có ghi chú</div>
                         </div>
                     </div>
@@ -1111,341 +861,78 @@
             <div id="wrapper grid">
                 <!-- Content Wrapper -->
                 <div id="content-wrapper" class="d-flex flex-column">
-                        <!-- table danh sach-->
-                        <div class="tableADay">
+                    <!-- table danh sach-->
+                    <div class="tableADay">
 
-                            <div class="sang">
-                                <div class="label" id="Sang">
-                                    <h3>Sáng Ngày 23/2/2021<h3></h3>
-                                </div>
-                                <table class="Table" id="tSang" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>ID</th>
-                                            <th>First Name</th>
-                                            <th>Last Name</th>
-                                            <th>Tiết 1</th>
-                                            <th>Tiết 2</th>
-                                            <th>Tiết 3</th>
-                                            <th>Tiết 4</th>
-                                            <th>Tiết 5</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-
-                                        <tr>
-                                            <td> <a class="alink" href="#">01</a> </td>
-                                            <td>Hoàng Đình Minh</td>
-                                            <td>Bảo</td>
-                                            <td>
-                                                <div class="comat"><span class="noted">n</span></div>
-                                            </td>
-                                            <td>
-                                                <div class="comat"></div>
-                                            </td>
-                                            <td>
-                                                <div class="vangphep"><span class="noted">n</span></div>
-                                            </td>
-                                            <td>
-                                                <div class="comat"></div>
-                                            </td>
-                                            <td>
-                                                <div class="comat"></div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td> <a class="alink" href="#">01</a> </td>
-                                            <td>Hoàng Đình Minh</td>
-                                            <td>Bảo</td>
-                                            <td>
-                                                <div class="comat"><span class="noted">n</span></div>
-                                            </td>
-                                            <td>
-                                                <div class="comat"></div>
-                                            </td>
-                                            <td>
-                                                <div class="vangphep"></div>
-                                            </td>
-                                            <td>
-                                                <div class="comat"></div>
-                                            </td>
-                                            <td>
-                                                <div class="comat"></div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td> <a class="alink" href="#">01</a> </td>
-                                            <td>Hoàng Đình Minh</td>
-                                            <td>Bảo</td>
-                                            <td>
-                                                <div class="comat"><span class="noted">n</span></div>
-                                            </td>
-                                            <td>
-                                                <div class="comat"><span class="noted">n</span></div>
-                                            </td>
-                                            <td>
-                                                <div class="vangphep"></div>
-                                            </td>
-                                            <td>
-                                                <div class="comat"></div>
-                                            </td>
-                                            <td>
-                                                <div class="comat"></div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td> <a class="alink" href="#">01</a> </td>
-                                            <td>Hoàng Đình Minh</td>
-                                            <td>Bảo</td>
-                                            <td>
-                                                <div class="comat"><span class="noted">n</span></div>
-                                            </td>
-                                            <td>
-                                                <div class="comat"></div>
-                                            </td>
-                                            <td>
-                                                <div class="vangphep"><span class="noted">n</span></div>
-                                            </td>
-                                            <td>
-                                                <div class="comat"></div>
-                                            </td>
-                                            <td>
-                                                <div class="comat"></div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td> <a class="alink" href="#">01</a> </td>
-                                            <td>Hoàng Đình Minh</td>
-                                            <td>Bảo</td>
-                                            <td>
-                                                <div class="comat"></div>
-                                            </td>
-                                            <td>
-                                                <div class="comat"></div>
-                                            </td>
-                                            <td>
-                                                <div class="vangphep"><span class="noted">n</span></div>
-                                            </td>
-                                            <td>
-                                                <div class="comat"></div>
-                                            </td>
-                                            <td>
-                                                <div class="comat"></div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td> <a class="alink" href="#">01</a> </td>
-                                            <td>Hoàng Đình Minh</td>
-                                            <td>Bảo</td>
-                                            <td>
-                                                <div class="comat"></div>
-                                            </td>
-                                            <td>
-                                                <div class="comat"></div>
-                                            </td>
-                                            <td>
-                                                <div class="vangphep"></div>
-                                            </td>
-                                            <td>
-                                                <div class="comat"><span class="noted">n</span></div>
-                                            </td>
-                                            <td>
-                                                <div class="comat"></div>
-                                            </td>
-                                        </tr>
-
-                                    </tbody>
-                                </table>
+                        <div class="sang">
+                            <div class="label" id="Sang">
+                                <h3 class="date-now-morning">
+                                </h3>
                             </div>
-                            <div class="chieu">
-                                <div class="label" id="Chieu">
-                                    <h3>Chiều Ngày 23/2/2021<h3></h3>
-                                </div>
-                                <table class="Table" id="tChieu" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>ID</th>
-                                            <th>First Name</th>
-                                            <th>Last Name</th>
-                                            <th>Tiết 1</th>
-                                            <th>Tiết 2</th>
-                                            <th>Tiết 3</th>
-                                            <th>Tiết 4</th>
-                                            <th>Tiết 5</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td> <a class="alink" href="#">01</a> </td>
-                                            <td>Hoàng Đình Minh</td>
-                                            <td>Bảo</td>
-                                            <td>
-                                                <div class="comat"></div>
-                                            </td>
-                                            <td>
-                                                <div class="comat"></div>
-                                            </td>
-                                            <td>
-                                                <div class="vangphep"></div>
-                                            </td>
-                                            <td>
-                                                <div class="comat"><span class="noted">n</span></div>
-                                            </td>
-                                            <td>
-                                                <div class="comat"></div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td> <a class="alink" href="#">01</a> </td>
-                                            <td>Hoàng Đình Minh</td>
-                                            <td>Bảo</td>
-                                            <td>
-                                                <div class="comat"></div>
-                                            </td>
-                                            <td>
-                                                <div class="comat"></div>
-                                            </td>
-                                            <td>
-                                                <div class="vangphep"></div>
-                                            </td>
-                                            <td>
-                                                <div class="comat"></div>
-                                            </td>
-                                            <td>
-                                                <div class="comat"></div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td> <a class="alink" href="#">01</a> </td>
-                                            <td>Hoàng Đình Minh</td>
-                                            <td>Bảo</td>
-                                            <td>
-                                                <div class="comat"></div>
-                                            </td>
-                                            <td>
-                                                <div class="comat"></div>
-                                            </td>
-                                            <td>
-                                                <div class="comat"></div>
-                                            </td>
-                                            <td>
-                                                <div class="vangphep"></div>
-                                            </td>
-                                            <td>
-                                                <div class="vang"><span class="noted">n</span></div>
-                                            </td>
-                                        </tr>
+                            <table class="Table" id="tSang" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>First Name</th>
+                                        <th>Last Name</th>
+                                        <th>Tiết 1</th>
+                                        <th>Tiết 2</th>
+                                        <th>Tiết 3</th>
+                                        <th>Tiết 4</th>
+                                        <th>Tiết 5</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="students-morning">
 
-                                        <tr>
-                                            <td> <a class="alink" href="#">01</a> </td>
-                                            <td>Hoàng Đình Minh</td>
-                                            <td>Bảo</td>
-                                            <td>
-                                                <div class="comat"></div>
-                                            </td>
-                                            <td>
-                                                <div class="comat"><span class="noted">n</span></div>
-                                            </td>
-                                            <td>
-                                                <div class="comat"></div>
-                                            </td>
-                                            <td>
-                                                <div class="vangphep"><span class="noted">n</span></div>
-                                            </td>
-                                            <td>
-                                                <div class="vang"><span class="noted">n</span></div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td> <a class="alink" href="#">01</a> </td>
-                                            <td>Hoàng Đình Minh</td>
-                                            <td>Bảo</td>
-                                            <td>
-                                                <div class="comat"><span class="noted">n</span></div>
-                                            </td>
-                                            <td>
-                                                <div class="comat"></div>
-                                            </td>
-                                            <td>
-                                                <div class="vangphep"><span class="noted">n</span></div>
-                                            </td>
-                                            <td>
-                                                <div class="comat"></div>
-                                            </td>
-                                            <td>
-                                                <div class="comat"></div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td> <a class="alink" href="#">01</a> </td>
-                                            <td>Hoàng Đình Minh</td>
-                                            <td>Bảo</td>
-                                            <td>
-                                                <div class="comat"></div>
-                                            </td>
-                                            <td>
-                                                <div class="comat"></div>
-                                            </td>
-                                            <td>
-                                                <div class="vangphep"></div>
-                                            </td>
-                                            <td>
-                                                <div class="comat"></div>
-                                            </td>
-                                            <td>
-                                                <div class="comat"></div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td> <a class="alink" href="#">01</a> </td>
-                                            <td>Hoàng Đình Minh</td>
-                                            <td>Bảo</td>
-                                            <td>
-                                                <div class="comat"></div>
-                                            </td>
-                                            <td>
-                                                <div class="comat"></div>
-                                            </td>
-                                            <td>
-                                                <div class="vangphep"><span class="noted">n</span></div>
-                                            </td>
-                                            <td>
-                                                <div class="comat"></div>
-                                            </td>
-                                            <td>
-                                                <div class="comat"></div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <div class="chuthich">
-                                    <h4>Chú thích :</h4>
-                                    <div style="display :flex">
-                                        <p>Có mặt: </p>
-                                        <div class="co"></div>
-                                    </div>
-                                    <div style="display :flex">
-                                        <p>Vắng có phép:</p>
-                                        <div class="phep"></div>
-                                    </div>
-                                    <div style="display :flex">
-                                        <p>Vắng không phép: </p>
-                                        <div class="kPhep"></div>
-                                    </div>
-                                    <div style="margin: 15px 0 0 21px;">n : có ghi chú</div>
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="chieu">
+                            <div class="label" id="Chieu">
+                                <h3 class="date-now-afternoon">Chiều Ngày 23/2/2021<h3></h3>
+                            </div>
+                            <table class="Table" id="tChieu" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>First Name</th>
+                                        <th>Last Name</th>
+                                        <th>Tiết 1</th>
+                                        <th>Tiết 2</th>
+                                        <th>Tiết 3</th>
+                                        <th>Tiết 4</th>
+                                        <th>Tiết 5</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="students-afternoon">
+
+                                </tbody>
+                            </table>
+                            <div class="chuthich">
+                                <h4>Chú thích :</h4>
+                                <div style="display :flex">
+                                    <p>Có mặt: </p>
+                                    <div class="co"></div>
                                 </div>
+                                <div style="display :flex">
+                                    <p>Vắng có phép:</p>
+                                    <div class="phep"></div>
+                                </div>
+                                <div style="display :flex">
+                                    <p>Vắng không phép: </p>
+                                    <div class="kPhep"></div>
+                                </div>
+                                <div style="margin: 15px 0 0 21px;">n : có ghi chú</div>
                             </div>
                         </div>
-                        <!-- <div > <button class="export">Export</button></div> -->
-                        <!--footer-->
->>>>>>> 8668ebad0882a9d9d6300684f3cb59ec1aa7028c
+                    </div>
+                    <!-- <div > <button class="export">Export</button></div> -->
+                    <!--footer-->
                 </div>
-                <!-- <div > <button class="export">Export</button></div> -->
-                <!--footer-->
             </div>
         </div>
-<<<<<<< HEAD
-=======
 
         <div class="view-month non_active">
             <div class="view view-amonth grid">
@@ -1747,8 +1234,8 @@
             </div>
             <div> <button class="export">Export</button></div>
         </div>
->>>>>>> 8668ebad0882a9d9d6300684f3cb59ec1aa7028c
     </div>
+    <!--footer-->
     <footer class="footer">
         <div>
             <h4>Trường tiểu học & THCS Đức Trí </h4>
@@ -1766,6 +1253,7 @@
         </div>
 
     </footer>
+
     <script>
         // Your web app's Firebase configuration
         // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -1784,15 +1272,13 @@
 
 
     </script>
-<<<<<<< HEAD
-    <script src="./../js/aday.js"></script>
-=======
-     <script src="./../js/list.js"></script>
+
+    <script src="./../js/list.js"></script>
     <script src="./../js/aWeek.js"></script>
     <script src="./../js/amonth.js"></script>
     <script src="./../js/aday.js"></script>
+    <script src="./../js/main.js"></script>
 
->>>>>>> 8668ebad0882a9d9d6300684f3cb59ec1aa7028c
     <!-- Functions -->
 
 </body>
