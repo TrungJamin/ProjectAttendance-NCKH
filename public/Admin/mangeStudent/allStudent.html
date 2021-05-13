@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>List Of Students</title>
+    <title>Attendance - List Of Students</title>
     <!-- Custom styles for this template-->
     <link href="./../../css/sb-admin-2.css" rel="stylesheet">
     <link rel="stylesheet" href="./../css/admin.css">
@@ -33,27 +33,28 @@
 
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-
+    <link rel="stylesheet" href="./../css/StyleManageStudent.css" />
 </head>
 
 <body id="page-top">
+
     <!-- EDIT FORM -->
-    <div class="edit">
+    <div class="edit add">
         <div class="box">
-            <div class="panel panel-primary">
+            <div class="panel">
                 <div class="panel-heading">
-                    <h3 class="panel-title" style="text-align: center;">Edit Student's Information
+                    <h3 class="panel-title" style="text-align: center">Edit Student's Information
 
                     </h3>
                 </div>
                 <div class="panel-body">
                     <form id="edit-form">
                         <div class="form-group">
-                            <label for="student-id">ID </label>
+                            <label for="student-id" id="student-id">ID </label>
                             <input readonly name="studentID" type="text" class="form-control" id="student-id"
                                 placeholder="ID...">
                             <label for="student-name">Name</label>
-                            <input name="studentName" type="text" class="form-control" id="student-name"
+                            <input name="studentName" type="text" class="form-control" id="fullname"
                                 placeholder="Name..." onkeypress="isAlphabetAndSpaces(event)" required>
                             <br>
                             <span id="lblValue" style="display: none; color: red; font-size: x-small;">Only Alphabets
@@ -61,24 +62,18 @@
                             <div class="row">
                                 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                                     <label for="student-dob">Data Of Birth</label>
-                                    <input name="Dob" type="date" class="form-control dateOfBirth" id="student-dob"
-                                        placeholder="DateOfBirth" required>&nbsp;
+                                    <input name="dob" id="dob" type="date" class="form-control dateOfBirth"
+                                        id="student-dob" placeholder="DateOfBirth" required>&nbsp;
                                     <b style="font-size: xx-small;"> *mm/dd/yyy</b>
                                 </div>
                                 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                                    <label for="inputGender">Gender</label>
-                                    <select name="Gender" id="inputGender" class="form-control" required>
+                                    <label for="gender">Gender</label>
+                                    <select name="gender" id="gender" class="form-control" required>
                                         <option value="" selected>Gender</option>
                                         <option value="male">Male</option>
                                         <option value="female">Female</option>
                                     </select>
                                 </div>
-                                <!-- <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                    <label for="selectClass">Class</label>
-                                    <input name="Class" type="text" class="form-control" id="student-class"
-                                        placeholder="Class" required>
-                                </div> -->
-
                             </div>
 
                             <br>
@@ -114,10 +109,12 @@
                             </span>
 
                         </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
 
-                        <button id="cancel" type="button" class="btn btn-danger ml-280">Cancel</button>
+                        <div class="function-edit col-12">
+                            <button type="submit" class="btn btn-success">Submit</button>
 
+                            <button id="cancel" type="button" class="btn btn-danger">Cancel</button>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -135,24 +132,24 @@
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
                     <!-- Sidebar Toggle (Topbar) -->
-                    <form class="form-inline">
-                        <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                            <i class="fa fa-bars"></i>
-                        </button>
-                    </form>
+
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
+
+                    <button class="btn btn-success add-student-button">Add + </button>
+
 
                     <!-- Topbar Search -->
-                    <form
-                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                    <form class="d-none d-sm-inline-block form-inline navbar-search">
                         <div class="input-group">
                             <input type="text" class="form-control bg-light border-0 small"
                                 placeholder="Search student..." aria-label="Search" aria-describedby="basic-addon2"
                                 id="Student-search">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
-                            </div>
+
+                            <button class="btn btn-success" type="button">
+                                <i class="fas fa-search fa-sm"></i>
+                            </button>
                         </div>
                     </form>
 
@@ -163,9 +160,9 @@
                 <div class="container-fluid">
 
                     <!-- DataTales of Student -->
-                    <div class="card shadow mb-4">
+                    <div class="shadow mb-4 col-12">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">DataTables Of Student</h6>
+                            <h6 class="m-0 font-weight-bold text-success">DataTables Of Student</h6>
                         </div>
                         <!-- LOADING GIFT -->
                         <div class="row" id="loading-gift">
@@ -183,7 +180,7 @@
                             <div class="table-responsive">
 
                                 <table class="table table-bordered hidden" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
+                                    <thead style="background-color: #ffff ; color:#00000082">
                                         <tr>
                                             <th>#</th>
                                             <th>ID</th>
@@ -206,7 +203,7 @@
                                             <th>Action</th>
                                         </tr>
                                     </thead>
-                                    <tfoot>
+                                    <tfoot style="background-color: #ffff ; color:#00000082">
                                         <tr>
                                             <th>#</th>
                                             <th>ID</th>
@@ -276,6 +273,7 @@
     <script src="./js/edit.js"></script>
     <script src="./js/sort.js"></script>
     <script src="./js/onSnapshot.js"></script>
+    <script src="./js/add.js"></script>
     <!-- <script src="./../../../js/events/"></script> -->
 
     <script src="./js/constants.js"></script>

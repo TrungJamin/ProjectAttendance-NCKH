@@ -15,11 +15,11 @@ edit_form.addEventListener("submit", (e) => {
     .doc(docID)
     .set({
       class: edit_form.Class1.value,
-      dateOfBirth: edit_form.Dob.value.split("-").reverse().join("/"),
-      gender: edit_form.Gender.value,
+      dateOfBirth: edit_form.dob.value.split("-").reverse().join("/"),
+      gender: edit_form.gender.value,
       address: edit_form.Address.value.trim(), // trim() not working
       id: edit_form.studentID.value,
-      name: edit_form.studentName.value // ERROR : CANNOT USE TRIM() => SO, WE HAVE TO USE THIS TEMPORARY METHOD
+      name: edit_form.fullname.value // ERROR : CANNOT USE TRIM() => SO, WE HAVE TO USE THIS TEMPORARY METHOD
         .split(" ")
         .filter((item) => item != "")
         .join(" "),
@@ -31,19 +31,20 @@ edit_form.addEventListener("submit", (e) => {
 
 // CLOSE edit form
 edit.addEventListener("click", (e) => {
-  // console.log(e.target);
-  // console.log(e.target.classList);
   if (e.target.classList.contains("edit")) {
+    edit_form.reset();
     edit.classList.remove("open");
   }
 });
 cancelEdit.addEventListener("click", (e) => {
   e.stopPropagation();
+  edit_form.reset();
   edit.classList.remove("open");
 });
 
 // SET SELECT CLASS AND GRADE
 const listOfClasses = [];
+
 const gradeSelect = document.getElementById("selectGrade");
 const classSelect = document.getElementById("selectClass");
 

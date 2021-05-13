@@ -20,7 +20,6 @@ const makeAdmin = document.querySelector(".makeAdmin");
 //   auth.getUserByEmail({ email }).then((res) => console.log(res));
 // });
 btnLogout.addEventListener("click", (event) => {
-  console.log("chay btn");
   formLogout.classList.add("open"); // hien thi forms
   console.log();
 });
@@ -29,6 +28,7 @@ function closeFormLogout() {
   // dong forms
   formLogout.classList.remove("open");
 }
+
 agreeLogout.addEventListener("click", (event) => {
   event.preventDefault();
   firebase
@@ -50,17 +50,43 @@ firebase.auth().onAuthStateChanged((user) => {
   console.log(user);
 });
 
+
+
+
+// doạn này khi vào trang se vao trang all teache dung 1 l
+
+function refresh() {
+  if (sessionStorage.getItem("url")) {
+    console.log("run1");
+    // neu co di theo url cu
+    iFrame.src = sessionStorage.getItem("url");
+  } else {
+    iFrame.src = "./mangeTecher/testNewTables.html";
+  }
+}
+refresh();
+
+
+
+
 addStudent.addEventListener("click", (event) => {
+  sessionStorage.setItem("url", "./mangeStudent/addStudent.html");
   iFrame.src = "./mangeStudent/addStudent.html";
 });
 
 allStudents.addEventListener("click", (event) => {
+  sessionStorage.setItem("url", "./mangeStudent/allStudent.html");
   iFrame.src = "./mangeStudent/allStudent.html";
 });
 
 addTeacher.addEventListener("click", (event) => {
+  sessionStorage.setItem("url", "./mangeTecher/addTeacher.html");
   iFrame.src = "./mangeTecher/addTeacher.html";
 });
 listTeacher.addEventListener("click", (event) => {
+  sessionStorage.setItem("url", "./mangeTecher/allTeacher.html");
+
   iFrame.src = "./mangeTecher/allTeacher.html";
 });
+
+/// log ui user

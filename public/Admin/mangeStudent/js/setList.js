@@ -112,15 +112,15 @@ function setList(group) {
       docID = doc_ID;
       edit_form.studentID.value = tr.getElementsByTagName("td")[1].textContent;
 
-      edit_form.studentName.value =
+      edit_form.fullname.value =
         tr.getElementsByTagName("td")[2].textContent + "";
 
-      edit_form.Dob.value = tr
+      edit_form.dob.value = tr
         .getElementsByTagName("td")[3]
         .textContent.split("/")
         .reverse()
         .join("-");
-      edit_form.Gender.value = tr.getElementsByTagName("td")[4].textContent;
+      edit_form.gender.value = tr.getElementsByTagName("td")[4].textContent;
       edit_form.Address.value = tr.getElementsByTagName("td")[6].textContent;
       edit_form.Phone.value = tr.getElementsByTagName("td")[7].textContent;
       let grade = tr.getElementsByTagName("td")[5].textContent.slice(0, 2);

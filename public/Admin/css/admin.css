@@ -1,7 +1,15 @@
 table,
 th,
+:root {
+  --mainColor: #1cc88a;
+}
 td {
   border: 1px solid black;
+}
+body {
+  background: #eef2f7;
+  margin: 0;
+  padding: 0;
 }
 thead,
 tfoot {
@@ -75,23 +83,10 @@ i {
     0 41.8px 33.4px rgba(0, 0, 0, 0.086), 0 100px 80px rgba(0, 0, 0, 0.12);
   min-height: 200px;
   width: 34vw;
-  margin: 100px auto;
+  margin: auto;
   background: white;
   border-radius: 5px;
   /* text-align: center; */
-}
-
-body {
-  background: #eef2f7;
-}
-form label {
-  font-style: normal;
-  font-weight: 1000;
-}
-body {
-  font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
-    Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Helvetica, Arial,
-    sans-serif;
 }
 
 /* for image */
@@ -287,7 +282,8 @@ body {
 /* bs3  */
 .panel {
   margin-bottom: 20px;
-  background-color: #fff;
+  color: #ffffff;
+  font-weight: 600;
   border: 1px solid transparent;
   border-radius: 4px;
   -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
@@ -295,8 +291,10 @@ body {
 }
 .panel-body {
   padding: 15px;
+  color: #333;
 }
 .panel-heading {
+  background-color: var(--mainColor);
   padding: 10px 15px;
   border-bottom: 1px solid transparent;
   border-top-left-radius: 3px;
@@ -866,4 +864,10 @@ input[type="search"] {
   input[type="month"].input-lg {
     line-height: 46px;
   }
+}
+.topbar {
+  justify-content: space-between;
+}
+.topbar .dropdown-list .dropdown-header {
+  background-color: var(--mainColor) !important;
 }
