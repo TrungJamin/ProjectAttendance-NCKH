@@ -123,10 +123,12 @@ function deleteById(id) {
 // tao them form input de get data nhap cho phan nay
 function addTeacher(obj) {
     reNewForm();
-  db.collection("Teachers")
+    
+    
+    db.collection("Teachers")
     .add(obj)
-    .then(function (response) {})
-    .catch(function (error) {});
+    .then(function (response) { console.log(`object`)})
+    .catch(function (error) {console.log("errr")});
 }
 
 // get input  to add or edit
@@ -178,6 +180,10 @@ function getInfoTeacher() {
   console.log(type, "==================");
   if (type == true) {
     teacher.id = createId();
+    console.log(teacher,"--------------");
+
+    delete teacher.undefined;
+
     addTeacher(teacher);
   }
 
@@ -227,12 +233,13 @@ function openFormInput(idOfHtml, teacher) {
 
     var myForm = document.querySelectorAll("#myForm .form-group");
 
+
     myForm[0].children[1].setAttribute("value", teacher.name);
     myForm[1].children[0].value = teacher.group;
     myForm[2].children[0].value = teacher.gender;
-    myForm[3].children[0].value = teacher.classLeader;
-    myForm[4].children[1].setAttribute("value", teacher.dataOfBirth);
-    myForm[5].children[1].setAttribute("value", teacher.address);
+    myForm[5].children[1].value = teacher.classLeader;
+    myForm[6].children[1].setAttribute("value",teacher.address);
+    myForm[7].children[1].setAttribute("value",teacher.dataOfBirth  );
   }
 }
 

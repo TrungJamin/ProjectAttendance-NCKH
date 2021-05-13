@@ -38,15 +38,17 @@
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-analytics.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-firestore.js"></script>
+    
     <script>
+       
         var firebaseConfig = {
             apiKey: "AIzaSyC3Yc52SF8cjOhM7jcskIkYTa3ViuCNijM",
             authDomain: "attendance-aae4c.firebaseapp.com",
             projectId: "attendance-aae4c",
             storageBucket: "attendance-aae4c.appspot.com",
             messagingSenderId: "215982681476",
-            appId: "1:215982681476:web:423a0e5b2d3a6cb6af41d1",
-            measurementId: "G-6S2QJD5SKB",
+            appId: "1:215982681476:web:8736a4ac5f5fb9eaaf41d1",
+            measurementId: "G-KCE2XYPBBR"
         };
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
@@ -62,7 +64,7 @@
     <!-- Main Content -->
 
 
-    <div class="row text-white">
+    <!-- <div class="row text-white">
         <div class="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto text-center form p-4">
             <h1 class="display-4 py-2 text-success">Input teacher</h1>
             <div class="px-2">
@@ -97,14 +99,7 @@
                                     aria-labelledby="triggerId">
                                     <div class="row" id="classTeach">
                                         <div class="col-xs-4-12" style="padding: 0.5rem">
-                                            <!-- <h6 class="text-center">
-                                          lớp 11
-                                          </h6>                              
-                                           <div class="form-check">
-                                              <label class="form-check-label">
-                                              <input type="checkbox" class="form-check-input" value="101">Option 1
-                                               </label>
-                                          </div> -->
+                                            
                                         </div>
 
                                         <div class="col-xs-4-12" style="padding: 0.5rem"></div>
@@ -140,9 +135,9 @@
                     </div>
                     <div class="form-group">
                         <label class="sr-only">Email</label>
-                        <input id="address" type="text" class="form-control" name="address" placeholder="địa chỉ"
+                        <input id="address" type="text" class="form-control" style="width:100%"  name="address" placeholder="địa chỉ"
                             onkeyup="locKiTu(value,'address')" required />
-                    </div>
+                        </div>
                     <button type="submit" class="btn btn-success">
                         Add
                     </button>
@@ -151,11 +146,115 @@
             </div>
         </div>
 
+    </div>  -->
+
+
+    <div class="col-xl-8">
+        <!-- Account details card-->
+
+        <div class="card mb-4">
+            <div class="card-header ">Account Details</div>
+            <div class="card-body">
+                 <form onsubmit="return mySubmitFunction(event)" class="justify-content-center" id="myForm">
+                    <!-- Form Group (username)-->
+                    <div class="form-group">
+                        <label class="small mb-1" for="inputUsername">Tên giáo viên</label>
+                        <input id="name" type="text" name="name" class="form-control" placeholder="Name"
+                            onkeyup="locKiTu(value,'name')" required />
+                    </div>
+                    <!-- Form Row-->
+                    <div class="form-row">
+                        <!-- Form Group (first name)-->
+                        <div class="form-group col-md-6">
+                            <label class="small mb-1" for="inputFirstName">khoa giảng dạy</label>
+                            <select class="form-control" name="group" id="group" required>
+                                <option value="nation">Tự nhiên</option>
+                                <option value="sociocultural" selected="selected">Xã hội</option>
+                            </select>
+                        </div>
+                        <!-- Form Group (last name)-->
+                        <div class="form-group col-md-6">
+                            <label class="small mb-1" for="inputLastName">Giới tính</label>
+                            <select class="form-control" name="gender" id="gender" required>
+                                <option value="true">nam</option>
+                                <option value="false">nữ</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!-- Form Row        -->
+                    <div class="row" >
+                        <!-- Form Group (organization name)-->
+                        <div class="form-group col-md-6">
+                            <label class="small mb-1" for="inputFirstName">khoa giảng dạy</label>
+                            <div class="dropdown"  >
+                                <button class="btn btn-outline-success dropdown-toggle btn-block" type="button" id="triggerId"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    danh sách lớp dạy
+                                </button>
+                                <div class="dropdown-menu" style="min-width: 20rem; padding: 2rem"
+                                    aria-labelledby="triggerId">
+                                    <div class="row" id="classTeach">
+                                        <div class="col-xs-4-12" style="padding: 0.5rem">
+                                            
+                                        </div>
+
+                                        <div class="col-xs-4-12" style="padding: 0.5rem"></div>
+
+                                        <div class="col-xs-4-12" style="padding: 0.5rem"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Form Group (location)-->
+                        <div class="form-group col-md-6">
+                            <label class="small mb-1" for="inputFirstName">khoa giảng dạy</label>
+                            <div class="dropdown"  >
+                                <button class="btn btn-outline-success dropdown-toggle btn-block" type="button" id="triggerId"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    danh sách môn dạy
+                                </button>
+                                <div class="dropdown-menu" style=" padding: 2rem" aria-labelledby="triggerId">
+                                    <div id='subjectTeach'>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Form Group (email address)-->
+                    <div class="form-group">
+                        <label class="small mb-1" for="inputEmailAddress">lớp chủ nhiệm</label>
+                        <select class="form-control" name="classLeader" id="classLeader"
+                            aria-placeholder="chọn lớp chủ nhiệm" required></select>
+                    </div>
+                    <!-- Form Row-->
+                    <div class="form-row">
+                        <!-- Form Group (phone number)-->
+                        <div class="form-group col-md-6">
+                            <label class="small mb-1" for="inputPhone">Email</label>
+                            <input id="address" type="text" class="form-control" style="width:100%"  name="address" placeholder="địa chỉ"
+                            onkeyup="locKiTu(value,'address')" required />
+                        </div>
+                        <!-- Form Group (birthday)-->
+                        <div class="form-group col-md-6">
+                            <label class="small mb-1" for="inputBirthday">Ngày sinh</label>
+                            <input type="date" class="form-control" name="dataOfBirth" placeholder="ngày sinh" required />
+                        </div>
+                    </div>
+                    <!-- Save changes button-->
+                    <button type="submit" class="btn btn-success">
+                        Add
+                    </button>
+                </form>
+            </div>
+        </div>
     </div>
-    </div>
+
+
+    
     <!-- End of Content Wrapper -->
 
-    </div>
+     
     <script src="./js/add_remove_editTeacher.js"></script>
     <!-- <script src="xoaKhiTuThua.js"></script> -->
 

@@ -4,6 +4,7 @@ var listOfTeachers = [];
 
 // Get data teacher and put into "listOfTeachers"
 db.collection("Teachers").onSnapshot(async function (querySnapshot) {
+  listOfTeachers = [];
   await querySnapshot.forEach(function (doc) {
     let tamp = doc.data();
     tamp.docId = doc.id;
@@ -15,7 +16,7 @@ db.collection("Teachers").onSnapshot(async function (querySnapshot) {
 
 function renderAddElementInTable(e) {
   let node = `  
-        <td class="text-center"></td>
+        
         <td class="text-center">${e.id}</td>
         <td class="text-center">${e.name}</td>
         <td class="text-center">${e.group}</td>
@@ -48,22 +49,27 @@ function renderAddElementInTable(e) {
 
 function renderTable(list) {
   clearTable();
+  console.log(`xoa table cu `)
   list.forEach((e) => renderAddElementInTable(e));
   if (list.length == 0) {
     setNoResult();
   }
+
+  console.log("them vao tavle mơi")
 }
 
 function clearTable() {
-  while (body.firstChild) {
-    body.removeChild(body.firstChild);
-  }
+
+  body.innerHTML=""
+  // while (body.firstChild) {
+  //   body.removeChild(body.firstChild);
+  // }
 }
 
 function setNoResult() {
   const tr = document.createElement("tr");
   const td = document.createElement("td");
-  td.textContent = "No Result";
+  td.textContent = "";
   tr.appendChild(td);
   body.appendChild(tr);
 }
