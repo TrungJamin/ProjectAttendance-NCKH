@@ -11,6 +11,12 @@ function getDateNow() {
   let tmp = d.getMonth() + 1 + "-" + d.getDate() + "-" + d.getFullYear();
   return tmp;
 }
+
+function getDate(date) {
+  let tmp =
+    date.getMonth() + 1 + "-" + date.getDate() + "-" + date.getFullYear();
+  return tmp;
+}
 DateNowMorning.innerText = "Sáng " + getDateNow();
 DateNowAfternoon.innerText = "Chiều " + getDateNow();
 for (var i = 0; i < links.length; i++) {
@@ -27,52 +33,59 @@ note.addEventListener("click", (e) => {
   }
 });
 
+function getAttendanceOfDay(attendances, date, id) {
+  let attendance = {};
+  attendance = attendances.find((att) => {
+    return att.day == date;
+  });
+
+  return attendance;
+}
 function renderMorning(listStudents) {
   let content = listStudents.map((student) => {
+    let att = getAttendanceOfDay(student.attendance, getDate(new Date()));
+    const renderAttendance = () => {
+      return att.data.morning.map((item) => {
+        return `<td>
+       <div class=${
+         item.status ? "comat" : item.asked ? "vangphep" : "vangkhongphep"
+       }>${item.note ? `<span class="noted">n</span>` : ""}
+       </div>
+   </td>
+  `;
+      });
+    };
     return `
         <tr>
         <td> <a class="alink" href="#">${student.id}</a> </td>
         <td>${student.firstName}</td>
         <td>${student.lastName}</td>
-        <td>
-            <div class="comat"><span class="noted">n</span></div>
-        </td>
-        <td>
-            <div class="comat"></div>
-        </td>
-        <td>
-            <div class="vangphep"><span class="noted">n</span></div>
-        </td>
-        <td>
-            <div class="comat"></div>
-        </td>
-        <td>
-            <div class="comat"></div>
-        </td>
-    </tr>
-      `;
+        ${renderAttendance().join("")}
+        <tr>`;
   });
-  studentsMorning.innerHTML = content.join("");
+  studentsMorning.innerHTML = content.join(" ");
 }
-function renderAfternoon() {
-  console.log(listStudents);
+function renderAfternoon(listStudents) {
   let content = listStudents.map((student) => {
-    let attendance = student.attendanceDate.afternoon.map((item) => {
-      return `<td> <div class=${
-        item.status ? "comat" : item.asked ? "vangphep" : "vang"
-      }>
-      </div> </td>`;
-    });
-    console.log(console.log(listStudents));
+    let att = getAttendanceOfDay(student.attendance, getDate(new Date()));
+    const renderAttendance = () => {
+      return att.data.afternoon.map((item) => {
+        return `<td>
+       <div class=${
+         item.status ? "comat" : item.asked ? "vangphep" : "vangkhongphep"
+       }>${item.note ? `<span class="noted">n</span>` : ""}
+       </div>
+   </td>
+  `;
+      });
+    };
     return `
-     <tr>
+        <tr>
         <td> <a class="alink" href="#">${student.id}</a> </td>
         <td>${student.firstName}</td>
         <td>${student.lastName}</td>
-        ${attendance.join(" ")}
-    
-    </tr>
-      `;
+        ${renderAttendance().join("")}
+        <tr>`;
   });
   studentsAfternoon.innerHTML = content.join("");
 }

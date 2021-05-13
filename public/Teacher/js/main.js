@@ -20,24 +20,24 @@ let demo = {
 db.collection("Students").onSnapshot((snapshots) => {
   snapshots.forEach((snapshot) => {
     let student = snapshot.data();
-    // let date = new Date("5-29-2021");
     db.collection(`Students`)
       .doc(snapshot.id)
       .collection("attendance")
-      .onSnapshot((snapshots) => {
-        snapshots.forEach((doc) => {
-          listStudents.push({
-            ...student,
-            attendance: doc.data(),
+      .onSnapshot(async (snapshots) => {
+        let attendance = await [];
+        await snapshots.forEach(async (doc) => {
+          await attendance.push({
+            day: doc.id,
+            data: doc.data(),
           });
         });
+        await listStudents.push({ ...student, attendance: attendance });
       });
   });
   setTimeout(() => {
-    console.log(listStudents);
-    // renderADay(listStudents);
-    // renderWeek(listStudents);
-  }, 1000);
+    renderADay(listStudents);
+    renderWeek(listStudents);
+  }, 2000);
 });
 
 // render
@@ -54,6 +54,8 @@ db.collection("Students").onSnapshot((snapshots) => {
 //           ...demo,
 //           week: getWeekNow(date),
 //           status: true,
+//           asked: false,
+//           note: "",
 //         })
 //         .then(() => {
 //           console.log("success");
