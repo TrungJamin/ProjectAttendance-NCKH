@@ -21,7 +21,6 @@ login[0].addEventListener("submit", (event) => {
               check = true;
             }
           });
-
           return check; // can suy nghi
         })
         .then((res) => {
