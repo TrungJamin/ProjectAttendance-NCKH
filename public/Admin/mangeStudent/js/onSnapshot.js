@@ -12,9 +12,8 @@ function indexOf(id) {
 }
 
 // onSnapshot ( - onSnapshot se chay cuoi cung)
-db.collection("Students2").onSnapshot((snapShot) => {
+db.collection("Students").onSnapshot((snapShot) => {
   let changes = snapShot.docChanges();
-  console.log("Run - 2");
   changes.forEach((change) => {
     // Edit data
     if (change.type == "modified") {

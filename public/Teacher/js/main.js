@@ -15,6 +15,9 @@ let demo = {
     { status: true, note: "", asked: true },
   ],
   status: true,
+  asked:"",
+  count:0,
+  note:""
 };
 
 db.collection("Students").onSnapshot((snapshots) => {

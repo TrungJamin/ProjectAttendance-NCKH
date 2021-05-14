@@ -5,7 +5,7 @@ const listOfStudent = [];
 var docID;
 console.log("RUN - 3");
 const studentTempList = [];
-db.collection("Students2")
+db.collection("Students")
   .get()
   .then((snapShot) => {
     console.log("Run - 1");
@@ -34,7 +34,7 @@ function setList(group) {
     const td_PhoneNumber = document.createElement("td");
 
     td_Id.textContent = person.id;
-    td_Name.textContent = person.name;
+    td_Name.textContent = person.firstName + " " + person.lastName;
     td_DateOB.textContent = person.dateOfBirth;
     td_Class.textContent = person.class;
     td_Gender.textContent = person.gender;
@@ -99,7 +99,7 @@ function setList(group) {
         // if we click "submit-btn" val = true
         if (val) {
           swal("Deleted Successfully!", { icon: "success" });
-          db.collection("Students2").doc(id).delete();
+          db.collection("Students").doc(id).delete();
         }
       });
     });
@@ -111,7 +111,6 @@ function setList(group) {
 
       docID = doc_ID;
       edit_form.studentID.value = tr.getElementsByTagName("td")[1].textContent;
-
       edit_form.fullname.value =
         tr.getElementsByTagName("td")[2].textContent + "";
 
