@@ -62,10 +62,7 @@ allStudents.addEventListener("click", (event) => {
   iFrame.src = "./mangeStudent/allStudent.html";
 });
 
-addTeacher.addEventListener("click", (event) => {
-  sessionStorage.setItem("url", "./mangeTecher/addTeacher.html");
-  iFrame.src = "./mangeTecher/addTeacher.html";
-});
+ 
 listTeacher.addEventListener("click", (event) => {
   sessionStorage.setItem("url", "./mangeTecher/allTeacher.html");
 
