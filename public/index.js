@@ -2,7 +2,7 @@ const containerLogin = document.querySelector(".containerLogin");
 const login = document.getElementsByClassName("login");
 const buttonlogin = document.querySelector(".button-login");
 const loading = document.querySelector(".loading");
-const db = firebase.firestore();
+
 login[0].addEventListener("submit", (event) => {
   event.preventDefault();
   var email = login[0]["email"].value;

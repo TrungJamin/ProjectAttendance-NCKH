@@ -1,6 +1,7 @@
 //EDIT
 const cancelEdit = document.getElementById("cancel");
 const edit = document.querySelector(".edit");
+const renderTypeBox = document.querySelector(".type-name-box");
 const edit_form = document.querySelector("#edit-form");
 // Add event listener for Edit Form - SUBMIT
 edit_form.addEventListener("submit", (e) => {

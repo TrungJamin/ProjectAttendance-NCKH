@@ -6,11 +6,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
 
-    <title>Attendance - List Of Students</title>
-    <!-- Custom styles for this template-->
+
     <link href="./../../css/sb-admin-2.css" rel="stylesheet">
     <link rel="stylesheet" href="./../css/liststudent.css">
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
@@ -33,7 +30,6 @@
 
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-    <link rel="stylesheet" href="./../css/StyleManageStudent.css" />
 </head>
 
 <body id="page-top">
@@ -54,10 +50,10 @@
                             Day
                         </button>
                         <button class="open-view-week col-4">
-                            <a>Week</a>
+                            Week
                         </button>
                         <button class="open-view-month col-4">
-                            <a>Month</a>
+                            Month
                         </button>
                     </div>
                 </nav>
@@ -71,44 +67,36 @@
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-success"></h6>
                         </div>
-                        <!-- LOADING GIFT -->
-                        <!-- <div class="row" id="loading-gift">
-                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 
-                            </div>
-                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                                <br>
-                                <img src="./../../img/loading.gif" style="margin-right: 100%;">
-
-                            </div>
-                        </div> -->
-                        <!-- End loading gift -->
                         <div class="card-body">
-                            <div class="table-responsive">
-
-                                <table class="table table-bordered hidden " id="dataTable" width="100%" cellspacing="0">
+                            <div class="loading-table col-12 m-auto">
+                                <img src="./../img/Loading-table.gif" alt="Loading" />
+                            </div>
+                            <div class="table-responsive database d-none">
+                                <div class="table-header text-center">
+                                    <h3 class="week-now">Loading...</h3>
+                                </div>
+                                <table class="table table-bordered hidden data-student-view scroll-table" id="dataTable"
+                                    width="100%" cellspacing="0">
                                     <thead style="background-color: #ffff ; color:#00000082">
 
-                                        <tr class="first">
-
+                                        <tr class="field-one-table">
+                                            <th>STT</th>
                                             <th rowspan="2">ID</th>
                                             <th rowspan="2">First Name</th>
                                             <th rowspan="2">Lats Name</th>
-                                            <th colspan="7">Week</th>
-
-                                        </tr>
-                                        <tr class="last">
-                                            <th rowspan="2">2</th>
-                                            <th rowspan="2">4</th>
+                                            <th rowspan="2">T2,2</th>
+                                            <th rowspan="2">T3,4</th>
                                             <th rowspan="2">4</th>
                                             <th rowspan="2">4</th>
                                             <th rowspan="2">4</th>
                                             <th rowspan="2">5 </th>
                                             <th colspan="7">6</th>
                                         </tr>
+
                                     </thead>
 
-                                    <tbody id="body-table">
+                                    <tbody class="table-list-week">
 
                                     </tbody>
                                 </table>
@@ -136,37 +124,14 @@
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
-
-    <script>
-        // Your web app's Firebase configuration
-        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-        var firebaseConfig = {
-            apiKey: "AIzaSyC3Yc52SF8cjOhM7jcskIkYTa3ViuCNijM",
-            authDomain: "attendance-aae4c.firebaseapp.com",
-            projectId: "attendance-aae4c",
-            storageBucket: "attendance-aae4c.appspot.com",
-            messagingSenderId: "215982681476",
-            appId: "1:215982681476:web:423a0e5b2d3a6cb6af41d1",
-            measurementId: "G-6S2QJD5SKB"
-        };
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-        var db = firebase.firestore();
-
-
-    </script>
-
-    <!-- Functions -->
+    <script src="./../../config/env.js"></script>
 
     <script src="./../../js/Sdk.js"></script>
-    <script src="./js/setList.js"></script>
-    <script src="./js/edit.js"></script>
-    <script src="./js/sort.js"></script>
-    <script src="./js/onSnapshot.js"></script>
-    <script src="./js/add.js"></script>
-
-
-    <script src="./js/constants.js"></script>
+    <!-- <script src="./../js/list.js"></script> -->
+    <script src="./../js/aWeek.js"></script>
+    <!-- <script src="./../js/amonth.js"></script> -->
+    <!-- <script src="./../js/aday.js"></script> -->
+    <script src="./../js/main.js"></script>
 
     <!-- <script src="/js/functions/Student/setList.js"></script>
     <script src="/js/functions/Student/onSnapshot.js"></script>

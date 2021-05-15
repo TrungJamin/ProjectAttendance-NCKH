@@ -34,7 +34,7 @@ function setList(group) {
     const td_PhoneNumber = document.createElement("td");
 
     td_Id.textContent = person.id;
-    td_Name.textContent = person.firstName + " " + person.lastName;
+    td_Name.textContent = person.firstName + " " + person.LastName;
     td_DateOB.textContent = person.dateOfBirth;
     td_Class.textContent = person.class;
     td_Gender.textContent = person.gender;
@@ -108,7 +108,7 @@ function setList(group) {
     i_edit.addEventListener("click", (e) => {
       e.stopPropagation();
       // OPEN EDIT FORM
-
+      renderTypeBox.innerText = "Edit Information";
       docID = doc_ID;
       edit_form.studentID.value = tr.getElementsByTagName("td")[1].textContent;
       edit_form.fullname.value =

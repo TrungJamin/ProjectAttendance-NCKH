@@ -33,11 +33,19 @@ tr {
   text-align: center;
   cursor: pointer;
   box-shadow: inset 0 0 0 0 #36d492;
-  -webkit-transition: all ease 0.8s;
-  -moz-transition: all ease 0.8s;
-  transition: all ease 0.8s;
+  -webkit-transition: all ease 0.5s;
+  -moz-transition: all ease 0.5s;
+  transition: all ease 0.5s;
 }
 .toggle-view-list button:hover {
   box-shadow: inset 100px 0 0 0 #40c97e;
   /* color: #fff; */
+}
+.loading-table {
+  display: flex;
+  justify-content: center;
+}
+.loading-table img {
+  width: 150px;
+  height: 150px;
 }

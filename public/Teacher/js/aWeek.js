@@ -1,8 +1,8 @@
 const viewMonth = document.querySelector(".view-aweek");
 const Notes = document.querySelectorAll(".noted");
 const weekNow = document.querySelector(".week-now");
-const viewDayInWeek = document.querySelector(".last");
-const tableWeek = document.querySelector(".table-week");
+const fieldOnTable = document.querySelector(".field-one-table");
+const tableWeek = document.querySelector(".table-list-week");
 
 const nextWeek = document.querySelector(".next-week");
 const backWeek = document.querySelector(".back-week");
@@ -28,28 +28,28 @@ for (var i = 0; i < Notes.length; i++) {
     console.log(viewMonth.classList);
   });
 }
-viewMonth.addEventListener("click", (e) => {
-  e.preventDefault();
-  if (viewMonth.classList.contains("open")) {
-    viewMonth.classList.remove("open");
-  }
-});
+// viewMonth.addEventListener("click", (e) => {
+//   e.preventDefault();
+//   if (viewMonth.classList.contains("open")) {
+//     viewMonth.classList.remove("open");
+//   }
+// });
 function getTypeDay(zeller) {
   switch (zeller) {
     case 1:
-      return "Mon";
+      return "T2";
     case 2:
-      return "Tue";
+      return "T3";
     case 3:
-      return "Wed";
+      return "T4";
     case 4:
-      return "Thu";
+      return "T5";
     case 5:
-      return "Fri";
+      return "T6";
     case 6:
-      return "Sat";
+      return "T7";
     case 0:
-      return "Sun";
+      return "CN";
   }
 }
 
@@ -76,8 +76,12 @@ renderWeek = (listStudents) => {
       <th> ${getTypeDay(d.getDay())} , ${d.getDate()} </th>
       `;
   });
-
-  viewDayInWeek.innerHTML = content.join(" ");
+  console.log(database);
+  const field = `<th>STT</th>
+  <th>ID</th>
+  <th>First Name</th>
+  <th>Last Name</th>`;
+  fieldOnTable.innerHTML = field + content.join(" ");
 
   let table = database.map((student, index) => {
     let atd = student.attendance.map((date) => {
@@ -92,6 +96,7 @@ renderWeek = (listStudents) => {
     return `
     <tr>
     <td>${index + 1}</td>
+    <td>${student.id}</td>
     <td>${student.firstName}</td>
     <td>${student.lastName}</td>
     ${atd.join(" ")}
@@ -132,28 +137,28 @@ function exportTableToExcel(tableID, filename = "") {
     downloadLink.click();
   }
 }
-var excelIO = new GC.Spread.Excel.IO();
-function exportExcel() {
-  var workbook = new GC.Spread.Sheets.Workbook(
-    document.getElementById("dataTable")
-  );
-  let json = workbook.toJSON();
-  console.log(json);
-  // excelIO.save(
-  //   json,
-  //   function (blob) {
-  //     saveAs(blob, "test");
-  //   },
-  //   function (e) {
-  //     if (e.errorCode === 1) {
-  //       alert(e.errorMessage);
-  //     }
-  //   }
-  // );
-}
-// exportExcel();
-console.log(nextWeek);
-nextWeek.addEventListener("click", function (e) {
-  weekNow.innerText = WeekNow() + 1;
-  renderWeek(listStudents, getWeekNow(new Date()) + 1);
-});
+// var excelIO = new GC.Spread.Excel.IO();
+// function exportExcel() {
+//   var workbook = new GC.Spread.Sheets.Workbook(
+//     document.getElementById("dataTable")
+//   );
+//   let json = workbook.toJSON();
+//   console.log(json);
+// excelIO.save(
+//   json,
+//   function (blob) {
+//     saveAs(blob, "test");
+//   },
+//   function (e) {
+//     if (e.errorCode === 1) {
+//       alert(e.errorMessage);
+//     }
+//   }
+// );
+// }
+// // exportExcel();
+// console.log(nextWeek);
+// nextWeek.addEventListener("click", function (e) {
+//   weekNow.innerText = WeekNow() + 1;
+//   renderWeek(listStudents, getWeekNow(new Date()) + 1);
+// });

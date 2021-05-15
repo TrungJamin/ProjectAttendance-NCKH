@@ -19,6 +19,7 @@ let demo = {
   note: "",
 };
 
+const loadingData = document.querySelector(".loading-table");
 db.collection("Students").onSnapshot((snapshots) => {
   snapshots.forEach((snapshot) => {
     let student = snapshot.data();
@@ -37,40 +38,10 @@ db.collection("Students").onSnapshot((snapshots) => {
       });
   });
   setTimeout(() => {
-    renderADay(listStudents);
+    // renderADay(listStudents);
     renderWeek(listStudents);
-    renderAMonth(listStudents);
+    // renderAMonth(listStudents);
+    document.querySelector(".database").classList.remove("d-none");
+    loadingData.classList.add("d-none");
   }, 2000);
-});
-
-// render
-// for (let i = 3; i <= 31; i++) {
-//   db.collection("Students").onSnapshot((snapshots) => {
-//     snapshots.forEach((snapshot) => {
-//       let student = snapshot.data();
-//       let date = new Date(`5-${i}-2021`);
-//       db.collection(`Students`)
-//         .doc(snapshot.id)
-//         .collection("attendance")
-//         .doc(`5-${i}-2021`)
-//         .set({
-//           ...demo,
-//           week: getWeekNow(date),
-//           status: true,
-//           asked: false,
-//           note: "",
-//         })
-//         .then(() => {
-//           console.log("success");
-//         });
-//     });
-//   });
-// }
-
-firebase.auth().onAuthStateChanged(function (user) {
-  if (user) {
-    // location.assign("./../screen/HompageTeacher.html");
-  } else {
-    location.assign("./public");
-  }
 });
