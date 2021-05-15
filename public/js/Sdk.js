@@ -1,3 +1,8 @@
+function getDateNow() {
+  let d = new Date();
+  let tmp = d.getMonth() + 1 + "-" + d.getDate() + "-" + d.getFullYear();
+  return tmp;
+}
 function maxDay(month, year) {
   if (
     month == 12 ||

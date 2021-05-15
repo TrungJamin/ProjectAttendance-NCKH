@@ -15,9 +15,8 @@ let demo = {
     { status: true, note: "", asked: true },
   ],
   status: true,
-  asked:"",
-  count:0,
-  note:""
+  asked: "",
+  note: "",
 };
 
 db.collection("Students").onSnapshot((snapshots) => {
@@ -40,6 +39,7 @@ db.collection("Students").onSnapshot((snapshots) => {
   setTimeout(() => {
     renderADay(listStudents);
     renderWeek(listStudents);
+    renderAMonth(listStudents);
   }, 2000);
 });
 
@@ -66,3 +66,11 @@ db.collection("Students").onSnapshot((snapshots) => {
 //     });
 //   });
 // }
+
+firebase.auth().onAuthStateChanged(function (user) {
+  if (user) {
+    // location.assign("./../screen/HompageTeacher.html");
+  } else {
+    location.assign("./public");
+  }
+});

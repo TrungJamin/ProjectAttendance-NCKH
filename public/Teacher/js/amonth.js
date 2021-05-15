@@ -1,8 +1,6 @@
 const viewMont = document.querySelector(".view-amonth");
 const notes = document.querySelectorAll(".havenote");
 
-
-
 for (var i = 0; i < notes.length; i++) {
   notes[i].addEventListener("click", (e) => {
     e.preventDefault();
@@ -17,4 +15,7 @@ viewMont.addEventListener("click", (e) => {
   }
 });
 
-
+const renderListOfMonth = document.querySelector(".month-list-student");
+const renderAMonth = (listStudents) => {
+  console.log(renderListOfMonth);
+};
