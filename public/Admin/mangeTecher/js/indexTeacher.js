@@ -2,6 +2,33 @@ var db = firebase.firestore();
 var body = document.querySelector("#upload");
 var listOfTeachers = [];
 
+
+// format obj to strin chuyaarn 
+function formatObjectClassAndTeach(s){
+  var index=0;
+  var stringOut="";
+ for( var i =0 ; i<s.length-1; i++){
+     if( s[index].class==s[i+1].class){
+         s[i+1].class="";
+     }
+     else{
+         index=i+1;
+     }
+ }
+
+  s.forEach(e=>{
+
+      if( e.class==""){
+          stringOut+= " ; "+e.subject; 
+      }   
+      else {
+          stringOut+="\n"+ e.class +" : "+e.subject;
+      }
+         
+  })
+  return stringOut;
+}
+
 // Get data teacher and put into "listOfTeachers"
 db.collection("Teachers").onSnapshot(async function (querySnapshot) {
   listOfTeachers = [];
@@ -21,7 +48,7 @@ function renderAddElementInTable(e) {
         <td class="text-center">${e.name}</td>
         <td class="text-center">${e.group}</td>
         <td class="text-center">${e.classLeader}</td>
-        <td class="text-center">${JSON.stringify(e.subjectsAndClass)} </td>
+        <td class="text-center">${formatObjectClassAndTeach(e.subjectsAndClass)} </td>
         <td class="text-center">${e.address}</td>
         <td class="text-center">${e.dataOfBirth}</td> 
      `;
