@@ -17,25 +17,23 @@
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="./../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link href="./../css/sb-admin-2.css" rel="stylesheet">
-    <link rel="stylesheet" href="./css/admin.css">
-    <link rel="stylesheet" href="./css/index.css">
+    <link href="./../../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="./../../css/sb-admin-2.css" rel="stylesheet">
 
 
-    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
 
-    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-firestore.js"></script>
     <!-- Latest compiled and minified CSS -->
     <script src="https://kit.fontawesome.com/33d2189f35.js" crossorigin="anonymous"></script>
 
 
-    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
 </head>
 
 <body id="page-top">
 
-    <div class="formLogout">
+    <div class="formLogout d-none   ">
         <div class="box">
             <div id="content-wrapper" class="d-flex flex-column">
 
@@ -78,7 +76,7 @@
                     <div class="sidebar-brand-icon rotate-n-15">
                         <i class="fas fa-laugh-wink"></i>
                     </div>
-                    <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+                    <div class="sidebar-brand-text mx-3">Wellcome Teacher </div>
                 </a>
 
                 <!-- Divider -->
@@ -98,13 +96,13 @@
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                         aria-expanded="true" aria-controls="collapseTwo">
                         <i class="fas fa-user-tie"></i>
-                        <span>Giáo Viên</span>
+                        <span>Teacher</span>
                     </a>
                     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Teacher's Interface</h6>
                             <a class="collapse-item" href="#" id="all-Teachers">All Teachers</a>
-                            
+                            <a class="collapse-item" href="#" id="add-Teacher">Add Teacher</a>
                         </div>
                     </div>
                 </li>
@@ -114,13 +112,15 @@
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                         aria-expanded="true" aria-controls="collapseUtilities">
                         <i class="fas fa-user-graduate"></i>
-                        <span>Học Sinh</span>
+                        <span>Student</span>
                     </a>
                     <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                         data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Student's Interface</h6>
-                            <a class="collapse-item" href="#" id="all-Students">Management Students</a>
+                            <a class="collapse-item" href="#" id="all-Students">All Students</a>
+                            <a class="collapse-item" href="#" id="add-Student">Add Student</a>
+
                         </div>
                     </div>
                 </li>
@@ -264,7 +264,7 @@
                                     </h6>
                                     <a class="dropdown-item d-flex align-items-center" href="#">
                                         <div class="dropdown-list-image mr-3">
-                                            <img class="rounded-circle" src="img/undraw_profile_1.svg" alt="...">
+                                            <img class="rounded-circle" src="" alt="...">
                                             <div class="status-indicator bg-success"></div>
                                         </div>
                                         <div class="font-weight-bold">
@@ -276,7 +276,7 @@
                                     </a>
                                     <a class="dropdown-item d-flex align-items-center" href="#">
                                         <div class="dropdown-list-image mr-3">
-                                            <img class="rounded-circle" src="img/undraw_profile_2.svg" alt="...">
+                                            <img class="rounded-circle" src="" alt="...">
                                             <div class="status-indicator"></div>
                                         </div>
                                         <div>
@@ -288,7 +288,7 @@
                                     </a>
                                     <a class="dropdown-item d-flex align-items-center" href="#">
                                         <div class="dropdown-list-image mr-3">
-                                            <img class="rounded-circle" src="img/undraw_profile_3.svg" alt="...">
+                                            <img class="rounded-circle" src="" alt="...">
                                             <div class="status-indicator bg-warning"></div>
                                         </div>
                                         <div>
@@ -301,7 +301,8 @@
                                     <a class="dropdown-item d-flex align-items-center" href="#">
                                         <div class="dropdown-list-image mr-3">
                                             <img class="rounded-circle"
-                                                src="https://source.unsplash.com/Mv9hjnEUHR4/60x60" alt="...">
+                                                src="https://scontent.fhan3-1.fna.fbcdn.net/v/t1.6435-9/154284871_2903332666618511_1279486478533318430_n.jpg?_nc_cat=106&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=vkTsezjDadsAX82APBv&_nc_ht=scontent.fhan3-1.fna&oh=b8505e737bed7c344344712600ea18d8&oe=60C323F9"
+                                                alt="...">
                                             <div class="status-indicator bg-success"></div>
                                         </div>
                                         <div>
@@ -323,7 +324,7 @@
                             <li class="nav-item dropdown no-arrow">
                                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">cin</span>
+                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">Mrs John</span>
                                     <img class="img-profile rounded-circle"
                                         src="https://scontent.fhan5-6.fna.fbcdn.net/v/t1.6435-0/s600x600/182726890_1495591240787937_7895737214979253178_n.jpg?_nc_cat=107&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=vo546ZKBl5cAX8DFYRr&_nc_ht=scontent.fhan5-6.fna&tp=7&oh=01b30f3367915740630c4f65cce66d14&oe=60B8DF59">
                                 </a>
@@ -356,16 +357,12 @@
 
                     <!-- iFrames -->
                     <div style="width: 100%; height: 100%;">
-                        <iframe class="iFrame" width="100%" height="100%" style="border:none;"></iframe>
+                        <iframe src="./listStudent.html" class="iFrame" width="100%" height="100%"
+                            style="border:none;"></iframe>
                     </div>
                 </div>
 
             </div>
-            <!-- Page Wrapper -->
-
-            <!-- End of Page Wrapper -->
-
-            <!-- Scroll to Top Button-->
             <a class="scroll-to-top rounded" href="#page-top">
                 <i class="fas fa-angle-up"></i>
             </a>
@@ -375,35 +372,17 @@
 
 </body>
 
-<script>
-    // Your web app's Firebase configuration
-    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-    var firebaseConfig = {
-        apiKey: "AIzaSyC3Yc52SF8cjOhM7jcskIkYTa3ViuCNijM",
-        authDomain: "attendance-aae4c.firebaseapp.com",
-        projectId: "attendance-aae4c",
-        storageBucket: "attendance-aae4c.appspot.com",
-        messagingSenderId: "215982681476",
-        appId: "1:215982681476:web:423a0e5b2d3a6cb6af41d1",
-        measurementId: "G-6S2QJD5SKB"
-    };
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-    var db = firebase.firestore();
 
+<script src="./../../config/env.js"></script>
 
-</script>
-
-<script src="./admin.js"></script>
-
-<script src="./../vendor/jquery/jquery.min.js"></script>
-<script src="./../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="./../../vendor/jquery/jquery.min.js"></script>
+<script src="./../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 <!-- Core plugin JavaScript-->
-<script src="./../vendor/jquery-easing/jquery.easing.min.js"></script>
+<script src="./../../vendor/jquery-easing/jquery.easing.min.js"></script>
 
 <!-- Custom scripts for all pages-->
-<script src="./../js/sb-admin-2.min.js"></script>
+<script src="./../js/index.js"></script>
 
 
 

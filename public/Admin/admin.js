@@ -1,5 +1,3 @@
-const addStudent = document.getElementById("add-Student");
-console.log(addStudent);
 const homepage = document.getElementById("homepage");
 const allStudents = document.getElementById("all-Students");
 
@@ -14,11 +12,7 @@ const btnLogout = document.querySelector("#btnLogout"); // button hien thi form
 const agreeLogout = document.querySelector("#agreeLogout"); // dong y dang xuat
 const auth = firebase.auth();
 const makeAdmin = document.querySelector(".makeAdmin");
-// makeAdmin.addEventListener("submit", (event) => {
-//   event.preventDefault();
-//   let email = makeAdmin["email"].value;
-//   auth.getUserByEmail({ email }).then((res) => console.log(res));
-// });
+
 btnLogout.addEventListener("click", (event) => {
   formLogout.classList.add("open"); // hien thi forms
   console.log();
@@ -50,9 +44,6 @@ firebase.auth().onAuthStateChanged((user) => {
   console.log(user);
 });
 
-
-
-
 // doạn này khi vào trang se vao trang all teache dung 1 l
 
 function refresh() {
@@ -61,28 +52,17 @@ function refresh() {
     // neu co di theo url cu
     iFrame.src = sessionStorage.getItem("url");
   } else {
-    iFrame.src = "./mangeTecher/testNewTables.html";
+    iFrame.src = "./mangeTecher/allTeacher.html";
   }
 }
 refresh();
-
-
-
-
-addStudent.addEventListener("click", (event) => {
-  sessionStorage.setItem("url", "./mangeStudent/addStudent.html");
-  iFrame.src = "./mangeStudent/addStudent.html";
-});
 
 allStudents.addEventListener("click", (event) => {
   sessionStorage.setItem("url", "./mangeStudent/allStudent.html");
   iFrame.src = "./mangeStudent/allStudent.html";
 });
 
-addTeacher.addEventListener("click", (event) => {
-  sessionStorage.setItem("url", "./mangeTecher/addTeacher.html");
-  iFrame.src = "./mangeTecher/addTeacher.html";
-});
+ 
 listTeacher.addEventListener("click", (event) => {
   sessionStorage.setItem("url", "./mangeTecher/allTeacher.html");
 

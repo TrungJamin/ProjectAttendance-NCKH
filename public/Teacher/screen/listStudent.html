@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+    <link href="./../../css/sb-admin-2.css" rel="stylesheet">
+    <link rel="stylesheet" href="./../css/liststudent.css">
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <script src="https://kit.fontawesome.com/33d2189f35.js" crossorigin="anonymous"></script>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+</head>
+
+<body id="page-top">
+
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                    <div class="toggle-view-list">
+                        <button class="open-view-day col-4">
+                            Day
+                        </button>
+                        <button class="open-view-week col-4">
+                            Week
+                        </button>
+                        <button class="open-view-month col-4">
+                            Month
+                        </button>
+                    </div>
+                </nav>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- DataTales of Student -->
+                    <div class="shadow mb-4 col-12">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-success"></h6>
+                        </div>
+
+                        <div class="card-body">
+                            <div class="loading-table col-12 m-auto">
+                                <img src="./../img/Loading-table.gif" alt="Loading" />
+                            </div>
+                            <div class="table-responsive database d-none">
+                                <div class="table-header text-center">
+                                    <h3 class="week-now">Loading...</h3>
+                                </div>
+                                <table class="table table-bordered hidden data-student-view scroll-table" id="dataTable"
+                                    width="100%" cellspacing="0">
+                                    <thead style="background-color: #ffff ; color:#00000082">
+
+                                        <tr class="field-one-table">
+                                            <th>STT</th>
+                                            <th rowspan="2">ID</th>
+                                            <th rowspan="2">First Name</th>
+                                            <th rowspan="2">Lats Name</th>
+                                            <th rowspan="2">T2,2</th>
+                                            <th rowspan="2">T3,4</th>
+                                            <th rowspan="2">4</th>
+                                            <th rowspan="2">4</th>
+                                            <th rowspan="2">4</th>
+                                            <th rowspan="2">5 </th>
+                                            <th colspan="7">6</th>
+                                        </tr>
+
+                                    </thead>
+
+                                    <tbody class="table-list-week">
+
+                                    </tbody>
+                                </table>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!-- /.container -->
+
+        </div>
+        <!-- End of Main Content -->
+
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+    <script src="./../../config/env.js"></script>
+
+    <script src="./../../js/Sdk.js"></script>
+    <!-- <script src="./../js/list.js"></script> -->
+    <script src="./../js/aWeek.js"></script>
+    <!-- <script src="./../js/amonth.js"></script> -->
+    <!-- <script src="./../js/aday.js"></script> -->
+    <script src="./../js/main.js"></script>
+
+    <!-- <script src="/js/functions/Student/setList.js"></script>
+    <script src="/js/functions/Student/onSnapshot.js"></script>
+
+    <script src="/js/functions/Student/edit.js"></script>
+    <script src="/js/events/inputEvents.js"></script> -->
+
+</body>
+
+</html>

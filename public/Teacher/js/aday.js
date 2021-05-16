@@ -6,19 +6,18 @@ const studentsAfternoon = document.querySelector(".students-afternoon");
 const DateNowMorning = document.querySelector(".date-now-morning");
 const DateNowAfternoon = document.querySelector(".date-now-afternoon");
 
-function getDateNow() {
-  let d = new Date();
-  let tmp = d.getMonth() + 1 + "-" + d.getDate() + "-" + d.getFullYear();
+function DateNowFormat(date) {
+  let tmp =
+    date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear();
   return tmp;
 }
-
 function getDate(date) {
   let tmp =
     date.getMonth() + 1 + "-" + date.getDate() + "-" + date.getFullYear();
   return tmp;
 }
-DateNowMorning.innerText = "Sáng " + getDateNow();
-DateNowAfternoon.innerText = "Chiều " + getDateNow();
+DateNowMorning.innerText = "Sáng " + DateNowFormat(new Date());
+DateNowAfternoon.innerText = "Chiều " + DateNowFormat(new Date());
 for (var i = 0; i < links.length; i++) {
   links[i].addEventListener("click", (e) => {
     e.preventDefault();
