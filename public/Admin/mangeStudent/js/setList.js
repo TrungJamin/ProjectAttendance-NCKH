@@ -34,7 +34,7 @@ function setList(group) {
     const td_PhoneNumber = document.createElement("td");
 
     td_Id.textContent = person.id;
-    td_Name.textContent = person.firstName + " " + person.LastName;
+    td_Name.textContent = person.firstName + " " + person.lastName;
     td_DateOB.textContent = person.dateOfBirth;
     td_Class.textContent = person.class;
     td_Gender.textContent = person.gender;

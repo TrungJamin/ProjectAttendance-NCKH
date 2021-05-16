@@ -18,3 +18,11 @@
 //     .then(function () {})
 //     .catch(function (error) {});
 // });
+const test = firebase.functions().httpsCallable("onCallTest");
+test({
+  name: "Function-oke",
+})
+  .then(function (res) {
+    console.log(res);
+  })
+  .catch(function (error) {});

@@ -871,3 +871,46 @@ input[type="search"] {
 .topbar .dropdown-list .dropdown-header {
   background-color: var(--mainColor) !important;
 }
+
+.enable-view-database {
+  opacity: 0.2;
+}
+#content {
+  position: relative;
+}
+.view-make-admin {
+  position: absolute;
+  top: 40%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+.form-make-admin {
+  position: relative;
+  height: 200px;
+  width: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 5px;
+  background-color: #f5f5f5;
+}
+.form-make-admin-header {
+  margin-top: 20px;
+}
+.form-make-admin input {
+  width: 70% !important;
+  margin: auto !important;
+}
+.form-make-admin button {
+  height: 40px !important;
+  width: 50%;
+  margin: auto;
+}
+.cancel-make-admin {
+  position: absolute;
+  right: 10px;
+  top: 5px;
+  cursor: pointer;
+}

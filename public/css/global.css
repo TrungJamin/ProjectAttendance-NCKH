@@ -1,0 +1,9 @@
+.loading-table {
+  display: flex;
+  justify-content: center;
+  background-color: #ffff !important;
+}
+.loading-table img {
+  width: 150px;
+  height: 150px;
+}

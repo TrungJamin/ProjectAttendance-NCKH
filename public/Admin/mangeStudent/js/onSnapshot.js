@@ -12,9 +12,9 @@ function indexOf(id) {
 }
 
 // onSnapshot ( - onSnapshot se chay cuoi cung)
-db.collection("Students").onSnapshot((snapShot) => {
-  let changes = snapShot.docChanges();
-  changes.forEach((change) => {
+db.collection("Students").onSnapshot(async (snapShot) => {
+  let changes = await snapShot.docChanges();
+  await changes.forEach((change) => {
     // Edit data
     if (change.type == "modified") {
       let tr = document.getElementById(change.doc.id);
@@ -67,6 +67,6 @@ db.collection("Students").onSnapshot((snapShot) => {
   setOrdinalNumbers();
 
   // LOADING TABLE
-  document.getElementById("loading-gift").classList.add("hidden");
-  document.getElementById("dataTable").classList.remove("hidden");
+  document.querySelector(".loading-table").classList.add("d-none");
+  document.querySelector(".table").classList.remove("hidden");
 });

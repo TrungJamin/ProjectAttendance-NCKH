@@ -10,9 +10,21 @@ let url = "home";
 const formLogout = document.querySelector(".formLogout"); // form hien thi log out
 const btnLogout = document.querySelector("#btnLogout"); // button hien thi form
 const agreeLogout = document.querySelector("#agreeLogout"); // dong y dang xuat
-const auth = firebase.auth();
-const makeAdmin = document.querySelector(".makeAdmin");
-
+// const auth = firebase.auth();
+const makeAdmin = document.querySelector(".make-admin");
+const cancelMakeAdmin = document.querySelector(".cancel-make-admin");
+makeAdmin.addEventListener("click", (event) => {
+  document
+    .querySelector(".view-database")
+    .classList.add("enable-view-database");
+  document.querySelector(".view-make-admin").classList.remove("d-none");
+});
+cancelMakeAdmin.addEventListener("click", function () {
+  document
+    .querySelector(".view-database")
+    .classList.remove("enable-view-database");
+  document.querySelector(".view-make-admin").classList.add("d-none");
+});
 btnLogout.addEventListener("click", (event) => {
   formLogout.classList.add("open"); // hien thi forms
   console.log();
@@ -73,3 +85,4 @@ listTeacher.addEventListener("click", (event) => {
 });
 
 /// log ui user
+console.log("chay");
