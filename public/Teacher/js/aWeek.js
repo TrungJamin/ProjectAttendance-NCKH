@@ -67,7 +67,7 @@ function dateOfWeek(listStudents, weekNow) {
   });
   return listWeek;
 }
-renderWeek = (listStudents) => {
+function renderWeek(listStudents){
   let database = dateOfWeek(listStudents, getWeekNow(new Date()));
 
   let content = database[1].attendance.map((date) => {

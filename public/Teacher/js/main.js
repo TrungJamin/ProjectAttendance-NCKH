@@ -39,9 +39,9 @@ db.collection("Students").onSnapshot((snapshots) => {
       });
   });
   setTimeout(() => {
-    renderDay(listStudents);
-    // renderWeek(listStudents);
-    // renderMonth(listStudents);
+     renderDay(listStudents);
+     renderWeek(listStudents);
+    renderMonth(listStudents);
     let dataBase = document.querySelectorAll(".database");
     dataBase.forEach((data) => {
       data.classList.remove("d-none");

@@ -13,7 +13,8 @@ function getDate(date) {
     date.getMonth() + 1 + "-" + date.getDate() + "-" + date.getFullYear();
   return tmp;
 }
-aDay.innerText = DateNowFormat(new Date());
+
+aDay.innerText = "Ngày " + DateNowFormat(new Date());
 
 // for (var i = 0; i < links.length; i++) {
 //   links[i].addEventListener("click", (e) => {
@@ -70,5 +71,3 @@ function renderDay(listStudents) {
 //     .TableExport({ fileName: "huy", type: "xlsx" });
 // }
 // exportData();
-
-
