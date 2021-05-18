@@ -1,3 +1,4 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
 thead,
 th,
 td,
@@ -81,13 +82,17 @@ tr {
   display: block;
 }
 
+.table-month .table-bordered thead tr th:nth-child(1),
+.table-month .table-bordered tbody tr td:nth-child(1) {
+  width: 5%;
+}
 .table-month .table-bordered thead tr th:nth-child(2),
 .table-month .table-bordered tbody tr td:nth-child(2) {
   width: 20%;
 }
 .table-month .table-bordered thead tr th:nth-child(3),
 .table-month .table-bordered tbody tr td:nth-child(3) {
-  width: 30%;
+  width: 25%;
 }
 .table-month .table-bordered thead tr th:nth-child(4),
 .table-month .table-bordered tbody tr td:nth-child(4) {
@@ -111,4 +116,9 @@ tr {
 .table-day .table-bordered tbody tr td:last-child {
   width: 10%;
   
+}
+.noted{
+  overflow: hidden;
+  white-space: nowrap; 
+  text-overflow: ellipsis;  
 }

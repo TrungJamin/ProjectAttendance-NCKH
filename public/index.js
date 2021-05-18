@@ -32,6 +32,7 @@ login[0].addEventListener("submit", (event) => {
           res
             ? location.assign("./Admin/admin.html")
             : location.assign("./Teacher/screen/index.html");
+            console.log(res);
           buttonlogin.classList.remove("d-none");
           loading.classList.add("d-none");
         });
