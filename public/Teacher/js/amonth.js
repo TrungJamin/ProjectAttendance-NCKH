@@ -58,7 +58,7 @@ function listMonth(listStudents, aMonth) {
   });
   return listMonth;
 }
-renderMonth = (listStudents) => {
+function renderMonth(listStudents) {
   let d  = new Date();
  let list = listMonth(listStudents,d.getMonth()+1 );
   let table = list.map((student, index) => {
