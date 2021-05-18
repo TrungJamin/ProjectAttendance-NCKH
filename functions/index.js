@@ -1,77 +1,85 @@
 const fetch = require("node-fetch");
-const path = require("path");
 const functions = require("firebase-functions");
 const admin = require("firebase-admin");
+const path = require("path");
+const assert = require("assert").strict;
+// const tf = require("@tensorflow/tfjs");
+const canvas = require("canvas");
 const faceapi = require("face-api.js");
 faceapi.env.monkeyPatch({ fetch: fetch });
 admin.initializeApp(functions.config().firebase);
+const jsdom = require("jsdom");
+const { JSDOM } = jsdom;
 const express = require("express");
 const cors = require("cors");
 const app = express();
 app.use(cors({ origin: true }));
 
+const Canvas = require("canvas");
 // const MODELS_URL = path.join(__dirname, '/../models/face-api');
 const db = admin.firestore();
-
+function decodeBase64Image(dataString) {
+  let response = new Buffer(dataString, "base64");
+  return response;
+}
+exports.testFunction = functions.https.onCall(async (data, content) => {
+  return decodeBase64Image(data.img);
+});
 exports.isFaceStudent = functions.https.onCall(async (data, content) => {
-  const dataUser = data;
-  async function start() {
-    var labeledFaceDescriptorsJson2;
+  const dataUser = await data;
+  let img = new Canvas.Image();
+  img.src = dataUser.img;
+  const displaySize = { width: img.width, height: img.height };
+  img.width = img.height = "1000";
+  console.log(img);
+  const start = async () => {
     var results;
     await db
       .collection("FacesDatabase")
       .doc("10A1")
       .get()
       .then((doc) => {
-        // console.log(doc.data());
         labeledFaceDescriptorsJson2 = doc.data().data;
-        // console.log(labeledFaceDescriptorsJson2);
-        labeledFaceDescriptorsJson2 = labeledFaceDescriptorsJson2.map(
-          (person) => {
-            //Convert Object to Array
-            person.descriptors = Object.values(person.descriptors);
-            person.descriptors = person.descriptors.map((detail) =>
-              Object.values(detail)
-            );
-            return person;
-          }
+        return labeledFaceDescriptorsJson2.map((person) => {
+          //Convert Object to Array
+          person.descriptors = Object.values(person.descriptors);
+          person.descriptors = person.descriptors.map((detail) =>
+            Object.values(detail)
+          );
+          return person;
+        });
+      })
+      .then((labeledFaceDescriptorsJson) => {
+        return labeledFaceDescriptorsJson.map((x) =>
+          faceapi.LabeledFaceDescriptors.fromJSON(x)
         );
-        // console.log(labeledFaceDescriptorsJson2);
-        return new Promise((resolve, reject) => {
-          resolve(labeledFaceDescriptorsJson2);
-        })
-          .then((data) => {
-            return data.map((x) => {
-              return faceapi.LabeledFaceDescriptors.fromJSON(x);
-            });
-          })
-          .then(async (data) => {
-            console.log("data2", data);
-            const faceMatcher = await new faceapi.FaceMatcher(data, 0.6);
-
-            let image = await dataUser.img;
-            const displaySize = { width: image.width, height: image.height };
-
-            // Xác thực các nhân vật trong ảnh chọn lên
-            const detections = await faceapi
-              .detectAllFaces(image)
-              .withFaceLandmarks()
-              .withFaceDescriptors();
-
-            const resizedDetections = faceapi.resizeResults(
-              detections,
-              displaySize
-            );
-            console.log(detections);
-            results = await resizedDetections.map((d) => {
-              // {_label: "Tony Stark", _distance: 0.5715871892946531} label => user id,
-              return faceMatcher.findBestMatch(d.descriptor);
-            });
-            return results;
-          });
+      })
+      .then((result) => {
+        return new faceapi.FaceMatcher(result, 0.6);
+      })
+      .then(async (faceMatcher) => {
+        const detections = await faceapi
+          .detectAllFaces(canvas)
+          .withFaceLandmarks()
+          .withFaceDescriptors();
+        console.log(detections);
+        const resizedDetections = faceapi.resizeResults(
+          detections,
+          displaySize
+        );
+        console.log(resizedDetections);
+        const results = resizedDetections.map((d) => {
+          console.log(faceMatcher.findBestMatch(d.descriptor)); // {_label: "Tony Stark", _distance: 0.5715871892946531} label => user id,
+          return faceMatcher.findBestMatch(d.descriptor);
+        });
+        return results;
+      })
+      .then((response) => {
+        results = response;
       });
+    // console.log(labeledFaceDescriptorsJson2);
     return results;
-  }
+  };
 
   return Promise.all([
     faceapi.nets.faceRecognitionNet.loadFromDisk(

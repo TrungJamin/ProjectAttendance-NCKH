@@ -13,9 +13,12 @@
   },
   "main": "index.js",
   "dependencies": {
+    "assert": "^2.0.0",
+    "canvas": "^2.7.0",
     "face-api.js": "^0.22.2",
     "firebase-admin": "^9.2.0",
     "firebase-functions": "^3.11.0",
+    "jsdom": "^16.5.3",
     "path": "^0.12.7"
   },
   "devDependencies": {

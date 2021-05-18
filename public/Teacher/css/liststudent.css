@@ -41,7 +41,7 @@ tr {
 }
 .toggle-view-list button:hover {
   box-shadow: inset 100px 0 0 0 #40c97e;
-  /* color: #fff; */
+  color: #fff;
 }
 .loading-table {
   display: flex;
