@@ -2,39 +2,15 @@ var type = true; // xac dinh kieu  (true )add or  (false)edit
 var teacherEdit = {};
 var db = firebase.firestore();
 
-// render subjectTeach
+var btnAddTeacher=document.querySelector("#addTeacher");
+console.log(btnAddTeacher)
+btnAddTeacher.addEventListener("click", () =>{
+  openFormInput("cover-caption","");
+  
+} )
 
-function renderSubjectTeach() {
-  var sub = [
-    "Toán",
-    "Ngữ văn",
-    "Sinh học",
-    "Vật lý",
-    "Hóa học",
-    "Lịch sử",
-    "Địa lý",
-    "Ngoại ngữ",
-    "Giáo dục công dân",
-    "Giáo dục Quốc phòng",
-    "Thể dục",
-    "Công nghệ",
-    "Tin học",
-    "Hoạt động trải nghiệm",
-  ];
 
-  var selectionClassLeader = document.querySelector("#subjectTeach");
-  var node = `<option > môn dạy</option>`;
-  sub.forEach((e) => {
-    node += `<div class="form-check">
-             <label class="form-check-label">
-                 <input type="checkbox" class="form-check-input" value='${e}'>${e}
-             </label>
-             </div>`;
-  });
-  selectionClassLeader.innerHTML = node;
-}
-renderSubjectTeach();
-
+ 
 // render selectionClassLeader lop hoc
 function getListClass() {
   db.collection("Classes")
@@ -50,32 +26,92 @@ function getListClass() {
         arr.push(gan);
       });
 
+
+      console.log("run -----")
       renderChooseClassLeader(arr);
-      renderChooseClassTeach(arr);
+       
+      renderMuntilChoose(arr);
     })
     .catch(function (error) {});
 }
 
 getListClass();
 
-// render choose classTeach
-function renderChooseClassTeach(classTeachs) {
-  var classTeach = document.querySelectorAll("#classTeach .col-xs-4-12");
 
-  // có 3 lớp // for chay 3 lần
-  // mỗi lần chạy add input checked book cho từng lớp
-  classTeachs.forEach((e, index) => {
-    let node = `<h6 class="text-center">lớp ${"1" + index}</h6>`;
-    e.forEach((eClass) => {
-      node += `<div class="form-check">
-            <label class="form-check-label">
-                <input type="checkbox" class="form-check-input" value='${eClass}'>${eClass}
-            </label>
-            </div>`;
-    });
-    classTeach[index].innerHTML = node;
+
+// new code 
+function renderMuntilChoose( listClass){
+
+  console.log("run")
+  console.log(`listClass`, listClass)
+  const renderMuntilchooseHtml=document.querySelector("#renderMuntilChoose");
+
+  var node='';
+
+  listClass.forEach(e=> {
+
+    e.forEach( element=>{
+       node+=`<div class="form-check">
+      <label class="form-check-label">
+          <input type="checkbox" class="form-check-input" value='${element}'>${element}
+      </label>
+      
+      <div class="renderMuntilChooseSubjects">
+        
+        
+      </div>
+      </div>`
+    })
+   
   });
+
+ 
+  renderMuntilchooseHtml.innerHTML=node;
+  renderMuntilChooseSubjects();
+
+  
+
 }
+
+
+function renderMuntilChooseSubjects(){
+
+  var sub = [
+    "Toán",
+    "Ngữ văn",
+    "Sinh học",
+    "Vật lý",
+    "Hóa học",
+    "Lịch sử",
+    "Địa lý",
+    "Ngoại ngữ",
+    "Giáo dục công dân",
+    "Giáo dục Quốc phòng",
+    "Thể dục",
+    "Công nghệ",
+    "Tin học",
+    "Hoạt động trải nghiệm",
+  ]; 
+
+  var node = ` `;
+  sub.forEach((e) => {
+    node += `<label class="form-check-label ml-3">
+          <input type="checkbox"  class="form-check-input  " value='${e}'> ${e}
+      </label>`;
+  });
+
+
+  const renderMuntilChooseSubjectsHtml= document.querySelectorAll(".renderMuntilChooseSubjects");
+
+  renderMuntilChooseSubjectsHtml.forEach( e=>{
+
+    e.innerHTML=node;
+
+  })
+
+  
+}
+ 
 
 //renderChooseClassLeader
 function renderChooseClassLeader(arr) {
@@ -125,10 +161,12 @@ function addTeacher(obj) {
     reNewForm();
     
     
+    console.log(obj)
     db.collection("Teachers")
     .add(obj)
     .then(function (response) { console.log(`object`)})
     .catch(function (error) {console.log("errr")});
+    closeFormInput("cover-caption");
 }
 
 // get input  to add or edit
@@ -143,28 +181,7 @@ function getInfoTeacher() {
 
   var teacher = {};
 
-  // lấy về sự lựa chọn lớp dạy
-  var classTeach = document.querySelectorAll("#classTeach .col-xs-4-12  input");
-  let arrClassTeach = [];
-  classTeach.forEach((e) => {
-    if (e.checked == true) {
-      arrClassTeach.push(e.value);
-    }
-  });
-  // console.log(arrClassTeach);
-  teacher.classTeach = arrClassTeach;
-
-  // lấy về sự lựa chọn môn dạy
-  var classTeach = document.querySelectorAll("#subjectTeach input");
-  let arrSubjectTeach = [];
-  classTeach.forEach((e) => {
-    if (e.checked == true) {
-      arrSubjectTeach.push(e.value);
-    }
-  });
-  console.log(arrSubjectTeach);
-  teacher.subjectTeach = arrSubjectTeach;
-  // teacher.classTeach=arrClassTeach;
+   
 
   var myForm = document.querySelectorAll("#myForm .form-group");
   myForm.forEach((e) => {
@@ -176,6 +193,46 @@ function getInfoTeacher() {
       teacher[name] = e.children[0].value;
     }
   });
+
+
+  const renderMuntilChoose= document.querySelector("#renderMuntilChoose");
+
+  console.log(renderMuntilChoose);
+
+  const subjectsAndClass =[];
+
+  let i=0;
+  while( renderMuntilChoose.children[i]!=undefined){
+
+    if(renderMuntilChoose.children[i].children[0].children[0].checked==true ){
+
+      
+      let j =0;
+      while(renderMuntilChoose.children[i].children[1].children[j] ){
+
+        if( renderMuntilChoose.children[i].children[1].children[j].children[0].checked==true ){
+          const tmp={
+            class:renderMuntilChoose.children[i].children[0].children[0].value,
+            subject :renderMuntilChoose.children[i].children[1].children[j].children[0].value
+          }
+
+          subjectsAndClass.push(tmp);
+        }
+        
+        
+        
+        j++;
+      }
+
+    }
+
+    i++;
+  }
+
+  teacher.subjectsAndClass=subjectsAndClass
+  
+
+
 
   console.log(type, "==================");
   if (type == true) {
@@ -189,14 +246,16 @@ function getInfoTeacher() {
 
   if (type == false) {
     teacher.id = teacherEdit.id;
+    delete teacher.undefined;
     console.log(teacherEdit.docId, teacher);
     editTeacher(teacherEdit.docId, teacher);
   }
 }
 
 function closeFormInput(idOfHtml) {
+  teacherEdit = {};
     reNewForm();
-  document.getElementById(idOfHtml).classList.add("hide");
+    document.getElementById(idOfHtml).classList.add("hide");
 }
 
 function openFormInput(idOfHtml, teacher) {
@@ -208,28 +267,7 @@ function openFormInput(idOfHtml, teacher) {
     console.log(teacher);
     teacherEdit = teacher;
 
-    //  // đổ data form input chọn lớp dạy
-    var classTeach = document.querySelectorAll(
-      "#classTeach .col-xs-4-12  input"
-    );
-    teacher.classTeach.forEach((eClass) => {
-      classTeach.forEach((e) => {
-        if (e.value == eClass) {
-          e.checked = true;
-        }
-      });
-    });
-
-    // đổ data vao from chọn môn dạy
-    var SubjectTeach = document.querySelectorAll("#subjectTeach input");
-
-    teacher.subjectTeach.forEach((eSubject) => {
-      SubjectTeach.forEach((e) => {
-        if (e.value == eSubject) {
-          e.checked = true;
-        }
-      });
-    });
+    
 
     var myForm = document.querySelectorAll("#myForm .form-group");
 
@@ -237,14 +275,63 @@ function openFormInput(idOfHtml, teacher) {
     myForm[0].children[1].setAttribute("value", teacher.name);
     myForm[1].children[0].value = teacher.group;
     myForm[2].children[0].value = teacher.gender;
-    myForm[5].children[1].value = teacher.classLeader;
-    myForm[6].children[1].setAttribute("value",teacher.address);
-    myForm[7].children[1].setAttribute("value",teacher.dataOfBirth  );
+    myForm[4].children[1].value = teacher.classLeader;
+    myForm[5].children[1].setAttribute("value",teacher.address);
+    myForm[6].children[1].setAttribute("value",teacher.dataOfBirth  );
+
+    // giai lap co data
+
+    const dataClassTeachSubjects= teacher.subjectsAndClass;
+
+    
+    // myForm[3].children[1].children[1].children[0].children[0] tung lop 1 
+    // myForm[3].children[1].children[1].children[0].children[0].children[0] tung phhan chon 1 trong 1 lop
+     // myForm[3].children[1].children[1].children[0].children[0].children[1].children[0]  input value trong 1 thành phan 
+    // console.log(`object`,  myForm[3].children[1].children[1].children[0].children[1].children[0].children[0].value , );
+
+  
+
+    var i=0;
+
+    var tmpForm=myForm[3].children[1].children[1];
+
+   
+    while( tmpForm.children[0].children[i]!=undefined ){
+
+      
+      // neu thang class dc chon thi di tiep tim nhung thang dc chon
+
+      dataClassTeachSubjects.forEach( e=>{
+
+        
+        if( e.class== tmpForm.children[0].children[i].children[0].children[0].value){
+
+          console.log(tmpForm.children[0].children[i].children[0].children[0].value);
+
+          tmpForm.children[0].children[i].children[0].children[0].checked=true;
+
+          let j=0;
+          while( tmpForm.children[0].children[i].children[1].children[j]!=undefined ){
+            if(e.class== tmpForm.children[0].children[i].children[0].children[0].value && e.subject== tmpForm.children[0].children[1].children[1].children[j].children[0].value){
+              console.log(e.subject,'-----', myForm[3].children[1].children[1].children[0].children[1].children[1].children[j].children[0].value);
+              tmpForm.children[0].children[i].children[1].children[j].children[0].checked=true;
+            }
+            j++;
+          }
+
+        } 
+
+      })
+      
+      i++;
+       
+    }
   }
 }
 
 function reNewForm() {
   document.getElementById("myForm").reset();
+  teacherEdit = {};
 }
 
 function mySubmitFunction(e) {

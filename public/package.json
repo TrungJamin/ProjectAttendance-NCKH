@@ -2,6 +2,8 @@
     "dependencies": {
         "@grapecity/spread-excelio": "^14.0.10",
         "@grapecity/spread-sheets": "^14.0.10",
-        "jquery": "^3.6.0"
+        "jquery": "^3.6.0",
+        "tableexport": "^5.2.0",
+        "xlsx": "^0.17.0"
     }
 }

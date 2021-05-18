@@ -39,47 +39,55 @@
 
     <!-- Page Wrapper -->
     <div id="wrapper">
-        <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
 
-            <!-- Main Content -->
-            <div id="content">
+        <div id="content">
 
-                <!-- Topbar -->
-                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-                    <div class="toggle-view-list">
-                        <button class="open-view-day col-4">
-                            Day
-                        </button>
-                        <button class="open-view-week col-4">
-                            Week
-                        </button>
-                        <button class="open-view-month col-4">
-                            Month
-                        </button>
+            <!-- Topbar -->
+            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                <select id="export-excel" class="form-control" aria-label=".form-select-lg">
+                    <option selected>Export Excel
+                        <i class="fa fa-download" aria-hidden="true"></i>
+                    </option>
+                    <option value="data-day">Day</option>
+                    <option value="data-week">Week</option>
+                    <option value="data-month">Month</option>
+                </select>
+
+                <div class="toggle-view-list">
+                    <button class="open-view-day col-4">
+                        Day
+                    </button>
+                    <button class="open-view-week col-4">
+                        Week
+                    </button>
+                    <button class="open-view-month col-4">
+                        Month
+                    </button>
+                </div>
+            </nav>
+            <!-- End of Topbar -->
+
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+
+                <!-- DataTales of Student -->
+                <div class="shadow mb-4 col-12">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-success"></h6>
                     </div>
-                </nav>
-                <!-- End of Topbar -->
 
-                <!-- Begin Page Content -->
-                <div class="container-fluid">
-
-                    <!-- DataTales of Student -->
-                    <div class="shadow mb-4 col-12">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-success"></h6>
+                    <div class="card-body">
+                        <div class="loading-table col-12 m-auto">
+                            <img src="./../../img/Loading-table.gif" alt="Loading" />
                         </div>
-
-                        <div class="card-body">
-                            <div class="loading-table col-12 m-auto">
-                                <img src="./../../img/Loading-table.gif" alt="Loading" />
-                            </div>
-                            <div class="table-responsive database d-none">
+                        <div class="table-week">
+                            <div class="table-responsive database">
                                 <div class="table-header text-center">
                                     <h3 class="week-now">Loading...</h3>
                                 </div>
-                                <table class="table table-bordered hidden data-student-view scroll-table" id="dataTable"
-                                    width="100%" cellspacing="0">
+
+                                <table id="data-week" class="table table-bordered hidden data-student-view scroll-table"
+                                    id="dataTable" width="100%" cellspacing="0">
                                     <thead style="background-color: #ffff ; color:#00000082">
 
                                         <tr class="field-one-table">
@@ -102,14 +110,85 @@
 
                                     </tbody>
                                 </table>
+                            </div>
+                        </div>
+                        <div class="table-month">
+                            <div class="table-responsive database d-none">
+                                <div class="table-header text-center">
+                                    <h3 class="month-now">Loading</h3>
+                                </div>
+
+                                <table id="data-month" class="table table-bordered data-student-view scroll-table"
+                                    id="dataTable" width="100%" cellspacing="0">
+                                    <thead style="background-color: #ffff ; color:#00000082">
+
+                                        <tr class="field-one-table">
+                                            <th>STT</th>
+                                            <th>ID</th>
+                                            <th>First Name</th>
+                                            <th>Lats Name</th>
+                                            <th>Vắng có phép</th>
+                                            <th>Vắng không phép</th>
+
+                                        </tr>
+
+                                    </thead>
+
+                                    <tbody class="table-list-month">
+
+                                    </tbody>
+                                </table>
+
+
+                            </div>
+                        </div>
+                        <div class="table-day open">
+                            <div class="table-responsive database d-none">
+                                <div class="table-header text-center" style="width:100%">
+                                    <h3 class="day-now">Loading</h3>
+                                </div>
+
+                                <table id="data-day" class="table table-bordered data-student-view scroll-table"
+                                    id="dataTable" width="100%" cellspacing="0">
+                                    <thead style="background-color: #ffff ; color:#00000082">
+
+                                        <tr>
+                                            <th rowspan="2">ID</th>
+                                            <th rowspan="2">First Name</th>
+                                            <th rowspan="2">Last Name</th>
+                                            <th colspan="5">Sáng</th>
+                                            <th colspan="5">Chiều</th>
+
+                                            <th rowspan="2">Note</th>
+                                        </tr>
+                                        <tr>
+                                            <th>t1</th>
+                                            <th>t2</th>
+                                            <th>t3</th>
+                                            <th>t4</th>
+                                            <th>t5</th>
+                                            <th>t1</th>
+                                            <th>t2</th>
+                                            <th>t3</th>
+                                            <th>t4</th>
+                                            <th>t5</th>
+                                        </tr>
+
+                                    </thead>
+
+                                    <tbody class="table-list-day">
+
+                                    </tbody>
+                                </table>
 
 
                             </div>
                         </div>
                     </div>
-
                 </div>
+
             </div>
+
             <!-- /.container -->
 
         </div>
@@ -126,13 +205,15 @@
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
+    <script lang="javascript" src="./../../node_modules/xlsx/dist/xlsx.core.min.js"></script>
+    <script src="./../../Sdk/FileSaver.js"></script>
+    <script src="https://unpkg.com/tableexport@5.2.0/dist/js/tableexport.js"></script>
     <script src="./../../config/env.js"></script>
-
-    <script src="./../../js/Sdk.js"></script>
+    <script src="./../../Sdk/Sdk.js"></script>
     <!-- <script src="./../js/list.js"></script> -->
-    <script src="./../js/aWeek.js"></script>
-    <!-- <script src="./../js/amonth.js"></script> -->
-    <!-- <script src="./../js/aday.js"></script> -->
+    <!-- <script src="./../js/aWeek.js"></script>
+    <script src="./../js/amonth.js"></script> -->
+    <script src="./../js/aday.js"></script>
     <script src="./../js/main.js"></script>
 
     <!-- <script src="/js/functions/Student/setList.js"></script>

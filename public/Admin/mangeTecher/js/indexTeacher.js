@@ -2,6 +2,33 @@ var db = firebase.firestore();
 var body = document.querySelector("#upload");
 var listOfTeachers = [];
 
+
+// format obj to strin chuyaarn 
+function formatObjectClassAndTeach(s){
+  var index=0;
+  var stringOut="";
+ for( var i =0 ; i<s.length-1; i++){
+     if( s[index].class==s[i+1].class){
+         s[i+1].class="";
+     }
+     else{
+         index=i+1;
+     }
+ }
+
+  s.forEach(e=>{
+
+      if( e.class==""){
+          stringOut+= " ; "+e.subject; 
+      }   
+      else {
+          stringOut+="\n"+ e.class +" : "+e.subject;
+      }
+         
+  })
+  return stringOut;
+}
+
 // Get data teacher and put into "listOfTeachers"
 db.collection("Teachers").onSnapshot(async function (querySnapshot) {
   listOfTeachers = [];
@@ -20,21 +47,21 @@ function renderAddElementInTable(e) {
         <td class="text-center">${e.id}</td>
         <td class="text-center">${e.name}</td>
         <td class="text-center">${e.group}</td>
-        <td class="text-center">${e.classTeach.toString()}</td>
-        <td class="text-center">${e.subjectTeach.toString()}</td>
+        <td class="text-center">${e.classLeader}</td>
+        <td class="text-center">${formatObjectClassAndTeach(e.subjectsAndClass)} </td>
         <td class="text-center">${e.address}</td>
         <td class="text-center">${e.dataOfBirth}</td> 
      `;
 
   var td = document.createElement("td");
   td.setAttribute("class", "text-center");
-  td.innerHTML = `<button type="button" class="btn btn-danger" onclick='deleteById("${e.docId}")' style=" color: white;">
+  td.innerHTML = `<button class="btn btn-outline-success" type="button" onclick='deleteById("${e.docId}")' style=" color: #8596C2;">
         <i class="fas fa-trash-alt"  ></i>
         </button>`;
 
   var btnEdit = document.createElement("button");
-  btnEdit.setAttribute("class", "btn btn-warning");
-  btnEdit.setAttribute("style", " color: white;");
+  btnEdit.setAttribute("class", "btn btn-outline-success");
+  btnEdit.setAttribute("style", " color: #8596C2;");
   btnEdit.innerHTML = ' <i class="far fa-edit"></i>';
   btnEdit.addEventListener("click", () => openFormInput("cover-caption", e));
   td.append(btnEdit);
@@ -47,6 +74,10 @@ function renderAddElementInTable(e) {
   // console.log(list);
 }
 
+
+function reRenderNotParam(){
+  renderTable(listOfTeachers) ;
+}
 function renderTable(list) {
   clearTable();
   console.log(`xoa table cu `)

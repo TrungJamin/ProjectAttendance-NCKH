@@ -1,4 +1,5 @@
 const listStudents = [];
+
 let demo = {
   morning: [
     { status: true, note: "", asked: true },
@@ -38,10 +39,20 @@ db.collection("Students").onSnapshot((snapshots) => {
       });
   });
   setTimeout(() => {
-    // renderADay(listStudents);
-    renderWeek(listStudents);
-    // renderAMonth(listStudents);
-    document.querySelector(".database").classList.remove("d-none");
+    renderDay(listStudents);
+    // renderWeek(listStudents);
+    // renderMonth(listStudents);
+    let dataBase = document.querySelectorAll(".database");
+    dataBase.forEach((data) => {
+      data.classList.remove("d-none");
+    });
     loadingData.classList.add("d-none");
   }, 2000);
+});
+const exportExcel = document.getElementById("export-excel");
+exportExcel.addEventListener("change", () => {
+  if (exportExcel.value != "Export Excel") {
+    doit(exportExcel.value);
+    exportExcel.value = "Export Excel";
+  }
 });

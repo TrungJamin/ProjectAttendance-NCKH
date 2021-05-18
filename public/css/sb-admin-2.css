@@ -10193,11 +10193,15 @@ a:focus {
 #wrapper #content-wrapper {
   background-color: #f8f9fc;
   width: 100%;
+  height: 1300px;
   overflow-x: hidden;
 }
 
 #wrapper #content-wrapper #content {
   flex: 1 0 auto;
+}
+#content {
+  width: 100%;
 }
 
 .container,
@@ -11701,4 +11705,33 @@ footer.sticky-footer .copyright {
 
 body.sidebar-toggled footer.sticky-footer {
   width: 100%;
+}
+
+/*----------------------------*/
+.table-bordered tbody {
+  display: block;
+  width: 100%;
+  height: 450px;
+  overflow-y: scroll;
+}
+.table-bordered thead,
+.table-bordered tbody tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+.table-bordered thead {
+  width: calc(100% - 17px);
+}
+/* .table-bordered tbody tr td:last-child {
+width: calc(100% - 17px);
+} */
+.site-footer {
+  background-color: #aaabaf;
+  color: #737373;
+  height: 200px;
+}
+.swal-overlay--show-modal {
+  position: fixed;
+  top: -500px;
 }

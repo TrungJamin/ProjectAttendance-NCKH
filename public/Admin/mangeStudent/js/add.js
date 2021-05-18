@@ -1,6 +1,5 @@
 const addStudent = document.querySelector(".add-student-button");
 
-
 let demo = {
   morning: [
     { status: true, note: "", asked: true },
@@ -41,7 +40,7 @@ edit_form.addEventListener("submit", (e) => {
     .doc(id)
     .set({
       firstName: data.slice(0, data.length - 1),
-      LastName: data[data.length - 1],
+      lastName: data[data.length - 1],
       id: id,
       name: edit_form.fullname.value,
       class: classSelect.value,

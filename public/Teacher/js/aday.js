@@ -1,10 +1,7 @@
 const note = document.querySelector(".note");
-const links = document.querySelectorAll(".alink");
-const studentsMorning = document.querySelector(".students-morning");
-const studentsAfternoon = document.querySelector(".students-afternoon");
-
-const DateNowMorning = document.querySelector(".date-now-morning");
-const DateNowAfternoon = document.querySelector(".date-now-afternoon");
+const dataOfDay = document.querySelector(".table-day");
+const aDay = document.querySelector(".day-now");
+const tableDay = document.querySelector(".table-list-day");
 
 function DateNowFormat(date) {
   let tmp =
@@ -16,79 +13,62 @@ function getDate(date) {
     date.getMonth() + 1 + "-" + date.getDate() + "-" + date.getFullYear();
   return tmp;
 }
-DateNowMorning.innerText = "Sáng " + DateNowFormat(new Date());
-DateNowAfternoon.innerText = "Chiều " + DateNowFormat(new Date());
-for (var i = 0; i < links.length; i++) {
-  links[i].addEventListener("click", (e) => {
-    e.preventDefault();
-    note.classList.add("open");
-    console.log(note.classList);
-  });
-}
-note.addEventListener("click", (e) => {
-  e.preventDefault();
-  if (note.classList.contains("open")) {
-    note.classList.remove("open");
-  }
-});
+aDay.innerText = DateNowFormat(new Date());
+
+// for (var i = 0; i < links.length; i++) {
+//   links[i].addEventListener("click", (e) => {
+//     e.preventDefault();
+//     note.classList.add("open");
+//     console.log(note.classList);
+//   });
+// }
+// note.addEventListener("click", (e) => {
+//   e.preventDefault();
+//   if (note.classList.contains("open")) {
+//     note.classList.remove("open");
+//   }
+// });
 
 function getAttendanceOfDay(attendances, date, id) {
   let attendance = {};
   attendance = attendances.find((att) => {
     return att.day == date;
   });
-
+  // console.log(attendance);
   return attendance;
 }
-function renderMorning(listStudents) {
+function renderDay(listStudents) {
   let content = listStudents.map((student) => {
     let att = getAttendanceOfDay(student.attendance, getDate(new Date()));
-    const renderAttendance = () => {
+    const renderMorning = () => {
       return att.data.morning.map((item) => {
-        return `<td>
-       <div class=${
-         item.status ? "comat" : item.asked ? "vangphep" : "vangkhongphep"
-       }>${item.note ? `<span class="noted">n</span>` : ""}
-       </div>
-   </td>
-  `;
+        return `<td> ${item.status ? "" : item.asked ? "p" : "k"}</td>
+        `;
       });
     };
-    return `
-        <tr>
-        <td> <a class="alink" href="#">${student.id}</a> </td>
-        <td>${student.firstName}</td>
-        <td>${student.lastName}</td>
-        ${renderAttendance().join("")}
-        <tr>`;
-  });
-  studentsMorning.innerHTML = content.join(" ");
-}
-function renderAfternoon(listStudents) {
-  let content = listStudents.map((student) => {
-    let att = getAttendanceOfDay(student.attendance, getDate(new Date()));
-    const renderAttendance = () => {
+    const renderAfternoon = () => {
       return att.data.afternoon.map((item) => {
-        return `<td>
-       <div class=${
-         item.status ? "comat" : item.asked ? "vangphep" : "vangkhongphep"
-       }>${item.note ? `<span class="noted">n</span>` : ""}
-       </div>
-   </td>
-  `;
+        return `<td> ${item.status ? "" : item.asked ? "p" : "k"}</td>
+        `;
       });
     };
     return `
-        <tr>
-        <td> <a class="alink" href="#">${student.id}</a> </td>
+    <tr>
+        <td> ${student.id} </td>
         <td>${student.firstName}</td>
         <td>${student.lastName}</td>
-        ${renderAttendance().join("")}
-        <tr>`;
+        ${renderMorning().join("")}
+        ${renderAfternoon().join("")}
+        <td class ='noted'> ${att.data.note}</td>
+        </tr>`;
   });
-  studentsAfternoon.innerHTML = content.join("");
+  tableDay.innerHTML = content.join(" ");
 }
-function renderADay(listStudents) {
-  renderMorning(listStudents);
-  renderAfternoon(listStudents);
-}
+// function exportData() {
+//   document
+//     .getElementsByClassName("data-student-view")
+//     .TableExport({ fileName: "huy", type: "xlsx" });
+// }
+// exportData();
+
+
