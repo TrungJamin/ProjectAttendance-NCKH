@@ -11702,3 +11702,23 @@ footer.sticky-footer .copyright {
 body.sidebar-toggled footer.sticky-footer {
   width: 100%;
 }
+
+/*----------------------------*/
+.table-bordered tbody {
+  display: block;
+  width:100% ;
+  height: 450px;
+  overflow-y: scroll;
+}
+.table-bordered thead,
+.table-bordered tbody tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+.table-bordered thead {
+  width: calc(100% - 17px);
+  }
+/* .table-bordered tbody tr td:last-child {
+width: calc(100% - 17px);
+} */
