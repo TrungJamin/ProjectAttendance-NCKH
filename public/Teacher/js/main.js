@@ -38,10 +38,13 @@ db.collection("Students").onSnapshot((snapshots) => {
       });
   });
   setTimeout(() => {
-    // renderADay(listStudents);
-    renderWeek(listStudents);
-    // renderAMonth(listStudents);
-    document.querySelector(".database").classList.remove("d-none");
+    renderDay(listStudents);
+    // renderWeek(listStudents);
+    // renderMonth(listStudents);
+    let dataBase = document.querySelectorAll(".database");
+    dataBase.forEach((data)=>{
+      data.classList.remove("d-none");
+    });
     loadingData.classList.add("d-none");
   }, 2000);
 });

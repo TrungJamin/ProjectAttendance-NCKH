@@ -15,6 +15,7 @@ db.collection("Students")
         data: doc.data(),
       };
       studentTempList.push(_doc);
+     
     });
   });
 

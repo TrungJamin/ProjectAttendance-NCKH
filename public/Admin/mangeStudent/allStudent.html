@@ -13,6 +13,7 @@
     <!-- Custom styles for this template-->
     <link href="./../../css/sb-admin-2.css" rel="stylesheet">
     <link rel="stylesheet" href="./../css/admin.css">
+ 
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
@@ -44,7 +45,11 @@
         <div class="box">
             <div class="panel">
                 <div class="panel-heading">
+
+                    <h3 class="panel-title" style="text-align: center">Chỉnh Sửa Thông Tin Học Sinh
+
                     <h3 class="panel-title type-name-box" style="text-align: center">Edit Student's Information
+
 
                     </h3>
                 </div>
@@ -54,25 +59,25 @@
                             <label for="student-id" id="student-id">ID </label>
                             <input readonly name="studentID" type="text" class="form-control" id="student-id"
                                 placeholder="ID...">
-                            <label for="student-name">Name</label>
+                            <label for="student-name">Họ Tên</label>
                             <input name="studentName" type="text" class="form-control" id="fullname"
-                                placeholder="Name..." onkeypress="isAlphabetAndSpaces(event)" required>
+                                placeholder="Họ Tên..." onkeypress="isAlphabetAndSpaces(event)" required>
                             <br>
                             <span id="lblValue" style="display: none; color: red; font-size: x-small;">Only Alphabets
                                 and spaces</span>
                             <div class="row">
                                 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                                    <label for="student-dob">Data Of Birth</label>
+                                    <label for="student-dob">Ngày Tháng Năm Sinh</label>
                                     <input name="dob" id="dob" type="date" class="form-control dateOfBirth"
                                         id="student-dob" placeholder="DateOfBirth" required>&nbsp;
                                     <b style="font-size: xx-small;"> *mm/dd/yyy</b>
                                 </div>
                                 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                                    <label for="gender">Gender</label>
+                                    <label for="gender">Giới Tính</label>
                                     <select name="gender" id="gender" class="form-control" required>
-                                        <option value="" selected>Gender</option>
-                                        <option value="male">Male</option>
-                                        <option value="female">Female</option>
+                                        <option value="" selected>Giới tính</option>
+                                        <option value="male">Nam</option>
+                                        <option value="female">Nữ</option>
                                     </select>
                                 </div>
                             </div>
@@ -81,29 +86,29 @@
 
                             <div class="row">
                                 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                                    <label for="selectGrade">Grade</label>
+                                    <label for="selectGrade">Khối Lớp</label>
 
                                     <select name="grade" id="selectGrade" class="form-control" required>
-                                        <option value="">Choose Grade</option>
+                                        <option value="">Chọn Khối</option>
                                         <option value="10">10</option>
                                         <option value="11">11</option>
                                         <option value="12">12</option>
                                     </select>
                                 </div>
                                 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                                    <label for="selectClass">Class</label>
+                                    <label for="selectClass">Lớp</label>
                                     <select name="Class1" id="selectClass" class="form-control" required="required">
-                                        <option value="">Class</option>
+                                        <option value="">Lớp</option>
                                     </select>
 
                                 </div>
                             </div>
 
-                            <label for="student-address">Address</label>
+                            <label for="student-address">Địa Chỉ</label>
                             <input name="Address" type="text" class="form-control" id="student-address"
-                                placeholder="Address" required>
+                                placeholder="Địa chỉ" required>
                             <br>
-                            <label for="student-phone">Phone Number</label>
+                            <label for="student-phone">Số Điện Thoại</label>
                             <input name="Phone" type="text" class="form-control" id="student-phone" placeholder="Phone"
                                 onkeypress="isNumber(event)" required>
                             <span id="lblValue2" style="display: none; color: red; font-size: x-small;">Only numbers
@@ -138,14 +143,14 @@
                         <i class="fa fa-bars"></i>
                     </button>
 
-                    <button class="btn btn-success add-student-button">Add + </button>
+                    <button class="btn btn-success add-student-button">Thêm + </button>
 
 
                     <!-- Topbar Search -->
                     <form class="d-none d-sm-inline-block form-inline navbar-search">
                         <div class="input-group">
                             <input type="text" class="form-control bg-light border-0 small"
-                                placeholder="Search student..." aria-label="Search" aria-describedby="basic-addon2"
+                                placeholder="Tìm kiếm học sinh..." aria-label="Search" aria-describedby="basic-addon2"
                                 id="Student-search">
 
                             <button class="btn btn-success" type="button">
@@ -163,7 +168,7 @@
                     <!-- DataTales of Student -->
                     <div class="shadow mb-4 col-12">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-success">DataTables Of Student</h6>
+                            <h6 class="m-0 font-weight-bold text-success">Danh Sách Học Sinh</h6>
                         </div>
                         <!-- LOADING GIFT -->
                         <div class="col-12 loading-table">
@@ -179,7 +184,7 @@
                                             <th>#</th>
                                             <th>ID</th>
                                             <th>
-                                                Name
+                                                Họ & Tên
                                                 &thinsp;
                                                 &thinsp;
                                                 &thinsp;
@@ -189,29 +194,15 @@
 
                                                 <!-- <button onclick="sortByName()">SORT</button> -->
                                             </th>
-                                            <th>DataOfBirth</th>
-                                            <th>Gender</th>
-                                            <th>Class</th>
-                                            <th>Address</th>
-                                            <th>Phone number</th>
-                                            <th>Action</th>
+                                            <th>Ngày Sinh</th>
+                                            <th>Giới Tính</th>
+                                            <th>Lớp</th>
+                                            <th>Địa Chỉ</th>
+                                            <th>Số Điện Thoại</th>
+                                            <th>Tùy Chọn</th>
                                         </tr>
                                     </thead>
-                                    <tfoot style="background-color: #ffff ; color:#00000082">
-                                        <tr>
-                                            <th>#</th>
-                                            <th>ID</th>
-                                            <th>
-                                                Name
-                                            </th>
-                                            <th>DataOfBirth</th>
-                                            <th>Gender</th>
-                                            <th>Class</th>
-                                            <th>Address</th>
-                                            <th>Phone number</th>
-                                            <th></th>
-                                        </tr>
-                                    </tfoot>
+                                    
                                     <tbody id="body-table">
 
                                     </tbody>

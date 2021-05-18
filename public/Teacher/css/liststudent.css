@@ -52,3 +52,63 @@ tr {
   width: 150px;
   height: 150px;
 }
+.table-week .table-bordered thead tr th:nth-child(1),
+.table-week .table-bordered tbody tr td:nth-child(1) {
+  width: 5%;
+}
+.table-week .table-bordered thead tr th:nth-child(2),
+.table-week .table-bordered tbody tr td:nth-child(2) {
+  width: 15%;
+}
+.table-week .table-bordered thead tr th:nth-child(3),
+.table-week .table-bordered tbody tr td:nth-child(3) {
+  width: 20%;
+}
+.table-week .table-bordered thead tr th:nth-child(4),
+.table-week .table-bordered tbody tr td:nth-child(4) {
+  width: 10%;
+}
+.table-week{
+  display: none;
+}
+.table-month{
+  display: none;
+}
+.table-day{
+  display: none;
+}
+.open{
+  display: block;
+}
+
+.table-month .table-bordered thead tr th:nth-child(2),
+.table-month .table-bordered tbody tr td:nth-child(2) {
+  width: 20%;
+}
+.table-month .table-bordered thead tr th:nth-child(3),
+.table-month .table-bordered tbody tr td:nth-child(3) {
+  width: 30%;
+}
+.table-month .table-bordered thead tr th:nth-child(4),
+.table-month .table-bordered tbody tr td:nth-child(4) {
+  width: 15%;
+}
+
+
+.table-day .table-bordered thead tr th:nth-child(1),
+.table-day .table-bordered tbody tr td:nth-child(1) {
+  width: 15%;
+}
+.table-day .table-bordered thead tr th:nth-child(2),
+.table-day .table-bordered tbody tr td:nth-child(2) {
+  width: 15%;
+}
+.table-day .table-bordered thead tr th:nth-child(3),
+.table-day .table-bordered tbody tr td:nth-child(3) {
+  width: 10%;
+}
+.table-day .table-bordered thead tr th:last-child,
+.table-day .table-bordered tbody tr td:last-child {
+  width: 10%;
+  
+}

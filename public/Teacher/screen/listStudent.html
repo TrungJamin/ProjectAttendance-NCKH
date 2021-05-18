@@ -74,36 +74,111 @@
                             <div class="loading-table col-12 m-auto">
                                 <img src="./../../img/Loading-table.gif" alt="Loading" />
                             </div>
-                            <div class="table-responsive database d-none">
-                                <div class="table-header text-center">
-                                    <h3 class="week-now">Loading...</h3>
+                            <div class="table-week">
+                                <div class="table-responsive database d-none">
+                                    <div class="table-header text-center">
+                                        <h3 class="week-now">Loading...</h3>
+                                    </div>
+
+                                    <table class="table table-bordered hidden data-student-view scroll-table" id="dataTable"
+                                        width="100%" cellspacing="0">
+                                        <thead style="background-color: #ffff ; color:#00000082">
+
+                                            <tr class="field-one-table">
+                                                <th>STT</th>
+                                                <th rowspan="2">ID</th>
+                                                <th rowspan="2">First Name</th>
+                                                <th rowspan="2">Lats Name</th>
+                                                <th rowspan="2">T2,2</th>
+                                                <th rowspan="2">T3,4</th>
+                                                <th rowspan="2">4</th>
+                                                <th rowspan="2">4</th>
+                                                <th rowspan="2">4</th>
+                                                <th rowspan="2">5 </th>
+                                                <th colspan="7">6</th>
+                                            </tr>
+
+                                        </thead>
+
+                                        <tbody class="table-list-week">
+
+                                        </tbody>
+                                    </table>
+
+
                                 </div>
-                                <table class="table table-bordered hidden data-student-view scroll-table" id="dataTable"
-                                    width="100%" cellspacing="0">
-                                    <thead style="background-color: #ffff ; color:#00000082">
+                            </div>
+                            <div class="table-month ">
+                                <div class="table-responsive database d-none">
+                                    <div class="table-header text-center">
+                                        <h3 class="month-now">Loading</h3>
+                                    </div>
 
-                                        <tr class="field-one-table">
-                                            <th>STT</th>
-                                            <th rowspan="2">ID</th>
-                                            <th rowspan="2">First Name</th>
-                                            <th rowspan="2">Lats Name</th>
-                                            <th rowspan="2">T2,2</th>
-                                            <th rowspan="2">T3,4</th>
-                                            <th rowspan="2">4</th>
-                                            <th rowspan="2">4</th>
-                                            <th rowspan="2">4</th>
-                                            <th rowspan="2">5 </th>
-                                            <th colspan="7">6</th>
-                                        </tr>
+                                    <table class="table table-bordered data-student-view scroll-table" id="dataTable"
+                                        width="100%" cellspacing="0">
+                                        <thead style="background-color: #ffff ; color:#00000082">
 
-                                    </thead>
+                                            <tr class="field-one-table">
+                                                <th>STT</th>
+                                                <th>ID</th>
+                                                <th>First Name</th>
+                                                <th>Lats Name</th>
+                                                <th>Vắng có phép</th>
+                                                <th>Vắng không phép</th>
+                                                
+                                            </tr>
 
-                                    <tbody class="table-list-week">
+                                        </thead>
 
-                                    </tbody>
-                                </table>
+                                        <tbody class="table-list-month">
+                                            
+                                        </tbody>
+                                    </table>
 
 
+                                </div>
+                            </div>
+                            <div class="table-day open">
+                                <div class="table-responsive database d-none">
+                                    <div class="table-header text-center">
+                                        <h3 class="day-now">Loading</h3>
+                                    </div>
+
+                                    <table class="table table-bordered data-student-view scroll-table" id="dataTable"
+                                        width="100%" cellspacing="0">
+                                        <thead style="background-color: #ffff ; color:#00000082">
+
+                                            <tr >
+                                                <th rowspan="2">ID</th>
+                                                <th rowspan="2">First Name</th>
+                                                <th rowspan="2">Last Name</th>
+                                                <th colspan="5">Sáng</th>
+                                                <th colspan="5">Chiều</th>
+                                                
+                                                <th rowspan="2">Note</th>
+                                            </tr>
+                                            <tr>
+                                                <th>t1</th>
+                                                <th>t2</th>
+                                                <th>t3</th>
+                                                <th>t4</th>
+                                                <th>t5</th>
+                                                <th>t1</th>
+                                                <th>t2</th>
+                                                <th>t3</th>
+                                                <th>t4</th>
+                                                <th>t5</th>
+                                            </tr>
+
+                                        </thead>
+
+                                        <tbody class="table-list-day">
+                                            
+                                        </tbody>
+                                    </table>
+
+
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -130,9 +205,9 @@
 
     <script src="./../../js/Sdk.js"></script>
     <!-- <script src="./../js/list.js"></script> -->
-    <script src="./../js/aWeek.js"></script>
-    <!-- <script src="./../js/amonth.js"></script> -->
-    <!-- <script src="./../js/aday.js"></script> -->
+    <!-- <script src="./../js/aWeek.js"></script>
+    <script src="./../js/amonth.js"></script> -->
+    <script src="./../js/aday.js"></script>
     <script src="./../js/main.js"></script>
 
     <!-- <script src="/js/functions/Student/setList.js"></script>

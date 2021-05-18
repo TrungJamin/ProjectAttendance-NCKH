@@ -64,7 +64,7 @@ function refresh() {
     // neu co di theo url cu
     iFrame.src = sessionStorage.getItem("url");
   } else {
-    iFrame.src = "./mangeTecher/testNewTables.html";
+    iFrame.src = "./mangeTecher/allTeacher.html";
   }
 }
 refresh();
@@ -74,10 +74,7 @@ allStudents.addEventListener("click", (event) => {
   iFrame.src = "./mangeStudent/allStudent.html";
 });
 
-addTeacher.addEventListener("click", (event) => {
-  sessionStorage.setItem("url", "./mangeTecher/addTeacher.html");
-  iFrame.src = "./mangeTecher/addTeacher.html";
-});
+ 
 listTeacher.addEventListener("click", (event) => {
   sessionStorage.setItem("url", "./mangeTecher/allTeacher.html");
 
