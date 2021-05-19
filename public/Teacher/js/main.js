@@ -39,8 +39,8 @@ db.collection("Students").onSnapshot((snapshots) => {
       });
   });
   setTimeout(() => {
-     renderDay(listStudents);
-     renderWeek(listStudents);
+    renderDay(listStudents);
+    renderWeek(listStudents);
     renderMonth(listStudents);
     let dataBase = document.querySelectorAll(".database");
     dataBase.forEach((data) => {
@@ -52,7 +52,7 @@ db.collection("Students").onSnapshot((snapshots) => {
 const exportExcel = document.getElementById("export-excel");
 exportExcel.addEventListener("change", () => {
   if (exportExcel.value != "Export Excel") {
-    doit(exportExcel.value);
+    doit(exportExcel.value, exportExcel.value);
     exportExcel.value = "Export Excel";
   }
 });

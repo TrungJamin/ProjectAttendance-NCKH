@@ -28,29 +28,21 @@ const backmonth = document.querySelector(".back-month");
 
 function MonthNow() {
   let d = new Date();
-  return (
-    " Month :" +
-    (d.getMonth() + 1) +
-    "/" +
-    d.getFullYear()
-  );
+  return " Month :" + (d.getMonth() + 1) + "/" + d.getFullYear();
 }
 monthNow.innerText = MonthNow();
- 
+
 let countHAbsent = 0;
 let countAbsent = 0;
 function listMonth(listStudents, aMonth) {
-  
   let listMonth = [];
-  console.log(listStudents);
+
   listStudents.forEach((student) => {
-    let att = student.attendance.filter((atd)=>{
-      
-      let month = atd.day.split('-');
-      console.log(month+"   "+aMonth);
-       return month[0] == aMonth;
+    let att = student.attendance.filter((atd) => {
+      let month = atd.day.split("-");
+      return month[0] == aMonth;
     });
-  
+
     listMonth.push({
       ...student,
       attendance: att,
@@ -59,10 +51,9 @@ function listMonth(listStudents, aMonth) {
   return listMonth;
 }
 function renderMonth(listStudents) {
-  let d  = new Date();
- let list = listMonth(listStudents,d.getMonth()+1 );
+  let d = new Date();
+  let list = listMonth(listStudents, d.getMonth() + 1);
   let table = list.map((student, index) => {
-    
     return `
     <tr>
     <td>${index + 1}</td>
@@ -75,4 +66,4 @@ function renderMonth(listStudents) {
     `;
   });
   tableMonth.innerHTML = table.join(" ");
-};
+}

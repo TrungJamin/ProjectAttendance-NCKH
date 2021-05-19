@@ -23,9 +23,7 @@ weekNow.innerText = WeekNow();
 for (var i = 0; i < Notes.length; i++) {
   Notes[i].addEventListener("click", (e) => {
     e.preventDefault();
-    console.log("chay");
     viewMonth.classList.add("open");
-    console.log(viewMonth.classList);
   });
 }
 // viewMonth.addEventListener("click", (e) => {
@@ -55,7 +53,6 @@ function getTypeDay(zeller) {
 
 function dateOfWeek(listStudents, weekNow) {
   let listWeek = [];
-  console.log(listStudents);
   listStudents.forEach((student) => {
     let attendance = student.attendance.filter((att) => {
       return att.data.week == weekNow;
@@ -67,7 +64,7 @@ function dateOfWeek(listStudents, weekNow) {
   });
   return listWeek;
 }
-function renderWeek(listStudents){
+function renderWeek(listStudents) {
   let database = dateOfWeek(listStudents, getWeekNow(new Date()));
 
   let content = database[1].attendance.map((date) => {
@@ -76,7 +73,6 @@ function renderWeek(listStudents){
       <th> ${getTypeDay(d.getDay())} , ${d.getDate()} </th>
       `;
   });
-  console.log(database);
   const field = `<th>STT</th>
   <th>ID</th>
   <th>First Name</th>
@@ -104,60 +100,9 @@ function renderWeek(listStudents){
     `;
   });
   tableWeek.innerHTML = table.join(" ");
-};
+}
 // const = document.querySelector("#dataTable");
 
-function exportTableToExcel(tableID, filename = "") {
-  var downloadLink;
-  var dataType = "application/vnd.ms-excel";
-  var tableSelect = document.getElementById("dataTable");
-  var tableHTML = tableSelect.outerHTML.replace(/ /g, "%20");
-
-  // Specify file name
-  filename = filename ? filename + ".xlsx" : "excel_data.xls";
-
-  // Create download link element
-  downloadLink = document.createElement("a");
-
-  // document.body.appendChild(downloadLink);
-
-  if (navigator.msSaveOrOpenBlob) {
-    var blob = new Blob(["\ufeff", tableHTML], {
-      type: dataType,
-    });
-    navigator.msSaveOrOpenBlob(blob, filename);
-  } else {
-    // Create a link to the file
-    downloadLink.href = "data:" + dataType + ", " + tableHTML;
-
-    // Setting the file name
-    downloadLink.download = filename;
-    console.log(filename);
-    //triggering the function
-    downloadLink.click();
-  }
-}
-// var excelIO = new GC.Spread.Excel.IO();
-// function exportExcel() {
-//   var workbook = new GC.Spread.Sheets.Workbook(
-//     document.getElementById("dataTable")
-//   );
-//   let json = workbook.toJSON();
-//   console.log(json);
-// excelIO.save(
-//   json,
-//   function (blob) {
-//     saveAs(blob, "test");
-//   },
-//   function (e) {
-//     if (e.errorCode === 1) {
-//       alert(e.errorMessage);
-//     }
-//   }
-// );
-// }
-// // exportExcel();
-// console.log(nextWeek);
 // nextWeek.addEventListener("click", function (e) {
 //   weekNow.innerText = WeekNow() + 1;
 //   renderWeek(listStudents, getWeekNow(new Date()) + 1);

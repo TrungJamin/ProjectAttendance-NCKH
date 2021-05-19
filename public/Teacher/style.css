@@ -85,7 +85,6 @@ body {
   background: #eef2f7;
 }
 
-
 form label {
   font-style: normal;
   font-weight: 1000;
@@ -889,8 +888,4 @@ input[type="search"] {
   position: fixed;
   background: rgba(0, 0, 0, 0.4);
   z-index: 1;
-  display: none;
-}
-.formLogout.open {
-  display: block;
 }
