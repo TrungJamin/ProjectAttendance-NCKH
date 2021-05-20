@@ -1,24 +1,23 @@
-// db.collection(`Students`).onSnapshot((snapshot) => {
-//   snapshot.forEach((doc) => {
-//     for (let i = 3; i <= 31; i++) {
-//       let date = new Date(`5-${i}-2021`);
-//       db.collection("Students")
-//         .doc(doc.id)
-//         .collection("attendance")
-//         .doc(`5-${i}-2021`)
-//         .set({
-//           ...demo,
-//           week: getWeekNow(date),
-//           status: true,
-//           asked: false,
-//           note: "",
-//         })
-//         .then(() => {
-//           console.log("success");
-//         });
-//     }
-//   });
-// });
+let demo = {
+  morning: [
+    { status: true, note: "", asked: true },
+    { status: true, note: "", asked: true },
+    { status: true, note: "", asked: true },
+    { status: true, note: "", asked: true },
+    { status: true, note: "", asked: true },
+  ],
+  afternoon: [
+    { status: true, note: "", asked: true },
+    { status: true, note: "", asked: true },
+    { status: true, note: "", asked: true },
+    { status: true, note: "", asked: true },
+    { status: true, note: "", asked: true },
+  ],
+  status: true,
+  asked: "",
+  note: "",
+};
+
 // add Student database
 // for (let i = 3; i <= 31; i++) {
 //   let student = {
@@ -41,13 +40,13 @@
 // db.collection(`Students`).onSnapshot((snapshot) => {
 //   snapshot.forEach((doc) => {
 //     for (let i = 3; i <= 31; i++) {
-//       let date = new Date(`5-${i}-2021`);
+//       let date = new Date(`4-${i}-2021`);
 //       db.collection("Students")
 //         .doc(doc.id)
 //         .collection("attendance")
-//         .doc(`5-${i}-2021`)
+//         .doc(`6-${i}-2021`)
 //         .set({
-//           ...demo,
+//           ,
 //           week: getWeekNow(date),
 //           status: true,
 //           asked: false,

@@ -39,7 +39,7 @@ db.collection("Students").onSnapshot((snapshots) => {
       });
   });
   setTimeout(() => {
-    renderDay(listStudents);
+    // renderDay(listStudents);
     renderWeek(listStudents);
     renderMonth(listStudents);
     let dataBase = document.querySelectorAll(".database");
