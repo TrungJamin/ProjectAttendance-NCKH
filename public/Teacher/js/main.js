@@ -21,34 +21,51 @@ let demo = {
 };
 
 const loadingData = document.querySelector(".loading-table");
-db.collection("Students").onSnapshot((snapshots) => {
-  snapshots.forEach((snapshot) => {
-    let student = snapshot.data();
-    db.collection(`Students`)
-      .doc(snapshot.id)
-      .collection("attendance")
-      .onSnapshot(async (snapshots) => {
-        let attendance = await [];
-        await snapshots.forEach(async (doc) => {
-          await attendance.push({
-            day: doc.id,
-            data: doc.data(),
-          });
-        });
-        await listStudents.push({ ...student, attendance: attendance });
-      });
-  });
-  setTimeout(() => {
-    // renderDay(listStudents);
-    renderWeek(listStudents);
-    renderMonth(listStudents);
-    let dataBase = document.querySelectorAll(".database");
-    dataBase.forEach((data) => {
-      data.classList.remove("d-none");
+db.collection("Students").onSnapshot(async (snapshots) => {
+  getData(
+    new Promise(async (resolve, reject) => {
+      setTimeout(
+        await snapshots.forEach((snapshot) => {
+          let student = snapshot.data();
+          db.collection(`Students`)
+            .doc(snapshot.id)
+            .collection("attendance")
+            .onSnapshot((snapshots) => {
+              let attendance = [];
+              snapshots.forEach((doc) => {
+                attendance.push({
+                  day: doc.id,
+                  data: doc.data(),
+                });
+              });
+              // console.log("chay-push");
+              listStudents.push({ ...student, attendance: attendance });
+            });
+        }, 500)
+      );
+      return resolve(listStudents);
     })
-    loadingData.classList.add("d-none");
-  }, 2000);
+  ).then((result) => {
+    setTimeout(() => {
+      renderDatabase(result);
+    }, 5000);
+  });
 });
+async function getData(Promise) {
+  return Promise;
+}
+async function renderDatabase(listStudents) {
+  renderDay(listStudents);
+  renderWeek(listStudents);
+  renderMonth(listStudents);
+  let dataBase = document.querySelectorAll(".database");
+  dataBase.forEach((data) => {
+    data.classList.remove("d-none");
+  });
+  loadingData.classList.add("d-none");
+  return true;
+}
+// renderDatabase(listStudents);
 const exportExcel = document.getElementById("export-excel");
 exportExcel.addEventListener("change", () => {
   if (exportExcel.value != "Export Excel") {
