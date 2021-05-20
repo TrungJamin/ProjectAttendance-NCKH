@@ -45,7 +45,7 @@ db.collection("Students").onSnapshot((snapshots) => {
     let dataBase = document.querySelectorAll(".database");
     dataBase.forEach((data) => {
       data.classList.remove("d-none");
-    });
+    })
     loadingData.classList.add("d-none");
   }, 2000);
 });

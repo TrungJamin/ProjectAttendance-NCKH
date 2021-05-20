@@ -124,3 +124,9 @@ tr {
   white-space: nowrap;
   text-overflow: ellipsis;
 }
+
+.multChoose{
+  padding: 5px 0px ;
+  background-color: #f8f9fc;
+  width: 98.5%;
+}
