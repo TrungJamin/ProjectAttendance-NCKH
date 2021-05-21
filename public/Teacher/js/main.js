@@ -20,6 +20,19 @@ let demo = {
   note: "",
 };
 
+let classL ;
+db
+    .collection("Teachers")
+    .get()
+    .then( (querySnapshot) => {
+        let obj = querySnapshot.docs.find( (doc)=> {
+          return doc.data().address == "taccin03@gmail.com"
+        });
+        classL = obj.data().classLeader;
+        console.log(classL);
+    })
+    
+
 const loadingData = document.querySelector(".loading-table");
 db.collection("Students").onSnapshot(async (snapshots) => {
   getData(
@@ -39,7 +52,10 @@ db.collection("Students").onSnapshot(async (snapshots) => {
                 });
               });
               // console.log("chay-push");
-              listStudents.push({ ...student, attendance: attendance });
+              if(student.class == classL){
+                listStudents.push({ ...student, attendance: attendance });
+              }
+              
             });
         }, 500)
       );

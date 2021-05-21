@@ -31,7 +31,7 @@ let pre = 0;
 let next = 0;
 function MonthNow() {
   let d = new Date();
-  return " Month :" + (d.getMonth() + 1) + "/" + d.getFullYear();
+  return " Month :" + (d.getMonth() + 1+ next - pre) + "/" + d.getFullYear();
 }
 monthNow.innerText = MonthNow();
 
@@ -61,6 +61,8 @@ function renderMonth(listStudents) {
   let list = listMonth(listStudents, d.getMonth() + 1 + next - pre);
   let table = list.map((student, index) => {
     student.attendance.forEach((att) => {
+      countHAbsent = 0;
+      countAbsent = 0;
       if (!att.data.status) {
         att.data.asked ? countHAbsent++ : countAbsent++;
       }
