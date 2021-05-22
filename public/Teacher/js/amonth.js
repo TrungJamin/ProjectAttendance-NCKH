@@ -67,8 +67,7 @@ function renderMonth(listStudents) {
         att.data.asked ? countHAbsent++ : countAbsent++;
       }
     });
-    console.log(countHAbsent);
-    console.log(countAbsent);
+    
     return `
     <tr>
     <td>${index + 1}</td>

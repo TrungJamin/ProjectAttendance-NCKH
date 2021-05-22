@@ -21,6 +21,11 @@ let demo = {
 };
 
 let classL ;
+let emailTeacher ;
+
+
+
+
 db
     .collection("Teachers")
     .get()
@@ -29,7 +34,7 @@ db
           return doc.data().address == "taccin03@gmail.com"
         });
         classL = obj.data().classLeader;
-        console.log(classL);
+        
     })
     
 

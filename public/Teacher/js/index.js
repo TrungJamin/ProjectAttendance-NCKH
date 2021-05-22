@@ -25,10 +25,12 @@ document.querySelector("#agreeLogout").addEventListener("click", () => {
       // An error happened.
     });
 });
-firebase.auth().onAuthStateChanged(function (user) {
-  if (user) {
-    // User is signed in.
-  } else {
-    location.assign("./../../");
-  }
-});
+
+let emailTeacher ;
+firebase.auth().onAuthStateChanged((user)=>{
+  emailTeacher = user.email;
+  console.log(emailTeacher);
+}
+);
+
+
