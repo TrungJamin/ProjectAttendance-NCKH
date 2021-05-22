@@ -130,3 +130,6 @@ tr {
   background-color: #f8f9fc;
   width: 98.5%;
 }
+.multChoose a{
+  cursor: pointer;
+}

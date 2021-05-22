@@ -70,8 +70,9 @@ function dateOfWeek(listStudents, weekNow) {
 }
 function renderWeek(listStudents) {
   let database = dateOfWeek(listStudents, getWeekNow(new Date())+nextW-preW);
-  console.log(database);
+
   let content = database[1].attendance.map((date) => {
+   
     let d = new Date(date.day);
     return `
       <th> ${getTypeDay(d.getDay())} , ${d.getDate()} </th>

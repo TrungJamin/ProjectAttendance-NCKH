@@ -1,24 +1,24 @@
 const listStudents = [];
 
-let demo = {
-  morning: [
-    { status: true, note: "", asked: true },
-    { status: true, note: "", asked: true },
-    { status: true, note: "", asked: true },
-    { status: true, note: "", asked: true },
-    { status: true, note: "", asked: true },
-  ],
-  afternoon: [
-    { status: true, note: "", asked: true },
-    { status: true, note: "", asked: true },
-    { status: true, note: "", asked: true },
-    { status: true, note: "", asked: true },
-    { status: true, note: "", asked: true },
-  ],
-  status: true,
-  asked: "",
-  note: "",
-};
+// let demo = {
+//   morning: [
+//     { status: true, note: "", asked: true },
+//     { status: true, note: "", asked: true },
+//     { status: true, note: "", asked: true },
+//     { status: true, note: "", asked: true },
+//     { status: true, note: "", asked: true },
+//   ],
+//   afternoon: [
+//     { status: true, note: "", asked: true },
+//     { status: true, note: "", asked: true },
+//     { status: true, note: "", asked: true },
+//     { status: true, note: "", asked: true },
+//     { status: true, note: "", asked: true },
+//   ],
+//   status: true,
+//   asked: "",
+//   note: "",
+// };
 
 
 const loadingData = document.querySelector(".loading-table");
@@ -35,14 +35,14 @@ firebase.auth().onAuthStateChanged(function (user) {
   }
 });
 function getStudents(className) {
-  db.collection("Students").onSnapshot(async (snapshots) => {
+  db.collection("Students2").onSnapshot(async (snapshots) => {
     getData(
       new Promise(async (resolve, reject) => {
         setTimeout(
           await snapshots.forEach((snapshot) => {
             let student = snapshot.data();
             if (student.class == className) {
-              db.collection(`Students`)
+              db.collection(`Students2`)
                 .doc(snapshot.id)
                 .collection("attendance")
                 .onSnapshot((snapshots) => {
@@ -71,11 +71,14 @@ function getStudents(className) {
 async function getData(Promise) {
   return Promise;
 }
+
+
 async function renderDatabase(listStudents) {
   renderDay(listStudents);
   renderWeek(listStudents);
   renderMonth(listStudents);
   let dataBase = document.querySelectorAll(".database");
+ 
   dataBase.forEach((data) => {
     data.classList.remove("d-none");
   });

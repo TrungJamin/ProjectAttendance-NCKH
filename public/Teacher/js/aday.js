@@ -16,7 +16,11 @@ function DateNowFormat(day, month, year) {
   return tmp;
 }
 function getDate(day, month, year) {
-  let tmp = month + "-" + day + "-" + year;
+  let tmp;
+  if(day<10)
+    tmp = month + "-0" + day + "-" + year;
+  else
+    tmp = month + "-" + day + "-" + year;
   return tmp;
 }
 
