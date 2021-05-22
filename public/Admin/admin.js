@@ -12,12 +12,23 @@ const btnLogout = document.querySelector("#btnLogout"); // button hien thi form
 const agreeLogout = document.querySelector("#agreeLogout"); // dong y dang xuat
 // const auth = firebase.auth();
 const makeAdmin = document.querySelector(".make-admin");
+const formMakeAdmin = document.querySelector(".form-make-admin");
+
 const cancelMakeAdmin = document.querySelector(".cancel-make-admin");
 makeAdmin.addEventListener("click", (event) => {
   document
     .querySelector(".view-database")
     .classList.add("enable-view-database");
   document.querySelector(".view-make-admin").classList.remove("d-none");
+});
+formMakeAdmin.addEventListener("submit", (e) => {
+  e.preventDefault();
+  firebase
+    .auth()
+    .signUp(formMakeAdmin["make-admin-email"].value, "123456")
+    .then((res) => {
+      console.log("alo");
+    });
 });
 cancelMakeAdmin.addEventListener("click", function () {
   document
@@ -74,7 +85,6 @@ allStudents.addEventListener("click", (event) => {
   iFrame.src = "./mangeStudent/allStudent.html";
 });
 
- 
 listTeacher.addEventListener("click", (event) => {
   sessionStorage.setItem("url", "./mangeTecher/allTeacher.html");
 

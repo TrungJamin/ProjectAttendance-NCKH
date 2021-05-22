@@ -58,3 +58,22 @@ let demo = {
 //     }
 //   });
 // });
+// let demo = {
+//   morning: [
+//     { status: true, note: "", asked: true },
+//     { status: true, note: "", asked: true },
+//     { status: true, note: "", asked: true },
+//     { status: true, note: "", asked: true },
+//     { status: true, note: "", asked: true },
+//   ],
+//   afternoon: [
+//     { status: true, note: "", asked: true },
+//     { status: true, note: "", asked: true },
+//     { status: true, note: "", asked: true },
+//     { status: true, note: "", asked: true },
+//     { status: true, note: "", asked: true },
+//   ],
+//   status: true,
+//   asked: "",
+//   note: "",
+// };

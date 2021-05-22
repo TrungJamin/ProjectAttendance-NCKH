@@ -65,9 +65,3 @@ function renderDay(listStudents) {
   });
   tableDay.innerHTML = content.join(" ");
 }
-// function exportData() {
-//   document
-//     .getElementsByClassName("data-student-view")
-//     .TableExport({ fileName: "huy", type: "xlsx" });
-// }
-// exportData();
