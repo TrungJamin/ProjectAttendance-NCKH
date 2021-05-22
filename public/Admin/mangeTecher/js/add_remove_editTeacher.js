@@ -219,8 +219,6 @@ function getInfoTeacher() {
           subjectsAndClass.push(tmp);
         }
         
-        
-        
         j++;
       }
 
@@ -229,7 +227,7 @@ function getInfoTeacher() {
     i++;
   }
 
-  teacher.subjectsAndClass=subjectsAndClass
+  teacher.subjectsAndClass=subjectsAndClass;
   
 
 

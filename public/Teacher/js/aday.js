@@ -7,22 +7,20 @@ const nextday = document.querySelector(".next-day");
 const backday = document.querySelector(".previous-day");
 const nowday = document.querySelector(".now-day");
 
-let day= new Date().getDate();
+let day = new Date().getDate();
 let month = new Date().getMonth() + 1;
 let year = new Date().getFullYear();
 
 function DateNowFormat(day, month, year) {
-  let tmp =
-    day + "-" + month + "-" + year;
+  let tmp = day + "-" + month + "-" + year;
   return tmp;
 }
 function getDate(day, month, year) {
-  let tmp =
-    month + "-" + day + "-" + year;
+  let tmp = month + "-" + day + "-" + year;
   return tmp;
 }
 
-aDay.innerText = "Ngày " + DateNowFormat(day, month , year);
+aDay.innerText = "Ngày " + DateNowFormat(day, month, year);
 
 // for (var i = 0; i < links.length; i++) {
 //   links[i].addEventListener("click", (e) => {
@@ -48,7 +46,7 @@ function getAttendanceOfDay(attendances, date, id) {
 }
 function renderDay(listStudents) {
   let content = listStudents.map((student) => {
-    let att = getAttendanceOfDay(student.attendance, getDate(day, month,year));
+    let att = getAttendanceOfDay(student.attendance, getDate(day, month, year));
     const renderMorning = () => {
       return att.data.morning.map((item) => {
         return `<td> ${item.status ? "" : item.asked ? "p" : "k"}</td>
@@ -73,50 +71,43 @@ function renderDay(listStudents) {
   });
   tableDay.innerHTML = content.join(" ");
 }
-// function exportData() {
-//   document
-//     .getElementsByClassName("data-student-view")
-//     .TableExport({ fileName: "huy", type: "xlsx" });
-// }
-// exportData();
 
 nextday.addEventListener("click", (e) => {
   e.preventDefault();
   day++;
-  if(day > maxDay(month, year)){
+  if (day > maxDay(month, year)) {
     day = 1;
-    if(month == 12){
+    if (month == 12) {
       month = 1;
       year++;
-    }else{
+    } else {
       month++;
     }
   }
-  aDay.innerText = "Ngày " + DateNowFormat(day, month , year);
+  aDay.innerText = "Ngày " + DateNowFormat(day, month, year);
   renderDay(listStudents);
 });
 backday.addEventListener("click", (e) => {
   e.preventDefault();
   day--;
-  if(day < 1){
-  
-    if(month == 1){
+  if (day < 1) {
+    if (month == 1) {
       day = 31;
       month = 12;
       year--;
-    }else{
+    } else {
       month--;
       day = maxDay(month, year);
     }
   }
-  aDay.innerText = "Ngày " + DateNowFormat(day, month , year);
+  aDay.innerText = "Ngày " + DateNowFormat(day, month, year);
   renderDay(listStudents);
 });
 nowday.addEventListener("click", (e) => {
   e.preventDefault();
-  day= new Date().getDate();
+  day = new Date().getDate();
   month = new Date().getMonth() + 1;
   year = new Date().getFullYear();
-  aDay.innerText = "Ngày " + DateNowFormat(day, month , year);
+  aDay.innerText = "Ngày " + DateNowFormat(day, month, year);
   renderDay(listStudents);
 });

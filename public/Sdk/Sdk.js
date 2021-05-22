@@ -56,5 +56,5 @@ function doit(id, fn, type, dl) {
   var wb = XLSX.utils.table_to_book(elt, { sheet: "Sheet JS" });
   return dl
     ? XLSX.write(wb, { bookType: type, bookSST: true, type: "base64" })
-    : XLSX.writeFile(wb, fn || "Database." + (type || "xlsx"));
+    : XLSX.writeFile(wb, fn || "SheetJSTableExport." + (type || "xlsx"));
 }

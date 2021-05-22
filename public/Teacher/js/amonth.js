@@ -1,28 +1,7 @@
 const viewMont = document.querySelector(".view-amonth");
 const notes = document.querySelectorAll(".havenote");
-
-// for (var i = 0; i < notes.length; i++) {
-//   notes[i].addEventListener("click", (e) => {
-//     e.preventDefault();
-//     viewMont.classList.add("open");
-//     console.log(viewMont.classList);
-//   });
-// }
-// viewMont.addEventListener("click", (e) => {
-//   e.preventDefault();
-//   if (viewMont.classList.contains("open")) {
-//     viewMont.classList.remove("open");
-//   }
-// });
-
-// const renderListOfMonth = document.querySelector(".month-list-student");
-// const renderAMonth = (listStudents) => {
-//   console.log(renderListOfMonth);
-// };
 const monthNow = document.querySelector(".month-now");
-
 const tableMonth = document.querySelector(".table-list-month");
-
 const nextmonth = document.querySelector(".next-month");
 const backmonth = document.querySelector(".previous-month");
 const nowMonth = document.querySelector(".now-month");
@@ -67,7 +46,6 @@ function renderMonth(listStudents) {
         att.data.asked ? countHAbsent++ : countAbsent++;
       }
     });
-    
     return `
     <tr>
     <td>${index + 1}</td>

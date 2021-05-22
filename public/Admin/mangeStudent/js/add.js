@@ -1,25 +1,6 @@
 const addStudent = document.querySelector(".add-student-button");
 
-let demo = {
-  morning: [
-    { status: true, note: "", asked: true },
-    { status: true, note: "", asked: true },
-    { status: true, note: "", asked: true },
-    { status: true, note: "", asked: true },
-    { status: true, note: "", asked: true },
-  ],
-  afternoon: [
-    { status: true, note: "", asked: true },
-    { status: true, note: "", asked: true },
-    { status: true, note: "", asked: true },
-    { status: true, note: "", asked: true },
-    { status: true, note: "", asked: true },
-  ],
-  status: true,
-  asked: "",
-  count: 0,
-  note: "",
-};
+
 addStudent.addEventListener("click", (e) => {
   renderTypeBox.innerHTML = "Add A Student";
   edit.classList.add("open");
