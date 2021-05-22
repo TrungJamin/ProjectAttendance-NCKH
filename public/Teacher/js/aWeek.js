@@ -4,16 +4,20 @@ const weekNow = document.querySelector(".week-now");
 const fieldOnTable = document.querySelector(".field-one-table");
 const tableWeek = document.querySelector(".table-list-week");
 
-const nextWeek = document.querySelector(".next-week");
-const backWeek = document.querySelector(".back-week");
+const nextweek = document.querySelector(".next-week");
+const backweek = document.querySelector(".previous-week");
+const nowweek = document.querySelector(".now-week");
+
+let preW = 0;
+let nextW = 0;
 
 function WeekNow() {
   let d = new Date();
   return (
     "Week " +
-    getWeekNow(new Date()) +
+    (getWeekNow(new Date())+ nextW-preW) +
     ", Month :" +
-    (d.getMonth() + 1) +
+    (d.getMonth() + 1 ) +
     "/" +
     d.getFullYear()
   );
@@ -65,7 +69,7 @@ function dateOfWeek(listStudents, weekNow) {
   return listWeek;
 }
 function renderWeek(listStudents) {
-  let database = dateOfWeek(listStudents, getWeekNow(new Date()));
+  let database = dateOfWeek(listStudents, getWeekNow(new Date())+nextW-preW);
   console.log(database);
   let content = database[1].attendance.map((date) => {
     let d = new Date(date.day);
@@ -107,3 +111,23 @@ function renderWeek(listStudents) {
 //   weekNow.innerText = WeekNow() + 1;
 //   renderWeek(listStudents, getWeekNow(new Date()) + 1);
 // });
+
+nextweek.addEventListener("click", (e) => {
+  e.preventDefault();
+  nextW++;
+  weekNow.innerText = WeekNow();
+  renderWeek(listStudents);
+});
+backweek.addEventListener("click", (e) => {
+  e.preventDefault();
+  preW++;
+  weekNow.innerText = WeekNow();
+  renderWeek(listStudents);
+});
+nowweek.addEventListener("click", (e) => {
+  e.preventDefault();
+  preW = 0;
+  nextW = 0;
+  weekNow.innerText = WeekNow();
+  renderWeek(listStudents);
+});

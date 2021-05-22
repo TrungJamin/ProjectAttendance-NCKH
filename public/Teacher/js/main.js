@@ -1,4 +1,26 @@
 const listStudents = [];
+
+let demo = {
+  morning: [
+    { status: true, note: "", asked: true },
+    { status: true, note: "", asked: true },
+    { status: true, note: "", asked: true },
+    { status: true, note: "", asked: true },
+    { status: true, note: "", asked: true },
+  ],
+  afternoon: [
+    { status: true, note: "", asked: true },
+    { status: true, note: "", asked: true },
+    { status: true, note: "", asked: true },
+    { status: true, note: "", asked: true },
+    { status: true, note: "", asked: true },
+  ],
+  status: true,
+  asked: "",
+  note: "",
+};
+
+
 const loadingData = document.querySelector(".loading-table");
 firebase.auth().onAuthStateChanged(function (user) {
   if (user) {
