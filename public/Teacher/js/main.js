@@ -20,13 +20,12 @@ const listStudents = [];
 //   note: "",
 // };
 
-
 const loadingData = document.querySelector(".loading-table");
 firebase.auth().onAuthStateChanged(function (user) {
   if (user) {
     db.collection("TeacherAdmin").onSnapshot(async function (snapshots) {
       snapshots.forEach((teacher) => {
-        if(teacher.data().email == user.email)
+        if (teacher.data().email == user.email)
           getStudents(teacher.data().class);
       });
     });
@@ -63,7 +62,7 @@ function getStudents(className) {
     ).then((result) => {
       setTimeout(() => {
         renderDatabase(result);
-      }, 5000);
+      }, 2000);
     });
   });
 }
@@ -72,13 +71,12 @@ async function getData(Promise) {
   return Promise;
 }
 
-
 async function renderDatabase(listStudents) {
   renderDay(listStudents);
   renderWeek(listStudents);
   renderMonth(listStudents);
   let dataBase = document.querySelectorAll(".database");
- 
+
   dataBase.forEach((data) => {
     data.classList.remove("d-none");
   });
