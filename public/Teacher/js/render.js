@@ -76,19 +76,19 @@
 //         console.log("add success");
 //       });
 //   }
-let student = {
-  firstName: "Hoang Dinh ",
-  lastName: "Bao",
-  name: "Hoang Dinh Bao",
-  address: "Quang Tri",
-  dateOfBirth: "2004-05-19",
-  gender: "male",
-  id: "562001",
-  phone: "0848492852",
-  class: "10A1",
-};
-db.collection("Students")
-  .add(student)
-  .then(() => {
-    console.log("add success");
-  });
+// let student = {
+//   firstName: "Hoang Dinh ",
+//   lastName: "Bao",
+//   name: "Hoang Dinh Bao",
+//   address: "Quang Tri",
+//   dateOfBirth: "2004-05-19",
+//   gender: "male",
+//   id: "562001",
+//   phone: "0848492852",
+//   class: "10A1",
+// };
+// db.collection("Students")
+//   .add(student)
+//   .then(() => {
+//     console.log("add success");
+//   });
