@@ -1,4 +1,3 @@
-
 const dataOfDay = document.querySelector(".table-day");
 const aDay = document.querySelector(".day-now");
 const tableDay = document.querySelector(".table-list-day");
@@ -17,15 +16,12 @@ function DateNowFormat(day, month, year) {
 }
 function getDate(day, month, year) {
   let tmp;
-  if(day<10)
-    tmp = month + "-0" + day + "-" + year;
-  else
-    tmp = month + "-" + day + "-" + year;
+  if (day < 10) tmp = month + "-0" + day + "-" + year;
+  else tmp = month + "-" + day + "-" + year;
   return tmp;
 }
 
 aDay.innerText = "Ngày " + DateNowFormat(day, month, year);
-
 
 // note.addEventListener("click", (e) => {
 //   e.preventDefault();
@@ -43,12 +39,15 @@ function getAttendanceOfDay(attendances, date, id) {
   return attendance;
 }
 
-function renderNote(node) {
-  console.log(node);
-}
+// function addEventListenerNode(id) {
+//   const note = document.querySelector(".")
+// }
 
 function renderDay(listStudents) {
+  let listID = [];
   let content = listStudents.map((student) => {
+    listID.push(student.id);
+    console.log(student.id);
     let att = getAttendanceOfDay(student.attendance, getDate(day, month, year));
     const renderMorning = () => {
       return att.data.morning.map((item) => {
@@ -56,6 +55,7 @@ function renderDay(listStudents) {
         `;
       });
     };
+    // addEventListenerNode(student.id);
     const renderAfternoon = () => {
       return att.data.afternoon.map((item) => {
         return `<td> ${item.status ? "" : item.asked ? "p" : "k"}</td>
@@ -73,19 +73,29 @@ function renderDay(listStudents) {
         </tr>`;
   });
   tableDay.innerHTML = content.join(" ");
-  const note = document.querySelectorAll(".noted");
-  for(var i = 0 ; i < note.length; i++){
-    console.log(note[i]);
-    note[i].addEventListener("click",(e)=>{
-        e.preventDefault();
-        renderNote(note[i]);
-    })
-    
+
+  listID.forEach((id) => {
+    document.getElementById(id).addEventListener("click", (e) => {
+      let noteStudent;
+      let i = 0;
+      for (let i = 0; id != listStudents[i].id; i++);
+      noteStudent = getAttendanceOfDay(
+        listStudents[i].attendance,
+        getDate(day, month, year)
+      );
+      let length = 0;
+      noteStudent.data.morning.forEach((item, index) => {
+        document.getElementById(index).innerText = item.note;
+        length++;
+      });
+      noteStudent.data.afternoon.forEach((item) => {
+        document.getElementById(length.toString()).innerText = item.note;
+        length++;
+      });
+      document.querySelector(".note-date").classList.remove("d-none");
+    });
+  });
 }
-}
-
-
-
 
 nextday.addEventListener("click", (e) => {
   e.preventDefault();
@@ -126,5 +136,3 @@ nowday.addEventListener("click", (e) => {
   aDay.innerText = "Ngày " + DateNowFormat(day, month, year);
   renderDay(listStudents);
 });
-
-

@@ -9,13 +9,13 @@
 
 
     <link href="./../../css/sb-admin-2.css" rel="stylesheet">
-    
+
 
     <link rel="stylesheet" href="./../css/liststudent.css">
 
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-firestore.js"></script>
-    
+
     <!-- Latest compiled and minified CSS -->
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-functions.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
@@ -39,81 +39,83 @@
 </head>
 
 <body id="page-top">
-    <div class="note-date d-none ">
+    <div class="note-date d-none">
         <div class="box">
-            
+
             <div class="panel panel-default">
                 <!-- Default panel contents -->
                 <div class="panel-heading">Họ Tên: </div>
-                    <div class="panel-body">
-                        <p></p>
-                    </div>
-            
-                    <!-- Table -->
-                    <table class="table table-note">
-                        <thead>
-                            <tr>
-                                <th>Buổi</th>
-                                <th>Tiết</th>
-                                <th>Ghi chú</th>
-                            </tr>
-                            
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td rowspan="5" class="rowspan">Sáng</td>
-                                <td> 1</td>
-                                <td>Content 2</td>
-                            </tr>
-                            <tr>
-                                <td> 2</td>
-                                <td>Content 2</td>
-                            </tr>
-                            <tr>
-                                <td> 3</td>
-                                <td>Content 2</td>
-                            </tr>
-                            <tr>
-                                <td> 4</td>
-                                <td>Content 2</td>
-                            </tr>
-                            <tr>
-                                <td> 5</td>
-                                <td>Content 2</td>
-                            </tr>
-                            <tr>
-                                <td rowspan="5" class="rowspan">Chiều</td>
-                                <td> 1</td>
-                                <td>Content 2 Content 2 Content 2 Content 2Content 2Content 2Content 2Content 2 Content 2 Content 2Content 2s</td>
-                            </tr>
-                            <tr>
-                                <td> 2</td>
-                                <td>Content 2</td>
-                            </tr>
-                            <tr>
-                                <td> 3</td>
-                                <td>Content 2</td>
-                            </tr>
-                            <tr>
-                                <td> 4</td>
-                                <td>Content 2</td>
-                            </tr>
-                            <tr>
-                                <td> 5</td>
-                                <td>Content 2</td>
-                            </tr>
-                           
-                        </tbody>
-                    </table>
+                <div class="panel-body">
+                    <p></p>
+                </div>
+
+                <!-- Table -->
+                <table class="table table-note">
+                    <thead>
+                        <tr>
+                            <th>Buổi</th>
+                            <th>Tiết</th>
+                            <th>Ghi chú</th>
+                        </tr>
+
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td rowspan="5" class="rowspan">Sáng</td>
+                            <td> 1</td>
+                            <td id="0">Content 2</td>
+                        </tr>
+                        <tr>
+                            <td> 2</td>
+                            <td id="1">Content 2</td>
+                        </tr>
+                        <tr>
+                            <td> 3</td>
+                            <td id="2">Content 2</td>
+                        </tr>
+                        <tr>
+                            <td> 4</td>
+                            <td id="3">Content 2</td>
+                        </tr>
+                        <tr>
+                            <td> 5</td>
+                            <td id="4">Content 2</td>
+                        </tr>
+                        <tr>
+                            <td rowspan="5" class="rowspan">Chiều</td>
+                            <td> 1</td>
+                            <td id="5">Content 2 Content 2 Content 2 Content 2Content 2Content 2Content 2Content 2
+                                Content 2
+                                Content 2Content 2s</td>
+                        </tr>
+                        <tr>
+                            <td> 2</td>
+                            <td id="6">Content 2</td>
+                        </tr>
+                        <tr>
+                            <td> 3</td>
+                            <td id="7">Content 2</td>
+                        </tr>
+                        <tr>
+                            <td> 4</td>
+                            <td id="8">Content 2</td>
+                        </tr>
+                        <tr>
+                            <td> 5</td>
+                            <td id="9">Content 2</td>
+                        </tr>
+
+                    </tbody>
+                </table>
             </div>
-            
+
         </div>
     </div>
 
     <!-- Page Wrapper -->
     <div id="wrapper">
 
-        <div id="content" class = "content none">
+        <div id="content" class="content none">
 
             <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
                 <select id="export-excel" class="form-control" aria-label=".form-select-lg">
@@ -157,7 +159,8 @@
                                     <h3 class="week-now">Loading...</h3>
                                 </div>
                                 <div class="multChoose">
-                                    <a class="previous-week"><i class="back-week fas fa-chevron-circle-left fa-lg"></i></a>
+                                    <a class="previous-week"><i
+                                            class="back-week fas fa-chevron-circle-left fa-lg"></i></a>
                                     <a class="next-week"><i class="next-week fas fa-chevron-circle-right fa-lg"></i></a>
                                     <a class="now-week">Hôm nay</a>
                                 </div>
@@ -193,8 +196,10 @@
                                     <h3 class="month-now">Loading</h3>
                                 </div>
                                 <div class="multChoose">
-                                    <a class="previous-month"><i class="back-week fas fa-chevron-circle-left fa-lg"></i></a>
-                                    <a class="next-month"><i class="next-week fas fa-chevron-circle-right fa-lg"></i></a>
+                                    <a class="previous-month"><i
+                                            class="back-week fas fa-chevron-circle-left fa-lg"></i></a>
+                                    <a class="next-month"><i
+                                            class="next-week fas fa-chevron-circle-right fa-lg"></i></a>
                                     <a class="now-month">Hôm nay</a>
                                 </div>
                                 <table class="table table-bordered data-student-view scroll-table" id="dataTable"
@@ -227,7 +232,8 @@
                                     <h3 class="day-now">Loading</h3>
                                 </div>
                                 <div class="multChoose">
-                                    <a class="previous-day"><i class="back-week fas fa-chevron-circle-left fa-lg"></i></a>
+                                    <a class="previous-day"><i
+                                            class="back-week fas fa-chevron-circle-left fa-lg"></i></a>
                                     <a class="next-day"><i class="next-week fas fa-chevron-circle-right fa-lg"></i></a>
                                     <a class="now-day">Hôm nay</a>
                                 </div>
@@ -274,22 +280,22 @@
             </div>
 
             <!-- /.container -->
-            
+
 
         </div>
         <!-- End of Main Content -->
 
     </div>
     <!-- End of Content Wrapper -->
-   
+
     </div>
-   
-    
+
+
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
-    
+
     <script src="https://unpkg.com/xlsx@0.17.0/dist/xlsx.core.min.js"></script>
     <script src="./../../Sdk/FileSaver.js"></script>
     <script src="https://unpkg.com/tableexport@5.2.0/dist/js/tableexport.js"></script>

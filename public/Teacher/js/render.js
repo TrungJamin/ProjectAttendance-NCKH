@@ -50,7 +50,6 @@
 //   }
 // });
 
-
 // firebase.auth().onAuthStateChanged(function (user) {
 //   if (user) {
 //     // location.assign("./../screen/HompageTeacher.html");
