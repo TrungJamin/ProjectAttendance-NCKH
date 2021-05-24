@@ -39,9 +39,9 @@ function renderMonth(listStudents) {
   countAbsent = 0;
   let list = listMonth(listStudents, d.getMonth() + 1 + next - pre);
   let table = list.map((student, index) => {
-    student.attendance.forEach((att) => {
-      countHAbsent = 0;
+    countHAbsent = 0;
       countAbsent = 0;
+    student.attendance.forEach((att) => {
       if (!att.data.status) {
         att.data.asked ? countHAbsent++ : countAbsent++;
       }

@@ -1,4 +1,4 @@
-const note = document.querySelector(".note");
+
 const dataOfDay = document.querySelector(".table-day");
 const aDay = document.querySelector(".day-now");
 const tableDay = document.querySelector(".table-list-day");
@@ -26,13 +26,7 @@ function getDate(day, month, year) {
 
 aDay.innerText = "Ngày " + DateNowFormat(day, month, year);
 
-// for (var i = 0; i < links.length; i++) {
-//   links[i].addEventListener("click", (e) => {
-//     e.preventDefault();
-//     note.classList.add("open");
-//     console.log(note.classList);
-//   });
-// }
+
 // note.addEventListener("click", (e) => {
 //   e.preventDefault();
 //   if (note.classList.contains("open")) {
@@ -48,6 +42,11 @@ function getAttendanceOfDay(attendances, date, id) {
   // console.log(attendance);
   return attendance;
 }
+
+function renderNote(node) {
+  console.log(node);
+}
+
 function renderDay(listStudents) {
   let content = listStudents.map((student) => {
     let att = getAttendanceOfDay(student.attendance, getDate(day, month, year));
@@ -70,11 +69,23 @@ function renderDay(listStudents) {
         <td>${student.lastName}</td>
         ${renderMorning().join("")}
         ${renderAfternoon().join("")}
-        <td class ='noted'> ${att.data.note}</td>
+        <td > <a class ="noted" id = "${student.id}">${att.data.note}</a></td>
         </tr>`;
   });
   tableDay.innerHTML = content.join(" ");
+  const note = document.querySelectorAll(".noted");
+  for(var i = 0 ; i < note.length; i++){
+    console.log(note[i]);
+    note[i].addEventListener("click",(e)=>{
+        e.preventDefault();
+        renderNote(note[i]);
+    })
+    
 }
+}
+
+
+
 
 nextday.addEventListener("click", (e) => {
   e.preventDefault();
@@ -115,3 +126,5 @@ nowday.addEventListener("click", (e) => {
   aDay.innerText = "Ngày " + DateNowFormat(day, month, year);
   renderDay(listStudents);
 });
+
+

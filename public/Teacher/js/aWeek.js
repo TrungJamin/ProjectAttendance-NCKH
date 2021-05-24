@@ -11,18 +11,18 @@ const nowweek = document.querySelector(".now-week");
 let preW = 0;
 let nextW = 0;
 
-function WeekNow() {
+function WeekNow(day1, day2) {
   let d = new Date();
   return (
-    "Week " +
+    "Tuần Học Thứ " +
     (getWeekNow(new Date())+ nextW-preW) +
-    ", Month :" +
-    (d.getMonth() + 1 ) +
-    "/" +
-    d.getFullYear()
+    "        : " +
+    day1 +
+    " -> " +
+    day2
   );
 }
-weekNow.innerText = WeekNow();
+
 
 for (var i = 0; i < Notes.length; i++) {
   Notes[i].addEventListener("click", (e) => {
@@ -70,12 +70,12 @@ function dateOfWeek(listStudents, weekNow) {
 }
 function renderWeek(listStudents) {
   let database = dateOfWeek(listStudents, getWeekNow(new Date())+nextW-preW);
-
+  weekNow.innerText = WeekNow(database[0].attendance[0].day,database[0].attendance[6].day );
   let content = database[1].attendance.map((date) => {
    
     let d = new Date(date.day);
     return `
-      <th> ${getTypeDay(d.getDay())} , ${d.getDate()} </th>
+      <th class ="typeDay"> ${getTypeDay(d.getDay())} , ${d.getDate()} </th>
       `;
   });
   const field = `<th>STT</th>
@@ -88,9 +88,7 @@ function renderWeek(listStudents) {
     let atd = student.attendance.map((date) => {
       return `
       <td>
-      <div class=${
-        date.data.status ? "comat" : date.data.asked ? "vang" : "vangkhongphep"
-      }><a class="noted" href="">n</a></div>
+      <div >${date.data.status ? "" : date.data.asked ? "P" : "V"}</div>
   </td>
       `;
     });
@@ -116,19 +114,19 @@ function renderWeek(listStudents) {
 nextweek.addEventListener("click", (e) => {
   e.preventDefault();
   nextW++;
-  weekNow.innerText = WeekNow();
+  
   renderWeek(listStudents);
 });
 backweek.addEventListener("click", (e) => {
   e.preventDefault();
   preW++;
-  weekNow.innerText = WeekNow();
+  
   renderWeek(listStudents);
 });
 nowweek.addEventListener("click", (e) => {
   e.preventDefault();
   preW = 0;
   nextW = 0;
-  weekNow.innerText = WeekNow();
+ 
   renderWeek(listStudents);
 });

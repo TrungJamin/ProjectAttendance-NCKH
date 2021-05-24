@@ -9,7 +9,10 @@
 
 
     <link href="./../../css/sb-admin-2.css" rel="stylesheet">
+    
+
     <link rel="stylesheet" href="./../css/liststudent.css">
+
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-firestore.js"></script>
     
@@ -36,12 +39,81 @@
 </head>
 
 <body id="page-top">
-
+    <div class="note-date ">
+        <div class="box">
+            
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading">Họ Tên: </div>
+                    <div class="panel-body">
+                        <p></p>
+                    </div>
+            
+                    <!-- Table -->
+                    <table class="table table-note">
+                        <thead>
+                            <tr>
+                                <th>Buổi</th>
+                                <th>Tiết</th>
+                                <th>Ghi chú</th>
+                            </tr>
+                            
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td rowspan="5" class="rowspan">Sáng</td>
+                                <td> 1</td>
+                                <td>Content 2</td>
+                            </tr>
+                            <tr>
+                                <td> 2</td>
+                                <td>Content 2</td>
+                            </tr>
+                            <tr>
+                                <td> 3</td>
+                                <td>Content 2</td>
+                            </tr>
+                            <tr>
+                                <td> 4</td>
+                                <td>Content 2</td>
+                            </tr>
+                            <tr>
+                                <td> 5</td>
+                                <td>Content 2</td>
+                            </tr>
+                            <tr>
+                                <td rowspan="5" class="rowspan">Chiều</td>
+                                <td> 1</td>
+                                <td>Content 2 Content 2 Content 2 Content 2Content 2Content 2Content 2Content 2 Content 2 Content 2Content 2s</td>
+                            </tr>
+                            <tr>
+                                <td> 2</td>
+                                <td>Content 2</td>
+                            </tr>
+                            <tr>
+                                <td> 3</td>
+                                <td>Content 2</td>
+                            </tr>
+                            <tr>
+                                <td> 4</td>
+                                <td>Content 2</td>
+                            </tr>
+                            <tr>
+                                <td> 5</td>
+                                <td>Content 2</td>
+                            </tr>
+                           
+                        </tbody>
+                    </table>
+            </div>
+            
+        </div>
+    </div>
 
     <!-- Page Wrapper -->
     <div id="wrapper">
 
-        <div id="content">
+        <div id="content" class = "content none">
 
             <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
                 <select id="export-excel" class="form-control" aria-label=".form-select-lg">
@@ -194,6 +266,7 @@
 
 
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -201,17 +274,17 @@
             </div>
 
             <!-- /.container -->
+            
 
         </div>
         <!-- End of Main Content -->
 
-
     </div>
     <!-- End of Content Wrapper -->
-
+   
     </div>
-    <!-- End of Page Wrapper -->
-
+   
+    
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
@@ -226,9 +299,8 @@
     <script src="./../js/amonth.js"></script>
     <script src="./../js/link.js"></script>
     <script src="./../js/aday.js"></script>
-<script src="./../js/serious.js"></script>
     <script src="./../js/main.js"></script>
-
+    <script src="./../js/note.js"></script>
 </body>
 
 </html>
