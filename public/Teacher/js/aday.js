@@ -80,7 +80,7 @@ function renderDay(listStudents) {
     console.log(note.innerText);
 
     note.addEventListener("click", (e) => {
-      console.log("run - link");
+
       let length = 0;
       att.data.morning.forEach((item, index) => {
         document.getElementById(index).innerText = item.note;
