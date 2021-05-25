@@ -36,10 +36,10 @@ function getAttendanceOfDay(attendances, date, id) {
 
 
 function renderDay(listStudents) {
-  let listID = [];
-  let content = listStudents.map((student) => {
-    listID.push(student.id);
-
+  tableDay.innerHTML = "";
+  listStudents.map((student) => {
+    const tr = document.createElement("tr");
+    const td = document.createElement("td");
     let att = getAttendanceOfDay(student.attendance, getDate(day, month, year));
     const renderMorning = () => {
       return att.data.morning.map((item) => {
@@ -47,49 +47,48 @@ function renderDay(listStudents) {
         `;
       });
     };
- 
+    console.log(att);
+    // addEventListenerNode(student.id);
     const renderAfternoon = () => {
       return att.data.afternoon.map((item) => {
         return `<td> ${item.status ? "" : item.asked ? "p" : "k"}</td>
         `;
       });
     };
-    return `
-    <tr>
-        <td> ${student.id} </td>
-        <td>${student.firstName}</td>
-        <td>${student.lastName}</td>
-        ${renderMorning().join("")}
-        ${renderAfternoon().join("")}
-        <td > <a class ="noted" id = "${student.id}">${att.data.note}</a></td>
-        </tr>`;
-  });
-  tableDay.innerHTML = content.join(" ");
+    let contentTr = `
+    <td> ${student.id} </td>
+    <td>${student.firstName}</td>
+    <td>${student.lastName}</td>
+    ${renderMorning().join("")}
+    ${renderAfternoon().join("")}
+    `;
+    tr.innerHTML = contentTr;
+    let note = document.createElement("p");
+    note.setAttribute("class", "noted");
+    note.setAttribute("id", student.id);
+    console.log("data", typeof att.data.note);
+    let contextNote = att.data.note + " ";
+    note.innerText = `"${contextNote}"`;
+    console.log(note.innerText);
 
-  listID.forEach((id) => {
-    document.getElementById(id).addEventListener("click", (e) => {
-      let noteStudent;
-      let i = 0;
-      for (let i = 0; id != listStudents[i].id; i++);
-      document.querySelector(".panel-heading").innerText = "Họ & Tên : "+listStudents[i].name;
-      noteStudent = getAttendanceOfDay(
-        listStudents[i].attendance,
-        getDate(day, month, year)
-      );
+    note.addEventListener("click", (e) => {
+      console.log("run - link");
       let length = 0;
-      noteStudent.data.morning.forEach((item, index) => {
+      att.data.morning.forEach((item, index) => {
         document.getElementById(index).innerText = item.note;
         length++;
       });
-      noteStudent.data.afternoon.forEach((item) => {
+      att.data.afternoon.forEach((item) => {
         document.getElementById(length.toString()).innerText = item.note;
         length++;
       });
       document.querySelector(".note-date").classList.remove("d-none");
     });
+    td.insertAdjacentElement("beforeend", note);
+    tr.append(td);
+    tableDay.append(tr);
   });
 }
-
 nextday.addEventListener("click", (e) => {
   e.preventDefault();
   day++;
