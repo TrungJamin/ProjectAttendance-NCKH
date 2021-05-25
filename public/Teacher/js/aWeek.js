@@ -75,7 +75,7 @@ function renderWeek(listStudents) {
    
     let d = new Date(date.day);
     return `
-      <th class ="typeDay"> ${getTypeDay(d.getDay())} , ${d.getDate()} </th>
+      <th id ="${date.day}"> ${getTypeDay(d.getDay())} , ${d.getDate()} </th>
       `;
   });
   const field = `<th>STT</th>
@@ -86,6 +86,9 @@ function renderWeek(listStudents) {
 
   let table = database.map((student, index) => {
     let atd = student.attendance.map((date) => {
+      document.getElementById(date.day).addEventListener("click", (e)=>{
+        console.log(date.day);
+      })
       return `
       <td>
       <div >${date.data.status ? "" : date.data.asked ? "P" : "V"}</div>

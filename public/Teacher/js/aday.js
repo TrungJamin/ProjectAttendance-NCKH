@@ -23,31 +23,23 @@ function getDate(day, month, year) {
 
 aDay.innerText = "Ngày " + DateNowFormat(day, month, year);
 
-// note.addEventListener("click", (e) => {
-//   e.preventDefault();
-//   if (note.classList.contains("open")) {
-//     note.classList.remove("open");
-//   }
-// });
+
 
 function getAttendanceOfDay(attendances, date, id) {
   let attendance = {};
   attendance = attendances.find((att) => {
     return att.day == date;
   });
-  // console.log(attendance);
   return attendance;
 }
 
-// function addEventListenerNode(id) {
-//   const note = document.querySelector(".")
-// }
+
 
 function renderDay(listStudents) {
   let listID = [];
   let content = listStudents.map((student) => {
     listID.push(student.id);
-    console.log(student.id);
+
     let att = getAttendanceOfDay(student.attendance, getDate(day, month, year));
     const renderMorning = () => {
       return att.data.morning.map((item) => {
@@ -55,7 +47,7 @@ function renderDay(listStudents) {
         `;
       });
     };
-    // addEventListenerNode(student.id);
+ 
     const renderAfternoon = () => {
       return att.data.afternoon.map((item) => {
         return `<td> ${item.status ? "" : item.asked ? "p" : "k"}</td>
@@ -79,6 +71,7 @@ function renderDay(listStudents) {
       let noteStudent;
       let i = 0;
       for (let i = 0; id != listStudents[i].id; i++);
+      document.querySelector(".panel-heading").innerText = "Họ & Tên : "+listStudents[i].name;
       noteStudent = getAttendanceOfDay(
         listStudents[i].attendance,
         getDate(day, month, year)
