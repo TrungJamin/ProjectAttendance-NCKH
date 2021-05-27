@@ -5,10 +5,7 @@ const faceapi = require("face-api.js");
 const path = require("path");
 admin.initializeApp(functions.config().firebase);
 const express = require("express");
-const cors = require("cors");
-const app = express();
-app.use(cors({ origin: true }));
-app.use(express.json());
+const cors = require("cors")({ origin: true });
 const { JSDOM } = require("jsdom");
 global.window = new JSDOM(`<html></html>`).window;
 global.document = window.document;
@@ -31,7 +28,7 @@ exports.isFaceStudent = functions.https.onCall(async (data, content) => {
     .detectAllFaces(Img)
     .withFaceLandmarks()
     .withFaceDescriptors();
-  // async function start() {
+  // // async function start() {
   //   return db
   //     .collection("FacesDatabase")
   //     .doc("10A1")
