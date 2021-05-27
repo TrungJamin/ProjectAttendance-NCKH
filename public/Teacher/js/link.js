@@ -8,9 +8,13 @@ const tableAMonth = document.querySelector(".table-month");
 
 linksDay.addEventListener("click", (e) => {
         e.preventDefault();
+        day = new Date().getDate();
+        month = new Date().getMonth() + 1;
+        year = new Date().getFullYear();
+        renderDay(listStudents,day, month, year);
         const open = document.querySelectorAll(".open");
         open.forEach((op) => {
-            console.log(op);
+           
             op.classList.remove("open");
         });
         tableADay.classList.add("open");
@@ -18,9 +22,13 @@ linksDay.addEventListener("click", (e) => {
 });
 linksWeek.addEventListener("click", (e) => {
     e.preventDefault();
+    preW = 0;
+    nextW = 0;
+    
+    renderWeek(listStudents);
     const open = document.querySelectorAll(".open");
     open.forEach((op) => {
-        console.log(op);
+      
         op.classList.remove("open");
     });
     tableAWeek.classList.add("open");
@@ -28,9 +36,13 @@ linksWeek.addEventListener("click", (e) => {
 });
 linksMonth.addEventListener("click", (e) => {
     e.preventDefault();
+    pre = 0;
+    next = 0;
+    monthNow.innerText = MonthNow();
+    renderMonth(listStudents);
     const open = document.querySelectorAll(".open");
     open.forEach((op) => {
-        console.log(op);
+    
         op.classList.remove("open");
     });
     tableAMonth.classList.add("open");
