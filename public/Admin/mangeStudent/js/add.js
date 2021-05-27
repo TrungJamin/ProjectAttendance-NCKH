@@ -1,5 +1,24 @@
 const addStudent = document.querySelector(".add-student-button");
+let demo = {
+  morning: [
+    { status: true, note: "", asked: true, code: "" },
+    { status: true, note: "", asked: true, code: "" },
+    { status: true, note: "", asked: true, code: "" },
+    { status: true, note: "", asked: true, code: "" },
+    { status: true, note: "", asked: true, code: "" },
+  ],
+  afternoon: [
+    { status: true, note: "", asked: true, code: "" },
+    { status: true, note: "", asked: true, code: "" },
+    { status: true, note: "", asked: true, code: "" },
+    { status: true, note: "", asked: true, code: "" },
+    { status: true, note: "", asked: true, code: "" },
+  ],
 
+  status: true,
+  asked: "",
+  note: "",
+};
 
 addStudent.addEventListener("click", (e) => {
   renderTypeBox.innerHTML = "Add A Student";

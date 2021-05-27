@@ -31,7 +31,7 @@ login[0].addEventListener("submit", (event) => {
         .then((res) => {
           res
             ? location.assign("./Admin/admin.html")
-            : location.assign("./Teacher/screen/");
+            : location.assign("./Teacher/screen/testFaceapi.html");
           buttonlogin.classList.remove("d-none");
           loading.classList.add("d-none");
         });
