@@ -26,10 +26,18 @@ document.querySelector("#agreeLogout").addEventListener("click", () => {
     });
 });
 
-let emailTeacher ;
+
 firebase.auth().onAuthStateChanged((user)=>{
-  emailTeacher = user.email;
-  console.log(emailTeacher);
+ 
+  
+  db.collection("TeacherAdmin").onSnapshot(async function (snapshots) {
+    snapshots.forEach((teacher) => {
+      if (teacher.data().email == user.email)
+      
+        document.querySelector(".page-header").innerHTML=   ` <h1>Danh Sách Điểm Danh Lớp ${teacher.data().class}</h1>`  
+      
+    });
+  });
 }
 );
 

@@ -42,11 +42,11 @@
     <div class="note-date d-none">
         <div class="box">
 
-            <div class="panel panel-default">
+            <div class="panel panel-default" >
                 <!-- Default panel contents -->
-                <div class="panel-heading">Họ Tên: </div>
-                <div class="panel-body">
-                    <p></p>
+                <div class="panel-heading ">
+                <div class="panel-name">Họ Tên </div>
+                <div class="delete"><i class="fas fa-times fa-lg"></i></div>
                 </div>
 
                 <!-- Table -->
@@ -63,46 +63,44 @@
                         <tr>
                             <td rowspan="5" class="rowspan">Sáng</td>
                             <td> 1</td>
-                            <td id="0">Content 2</td>
+                            <td id="0"></td>
                         </tr>
                         <tr>
                             <td> 2</td>
-                            <td id="1">Content 2</td>
+                            <td id="1"></td>
                         </tr>
                         <tr>
                             <td> 3</td>
-                            <td id="2">Content 2</td>
+                            <td id="2"></td>
                         </tr>
                         <tr>
                             <td> 4</td>
-                            <td id="3">Content 2</td>
+                            <td id="3"></td>
                         </tr>
                         <tr>
                             <td> 5</td>
-                            <td id="4">Content 2</td>
+                            <td id="4"></td>
                         </tr>
                         <tr>
                             <td rowspan="5" class="rowspan">Chiều</td>
                             <td> 1</td>
-                            <td id="5">Content 2 Content 2 Content 2 Content 2Content 2Content 2Content 2Content 2
-                                Content 2
-                                Content 2Content 2s</td>
+                            <td id="5"></td>
                         </tr>
                         <tr>
                             <td> 2</td>
-                            <td id="6">Content 2</td>
+                            <td id="6"></td>
                         </tr>
                         <tr>
                             <td> 3</td>
-                            <td id="7">Content 2</td>
+                            <td id="7"></td>
                         </tr>
                         <tr>
                             <td> 4</td>
-                            <td id="8">Content 2</td>
+                            <td id="8"></td>
                         </tr>
                         <tr>
                             <td> 5</td>
-                            <td id="9">Content 2</td>
+                            <td id="9"></td>
                         </tr>
 
                     </tbody>
@@ -119,23 +117,23 @@
 
             <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
                 <select id="export-excel" class="form-control" aria-label=".form-select-lg">
-                    <option selected>Export Excel
+                    <option selected>Xuất file Excel
                         <i class="fa fa-download" aria-hidden="true"></i>
                     </option>
-                    <option value="data-day">Day</option>
-                    <option value="data-week">Week</option>
-                    <option value="data-month">Month</option>
+                    <option value="data-day">Ngày</option>
+                    <option value="data-week">Tuần</option>
+                    <option value="data-month">Tháng</option>
                 </select>
 
                 <div class="toggle-view-list">
                     <button class="open-view-day col-4">
-                        Day
+                        Ngày
                     </button>
                     <button class="open-view-week col-4">
-                        Week
+                        Tuần
                     </button>
                     <button class="open-view-month col-4">
-                        Month
+                        Tháng
                     </button>
                 </div>
             </nav>
@@ -157,6 +155,17 @@
                             <div class="table-responsive database">
                                 <div class="table-header text-center">
                                     <h3 class="week-now">Loading...</h3>
+                                    <form class="d-none d-sm-inline-block form-inline navbar-search">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control bg-light border-0 small"
+                                                placeholder="Tìm kiếm học sinh..." aria-label="Search" aria-describedby="basic-addon2"
+                                                id="week-search">
+                
+                                            <button class="btn btn-success" type="button">
+                                                <i class="fas fa-search fa-sm"></i>
+                                            </button>
+                                        </div>
+                                    </form>
                                 </div>
                                 <div class="multChoose">
                                     <a class="previous-week"><i
@@ -170,9 +179,9 @@
 
                                         <tr class="field-one-table">
                                             <th>STT</th>
-                                            <th rowspan="2">ID</th>
-                                            <th rowspan="2">First Name</th>
-                                            <th rowspan="2">Lats Name</th>
+                                            <th rowspan="2">Mã HS</th>
+                                            <th rowspan="2">Họ tên đệm</th>
+                                            <th rowspan="2">Tên</th>
                                             <th rowspan="2">T2,2</th>
                                             <th rowspan="2">T3,4</th>
                                             <th rowspan="2">4</th>
@@ -194,6 +203,17 @@
                             <div class="table-responsive database d-none">
                                 <div class="table-header text-center">
                                     <h3 class="month-now">Loading</h3>
+                                    <form class="d-none d-sm-inline-block form-inline navbar-search">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control bg-light border-0 small"
+                                                placeholder="Tìm kiếm học sinh..." aria-label="Search" aria-describedby="basic-addon2"
+                                                id="month-search">
+                
+                                            <button class="btn btn-success" type="button">
+                                                <i class="fas fa-search fa-sm"></i>
+                                            </button>
+                                        </div>
+                                    </form>
                                 </div>
                                 <div class="multChoose">
                                     <a class="previous-month"><i
@@ -208,9 +228,9 @@
 
                                         <tr class="field-one-table">
                                             <th>STT</th>
-                                            <th>ID</th>
-                                            <th>First Name</th>
-                                            <th>Lats Name</th>
+                                            <th>Mã HS</th>
+                                            <th>Họ tên đệm</th>
+                                            <th>Tên</th>
                                             <th>Vắng có phép</th>
                                             <th>Vắng không phép</th>
 
@@ -230,6 +250,17 @@
                             <div class="table-responsive database d-none">
                                 <div class="table-header text-center" style="width:100%">
                                     <h3 class="day-now">Loading</h3>
+                                    <form class="d-none d-sm-inline-block form-inline navbar-search">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control bg-light border-0 small"
+                                                placeholder="Tìm kiếm học sinh..." aria-label="Search" aria-describedby="basic-addon2"
+                                                id="day-search">
+                
+                                            <button class="btn btn-success" type="button">
+                                                <i class="fas fa-search fa-sm"></i>
+                                            </button>
+                                        </div>
+                                    </form>
                                 </div>
                                 <div class="multChoose">
                                     <a class="previous-day"><i
@@ -242,13 +273,14 @@
                                     <thead style="background-color: #ffff ; color:#00000082">
 
                                         <tr>
-                                            <th rowspan="2" style="padding-bottom: 33px;">ID</th>
-                                            <th rowspan="2" style="padding-bottom: 33px;">First Name</th>
-                                            <th rowspan="2" style="padding-bottom: 33px;">Last Name</th>
+                                            <th rowspan="2" style="padding-bottom: 33px;">STT</th>
+                                            <th rowspan="2" style="padding-bottom: 33px;">Mã HS</th>
+                                            <th rowspan="2" style="padding-bottom: 33px;">Họ tên đệm</th>
+                                            <th rowspan="2" style="padding-bottom: 33px;">Tên</th>
                                             <th colspan="5">Sáng</th>
                                             <th colspan="5">Chiều</th>
 
-                                            <th rowspan="2" style="padding-bottom: 33px;">Note</th>
+                                            <th rowspan="2" style="padding-bottom: 33px;">Ghi chú</th>
                                         </tr>
                                         <tr>
                                             <th>t1</th>
@@ -306,7 +338,7 @@
     <script src="./../js/link.js"></script>
     <script src="./../js/aday.js"></script>
     <script src="./../js/main.js"></script>
-    <script src="./../js/note.js"></script>
+ 
 </body>
 
 </html>

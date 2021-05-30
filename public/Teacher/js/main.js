@@ -34,14 +34,14 @@ firebase.auth().onAuthStateChanged(function (user) {
   }
 });
 function getStudents(className) {
-  db.collection("Students2").onSnapshot(async (snapshots) => {
+  db.collection("Students").onSnapshot(async (snapshots) => {
     getData(
       new Promise(async (resolve, reject) => {
         setTimeout(
           await snapshots.forEach((snapshot) => {
             let student = snapshot.data();
             if (student.class == className) {
-              db.collection(`Students2`)
+              db.collection(`Students`)
                 .doc(snapshot.id)
                 .collection("attendance")
                 .onSnapshot((snapshots) => {
@@ -72,7 +72,11 @@ async function getData(Promise) {
 }
 
 async function renderDatabase(listStudents) {
-  renderDay(listStudents);
+  console.log();
+  let day = new Date().getDate();
+  let month = new Date().getMonth() + 1;
+  let year = new Date().getFullYear();
+  renderDay(listStudents, day, month, year);
   renderWeek(listStudents);
   renderMonth(listStudents);
   let dataBase = document.querySelectorAll(".database");
