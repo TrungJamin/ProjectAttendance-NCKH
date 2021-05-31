@@ -55,7 +55,7 @@
           <div class="card-header">Thêm giáo viên</div>
 
           <div class="card-body">
-            <form class="justify-content-center" id="myForm">
+            <form class="justify-content-center" id="myForm" onsubmit="mySubmitFunction(event)">
               <!-- Form Group (username)-->
               <div class="form-group">
                 <label class="small mb-1" for="inputUsername">Tên giáo viên</label>
@@ -68,8 +68,9 @@
                 <div class="form-group col-md-6">
                   <label class="small mb-1" for="inputFirstName">khoa giảng dạy</label>
                   <select class="form-control" name="group" id="group" required>
+                    <option value="" selected>chọn</option>
                     <option value="nation">Tự nhiên</option>
-                    <option value="sociocultural" selected="selected">
+                    <option value="sociocultural" >
                       Xã hội
                     </option>
                   </select>
@@ -78,6 +79,7 @@
                 <div class="form-group col-md-6">
                   <label class="small mb-1" for="inputLastName">Giới tính</label>
                   <select class="form-control" name="gender" id="gender" required>
+                    <option value="" selected>chọn</option>
                     <option value="true">nam</option>
                     <option value="false">nữ</option>
                   </select>
@@ -85,7 +87,7 @@
               </div>
               <!-- Form Row        -->
               <div class="row">
-                <div class="form-group col-md-12">
+                <div class="form-group col-md-12" id="khoaGiangDay">
                   <label class="small mb-1" for="inputFirstName">khoa giảng dạy</label>
                   <div class="dropdown">
                     <button class="
@@ -124,12 +126,12 @@
                 </div>
               </div>
               <!-- Save changes button-->
-
+              <div class="d-flex justify-content-between">
+                <button type="submit" class="btn btn-success" >Thêm</button>
+                <button  class="btn btn-danger" type="reset" onclick="closeFormInput(`cover-caption`)">Hủy</button>
+              </div>
             </form>
-            <div class="d-flex justify-content-between">
-              <button type="submit" class="btn btn-success" onclick="mySubmitFunction(event)">Thêm</button>
-              <button type="submit" class="btn btn-danger" onclick="closeFormInput(`cover-caption`)">Hủy</button>
-            </div>
+            
 
           </div>
         </div>
@@ -137,7 +139,7 @@
     </div>
   </div>
 
-  <div class="card shadow mb-4" style="width: 100%;">
+  <div class="card shadow mb-4" style="width: 100%;" id="allViewPage">
     <div class="card-header py-3">
       <h6 class="m-0 font-weight-bold text-success">Danh sách giáo viên</h6>
     </div>
@@ -172,14 +174,14 @@
 
     <div class="card-body">
       <div class="table-responsive">
-        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+        <table class="table table-bordered " id="dataTable" width="100%" style="font-size: 13px;" cellspacing="0">
           <thead>
             <tr>
               <th>Id</th>
               <th>Tên</th>
+              <th>Giới tính</th>
               <th>Nhóm</th>
               <th>Chủ nhiệm</th>
-
               <th>Lớp vs Môn</th>
               <th>@Mail</th>
               <th>Ngày sinh</th>
