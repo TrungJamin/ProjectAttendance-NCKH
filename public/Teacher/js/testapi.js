@@ -1,6 +1,7 @@
 console.log("chay");
-const isFaceStudent = firebase.functions().httpsCallable("isFaceStudent");
-const testFunction = firebase.functions().httpsCallable("testFunction");
+const isFaceStudent = firebase
+  .functions()
+  .httpsCallable("detectedListAttendance");
 const imgUpload = document.getElementById("imageUpload");
 imgUpload.addEventListener("change", async () => {
   console.log("chay");

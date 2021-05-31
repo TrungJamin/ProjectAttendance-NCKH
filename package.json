@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "jdom": "^3.2.1"
+  }
+}
