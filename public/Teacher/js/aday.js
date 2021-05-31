@@ -69,8 +69,7 @@ function renderDay(listStudents, d, m, y) {
     note.innerText = `"${contextNote}"`;
 
     note.addEventListener("click", (e) => {
-      document.querySelector(".panel-name").innerText =
-        "Họ Tên: " + student.name;
+      document.querySelector(".panel-name").innerText = "Họ Tên: "+ student.name;
       let length = 0;
       att.data.morning.forEach((item, index) => {
         document.getElementById(index).innerText = item.note;
