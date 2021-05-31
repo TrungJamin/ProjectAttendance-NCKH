@@ -5,12 +5,13 @@ const tableMonth = document.querySelector(".table-list-month");
 const nextmonth = document.querySelector(".next-month");
 const backmonth = document.querySelector(".previous-month");
 const nowMonth = document.querySelector(".now-month");
+const searchMonth = document.getElementById("month-search");
 
 let pre = 0;
 let next = 0;
 function MonthNow() {
   let d = new Date();
-  return " Month :" + (d.getMonth() + 1+ next - pre) + "/" + d.getFullYear();
+  return " Tháng " + (d.getMonth() + 1+ next - pre) + "/" + d.getFullYear();
 }
 monthNow.innerText = MonthNow();
 
@@ -78,4 +79,29 @@ nowMonth.addEventListener("click", (e) => {
   next = 0;
   monthNow.innerText = MonthNow();
   renderMonth(listStudents);
+});
+
+
+searchMonth.addEventListener("input", (e) => {
+  let value = e.target.value;
+
+  if (value && value.trim().length > 0) {
+    value = value
+      .split(" ")
+      .filter((item) => item != "")
+      .join(" ")
+      .toLowerCase();
+    let tmp = listStudents.filter((student) => {
+      return (
+        student.name.toLowerCase().includes(value) ||
+        student.id.toString().toLowerCase().includes(value) ||
+        student.gender.toLowerCase().includes(value) ||
+        student.phone.toLowerCase().includes(value) ||
+        student.address.toLowerCase().includes(value)
+      );
+    });
+    renderMonth(listStudents);
+  } else {
+    renderMonth(listStudents);
+  }
 });

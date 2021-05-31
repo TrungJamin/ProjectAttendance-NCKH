@@ -7,6 +7,7 @@ const tableWeek = document.querySelector(".table-list-week");
 const nextweek = document.querySelector(".next-week");
 const backweek = document.querySelector(".previous-week");
 const nowweek = document.querySelector(".now-week");
+const searchWeek = document.getElementById("week-search");
 
 let preW = 0;
 let nextW = 0;
@@ -70,22 +71,25 @@ function dateOfWeek(listStudents, weekNow) {
 }
 function renderWeek(listStudents) {
   let database = dateOfWeek(listStudents, getWeekNow(new Date())+nextW-preW);
+ 
   weekNow.innerText = WeekNow(database[0].attendance[0].day,database[0].attendance[6].day );
   let content = database[1].attendance.map((date) => {
    
     let d = new Date(date.day);
     return `
-      <th class ="typeDay"> ${getTypeDay(d.getDay())} , ${d.getDate()} </th>
+      <th class= "typeDay" id ="${date.day}"> ${getTypeDay(d.getDay())} , ${d.getDate()} </th>
       `;
   });
+  
   const field = `<th>STT</th>
-  <th>ID</th>
-  <th>First Name</th>
-  <th>Last Name</th>`;
+  <th>MÃ HS</th>
+  <th>Họ tên đệm</th>
+  <th>Tên</th>`;
   fieldOnTable.innerHTML = field + content.join(" ");
 
   let table = database.map((student, index) => {
     let atd = student.attendance.map((date) => {
+      
       return `
       <td>
       <div >${date.data.status ? "" : date.data.asked ? "P" : "V"}</div>
@@ -103,6 +107,17 @@ function renderWeek(listStudents) {
     `;
   });
   tableWeek.innerHTML = table.join(" ");
+  database[1].attendance.map((date)=>{
+    document.getElementById(date.day).addEventListener("click",(e)=>{
+      e.preventDefault();
+      renderDay(listStudents,new Date(date.day).getDate(), new Date(date.day).getMonth()+1, new Date(date.day).getFullYear())
+      const open = document.querySelectorAll(".open");
+      open.forEach((op) => {
+          op.classList.remove("open");
+      });
+      tableADay.classList.add("open");
+    })
+  })
 }
 // const = document.querySelector("#dataTable");
 
@@ -129,4 +144,29 @@ nowweek.addEventListener("click", (e) => {
   nextW = 0;
  
   renderWeek(listStudents);
+});
+
+
+searchWeek.addEventListener("input", (e) => {
+  let value = e.target.value;
+
+  if (value && value.trim().length > 0) {
+    value = value
+      .split(" ")
+      .filter((item) => item != "")
+      .join(" ")
+      .toLowerCase();
+    let tmp = listStudents.filter((student) => {
+      return (
+        student.name.toLowerCase().includes(value) ||
+        student.id.toString().toLowerCase().includes(value) ||
+        student.gender.toLowerCase().includes(value) ||
+        student.phone.toLowerCase().includes(value) ||
+        student.address.toLowerCase().includes(value)
+      );
+    });
+    renderWeek(tmp);
+  } else {
+    renderWeek(tmp);
+  }
 });

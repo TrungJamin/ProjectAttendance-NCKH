@@ -101,7 +101,7 @@ tr {
 
 .table-day .table-bordered thead tr th:nth-child(1),
 .table-day .table-bordered tbody tr td:nth-child(1) {
-  width: 15%;
+  width: 5%;
 }
 .table-day .table-bordered thead tr th:nth-child(2),
 .table-day .table-bordered tbody tr td:nth-child(2) {
@@ -109,6 +109,10 @@ tr {
 }
 .table-day .table-bordered thead tr th:nth-child(3),
 .table-day .table-bordered tbody tr td:nth-child(3) {
+  width: 15%;
+}
+.table-day .table-bordered thead tr th:nth-child(4),
+.table-day .table-bordered tbody tr td:nth-child(4) {
   width: 10%;
 }
 .table-day .table-bordered thead tr th:last-child,
@@ -157,6 +161,8 @@ tr {
   text-align: center;
 }
 .panel-heading {
+  display: flex;
+  justify-content: space-between;
   padding: 10px 15px;
   border-bottom: 1px solid transparent;
   border-top-left-radius: 3px;
@@ -165,6 +171,14 @@ tr {
   color: #304ca2;
 }
 
+.panel-name{
+  text-align: center;
+  width: 95%;
+  font-weight: 500;
+}
+.delete{
+  padding: 0 15px;
+}
 .note-date{
   width: 100%;
     height: 100%;
@@ -172,6 +186,7 @@ tr {
     background: rgba(0, 0, 0, 0.4);
     z-index: 5;
 }
+
 
 .table-note thead tr th:nth-child(1),
 .table-note tbody tr td:nth-child(1) {
@@ -182,4 +197,17 @@ tr {
 }
 .table-note .rowspan{
   padding-top: 112px;
+}
+.typeDay{
+  cursor: pointer;
+}
+.day-now, .month-now, .week-now{
+  width: 80%;
+}
+.table-header{
+  display: flex;
+  
+}
+.bg-light {
+  background-color: #e1e6f3 !important;
 }

@@ -6,6 +6,8 @@ const nextday = document.querySelector(".next-day");
 const backday = document.querySelector(".previous-day");
 const nowday = document.querySelector(".now-day");
 
+const searchDay = document.getElementById("day-search");
+
 let day = new Date().getDate();
 let month = new Date().getMonth() + 1;
 let year = new Date().getFullYear();
@@ -21,42 +23,30 @@ function getDate(day, month, year) {
   return tmp;
 }
 
-aDay.innerText = "Ngày " + DateNowFormat(day, month, year);
-
-// note.addEventListener("click", (e) => {
-//   e.preventDefault();
-//   if (note.classList.contains("open")) {
-//     note.classList.remove("open");
-//   }
-// });
-
 function getAttendanceOfDay(attendances, date, id) {
   let attendance = {};
   attendance = attendances.find((att) => {
     return att.day == date;
   });
-  // console.log(attendance);
   return attendance;
 }
 
-// function addEventListenerNode(id) {
-//   const note = document.querySelector(".")
-// }
 
-function renderDay(listStudents) {
+
+function renderDay(listStudents, d, m, y) {
+  aDay.innerText = "Ngày " + DateNowFormat(d, m, y);
   tableDay.innerHTML = "";
-  listStudents.map((student) => {
+  listStudents.map((student, index) => {
     const tr = document.createElement("tr");
     const td = document.createElement("td");
-    let att = getAttendanceOfDay(student.attendance, getDate(day, month, year));
+    let att = getAttendanceOfDay(student.attendance, getDate(d, m, y));
     const renderMorning = () => {
       return att.data.morning.map((item) => {
         return `<td> ${item.status ? "" : item.asked ? "p" : "k"}</td>
         `;
       });
     };
-    console.log(att);
-    // addEventListenerNode(student.id);
+ 
     const renderAfternoon = () => {
       return att.data.afternoon.map((item) => {
         return `<td> ${item.status ? "" : item.asked ? "p" : "k"}</td>
@@ -64,6 +54,7 @@ function renderDay(listStudents) {
       });
     };
     let contentTr = `
+    <td>${index + 1}</td>
     <td> ${student.id} </td>
     <td>${student.firstName}</td>
     <td>${student.lastName}</td>
@@ -74,13 +65,13 @@ function renderDay(listStudents) {
     let note = document.createElement("p");
     note.setAttribute("class", "noted");
     note.setAttribute("id", student.id);
-    console.log("data", typeof att.data.note);
+   
     let contextNote = att.data.note + " ";
     note.innerText = `"${contextNote}"`;
-    console.log(note.innerText);
+   
 
     note.addEventListener("click", (e) => {
-
+      document.querySelector(".panel-name").innerText = "Họ Tên: "+ student.name;
       let length = 0;
       att.data.morning.forEach((item, index) => {
         document.getElementById(index).innerText = item.note;
@@ -109,8 +100,7 @@ nextday.addEventListener("click", (e) => {
       month++;
     }
   }
-  aDay.innerText = "Ngày " + DateNowFormat(day, month, year);
-  renderDay(listStudents);
+  renderDay(listStudents,day, month, year);
 });
 backday.addEventListener("click", (e) => {
   e.preventDefault();
@@ -125,14 +115,40 @@ backday.addEventListener("click", (e) => {
       day = maxDay(month, year);
     }
   }
-  aDay.innerText = "Ngày " + DateNowFormat(day, month, year);
-  renderDay(listStudents);
+  renderDay(listStudents,day, month, year);
 });
 nowday.addEventListener("click", (e) => {
   e.preventDefault();
   day = new Date().getDate();
   month = new Date().getMonth() + 1;
   year = new Date().getFullYear();
-  aDay.innerText = "Ngày " + DateNowFormat(day, month, year);
-  renderDay(listStudents);
+  renderDay(listStudents,day, month, year);
+});
+
+document.querySelector(".delete").addEventListener("click",(e)=>{
+  document.querySelector(".note-date").classList.add("d-none");
+})
+
+searchDay.addEventListener("input", (e) => {
+  let value = e.target.value;
+
+  if (value && value.trim().length > 0) {
+    value = value
+      .split(" ")
+      .filter((item) => item != "")
+      .join(" ")
+      .toLowerCase();
+    let tmp = listStudents.filter((student) => {
+      return (
+        student.name.toLowerCase().includes(value) ||
+        student.id.toString().toLowerCase().includes(value) ||
+        student.gender.toLowerCase().includes(value) ||
+        student.phone.toLowerCase().includes(value) ||
+        student.address.toLowerCase().includes(value)
+      );
+    });
+    renderDay(tmp,day,month,year);
+  } else {
+    renderDay(listStudents,day,month,year);
+  }
 });

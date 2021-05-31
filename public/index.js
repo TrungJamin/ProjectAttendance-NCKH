@@ -9,11 +9,13 @@ login[0].addEventListener("submit", (event) => {
   var password = login[0]["password"].value;
   buttonlogin.classList.add("d-none");
   loading.classList.remove("d-none");
+
   firebase
     .auth()
     .signInWithEmailAndPassword(email, password)
     .then(async function (response) {
       // check admin
+      console.log(response);
       await db
         .collection("admin")
         .get()
