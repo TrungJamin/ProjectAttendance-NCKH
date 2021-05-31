@@ -19,10 +19,9 @@
     "@tensorflow/tfjs-node-gpu": "^3.6.1",
     "@vladmandic/face-api": "^1.2.5",
     "bcrypt": "^5.0.1",
-    "face-api.js": "^0.22.2",
     "firebase-admin": "^9.2.0",
     "firebase-functions": "^3.14.1",
-    "fs": "0.0.1-security",
+    "jsdom": "^16.6.0",
     "path": "^0.12.7",
     "window": "^4.2.7"
   },

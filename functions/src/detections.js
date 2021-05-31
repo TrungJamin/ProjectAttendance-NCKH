@@ -1,7 +1,7 @@
 const path = require("path");
 const tensorFlow = require("@tensorflow/tfjs-node");
 const faceapi = require("@vladmandic/face-api/dist/face-api.node.js");
-const modelPathRoot = "./models";
+const modelPathRoot = "./../models";
 let optionsSSDMobileNet;
 const Window = require("window");
 const window = new Window();
@@ -30,7 +30,10 @@ async function image(file) {
 }
 
 async function detect(tensor) {
-  const result = await faceapi.detectAllFaces(tensor, optionsSSDMobileNet);
+  const result = await faceapi
+    .detectAllFaces(tensor, optionsSSDMobileNet)
+    .withFaceLandmarks()
+    .withFaceDescriptors();
   return result;
 }
 
