@@ -1,302 +1,217 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
 
-    <!-- Latest compiled and minified CSS -->
-    <title>Admin</title>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-    <link rel="stylesheet" href="./../css/teacherStyle.css" />
-    <link
-      href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-      rel="stylesheet"
-    />
+  <!-- Latest compiled and minified CSS -->
+  <title>Admin</title>
 
-    <link
-      href="./.././../vendor/fontawesome-free/css/all.min.css"
-      rel="stylesheet"
-      type="text/css"
-    />
-    <!-- Custom styles for this template -->
-    <link href="./.././../css/sb-admin-2.css" rel="stylesheet" />
+  <link rel="stylesheet" href="./../css/teacherStyle.css" />
+  <link
+    href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+    rel="stylesheet" />
 
-    <!-- Custom styles for this page -->
-    <link
-      href="./.././../vendor/datatables/dataTables.bootstrap4.min.css"
-      rel="stylesheet"
-    />
+  <link href="./.././../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" />
+  <!-- Custom styles for this template -->
+  <link href="./.././../css/sb-admin-2.css" rel="stylesheet" />
 
-    <link href="./../../css/sb-admin-2.css" rel="stylesheet" />
-    <script
-      src="https://kit.fontawesome.com/2348ec6f34.js"
-      crossorigin="anonymous"
-    ></script>
+  <!-- Custom styles for this page -->
+  <link href="./.././../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" />
 
-    <!-- firebase -->
-    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-firestore.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
-    <script>
-      var firebaseConfig = {
-        apiKey: "AIzaSyC3Yc52SF8cjOhM7jcskIkYTa3ViuCNijM",
-        authDomain: "attendance-aae4c.firebaseapp.com",
-        projectId: "attendance-aae4c",
-        storageBucket: "attendance-aae4c.appspot.com",
-        messagingSenderId: "215982681476",
-        appId: "1:215982681476:web:423a0e5b2d3a6cb6af41d1",
-        measurementId: "G-6S2QJD5SKB",
-      };
-      // Initialize Firebase
-      firebase.initializeApp(firebaseConfig);
-    </script>
-  </head>
+  <link href="./../../css/sb-admin-2.css" rel="stylesheet" />
+  <script src="https://kit.fontawesome.com/2348ec6f34.js" crossorigin="anonymous"></script>
 
-  <!-- <body> -->
+  <!-- firebase -->
+  <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
+  <script>
+    var firebaseConfig = {
+      apiKey: "AIzaSyC3Yc52SF8cjOhM7jcskIkYTa3ViuCNijM",
+      authDomain: "attendance-aae4c.firebaseapp.com",
+      projectId: "attendance-aae4c",
+      storageBucket: "attendance-aae4c.appspot.com",
+      messagingSenderId: "215982681476",
+      appId: "1:215982681476:web:423a0e5b2d3a6cb6af41d1",
+      measurementId: "G-6S2QJD5SKB",
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+  </script>
+</head>
 
-  <body >
-    <div id="cover-caption" class="hide">
-      <div class="container">
-        <div class="col-xl-12" >
-          <!-- Account details card-->
+<!-- <body> -->
 
-          <div class="card mb-4">
-            <div class="card-header">Thêm giáo viên</div>
+<body>
+  <div id="cover-caption" class="hide">
+    <div class="container">
+      <div class="col-xl-12">
+        <!-- Account details card-->
 
-            <div class="card-body">
-              <form
-                
-                class="justify-content-center"
-                id="myForm"
-              >
-                <!-- Form Group (username)-->
-                <div class="form-group">
-                  <label class="small mb-1" for="inputUsername"
-                    >Tên giáo viên</label
-                  >
-                  <input
-                    id="name"
-                    type="text"
-                    name="name"
-                    class="form-control"
-                    placeholder="Name"
-                    onkeyup="locKiTu(value,'name')"
-                    required
-                  />
+        <div class="card mb-4">
+          <div class="card-header">Thêm giáo viên</div>
+
+          <div class="card-body">
+            <form class="justify-content-center" id="myForm">
+              <!-- Form Group (username)-->
+              <div class="form-group">
+                <label class="small mb-1" for="inputUsername">Tên giáo viên</label>
+                <input id="name" type="text" name="name" class="form-control" placeholder="Name"
+                  onkeyup="locKiTu(value,'name')" required />
+              </div>
+              <!-- Form Row-->
+              <div class="form-row">
+                <!-- Form Group (first name)-->
+                <div class="form-group col-md-6">
+                  <label class="small mb-1" for="inputFirstName">khoa giảng dạy</label>
+                  <select class="form-control" name="group" id="group" required>
+                    <option value="nation">Tự nhiên</option>
+                    <option value="sociocultural" selected="selected">
+                      Xã hội
+                    </option>
+                  </select>
                 </div>
-                <!-- Form Row-->
-                <div class="form-row">
-                  <!-- Form Group (first name)-->
-                  <div class="form-group col-md-6">
-                    <label class="small mb-1" for="inputFirstName"
-                      >khoa giảng dạy</label
-                    >
-                    <select
-                      class="form-control"
-                      name="group"
-                      id="group"
-                      required
-                    >
-                      <option value="nation">Tự nhiên</option>
-                      <option value="sociocultural" selected="selected">
-                        Xã hội
-                      </option>
-                    </select>
-                  </div>
-                  <!-- Form Group (last name)-->
-                  <div class="form-group col-md-6">
-                    <label class="small mb-1" for="inputLastName"
-                      >Giới tính</label
-                    >
-                    <select
-                      class="form-control"
-                      name="gender"
-                      id="gender"
-                      required
-                    >
-                      <option value="true">nam</option>
-                      <option value="false">nữ</option>
-                    </select>
-                  </div>
+                <!-- Form Group (last name)-->
+                <div class="form-group col-md-6">
+                  <label class="small mb-1" for="inputLastName">Giới tính</label>
+                  <select class="form-control" name="gender" id="gender" required>
+                    <option value="true">nam</option>
+                    <option value="false">nữ</option>
+                  </select>
                 </div>
-                <!-- Form Row        -->
-                <div class="row">
-                  <div class="form-group col-md-12">
-                    <label class="small mb-1" for="inputFirstName"
-                      >khoa giảng dạy</label
-                    >
-                    <div class="dropdown">
-                      <button
-                        class="
+              </div>
+              <!-- Form Row        -->
+              <div class="row">
+                <div class="form-group col-md-12">
+                  <label class="small mb-1" for="inputFirstName">khoa giảng dạy</label>
+                  <div class="dropdown">
+                    <button class="
                           btn btn-outline-success
                           dropdown-toggle
                           btn-block
-                        "
-                        type="button"
-                        id="triggerId"
-                        data-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="false"
-                      >
-                        danh sách môn dạy
-                      </button>
-                      <div
-                        class="dropdown-menu"
-                        style="padding: 2rem"
-                        aria-labelledby="triggerId"
-                      >
-                        <div id="renderMuntilChoose"></div>
-                      </div>
+                        " type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
+                      aria-expanded="false">
+                      danh sách môn dạy
+                    </button>
+                    <div class="dropdown-menu" style="padding: 2rem" aria-labelledby="triggerId">
+                      <div id="renderMuntilChoose"></div>
                     </div>
                   </div>
                 </div>
-
-                <!-- Form Group (email address)-->
-                <div class="form-group">
-                  <label class="small mb-1" for="inputEmailAddress"
-                    >lớp chủ nhiệm</label
-                  >
-                  <select
-                    class="form-control"
-                    name="classLeader"
-                    id="classLeader"
-                    aria-placeholder="chọn lớp chủ nhiệm"
-                    required
-                  ></select>
-                </div>
-                <!-- Form Row-->
-                <div class="form-row">
-                  <!-- Form Group (phone number)-->
-                  <div class="form-group col-md-6">
-                    <label class="small mb-1" for="inputPhone">Email</label>
-                    <input
-                      id="address"
-                      type="text"
-                      class="form-control"
-                      style="width: 100%"
-                      name="address"
-                      placeholder="@mail"
-                      onkeyup="locKiTu(value,'address')"
-                      required
-                    />
-                  </div>
-                  <!-- Form Group (birthday)-->
-                  <div class="form-group col-md-6">
-                    <label class="small mb-1" for="inputBirthday"
-                      >Ngày sinh</label
-                    >
-                    <input
-                      type="date"
-                      class="form-control"
-                      name="dataOfBirth"
-                      placeholder="ngày sinh"
-                      required
-                    />
-                  </div>
-                </div>
-                <!-- Save changes button-->
-               
-              </form>
-              <div class="d-flex justify-content-between">
-                <button type="submit" class="btn btn-success" onclick="mySubmitFunction(event)">Thêm</button>
-              <button type="submit" class="btn btn-danger" onclick="closeFormInput(`cover-caption`)">Hủy</button>
               </div>
-              
+
+              <!-- Form Group (email address)-->
+              <div class="form-group">
+                <label class="small mb-1" for="inputEmailAddress">lớp chủ nhiệm</label>
+                <select class="form-control" name="classLeader" id="classLeader" aria-placeholder="chọn lớp chủ nhiệm"
+                  required></select>
+              </div>
+              <!-- Form Row-->
+              <div class="form-row">
+                <!-- Form Group (phone number)-->
+                <div class="form-group col-md-6">
+                  <label class="small mb-1" for="inputPhone">Email</label>
+                  <input id="address" type="text" class="form-control" style="width: 100%" name="address"
+                    placeholder="@mail" onkeyup="locKiTu(value,'address')" required />
+                </div>
+                <!-- Form Group (birthday)-->
+                <div class="form-group col-md-6">
+                  <label class="small mb-1" for="inputBirthday">Ngày sinh</label>
+                  <input type="date" class="form-control" name="dataOfBirth" placeholder="ngày sinh" required />
+                </div>
+              </div>
+              <!-- Save changes button-->
+
+            </form>
+            <div class="d-flex justify-content-between">
+              <button type="submit" class="btn btn-success" onclick="mySubmitFunction(event)">Thêm</button>
+              <button type="submit" class="btn btn-danger" onclick="closeFormInput(`cover-caption`)">Hủy</button>
             </div>
+
           </div>
         </div>
       </div>
     </div>
+  </div>
 
-    <div class="card shadow mb-4"  style="width: 100%;">
-      <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-success">Danh sách giáo viên</h6>
-      </div>
-
-      <br />
-      <div class="row">
-        <div class="form-group col-md-5">
-          <button type="button" class="btn btn-success"  id="addTeacher">Thêm giáo viên</button>
-        </div>
-
-        <div class="form-group col-md-5">
-
-          <div class="input-group">
-            <input
-              type="text"
-              class="form-control bg-light border-0 small"
-              placeholder="tìm kiếm ..."
-              aria-label="Search"
-              aria-describedby="basic-addon2"
-              id="Teacher-search"
-              onchange="searchAll(value)"
-            />
-            <div class="input-group-append">
-              <button
-                class="btn btn-success"
-                type="button"
-               style="z-index: 0 !important;"
-              >
-                <i class="fas fa-search fa-sm" aria-hidden="true"></i>
-              </button>
-            </div> 
-          </div>
-
-        </div>
-
-        <div class="form-group col-md-1">
-          <button type="button" class="btn btn-success" onclick="reRenderNotParam()" >
-            <i class="fas fa-redo"></i>
-          </button>
-        </div>
-        
-      </div>
-
-      <div class="card-body">
-        <div class="table-responsive">
-          <table  class="table table-bordered" id="dataTable" width="100%"   cellspacing="0"  >
-            <thead>
-              <tr>
-                <th>Id</th>
-                <th>Tên</th>
-                <th>Nhóm</th>
-                <th>Chủ nhiệm</th>
-
-                <th>Lớp vs Môn</th>
-                <th>@Mail</th>
-                <th>Ngày sinh</th>
-                <th>Chỉnh sửa</th>
-              </tr>
-            </thead>
-            
-            <tbody id="upload"></tbody>
-          </table>
-        </div>
-      </div>
+  <div class="card shadow mb-4" style="width: 100%;">
+    <div class="card-header py-3">
+      <h6 class="m-0 font-weight-bold text-success">Danh sách giáo viên</h6>
     </div>
 
-    <script src="./.././../vendor/jquery/jquery.min.js"></script>
-    <script src="./.././../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <br />
+    <div class="row">
+      <div class="form-group col-md-5">
+        <button type="button" class="btn btn-success" id="addTeacher">Thêm giáo viên</button>
+      </div>
 
-    <!-- Core plugin JavaScript-->
-    <script src="./.././../vendor/jquery-easing/jquery.easing.min.js"></script>
+      <div class="form-group col-md-5">
 
-    <!-- Custom scripts for all pages-->
-    <script src="./.././../js/sb-admin-2.min.js"></script>
+        <div class="input-group">
+          <input type="text" class="form-control bg-light border-0 small" placeholder="tìm kiếm ..." aria-label="Search"
+            aria-describedby="basic-addon2" id="Teacher-search" onchange="searchAll(value)" />
+          <div class="input-group-append">
+            <button class="btn btn-success" type="button" style="z-index: 0 !important;">
+              <i class="fas fa-search fa-sm" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
 
-    <!-- Page level plugins -->
-    <script src="./.././../vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="./.././../vendor/datatables/dataTables.bootstrap4.min.js"></script>
+      </div>
 
-    <!-- Bootstrap core JavaScript-->
-    <!-- <script src="./../../../js/InterfaceAdmin.js"></script> -->
-    <script src="./js/indexTeacher.js"></script>
-    <script src="./js/add_remove_editTeacher.js"></script>
-    <script src="./js/search.js"></script>
-    <!-- <script src="xoaKhiTuThua.js"></script> -->
-  </body>
+      <div class="form-group col-md-1">
+        <button type="button" class="btn btn-success" onclick="reRenderNotParam()">
+          <i class="fas fa-redo"></i>
+        </button>
+      </div>
+
+    </div>
+
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Tên</th>
+              <th>Nhóm</th>
+              <th>Chủ nhiệm</th>
+
+              <th>Lớp vs Môn</th>
+              <th>@Mail</th>
+              <th>Ngày sinh</th>
+              <th>Chỉnh sửa</th>
+            </tr>
+          </thead>
+
+          <tbody id="upload"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script src="./.././../vendor/jquery/jquery.min.js"></script>
+  <script src="./.././../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="./.././../vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for all pages-->
+  <!-- <script src="./.././../js/sb-admin-2.min.js"></script> -->
+
+  <!-- Page level plugins -->
+  <script src="./.././../vendor/datatables/jquery.dataTables.min.js"></script>
+  <script src="./.././../vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+  <!-- Bootstrap core JavaScript-->
+  <!-- <script src="./../../../js/InterfaceAdmin.js"></script> -->
+  <script src="./js/indexTeacher.js"></script>
+  <script src="./js/add_remove_editTeacher.js"></script>
+  <script src="./js/search.js"></script>
+  <!-- <script src="xoaKhiTuThua.js"></script> -->
+</body>
+
 </html>

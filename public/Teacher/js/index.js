@@ -26,19 +26,19 @@ document.querySelector("#agreeLogout").addEventListener("click", () => {
     });
 });
 
-
-firebase.auth().onAuthStateChanged((user)=>{
- 
-  
-  db.collection("TeacherAdmin").onSnapshot(async function (snapshots) {
-    snapshots.forEach((teacher) => {
-      if (teacher.data().email == user.email)
-      
-        document.querySelector(".page-header").innerHTML=   ` <h1>Danh Sách Điểm Danh Lớp ${teacher.data().class}</h1>`  
-      
+firebase.auth().onAuthStateChanged((user) => {
+  if (user) {
+    db.collection("TeacherAdmin").onSnapshot(async function (snapshots) {
+      snapshots.forEach((teacher) => {
+        if (teacher.data().email == user.email)
+          document.querySelector(
+            ".page-header"
+          ).innerHTML = ` <h1>Danh Sách Điểm Danh Lớp ${
+            teacher.data().class
+          }</h1>`;
+      });
     });
-  });
-}
-);
-
-
+  } else {
+    location.assign("./../../index.html");
+  }
+});

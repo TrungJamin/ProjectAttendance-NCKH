@@ -60,7 +60,11 @@ edit_form.addEventListener("submit", (e) => {
 
 const createAttendance = (id) => {
   for (let i = 1; i <= 31; i++) {
-    let day = `5-${i}-2021`;
+    x = i;
+    if (i < 10) {
+       x = "0" + i;
+    }
+    let day = `5-${x}-2021`;
     console.log(day);
     db.collection("Students")
       .doc(id)

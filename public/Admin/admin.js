@@ -1,6 +1,5 @@
 const homepage = document.getElementById("homepage");
 const allStudents = document.getElementById("all-Students");
-
 const iFrame = document.querySelector(".iFrame");
 
 const addTeacher = document.getElementById("add-Teacher");
@@ -13,7 +12,7 @@ const agreeLogout = document.querySelector("#agreeLogout"); // dong y dang xuat
 // const auth = firebase.auth();
 const makeAdmin = document.querySelector(".make-admin");
 const formMakeAdmin = document.querySelector(".form-make-admin");
-
+const auth = firebase.auth();
 const cancelMakeAdmin = document.querySelector(".cancel-make-admin");
 makeAdmin.addEventListener("click", (event) => {
   document
@@ -21,14 +20,80 @@ makeAdmin.addEventListener("click", (event) => {
     .classList.add("enable-view-database");
   document.querySelector(".view-make-admin").classList.remove("d-none");
 });
+const isAccountExist = (email) => {
+  let isAdmin = false;
+  return db
+    .collection("TeacherAdmin")
+    .get()
+    .then(function (querySnapshot) {
+      querySnapshot.forEach((teacher) => {
+        if (teacher.data().email === email) {
+          isAdmin = {
+            isAdmin: true,
+            id: teacher.id,
+          };
+          return;
+        }
+      });
+      return isAdmin;
+    })
+    .catch(function (error) {
+      return false;
+    });
+};
+const setClassTeacherAdmin = (newLeader) => {
+  const { classLeader, id, email } = newLeader;
+  console.log("run-set-class-teacher-admin");
+  return db
+    .collection("TeacherAdmin")
+    .doc(id)
+    .set({
+      email: email,
+      class: classLeader,
+    })
+    .then((res) => {
+      console.log("success");
+    });
+};
+const makeTeacherAdmin = async (newAccount) => {
+  console.log("run-make-admin");
+  const { classLeader, email, password } = newAccount;
+  console.log(password);
+  return firebase
+    .auth()
+    .createUserWithEmailAndPassword(email, password)
+    .then(async function (response) {
+      await setClassTeacherAdmin({
+        email: email,
+        classLeader: classLeader,
+        id: response.user.uid,
+      });
+    })
+    .then((result) => {
+      console.log("make-admin-success");
+    })
+    .catch(function (error) {
+      console.log(error.message);
+    });
+};
 formMakeAdmin.addEventListener("submit", (e) => {
   e.preventDefault();
-  firebase
-    .auth()
-    .signUp(formMakeAdmin["make-admin-email"].value, "123456")
-    .then((res) => {
-      console.log("alo");
-    });
+  const email = formMakeAdmin["make-admin-email"].value;
+  const classLeader = formMakeAdmin["class-leader"].value;
+  const password = classLeader + "123456";
+  isAccountExist(email).then(async (res) => {
+    if (res) {
+      console.log(res);
+      let newLeader = { id: res.id, email: email, classLeader: classLeader };
+      await setClassTeacherAdmin(newLeader);
+    } else {
+      makeTeacherAdmin({
+        email: email,
+        classLeader: classLeader,
+        password: password,
+      });
+    }
+  });
 });
 cancelMakeAdmin.addEventListener("click", function () {
   document
@@ -90,6 +155,3 @@ listTeacher.addEventListener("click", (event) => {
 
   iFrame.src = "./mangeTecher/allTeacher.html";
 });
-
-/// log ui user
-console.log("chay");

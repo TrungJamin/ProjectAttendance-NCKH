@@ -130,12 +130,12 @@ tr {
   cursor: pointer;
 }
 
-.multChoose{
-  padding: 5px 0px ;
+.multChoose {
+  padding: 5px 0px;
   background-color: #f8f9fc;
   width: 98.5%;
 }
-.multChoose a{
+.multChoose a {
   cursor: pointer;
 }
 
@@ -171,43 +171,46 @@ tr {
   color: #304ca2;
 }
 
-.panel-name{
+.panel-name {
   text-align: center;
   width: 95%;
   font-weight: 500;
 }
-.delete{
+.delete {
   padding: 0 15px;
 }
-.note-date{
+.note-date {
   width: 100%;
-    height: 100%;
-    position: fixed;
-    background: rgba(0, 0, 0, 0.4);
-    z-index: 5;
+  height: 100%;
+  position: fixed;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 5;
 }
-
 
 .table-note thead tr th:nth-child(1),
 .table-note tbody tr td:nth-child(1) {
   width: 7%;
 }
-.table-note{
+.table-note {
   text-align: left;
 }
-.table-note .rowspan{
+.table-note .rowspan {
   padding-top: 112px;
 }
-.typeDay{
+.typeDay {
   cursor: pointer;
 }
-.day-now, .month-now, .week-now{
+.day-now,
+.month-now,
+.week-now {
   width: 80%;
 }
-.table-header{
+.table-header {
   display: flex;
-  
 }
 .bg-light {
   background-color: #e1e6f3 !important;
+}
+.delete {
+  cursor: pointer;
 }
