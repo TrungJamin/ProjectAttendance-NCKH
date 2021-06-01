@@ -43,7 +43,6 @@ const isAccountExist = (email) => {
 };
 const setClassTeacherAdmin = (newLeader) => {
   const { classLeader, id, email } = newLeader;
-  console.log("run-set-class-teacher-admin");
   return db
     .collection("TeacherAdmin")
     .doc(id)
@@ -56,9 +55,7 @@ const setClassTeacherAdmin = (newLeader) => {
     });
 };
 const makeTeacherAdmin = async (newAccount) => {
-  console.log("run-make-admin");
   const { classLeader, email, password } = newAccount;
-  console.log(password);
   return firebase
     .auth()
     .createUserWithEmailAndPassword(email, password)
@@ -69,9 +66,7 @@ const makeTeacherAdmin = async (newAccount) => {
         id: response.user.uid,
       });
     })
-    .then((result) => {
-      console.log("make-admin-success");
-    })
+    .then((result) => {})
     .catch(function (error) {
       console.log(error.message);
     });
@@ -129,14 +124,12 @@ firebase.auth().onAuthStateChanged((user) => {
   } else {
     homepage.classList.remove("non_active");
   }
-  console.log(user);
 });
 
 // doạn này khi vào trang se vao trang all teache dung 1 l
 
 function refresh() {
   if (sessionStorage.getItem("url")) {
-    console.log("run1");
     // neu co di theo url cu
     iFrame.src = sessionStorage.getItem("url");
   } else {

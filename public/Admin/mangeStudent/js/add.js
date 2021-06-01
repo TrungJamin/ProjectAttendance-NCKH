@@ -21,21 +21,19 @@ let demo = {
 };
 
 addStudent.addEventListener("click", (e) => {
-  renderTypeBox.innerHTML = "Add A Student";
+  renderTypeBox.innerHTML = "Thêm Một Sinh Viên";
   edit.classList.add("open");
-  console.log(edit_form);
 });
 edit_form.addEventListener("submit", (e) => {
   e.preventDefault();
-  console.log(edit_form);
   let dob = edit_form.dob.value.split("-").reverse().join("/");
 
   let year =
     gradeSelect.value == "10" ? 2021 : gradeSelect.value == "11" ? 2020 : 2019;
   let gender = edit_form.gender.value == "male" ? "1" : "0";
-  let id = year + gender + 2;
+  const id = year + gender + parseInt(Math.random() * 100);
   let data = edit_form.fullname.value.split(" ");
-
+  console.log("loading");
   db.collection("Students")
     .doc(id)
     .set({
@@ -49,22 +47,25 @@ edit_form.addEventListener("submit", (e) => {
       address: edit_form.Address.value,
       phone: edit_form.Phone.value,
     })
-    .then((res) => {
-      createAttendance(id);
+    .then(async (res) => {
+      for (let i = 5; i <= 7; i++) {
+        await createAttendance(id, i);
+      }
       edit_form.reset();
+      swal("Successfully!", "", "success");
     })
     .catch((err) => {
-      console.log("chay");
+      alert(err.message);
     });
 });
 
-const createAttendance = (id) => {
+const createAttendance = (id, month) => {
   for (let i = 1; i <= 31; i++) {
     x = i;
     if (i < 10) {
-       x = "0" + i;
+      x = "0" + i;
     }
-    let day = `5-${x}-2021`;
+    let day = `${month}-${x}-2021`;
     console.log(day);
     db.collection("Students")
       .doc(id)
@@ -73,9 +74,6 @@ const createAttendance = (id) => {
       .set({
         ...demo,
         week: getWeekNow(new Date(day)),
-      })
-      .then(() => {
-        swal("Successfully!", "", "success");
       });
   }
 };

@@ -25,11 +25,7 @@ function getListClass() {
         });
         arr.push(gan);
       });
-
-
-      console.log("run -----")
-      renderChooseClassLeader(arr);
-       
+      renderChooseClassLeader(arr); 
       renderMuntilChoose(arr);
     })
     .catch(function (error) {});
