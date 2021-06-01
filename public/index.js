@@ -32,7 +32,7 @@ login[0].addEventListener("submit", (event) => {
         })
         .then((res) => {
           res
-            ? location.assign("./Admin/admin.html")
+            ? location.assign("./Admin/")
             : location.assign("./Teacher/screen/");
           buttonlogin.classList.remove("d-none");
           loading.classList.add("d-none");

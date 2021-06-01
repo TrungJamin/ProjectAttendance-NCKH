@@ -18,29 +18,8 @@ db.collection("Students").onSnapshot(async (snapShot) => {
     // Edit data
     if (change.type == "modified") {
       let tr = document.getElementById(change.doc.id);
-      // tr.innerHTML = " ";
-      // tr.innerHTML = `
-      //   <td> 1 </td>
-      //   <td>${change.doc.data().id} </td>
-      //   <td>${change.doc.data().name} </td>
-      //   <td>${change.doc.data().dateOfBirth} </td>
-      //   <td>${change.doc.data().gender} </td>
-      //   <td>${change.doc.data().class} </td>
-      //   <td>${change.doc.data().address} </td>
-      //   <td>${change.doc.data().phone} </td>
-
-      // `;
-      // console.log(tr);
-      // let student = change.doc.data();
-      // let index = indexOf(student.id);
-      // listOfStudent[index] = student;
-
       // Mảng các phần tử "th" của "tr"
       let childrenOf_tr = tr.getElementsByTagName("td");
-      /* let childrenOf_body = body_table.getElementsByTagName("tr");
-      console.log(childrenOf_body[0].getElementsByTagName("td")[0].textContent); */
-
-      // thay đổi nội dung của các phần tư "th" của tr
       childrenOf_tr[1].textContent = change.doc.data().id;
       childrenOf_tr[2].textContent = change.doc.data().name;
       childrenOf_tr[3].textContent = change.doc.data().dateOfBirth;

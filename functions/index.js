@@ -49,3 +49,26 @@ exports.detectedListAttendance = functions
         return error.message;
       });
   });
+exports.saveImageInDataBase = functions
+  .runWith(runtimeOpts)
+  .https.onCall(async (data, content) => {
+    const { listBase64, id, Class } = data;
+    const descriptors = await listBase64.map((base64) => {
+      return detects(base64);
+    });
+    return db
+      .collection("DataBaseFace")
+      .doc(Class)
+      .collection("data")
+      .doc(id)
+      .set({
+        label: id,
+        descriptors: descriptors,
+      })
+      .then(() => {
+        return true;
+      })
+      .catch(function (error) {
+        return error.message;
+      });
+  });
