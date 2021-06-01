@@ -1,16 +1,12 @@
 var type = true; // xac dinh kieu  (true )add or  (false)edit
 var teacherEdit = {};
-var db = firebase.firestore();
 
-var btnAddTeacher=document.querySelector("#addTeacher");
-console.log(btnAddTeacher)
-btnAddTeacher.addEventListener("click", () =>{
-  openFormInput("cover-caption","");
-  
-} )
+var btnAddTeacher = document.querySelector("#addTeacher");
+console.log(btnAddTeacher);
+btnAddTeacher.addEventListener("click", () => {
+  openFormInput("cover-caption", "");
+});
 
-
- 
 // render selectionClassLeader lop hoc
 function getListClass() {
   db.collection("Classes")
@@ -25,7 +21,7 @@ function getListClass() {
         });
         arr.push(gan);
       });
-      renderChooseClassLeader(arr); 
+      renderChooseClassLeader(arr);
       renderMuntilChoose(arr);
     })
     .catch(function (error) {});
@@ -33,21 +29,17 @@ function getListClass() {
 
 getListClass();
 
+// new code
+function renderMuntilChoose(listClass) {
+  console.log("run");
+  console.log(`listClass`, listClass);
+  const renderMuntilchooseHtml = document.querySelector("#renderMuntilChoose");
 
+  var node = "";
 
-// new code 
-function renderMuntilChoose( listClass){
-
-  console.log("run")
-  console.log(`listClass`, listClass)
-  const renderMuntilchooseHtml=document.querySelector("#renderMuntilChoose");
-
-  var node='';
-
-  listClass.forEach(e=> {
-
-    e.forEach( element=>{
-       node+=`<div class="form-check">
+  listClass.forEach((e) => {
+    e.forEach((element) => {
+      node += `<div class="form-check">
       <label class="form-check-label">
           <input type="checkbox" class="form-check-input" value='${element}'>${element}
       </label>
@@ -56,22 +48,15 @@ function renderMuntilChoose( listClass){
         
         
       </div>
-      </div>`
-    })
-   
+      </div>`;
+    });
   });
 
- 
-  renderMuntilchooseHtml.innerHTML=node;
+  renderMuntilchooseHtml.innerHTML = node;
   renderMuntilChooseSubjects();
-
-  
-
 }
 
-
-function renderMuntilChooseSubjects(){
-
+function renderMuntilChooseSubjects() {
   var sub = [
     "Toán",
     "Ngữ văn",
@@ -87,7 +72,7 @@ function renderMuntilChooseSubjects(){
     "Công nghệ",
     "Tin học",
     "Hoạt động trải nghiệm",
-  ]; 
+  ];
 
   var node = ` `;
   sub.forEach((e) => {
@@ -96,18 +81,14 @@ function renderMuntilChooseSubjects(){
       </label>`;
   });
 
+  const renderMuntilChooseSubjectsHtml = document.querySelectorAll(
+    ".renderMuntilChooseSubjects"
+  );
 
-  const renderMuntilChooseSubjectsHtml= document.querySelectorAll(".renderMuntilChooseSubjects");
-
-  renderMuntilChooseSubjectsHtml.forEach( e=>{
-
-    e.innerHTML=node;
-
-  })
-
-  
+  renderMuntilChooseSubjectsHtml.forEach((e) => {
+    e.innerHTML = node;
+  });
 }
- 
 
 //renderChooseClassLeader
 function renderChooseClassLeader(arr) {
@@ -123,7 +104,7 @@ function renderChooseClassLeader(arr) {
 
 // edit teacher
 function editTeacher(id, obj) {
-    reNewForm();
+  reNewForm();
   closeFormInput("cover-caption");
 
   db.collection("Teachers")
@@ -154,15 +135,18 @@ function deleteById(id) {
 
 // tao them form input de get data nhap cho phan nay
 function addTeacher(obj) {
-    reNewForm();
-    
-    
-    console.log(obj)
-    db.collection("Teachers")
+  reNewForm();
+
+  console.log(obj);
+  db.collection("Teachers")
     .add(obj)
-    .then(function (response) { console.log(`object`)})
-    .catch(function (error) {console.log("errr")});
-    closeFormInput("cover-caption");
+    .then(function (response) {
+      console.log(`object`);
+    })
+    .catch(function (error) {
+      console.log("errr");
+    });
+  closeFormInput("cover-caption");
 }
 
 // get input  to add or edit
@@ -177,8 +161,6 @@ function getInfoTeacher() {
 
   var teacher = {};
 
-   
-
   var myForm = document.querySelectorAll("#myForm .form-group");
   myForm.forEach((e) => {
     if (e.children[1] != undefined) {
@@ -190,48 +172,46 @@ function getInfoTeacher() {
     }
   });
 
-
-  const renderMuntilChoose= document.querySelector("#renderMuntilChoose");
+  const renderMuntilChoose = document.querySelector("#renderMuntilChoose");
 
   console.log(renderMuntilChoose);
 
-  const subjectsAndClass =[];
+  const subjectsAndClass = [];
 
-  let i=0;
-  while( renderMuntilChoose.children[i]!=undefined){
-
-    if(renderMuntilChoose.children[i].children[0].children[0].checked==true ){
-
-      
-      let j =0;
-      while(renderMuntilChoose.children[i].children[1].children[j] ){
-
-        if( renderMuntilChoose.children[i].children[1].children[j].children[0].checked==true ){
-          const tmp={
-            class:renderMuntilChoose.children[i].children[0].children[0].value,
-            subject :renderMuntilChoose.children[i].children[1].children[j].children[0].value
-          }
+  let i = 0;
+  while (renderMuntilChoose.children[i] != undefined) {
+    if (
+      renderMuntilChoose.children[i].children[0].children[0].checked == true
+    ) {
+      let j = 0;
+      while (renderMuntilChoose.children[i].children[1].children[j]) {
+        if (
+          renderMuntilChoose.children[i].children[1].children[j].children[0]
+            .checked == true
+        ) {
+          const tmp = {
+            class: renderMuntilChoose.children[i].children[0].children[0].value,
+            subject:
+              renderMuntilChoose.children[i].children[1].children[j].children[0]
+                .value,
+          };
 
           subjectsAndClass.push(tmp);
         }
-        
+
         j++;
       }
-
     }
 
     i++;
   }
 
-  teacher.subjectsAndClass=subjectsAndClass;
-  
-
-
+  teacher.subjectsAndClass = subjectsAndClass;
 
   console.log(type, "==================");
   if (type == true) {
     teacher.id = createId();
-    console.log(teacher,"--------------");
+    console.log(teacher, "--------------");
 
     delete teacher.undefined;
 
@@ -248,8 +228,8 @@ function getInfoTeacher() {
 
 function closeFormInput(idOfHtml) {
   teacherEdit = {};
-    reNewForm();
-    document.getElementById(idOfHtml).classList.add("hide");
+  reNewForm();
+  document.getElementById(idOfHtml).classList.add("hide");
 }
 
 function openFormInput(idOfHtml, teacher) {
@@ -261,64 +241,71 @@ function openFormInput(idOfHtml, teacher) {
     console.log(teacher);
     teacherEdit = teacher;
 
-    
-
     var myForm = document.querySelectorAll("#myForm .form-group");
-
 
     myForm[0].children[1].setAttribute("value", teacher.name);
     myForm[1].children[0].value = teacher.group;
     myForm[2].children[0].value = teacher.gender;
     myForm[4].children[1].value = teacher.classLeader;
-    myForm[5].children[1].setAttribute("value",teacher.address);
-    myForm[6].children[1].setAttribute("value",teacher.dataOfBirth  );
+    myForm[5].children[1].setAttribute("value", teacher.address);
+    myForm[6].children[1].setAttribute("value", teacher.dataOfBirth);
 
     // giai lap co data
 
-    const dataClassTeachSubjects= teacher.subjectsAndClass;
+    const dataClassTeachSubjects = teacher.subjectsAndClass;
 
-    
-    // myForm[3].children[1].children[1].children[0].children[0] tung lop 1 
+    // myForm[3].children[1].children[1].children[0].children[0] tung lop 1
     // myForm[3].children[1].children[1].children[0].children[0].children[0] tung phhan chon 1 trong 1 lop
-     // myForm[3].children[1].children[1].children[0].children[0].children[1].children[0]  input value trong 1 thành phan 
+    // myForm[3].children[1].children[1].children[0].children[0].children[1].children[0]  input value trong 1 thành phan
     // console.log(`object`,  myForm[3].children[1].children[1].children[0].children[1].children[0].children[0].value , );
 
-  
+    var i = 0;
 
-    var i=0;
+    var tmpForm = myForm[3].children[1].children[1];
 
-    var tmpForm=myForm[3].children[1].children[1];
-
-   
-    while( tmpForm.children[0].children[i]!=undefined ){
-
-      
+    while (tmpForm.children[0].children[i] != undefined) {
       // neu thang class dc chon thi di tiep tim nhung thang dc chon
 
-      dataClassTeachSubjects.forEach( e=>{
+      dataClassTeachSubjects.forEach((e) => {
+        if (
+          e.class ==
+          tmpForm.children[0].children[i].children[0].children[0].value
+        ) {
+          console.log(
+            tmpForm.children[0].children[i].children[0].children[0].value
+          );
 
-        
-        if( e.class== tmpForm.children[0].children[i].children[0].children[0].value){
+          tmpForm.children[0].children[
+            i
+          ].children[0].children[0].checked = true;
 
-          console.log(tmpForm.children[0].children[i].children[0].children[0].value);
-
-          tmpForm.children[0].children[i].children[0].children[0].checked=true;
-
-          let j=0;
-          while( tmpForm.children[0].children[i].children[1].children[j]!=undefined ){
-            if(e.class== tmpForm.children[0].children[i].children[0].children[0].value && e.subject== tmpForm.children[0].children[1].children[1].children[j].children[0].value){
-              console.log(e.subject,'-----', myForm[3].children[1].children[1].children[0].children[1].children[1].children[j].children[0].value);
-              tmpForm.children[0].children[i].children[1].children[j].children[0].checked=true;
+          let j = 0;
+          while (
+            tmpForm.children[0].children[i].children[1].children[j] != undefined
+          ) {
+            if (
+              e.class ==
+                tmpForm.children[0].children[i].children[0].children[0].value &&
+              e.subject ==
+                tmpForm.children[0].children[1].children[1].children[j]
+                  .children[0].value
+            ) {
+              console.log(
+                e.subject,
+                "-----",
+                myForm[3].children[1].children[1].children[0].children[1]
+                  .children[1].children[j].children[0].value
+              );
+              tmpForm.children[0].children[i].children[1].children[
+                j
+              ].children[0].checked = true;
             }
             j++;
           }
+        }
+      });
 
-        } 
-
-      })
-      
       i++;
-       
     }
   }
 }

@@ -1,31 +1,25 @@
-var db = firebase.firestore();
 var body = document.querySelector("#upload");
 var listOfTeachers = [];
 
+// format obj to strin chuyaarn
+function formatObjectClassAndTeach(s) {
+  var index = 0;
+  var stringOut = "";
+  for (var i = 0; i < s.length - 1; i++) {
+    if (s[index].class == s[i + 1].class) {
+      s[i + 1].class = "";
+    } else {
+      index = i + 1;
+    }
+  }
 
-// format obj to strin chuyaarn 
-function formatObjectClassAndTeach(s){
-  var index=0;
-  var stringOut="";
- for( var i =0 ; i<s.length-1; i++){
-     if( s[index].class==s[i+1].class){
-         s[i+1].class="";
-     }
-     else{
-         index=i+1;
-     }
- }
-
-  s.forEach(e=>{
-
-      if( e.class==""){
-          stringOut+= " ; "+e.subject; 
-      }   
-      else {
-          stringOut+="\n"+ e.class +" : "+e.subject;
-      }
-         
-  })
+  s.forEach((e) => {
+    if (e.class == "") {
+      stringOut += " ; " + e.subject;
+    } else {
+      stringOut += "\n" + e.class + " : " + e.subject;
+    }
+  });
   return stringOut;
 }
 
@@ -48,7 +42,9 @@ function renderAddElementInTable(e) {
         <td class="text-center">${e.name}</td>
         <td class="text-center">${e.group}</td>
         <td class="text-center">${e.classLeader}</td>
-        <td class="text-center">${formatObjectClassAndTeach(e.subjectsAndClass)} </td>
+        <td class="text-center">${formatObjectClassAndTeach(
+          e.subjectsAndClass
+        )} </td>
         <td class="text-center">${e.address}</td>
         <td class="text-center">${e.dataOfBirth}</td> 
      `;
@@ -74,24 +70,22 @@ function renderAddElementInTable(e) {
   // console.log(list);
 }
 
-
-function reRenderNotParam(){
-  renderTable(listOfTeachers) ;
+function reRenderNotParam() {
+  renderTable(listOfTeachers);
 }
 function renderTable(list) {
   clearTable();
-  console.log(`xoa table cu `)
+  console.log(`xoa table cu `);
   list.forEach((e) => renderAddElementInTable(e));
   if (list.length == 0) {
     setNoResult();
   }
 
-  console.log("them vao tavle mơi")
+  console.log("them vao tavle mơi");
 }
 
 function clearTable() {
-
-  body.innerHTML=""
+  body.innerHTML = "";
   // while (body.firstChild) {
   //   body.removeChild(body.firstChild);
   // }

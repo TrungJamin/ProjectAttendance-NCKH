@@ -14,12 +14,7 @@ const makeAdmin = document.querySelector(".make-admin");
 const formMakeAdmin = document.querySelector(".form-make-admin");
 const auth = firebase.auth();
 const cancelMakeAdmin = document.querySelector(".cancel-make-admin");
-makeAdmin.addEventListener("click", (event) => {
-  document
-    .querySelector(".view-database")
-    .classList.add("enable-view-database");
-  document.querySelector(".view-make-admin").classList.remove("d-none");
-});
+
 const isAccountExist = (email) => {
   let isAdmin = false;
   return db
@@ -71,31 +66,7 @@ const makeTeacherAdmin = async (newAccount) => {
       console.log(error.message);
     });
 };
-formMakeAdmin.addEventListener("submit", (e) => {
-  e.preventDefault();
-  const email = formMakeAdmin["make-admin-email"].value;
-  const classLeader = formMakeAdmin["class-leader"].value;
-  const password = classLeader + "123456";
-  isAccountExist(email).then(async (res) => {
-    if (res) {
-      console.log(res);
-      let newLeader = { id: res.id, email: email, classLeader: classLeader };
-      await setClassTeacherAdmin(newLeader);
-    } else {
-      makeTeacherAdmin({
-        email: email,
-        classLeader: classLeader,
-        password: password,
-      });
-    }
-  });
-});
-cancelMakeAdmin.addEventListener("click", function () {
-  document
-    .querySelector(".view-database")
-    .classList.remove("enable-view-database");
-  document.querySelector(".view-make-admin").classList.add("d-none");
-});
+
 btnLogout.addEventListener("click", (event) => {
   formLogout.classList.add("open"); // hien thi forms
   console.log();

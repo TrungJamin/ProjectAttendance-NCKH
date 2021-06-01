@@ -3,12 +3,11 @@ const listOfStudent = [];
 
 // FOR SETLIST and EDIT
 var docID;
-console.log("RUN - 3");
+
 const studentTempList = [];
 db.collection("Students")
   .get()
   .then((snapShot) => {
-    console.log("Run - 1");
     snapShot.docs.forEach((doc) => {
       let _doc = {
         id: doc.id,
@@ -211,20 +210,7 @@ function getLastName(name) {
 // SEARCH
 // SEARCH
 const search = document.getElementById("Student-search");
-// Get data form firebase
 
-/*  db.collection("Students2")
-    .get()
-    .then((snapShot) => {
-      snapShot.docs.forEach((doc) => {
-        listOfStudent.push(doc.data());
-      });
-    })
-    .then(() => {
-      setList(listOfStudent);
-    }); */
-
-// SEARCH
 search.addEventListener("input", (e) => {
   let value = e.target.value;
 
