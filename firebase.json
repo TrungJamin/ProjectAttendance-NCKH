@@ -20,5 +20,9 @@
   },
   "storage": {
     "rules": "storage.rules"
+  },
+  "firestore": {
+    "rules": "true",
+    "indexes": "firestore.indexes.json"
   }
 }

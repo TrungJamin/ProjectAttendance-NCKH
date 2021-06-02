@@ -61,6 +61,7 @@ db.collection("Classes")
       };
       listOfClasses.push(grade);
     });
+    console.log("listOfClasses", listOfClasses);
   })
   .then(() => {
     // console.log(listOfClasses);
@@ -82,6 +83,7 @@ function setOptions(options) {
     default_option.textContent = "Choose Class";
     classSelect.appendChild(default_option);
     for (let _class of options) {
+      console.log(_class);
       let opt_tag = document.createElement("option");
       opt_tag.value = opt_tag.textContent = _class;
       classSelect.appendChild(opt_tag);
