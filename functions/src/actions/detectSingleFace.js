@@ -1,6 +1,6 @@
-const { start, faceapi, optionsSSDMobileNet } = require("./../env/env");
-const { image } = require("./../services");
-const { data } = require("./../dataOneFace");
+const { start, faceapi, optionsSSDMobileNet } = require("../../env/env");
+const { image } = require("../../services");
+const { data } = require("../../dataOneFace");
 async function toDescriptors(listBase64, id) {
   let res = await listBase64.map(async (base64) => {
     const tensor = await image(base64);
@@ -23,13 +23,19 @@ async function detectFace(listBase64, id) {
   await faceapi.tf.ready();
   await start();
   const descriptors = await toDescriptors(listBase64);
-  return new faceapi.LabeledFaceDescriptors(id, descriptors);
+  let LabeledFaceDescriptorsJSON = descriptors.map((detail) =>
+    Object.assign({}, detail)
+  );
+  return {
+    label: id,
+    descriptors: LabeledFaceDescriptorsJSON,
+  };
 }
 module.exports = { detectFace };
 
-// const list = [data];
-// async function run() {
-//   let result = await detectFace(list, "101");
-//   console.log(result);
-// }
-// run();
+const list = [data];
+async function run() {
+  let result = await detectFace(list, "101");
+  console.log(result);
+}
+run();

@@ -1,6 +1,6 @@
-const { faceapi, optionsSSDMobileNet, start } = require("./../env/env");
-const { image } = require("./../services/");
-const { data } = require("./../data");
+const { faceapi, optionsSSDMobileNet, start } = require("../../env/env");
+const { image } = require("../../services");
+const { data } = require("../../data");
 async function detect(tensor) {
   const result = await faceapi
     .detectAllFaces(tensor, optionsSSDMobileNet)

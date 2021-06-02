@@ -1,7 +1,7 @@
 const functions = require("firebase-functions");
 const admin = require("firebase-admin");
 admin.initializeApp(functions.config().firebase);
-const { detects, faceapi } = require("./src/detections");
+const { detects, faceapi, detectFace } = require("./src/");
 const db = admin.firestore();
 const runtimeOpts = {
   timeoutSeconds: 300,
@@ -49,22 +49,17 @@ exports.detectedListAttendance = functions
         return error.message;
       });
   });
-exports.saveImageInDataBase = functions
+exports.addDescriptorsInData = functions
   .runWith(runtimeOpts)
   .https.onCall(async (data, content) => {
     const { listBase64, id, Class } = data;
-    const descriptors = await listBase64.map((base64) => {
-      return detects(base64);
-    });
+    const database = await detectFace(listBase64, id);
     return db
       .collection("DataBaseFace")
       .doc(Class)
       .collection("data")
       .doc(id)
-      .set({
-        label: id,
-        descriptors: descriptors,
-      })
+      .set(database)
       .then(() => {
         return true;
       })
