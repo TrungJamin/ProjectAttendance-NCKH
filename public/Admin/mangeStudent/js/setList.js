@@ -81,6 +81,7 @@ function setList(group) {
     // console.log("RUN"); // chạy 4371 lần :)
     i_trash.addEventListener("click", (e) => {
       e.stopPropagation();
+
       let id = e.target.parentElement.parentElement.getAttribute("id");
       swal({
         title: "Are you sure ?",
@@ -107,6 +108,7 @@ function setList(group) {
     i_edit.addEventListener("click", (e) => {
       e.stopPropagation();
       // OPEN EDIT FORM
+      typeBoxEdit = true;
       renderTypeBox.innerText = "Edit Information";
       docID = doc_ID;
       edit_form.studentID.value = tr.getElementsByTagName("td")[1].textContent;
