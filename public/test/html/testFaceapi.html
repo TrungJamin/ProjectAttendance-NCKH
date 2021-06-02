@@ -29,14 +29,15 @@
 
     <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-functions.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
+    <script type="text/javascript" src="./../js/webcam.min.js"></script>
 </head>
 
 <body id="page-top">
-    <form class="add-imge">
-        <input type="file" id="imageUpload">
-        <input type="file" id="imageUpload2">
-    </form>
+    <div id="my_camera"></div>
+    <input type=button value="Take Snapshot" onClick="take_snapshot()"></input>
 
+    <from id="results">
+        <button type="submit" class="save"> Save</button> </form>
 </body>
 
 
