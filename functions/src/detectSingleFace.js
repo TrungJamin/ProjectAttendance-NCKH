@@ -1,41 +1,35 @@
 const { start, faceapi, optionsSSDMobileNet } = require("./../env/env");
 const { image } = require("./../services");
 const { data } = require("./../dataOneFace");
-const detect = async (listBase64, id) => {
-  let descriptions = [];
-  await listBase64.map(async (base64) => {
+async function toDescriptors(listBase64, id) {
+  let res = await listBase64.map(async (base64) => {
     const tensor = await image(base64);
     const detections = await faceapi
       .detectSingleFace(tensor, optionsSSDMobileNet)
       .withFaceLandmarks()
       .withFaceDescriptor();
-    // console.log(detections);
     tensor.dispose();
-    if (typeof detections !== "undefined") {
+    if (detections) {
       console.log("run - 1");
-      descriptions.push(detections.descriptor);
-      return true;
+      return detections.descriptor;
     }
-    return false;
   });
-  return new faceapi.LabeledFaceDescriptors(id, descriptions);
-};
+  return Promise.all(res);
+}
 async function detectFace(listBase64, id) {
   await faceapi.tf.setBackend("tensorflow");
   await faceapi.tf.enableProdMode();
   await faceapi.tf.ENV.set("DEBUG", false);
   await faceapi.tf.ready();
   await start();
-  const result = await detect(listBase64, id);
-  return result;
+  const descriptors = await toDescriptors(listBase64);
+  return new faceapi.LabeledFaceDescriptors(id, descriptors);
 }
 module.exports = { detectFace };
 
-const list = [data];
-console.log(typeof list);
-async function run() {
-  await detectFace(list, "101").then((result) => {
-    console.log(result);
-  });
-}
-run();
+// const list = [data];
+// async function run() {
+//   let result = await detectFace(list, "101");
+//   console.log(result);
+// }
+// run();
