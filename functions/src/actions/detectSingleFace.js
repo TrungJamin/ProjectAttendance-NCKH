@@ -1,9 +1,9 @@
 const { start, faceapi, optionsSSDMobileNet } = require("../../env/env");
 const { image } = require("../../services");
-const { data } = require("../../data");
 const { data1 } = require("../../data1");
+const { data } = require("../../dataOneFace");
 async function toDescriptors(listBase64) {
-  let res = await listBase64.map(async (base64) => {
+  let res = await listBase64.filterAndMapAsync(async (base64) => {
     const tensor = await image(base64);
     const detections = await faceapi
       .detectSingleFace(tensor, optionsSSDMobileNet)
@@ -18,7 +18,6 @@ async function toDescriptors(listBase64) {
   return Promise.all(res);
 }
 async function detectFace(listBase64, id) {
-  // console.log("listbase64", listBase64);
   await faceapi.tf.setBackend("tensorflow");
   await faceapi.tf.enableProdMode();
   await faceapi.tf.ENV.set("DEBUG", false);
@@ -29,12 +28,39 @@ async function detectFace(listBase64, id) {
     Object.assign({}, detail)
   );
   LabeledFaceDescriptorsJSON = Object.assign({}, LabeledFaceDescriptorsJSON);
-  console.log("label", LabeledFaceDescriptorsJSON);
+  // console.log("label", LabeledFaceDescriptorsJSON);
   return {
     label: id,
     descriptors: LabeledFaceDescriptorsJSON,
   };
 }
-const list = [data, data1];
-detectFace(list, "011");
+
+Array.prototype.filterAndMapAsync = async function (callback) {
+  var newArray = [];
+  for (var i = 0; i < this.length; i++) {
+    let check = await callback(this[i], i, this);
+    if (check) {
+      newArray.push(callback(this[i], i, this));
+    }
+  }
+  return newArray;
+};
 module.exports = { detectFace };
+
+// async function test() {
+//   const abc = await [1, 2, 3].filterAndMapAsync(function (item) {
+//     if (item > 2) {
+//       return item;
+//     }
+//   });
+//   Promise.all(abc).then((res) => {
+//     console.log(res);
+//   });
+// }
+// test();
+
+// let list = [data, data1];
+
+// detectFace(list, "10A1").then((res) => {
+//   console.log(res);
+// });
