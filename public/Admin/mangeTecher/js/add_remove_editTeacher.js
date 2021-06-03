@@ -2,6 +2,7 @@ var type = true; // xac dinh kieu  (true )add or  (false)edit
 var teacherEdit = {};
 
 var btnAddTeacher=document.querySelector("#addTeacher");
+var spinnerAddTeacher=document.querySelector("#loadingAddTeacher");
 // console.log(btnAddTeacher)
 btnAddTeacher.addEventListener("click", () =>{
   openFormInput("cover-caption","");
@@ -202,6 +203,8 @@ function deleteById(id) {
  function addTeacher(obj) {
 
   // kiểm tra xem email đã dd cấp account chưa 
+
+  spinnerAddTeacher.classList.remove("d-none");
  
   if( obj.subjectsAndClass.length===0){
     alert("Thêm danh sách môn dạy");
@@ -216,9 +219,8 @@ function deleteById(id) {
           .set(obj)
           .then(function (response) {
             reNewForm();
-            //  console.log(obj)
              closeFormInput("cover-caption");
-            // console.log( "add oke teacher")
+             spinnerAddTeacher.classList.add("d-none");
           })
           .catch(function (error) {console.log("errr")});
          

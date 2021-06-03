@@ -41,7 +41,7 @@ function renderAddElementInTable(e) {
         <td class="text-center">${e.name}</td>
         <td class="text-center">${e.gender == "true" ? "Nam" : "Nữ"}</td>
         <td class="text-center">${e.group}</td>
-        <td class="text-center">${e.classLeader}</td>
+        <td class="text-center">${e.classLeader==''?"không chủ nhiệm":e.classLeader}</td>
         <td class="text-center">${formatObjectClassAndTeach(
           e.subjectsAndClass
         )} </td>
