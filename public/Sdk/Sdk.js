@@ -37,7 +37,7 @@ function differentDays(date, date2) {
   if (date.getFullYear() == date2.getFullYear()) return diff;
   let sum = 0;
   let tempYear = date.getFullYear();
-  let maxYear = dt.year;
+  let maxYear = date2.getFullYear();
   if (date.getFullYear() > date2.getFullYear()) {
     tempYear = date2.getFullYear();
     maxYear = date.getFullYear();

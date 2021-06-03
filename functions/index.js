@@ -67,3 +67,47 @@ exports.addDescriptorsInData = functions
         return error.message;
       });
   });
+exports.getListAttendance = functions
+  .runWith(runtimeOpts)
+  .https.onCall(async (data, content) => {
+    return db
+      .collection("DataBaseFace")
+      .doc(data.class)
+      .collection("data")
+      .get()
+      .then((querySnapshots) => {
+        let labeledFaceDescriptorsJson2 = [];
+        querySnapshots.forEach((item) => {
+          labeledFaceDescriptorsJson2.push(item.data());
+        });
+        return labeledFaceDescriptorsJson2.map((person) => {
+          person.descriptors = Object.values(person.descriptors);
+          person.descriptors = person.descriptors.map((detail) =>
+            Object.values(detail)
+          );
+          return person;
+        });
+      })
+      .then((labeledFaceDescriptorsJson) => {
+        return labeledFaceDescriptorsJson.map((x) =>
+          faceapi.LabeledFaceDescriptors.fromJSON(x)
+        );
+      })
+      .then((result) => {
+        return new faceapi.FaceMatcher(result, 0.6);
+      })
+      .then(async (faceMatcher) => {
+        const detections = await detects(data.img);
+        const resizedDetections = await faceapi.resizeResults(
+          detections,
+          displaySize
+        );
+        const result = await resizedDetections.map((d) => {
+          return faceMatcher.findBestMatch(d.descriptor);
+        });
+        return result;
+      })
+      .catch((error) => {
+        return error.message;
+      });
+  });

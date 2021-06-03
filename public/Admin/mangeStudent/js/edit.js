@@ -20,28 +20,25 @@ cancelEdit.addEventListener("click", (e) => {
 });
 
 // SET SELECT CLASS AND GRADE
-const listOfClasses = [];
-
+var listOfClasses = [];
+var totalStudent = 0;
 const gradeSelect = document.getElementById("selectGrade");
 const classSelect = document.getElementById("selectClass");
 
 // GET all docs classes form DATABASE
-db.collection("Classes")
-  .get()
-  .then((snapShot) => {
-    snapShot.docs.forEach((doc) => {
-      let grade = {
-        grade: doc.id,
-        classes: doc.data().class,
-        total: doc.data().total,
-      };
-      listOfClasses.push(grade);
-    });
-    console.log("listOfClasses", listOfClasses);
-  })
-  .then(() => {
-    // console.log(listOfClasses);
+
+db.collection("Classes").onSnapshot((snapShot) => {
+  listOfClasses = [];
+  snapShot.docs.forEach((doc) => {
+    let grade = {
+      grade: doc.id,
+      classes: doc.data().classes,
+      total: doc.data().total,
+    };
+    listOfClasses.push(grade);
   });
+  // console.log("listOfClasses", listOfClasses);
+});
 
 // Clear Option - Class Select
 function clearOptions() {

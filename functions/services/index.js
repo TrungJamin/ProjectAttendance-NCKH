@@ -1,6 +1,7 @@
 const tensorFlow = require("@tensorflow/tfjs-node");
 const Window = require("window");
 const window = new Window();
+const { data } = require("./../data");
 var BASE64_MARKER = ";base64,";
 function convertDataURIToBinary(dataURI) {
   var base64Index = dataURI.indexOf(BASE64_MARKER) + BASE64_MARKER.length;
@@ -24,5 +25,4 @@ async function image(file) {
   casted.dispose();
   return result;
 }
-
 module.exports = { image };

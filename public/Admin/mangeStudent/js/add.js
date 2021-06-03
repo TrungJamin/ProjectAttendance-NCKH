@@ -24,7 +24,6 @@ addStudent.addEventListener("click", (e) => {
   renderTypeBox.innerHTML = "Thêm Một Sinh Viên";
   edit.classList.add("open");
   typeBoxEdit = false;
-  console.log("run-addstudent", typeBoxEdit);
 });
 
 edit_form.addEventListener("submit", (e) => {
@@ -34,9 +33,8 @@ edit_form.addEventListener("submit", (e) => {
     gradeSelect.value == "10" ? 2021 : gradeSelect.value == "11" ? 2020 : 2019;
   let gender = edit_form.gender.value == "male" ? "1" : "0";
   let data = edit_form.fullname.value.split(" ");
-  const id = typeBoxEdit
-    ? edit_form.studentID.value
-    : year + gender + parseInt(Math.random() * 100);
+  let id = "";
+
   if (typeBoxEdit) {
     id = edit_form.studentID.value;
     db.collection("Students")
@@ -53,8 +51,9 @@ edit_form.addEventListener("submit", (e) => {
         phone: edit_form.Phone.value,
       });
   } else {
-    const id = year + gender + parseInt(Math.random() * 100);
-    console.log("run-add");
+    let gradeLevel = getGradeLevel(classSelect.value);
+    let total = gradeLevel.total;
+    const id = year + gender + classSelect.value + ++total;
     db.collection("Students")
       .doc(id)
       .set({
@@ -72,12 +71,15 @@ edit_form.addEventListener("submit", (e) => {
         for (let i = 5; i <= 7; i++) {
           await createAttendance(id, i);
         }
+        setGradeLevel(classSelect.value);
         edit_form.reset();
-        swal("Successfully!", "", "success");
       })
-      .catch((err) => {
-        alert(err.message);
+      .then(function () {
+        swal("Successfully!", "", "success");
       });
+    // .catch((err) => {
+    //   alert(err.message);
+    // });
   }
 });
 
@@ -98,3 +100,19 @@ const createAttendance = (id, month) => {
       });
   }
 };
+function getGradeLevel(Class) {
+  return listOfClasses.find((item) => {
+    return item.classes.includes(Class);
+  });
+}
+function setGradeLevel(Class) {
+  var tmp = getGradeLevel(Class);
+  let newtotal = tmp.total + 1;
+  console.log(newtotal);
+  db.collection("Classes")
+    .doc(tmp.grade)
+    .set({
+      ...tmp,
+      total: newtotal,
+    });
+}

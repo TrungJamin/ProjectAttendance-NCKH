@@ -4,7 +4,7 @@ const iFrame = document.querySelector(".iFrame");
 
 const addTeacher = document.getElementById("add-Teacher");
 const listTeacher = document.getElementById("all-Teachers");
-
+const addFaceStudent = document.querySelector(".add-face-student");
 let url = "home";
 const formLogout = document.querySelector(".formLogout"); // form hien thi log out
 const btnLogout = document.querySelector("#btnLogout"); // button hien thi form
@@ -118,4 +118,9 @@ listTeacher.addEventListener("click", (event) => {
   sessionStorage.setItem("url", "./mangeTecher/allTeacher.html");
 
   iFrame.src = "./mangeTecher/allTeacher.html";
+});
+addFaceStudent.addEventListener("click", function (e) {
+  sessionStorage.setItem("url", "./addFaceDataBase/index.html");
+
+  iFrame.src = "./addFaceDataBase";
 });
