@@ -31,7 +31,6 @@ db.collection("Teachers").onSnapshot(async function (querySnapshot) {
     tamp.docId = doc.id;
     listOfTeachers.push(tamp);
   });
-  console.log(listOfTeachers);
   renderTable(listOfTeachers);
 });
 
@@ -40,6 +39,7 @@ function renderAddElementInTable(e) {
         
         <td class="text-center">${e.id}</td>
         <td class="text-center">${e.name}</td>
+        <td class="text-center">${e.gender == "true" ? "Nam" : "Nữ"}</td>
         <td class="text-center">${e.group}</td>
         <td class="text-center">${e.classLeader}</td>
         <td class="text-center">${formatObjectClassAndTeach(
@@ -75,13 +75,10 @@ function reRenderNotParam() {
 }
 function renderTable(list) {
   clearTable();
-  console.log(`xoa table cu `);
   list.forEach((e) => renderAddElementInTable(e));
   if (list.length == 0) {
     setNoResult();
   }
-
-  console.log("them vao tavle mơi");
 }
 
 function clearTable() {
