@@ -10,9 +10,10 @@ var idStudent = "";
 
 save.addEventListener("click", (e) => {
   e.preventDefault();
-  document.querySelector(".container").classList.add("disabled");
-  document.querySelector(".loading").classList.remove("d-none");
+
   if (valueClass != "" && idStudent != "") {
+    document.querySelector(".container").classList.add("disabled");
+    document.querySelector(".loading").classList.remove("d-none");
     Promise.all(listBase64).then((values) => {
       console.log("loading image");
       console.log(values);
