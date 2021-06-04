@@ -61,7 +61,7 @@ exports.addDescriptorsInData = functions
       .doc(id)
       .set(database)
       .then(() => {
-        return Object.keys(database.descriptors).length;
+        return true;
       })
       .catch(function (error) {
         return error.message;

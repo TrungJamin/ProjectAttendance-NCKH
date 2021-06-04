@@ -5,43 +5,50 @@ const save = document.querySelector(".save");
 let listBase64 = [];
 let index = 0;
 
-var valueClass='';
-var idStudent='';
+var valueClass = "";
+var idStudent = "";
 
 save.addEventListener("click", (e) => {
   e.preventDefault();
-  
-  if(valueClass!=''&&idStudent!=''){
+  document.querySelector(".container").classList.add("disabled");
+  document.querySelector(".loading").classList.remove("d-none");
+  if (valueClass != "" && idStudent != "") {
     Promise.all(listBase64).then((values) => {
-    console.log("loading image");
-    console.log(values);
-    addImage({
-      id: idStudent,
-      Class: valueClass,
-      listBase64: values,
-    }).then((values) => {
-
-      // up lên thanh công reset form 
-      listBase64 = [];
-      var listImg = document.querySelector("#results");
-      listImg.innerHTML='';
-      valueClass='';
-      idStudent='';
-      var selectionClassLeader = document.querySelector("#classLeader");
-      var selectionStudent = document.querySelector("#chooseStudent");
-      selectionClassLeader.value='';
-      selectionStudent.value='';
-
-
+      console.log("loading image");
       console.log(values);
+      addImage({
+        id: idStudent,
+        Class: valueClass,
+        listBase64: values,
+      })
+        .then((values) => {
+          // up lên thanh công reset form
+          listBase64 = [];
+          var listImg = document.querySelector("#results");
+          listImg.innerHTML = "";
+          valueClass = "";
+          idStudent = "";
+          var selectionClassLeader = document.querySelector("#classLeader");
+          var selectionStudent = document.querySelector("#chooseStudent");
+          selectionClassLeader.value = "";
+          selectionStudent.value = "";
+          swal(
+            "Dữ Liệu Đã Cập Nhật Thành Công",
+            "Cám Ơn Bạn Rất Nhiều",
+            "success"
+          );
+          document.querySelector(".container").classList.remove("disabled");
+          document.querySelector(".loading").classList.add("d-none");
+        })
+        .catch((error) => {
+          swal("Warning!", "Đã Xảy Ra Lỗi , Vui Lòng Thêm lại ", "Tiếp Tục");
+          document.querySelector(".container").classList.remove("disabled");
+          document.querySelector(".loading").classList.add("d-none");
+        });
     });
-  });
+  } else {
+    alert("chọn lơp và id học sinh");
   }
-  else{
-
-    alert("chọn lơp và id học sinh")
-  }
-  
 });
 Webcam.set({
   width: 400,
@@ -52,67 +59,59 @@ Webcam.attach("#my_camera");
 
 function take_snapshot() {
   // take snapshot and get image data
-  if (index < 5) {
+  if (listBase64.length < 10) {
     Webcam.snap(function (data_uri) {
-      document
-        .getElementById("results")
-        .insertAdjacentHTML(
-          "beforeend",
-          `<div class='box-img'> <i class="far fa-times-circle" onclick="removeImg('${index}')"></i> <img id=${index} class="albumImg" src="${data_uri}"/>  </div>`
-        );
+      document.getElementById("results").insertAdjacentHTML(
+        "beforeend",
+        `<div class='box-img'> 
+          <i class="far fa-times-circle" onclick="removeImg('${index}')"></i>
+          <img id=${index} class="albumImg" src="${data_uri}"/> 
+         </div>`
+      );
+
       index++;
       listBase64 = [...listBase64, data_uri];
     });
   } else {
-    alert("max is 5 photo");
+    alert("max is 10 photo");
   }
+  listBase64.length == 10 ? save.removeAttribute("disabled") : "";
 }
 
 ///
 
 function removeImg(id) {
   listBase64.splice(id, 1);
-
   var newData = "";
-
   listBase64.forEach((e, index) => {
-    newData += `<div class='box-img'> <i class="far fa-times-circle" onclick="removeImg('${index}')"></i> <img id=${index} class="albumImg" src="${e}"/>  </div>`;
+    newData += `<div class='box-img'>
+    <i class="far fa-times-circle" onclick="removeImg('${index}')"></i>
+    <img id=${index} class="albumImg" src="${e}"/>
+      </div>`;
   });
-
   var listImg = document.querySelector("#results");
 
   listImg.innerHTML = newData;
 }
-
-
-
 
 // render selectionClassLeader lop hoc
 
 var selectionClassLeader = document.querySelector("#classLeader");
 
 function getListClass() {
-
-  db.collection("Classes")
-    .get()
-    .then(function (querySnapshot) {
-      var arr = [];
-      querySnapshot.forEach(function (doc) {
-        var tamp = doc.data().classes;
-        var gan = [];
-        tamp.forEach((e) => {
-          gan.push(e);
-        });
-        arr.push(gan);
-        
+  db.collection("Classes").onSnapshot(function (querySnapshot) {
+    var arr = [];
+    querySnapshot.forEach(function (doc) {
+      var tamp = doc.data().classes;
+      var gan = [];
+      tamp.forEach((e) => {
+        gan.push(e);
       });
+      arr.push(gan);
+    });
 
-
-      renderChooseClassLeader(arr);
-       
-      renderMuntilChoose(arr);
-    })
-    .catch(function (error) { console.log( error)});
+    renderChooseClassLeader(arr);
+  });
 }
 
 getListClass();
@@ -128,46 +127,33 @@ function renderChooseClassLeader(arr) {
   selectionClassLeader.innerHTML = node;
 }
 
-
-
-function renderChooseStudent(arr){
-
+function renderChooseStudent(arr) {
   var selectionStudent = document.querySelector("#chooseStudent");
-
-  var nodeDataStudent='<option checked >chọn học sinh</option>';
-
-  arr.forEach(e=>{
-    nodeDataStudent+=`<option value='${e.id}' > ${e.id} - ${e.lastName}</option>`;
-  })
-
-  selectionStudent.innerHTML=nodeDataStudent;
+  var nodeDataStudent = "<option checked >chọn học sinh</option>";
+  arr.forEach((e) => {
+    nodeDataStudent += `<option value='${e.id}' > ${e.id} - ${e.lastName}</option>`;
+  });
+  selectionStudent.innerHTML = nodeDataStudent;
 }
 
+function onChangeClass(className) {
+  // test query student
 
-function onChangeClass(className){
-  // test query student 
-
-  valueClass=className;
-  const dataStudent=[];
- db
-    .collection("Students").where("class", "==", className)
+  valueClass = className;
+  const dataStudent = [];
+  db.collection("Students")
+    .where("class", "==", className)
     .get()
     .then(function (querySnapshot) {
-        querySnapshot.forEach(function (doc) {
-          
-          dataStudent.push(doc.data());
-         
-        });
-        renderChooseStudent(dataStudent)
+      querySnapshot.forEach(function (doc) {
+        dataStudent.push(doc.data());
+      });
+      renderChooseStudent(dataStudent);
     })
-    .catch(function (error) {
-
-    })
- 
+    .catch(function (error) {});
 }
 
-function onChangeStudent(id){
-  // test query student 
-  idStudent=id;
+function onChangeStudent(id) {
+  // test query student
+  idStudent = id;
 }
-
