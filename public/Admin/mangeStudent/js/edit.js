@@ -69,7 +69,7 @@ function setOptions(options) {
 // Set default
 function setDefault() {
   let opt_tag = document.createElement("option");
-  opt_tag.value = opt_tag.textContent = "Choose Class";
+  opt_tag.value = opt_tag.textContent = "Chọn lớp";
   classSelect.appendChild(opt_tag);
 }
 
