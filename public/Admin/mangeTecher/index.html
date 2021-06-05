@@ -44,7 +44,7 @@
        
 
         <div class="card mb-4">
-          <div class="card-header" id="typeFormTeacher">Thêm giáo viên</div>
+          <div class="card-header text-center" id="typeFormTeacher">Thêm giáo viên</div>
 
           <div class="d-none" id="loadingAddTeacher" style="position: absolute; top: 41%; left:48%">
             <div class="spinner-border" role="status">
@@ -124,7 +124,7 @@
               </div>
               <!-- Save changes button-->
               <div class="d-flex justify-content-between">
-                <button type="submit" class="btn btn-success" >Thêm</button>
+                <button type="submit" class="btn btn-success" >Lưu</button>
                 <button  class="btn btn-danger" type="reset" onclick="closeFormInput(`cover-caption`)">Hủy</button>
               </div>
             </form>
@@ -138,34 +138,38 @@
 
   <div class="card shadow mb-4" style="width: 100%;" id="allViewPage">
     <div class="card-header py-3">
-      <h6 class="m-0 font-weight-bold text-success">Danh sách giáo viên</h6>
+      <h6 class="m-0 font-weight-bold text-success h3">Danh sách giáo viên</h6>
     </div>
 
     <br />
     <div class="row">
       <div class="form-group col-md-5">
-        <button type="button" class="btn btn-success" id="addTeacher">Thêm giáo viên</button>
+        <button type="button" class="btn btn-success" id="addTeacher">Thêm +</button>
       </div>
 
-      <div class="form-group col-md-5">
+      <div class="form-group col-md-4">
 
-        <div class="input-group">
+        
+        <form class="input-group ">
           <input type="text" class="form-control bg-light border-0 small" placeholder="tìm kiếm ..." aria-label="Search"
             aria-describedby="basic-addon2" id="Teacher-search" onchange="searchAll(value)" />
           <div class="input-group-append">
-            <button class="btn btn-success" type="button" style="z-index: 0 !important;">
+            <button class="btn btn-success" type="reset" style="z-index: 0 !important;">
               <i class="fas fa-search fa-sm" aria-hidden="true"></i>
             </button>
+            <button type="button" class="btn btn-success ml-2" onclick="reRenderNotParam()">
+              <i class="fas fa-redo"></i>
+            </button>
           </div>
-        </div>
+        </form>
+
+       
 
       </div>
 
-      <div class="form-group col-md-1">
-        <button type="button" class="btn btn-success" onclick="reRenderNotParam()">
-          <i class="fas fa-redo"></i>
-        </button>
-      </div>
+      
+        
+     
 
     </div>
 
@@ -173,16 +177,16 @@
       <div class="table-responsive">
         <table class="table table-bordered " id="dataTable" width="100%" style="font-size: 13px;" cellspacing="0">
           <thead>
-            <tr>
+            <tr class="text-center " style="font-size: 16px; font-weight: bold;">
               <th>Mã số</th>
               <th>Tên</th>
               <th>Giới tính</th>
               <th>Nhóm</th>
               <th>Chủ nhiệm</th>
               <th>Lớp vs Môn</th>
-              <th>địa chỉ thư</th>
+              <th>email</th>
               <th>Ngày sinh</th>
-              <th>Chỉnh sửa</th>
+              <th>Tùy chọn</th>
             </tr>
           </thead>
 

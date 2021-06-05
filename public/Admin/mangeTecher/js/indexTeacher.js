@@ -34,29 +34,39 @@ db.collection("Teachers").onSnapshot(async function (querySnapshot) {
   renderTable(listOfTeachers);
 });
 
+
+
 function renderAddElementInTable(e) {
+
+  var date=new Date(e.dataOfBirth);
+  var options = {
+    year: "numeric",
+    month: "2-digit",
+    day: "numeric"
+  };
+  date=date.toLocaleDateString("en", options);
   let node = `  
         
         <td class="text-center">${e.id}</td>
         <td class="text-center">${e.name}</td>
         <td class="text-center">${e.gender == "true" ? "Nam" : "Nữ"}</td>
-        <td class="text-center">${e.group}</td>
+        <td class="text-center">${e.group=='nation'? "Tự nhiên" : "Xã hội"}</td>
         <td class="text-center">${e.classLeader==''?"không chủ nhiệm":e.classLeader}</td>
         <td class="text-center">${formatObjectClassAndTeach(
           e.subjectsAndClass
         )} </td>
         <td class="text-center">${e.address}</td>
-        <td class="text-center">${e.dataOfBirth}</td> 
+        <td class="text-center">${date}</td> 
      `;
 
   var td = document.createElement("td");
   td.setAttribute("class", "text-center");
-  td.innerHTML = `<button class="btn btn-outline-success" type="button" onclick='deleteById("${e.docId}")' style=" color: #8596C2;">
+  td.innerHTML = `<button class="btn btn-outline-success " type="button" onclick='deleteById("${e.docId}","${e.id}","${e.name}")' style=" color: #8596C2;">
         <i class="fas fa-trash-alt"  ></i>
         </button>`;
 
   var btnEdit = document.createElement("button");
-  btnEdit.setAttribute("class", "btn btn-outline-success");
+  btnEdit.setAttribute("class", "btn btn-outline-success ml-2");
   btnEdit.setAttribute("style", " color: #8596C2;");
   btnEdit.innerHTML = ' <i class="far fa-edit"></i>';
   btnEdit.addEventListener("click", () => openFormInput("cover-caption", e));

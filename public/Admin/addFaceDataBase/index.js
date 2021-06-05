@@ -146,7 +146,7 @@ getListClass();
 
 //renderChooseClassLeader
 function renderChooseClassLeader(arr) {
-  var node = `<option value checked > chọn class</option>`;
+  var node = `<option value checked > chọn lớp </option>`;
   arr.forEach((e) => {
     e.forEach((eClass) => {
       node += `<option value='${eClass}' > chủ nhiệm lớp ${eClass}</option>`;

@@ -151,7 +151,7 @@ function renderMuntilChooseSubjects(){
 //renderChooseClassLeader
 function renderChooseClassLeader(arr) {
   var selectionClassLeader = document.querySelector("#classLeader");
-  var node = `<option value checked > chọn class leader</option> <option value=""> Không chủ nhiệm</option>`;
+  var node = `<option value checked > chọn lớp leader</option> <option value=""> Không chủ nhiệm</option>`;
   arr.forEach((e) => {
     e.forEach((eClass) => {
       node += `<option value='${eClass}' > chủ nhiệm lớp ${eClass}</option>`;
@@ -183,14 +183,13 @@ function editTeacher(id, obj) {
 }
 
 //// deleteById
-function deleteById(id , name ) {
-  // console.log(id);
+function deleteById(id ,idTeacher, name ) {
 
 
   Swal.fire({
     position: 'top',
     title: 'Bạn có chắc xóa ?',
-    text:` Giáo viên : ${name}-${id} ` ,
+    text:` Giáo viên : ${name}  - id:${idTeacher} ` ,
     icon: 'warning',
     showCancelButton: true,
     confirmButtonColor: '#3085d6',
@@ -224,10 +223,6 @@ function deleteById(id , name ) {
 
     }
   })
-
-  
-  
-
  
 }
 
@@ -268,6 +263,7 @@ function deleteById(id , name ) {
        })
        .catch(function (error) {
           alert(" Nhập lại email !");
+          spinnerAddTeacher.classList.add("d-none");
        });
        
       

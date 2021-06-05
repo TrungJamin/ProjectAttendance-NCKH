@@ -39,7 +39,11 @@ login[0].addEventListener("submit", (event) => {
         });
     })
     .catch(function (error) {
-      alert("Password is wrong ");
+      Swal.fire({
+        position: 'top',
+        title: 'sai mật khẩu',
+        showConfirmButton: true,
+      });
       buttonlogin.classList.remove("d-none");
       loading.classList.add("d-none");
     });
