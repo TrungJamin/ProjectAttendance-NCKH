@@ -12,7 +12,7 @@ save.addEventListener("click", (e) => {
   e.preventDefault();
 
   if (valueClass != "" && idStudent != "") {
-    document.querySelector(".container").classList.add("disabled");
+    document.querySelector(".container-fluid").classList.add("disabled");
     document.querySelector(".loading").classList.remove("d-none");
     Promise.all(listBase64).then((values) => {
       console.log("loading image");
@@ -38,29 +38,32 @@ save.addEventListener("click", (e) => {
             "Cám Ơn Bạn Rất Nhiều",
             "success"
           );
-          document.querySelector(".container").classList.remove("disabled");
+          document
+            .querySelector(".container-fluid")
+            .classList.remove("disabled");
           document.querySelector(".loading").classList.add("d-none");
         })
         .catch((error) => {
           swal("Warning!", "Đã Xảy Ra Lỗi , Vui Lòng Thêm lại ", "Tiếp Tục");
-          document.querySelector(".container").classList.remove("disabled");
+          document
+            .querySelector(".container-fluid")
+            .classList.remove("disabled");
           document.querySelector(".loading").classList.add("d-none");
         });
     });
   } else {
-
     Swal.fire({
-      title: 'Mời chọn lớp và mã số học sinh',
-      position:"top",
+      title: "Mời chọn lớp và mã số học sinh",
+      position: "top",
       showClass: {
-        popup: 'animate__animated animate__fadeInDown',
-        timer: 500
+        popup: "animate__animated animate__fadeInDown",
+        timer: 500,
       },
       hideClass: {
-        popup: 'animate__animated animate__fadeOutUp',
-        timer: 500
-      }
-    })
+        popup: "animate__animated animate__fadeOutUp",
+        timer: 500,
+      },
+    });
   }
 });
 Webcam.set({
@@ -86,20 +89,18 @@ function take_snapshot() {
       listBase64 = [...listBase64, data_uri];
     });
   } else {
-    
     Swal.fire({
-      title: 'tối đa 10 ảnh',
-      position:"top",
+      title: "tối đa 10 ảnh",
+      position: "top",
       showClass: {
-        popup: 'animate__animated animate__fadeInDown',
-        timer: 500
+        popup: "animate__animated animate__fadeInDown",
+        timer: 500,
       },
       hideClass: {
-        popup: 'animate__animated animate__fadeOutUp',
-        timer: 500
-      }
-    })
-
+        popup: "animate__animated animate__fadeOutUp",
+        timer: 500,
+      },
+    });
   }
   listBase64.length == 10 ? save.removeAttribute("disabled") : "";
 }
@@ -116,9 +117,7 @@ function removeImg(id) {
   });
   var listImg = document.querySelector("#results");
 
-  
-    save.setAttribute("disabled", "");
-  
+  save.setAttribute("disabled", "");
 
   listImg.innerHTML = newData;
 }
