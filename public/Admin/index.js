@@ -104,7 +104,7 @@ function refresh() {
     // neu co di theo url cu
     iFrame.src = sessionStorage.getItem("url");
   } else {
-    iFrame.src = "./mangeTecher/allTeacher.html";
+    iFrame.src = "./mangeTecher/";
   }
 }
 refresh();
