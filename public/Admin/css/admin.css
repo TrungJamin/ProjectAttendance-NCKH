@@ -918,3 +918,6 @@ input[type="search"] {
   margin: auto;
   width: 70% !important;
 }
+.table {
+  text-align: center;
+}

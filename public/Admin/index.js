@@ -110,17 +110,17 @@ function refresh() {
 refresh();
 
 allStudents.addEventListener("click", (event) => {
-  sessionStorage.setItem("url", "./mangeStudent/allStudent.html");
-  iFrame.src = "./mangeStudent/allStudent.html";
+  sessionStorage.setItem("url", "./mangeStudent/");
+  iFrame.src = "./mangeStudent/";
 });
 
 listTeacher.addEventListener("click", (event) => {
-  sessionStorage.setItem("url", "./mangeTecher/allTeacher.html");
+  sessionStorage.setItem("url", "./mangeTecher/");
 
-  iFrame.src = "./mangeTecher/allTeacher.html";
+  iFrame.src = "./mangeTecher/";
 });
 addFaceStudent.addEventListener("click", function (e) {
-  sessionStorage.setItem("url", "./addFaceDataBase/index.html");
+  sessionStorage.setItem("url", "./addFaceDataBase/");
 
   iFrame.src = "./addFaceDataBase";
 });

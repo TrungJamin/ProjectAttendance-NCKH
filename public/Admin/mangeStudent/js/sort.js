@@ -20,8 +20,4 @@ function getLastName(name) {
 
   return temp[temp.length - 1].toLowerCase().charCodeAt(0);
 }
-// let a = [5, 3, 9, 2];
-// console.log(a);
-// a.sort((a, b) => a - b);
-// console.log(a);
-// console.log(listOfStudent);
+

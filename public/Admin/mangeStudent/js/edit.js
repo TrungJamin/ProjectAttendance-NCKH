@@ -53,7 +53,7 @@ function setOptions(options) {
   if (options) {
     let default_option = document.createElement("option");
     default_option.value = "";
-    default_option.textContent = "Choose Class";
+    default_option.textContent = "Chọn Lớp";
     classSelect.appendChild(default_option);
     for (let _class of options) {
       console.log(_class);
