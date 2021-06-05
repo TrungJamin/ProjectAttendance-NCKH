@@ -63,13 +63,13 @@ const makeTeacherAdmin = async (newAccount) => {
     })
     .then((result) => {})
     .catch(function (error) {
-      console.log(error.message);
+      alert(error.message);
     });
 };
 
 btnLogout.addEventListener("click", (event) => {
   formLogout.classList.add("open"); // hien thi forms
-  console.log();
+
 });
 
 function closeFormLogout() {

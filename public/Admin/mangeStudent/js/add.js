@@ -108,7 +108,6 @@ function getGradeLevel(Class) {
 function setGradeLevel(Class) {
   var tmp = getGradeLevel(Class);
   let newtotal = tmp.total + 1;
-  console.log(newtotal);
   db.collection("Classes")
     .doc(tmp.grade)
     .set({

@@ -3,8 +3,7 @@ function isAlphabetAndSpaces(event) {
   var VIETNAMESE_DIACRITIC_CHARACTERS =
     "ẮẰẲẴẶĂẤẦẨẪẬÂÁÀÃẢẠĐẾỀỂỄỆÊÉÈẺẼẸÍÌỈĨỊỐỒỔỖỘÔỚỜỞỠỢƠÓÒÕỎỌỨỪỬỮỰƯÚÙỦŨỤÝỲỶỸỴ";
   var ch = String.fromCharCode(event.which);
-  // console.log(event.which);
-  c; //onsole.log(ch);
+
   if (
     /[A-Za-z\s]/.test(ch) ||
     VIETNAMESE_DIACRITIC_CHARACTERS.toLocaleLowerCase().includes(
