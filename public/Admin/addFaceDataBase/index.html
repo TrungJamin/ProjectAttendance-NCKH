@@ -11,6 +11,8 @@
 
   <title>Interface Admin</title>
 
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
   <!-- Custom fonts for this template-->
   <link
     href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
@@ -40,12 +42,11 @@
 
     <form>
       <div class="function d-flex justify-content-between">
-        <button type="button" class="btn btn-success" onClick="take_snapshot()"> <i class="fas fa-camera-retro"></i>
-          take
-          photo</button>
-        <button type="submit" class="save btn btn-success" disabled> <i class="far fa-save"></i> Save</button>
+        <button type="button" style="z-index: 100;" class="btn btn-success" onClick="take_snapshot()"> <i class="fas fa-camera-retro"></i>
+          Chụp ảnh </button>
+        <button type="submit" style="z-index: 100;"  class="save btn btn-success" disabled> <i class="far fa-save"></i>Lưu ảnh </button>
       </div>
-      <div class="pt-3 d-flex">
+      <div class=" d-flex  justify-content-center">
         <div class="form-group m-2">
           <select class="form-control" onchange="onChangeClass(value)" name="classLeader" id="classLeader"
             aria-placeholder="chọn lớp chủ nhiệm" required>

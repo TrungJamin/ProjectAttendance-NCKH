@@ -24,6 +24,8 @@
   <link href="./../../css/sb-admin-2.css" rel="stylesheet" />
   <script src="https://kit.fontawesome.com/2348ec6f34.js" crossorigin="anonymous"></script>
 
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
   <!-- firebase -->
   <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-firestore.js"></script>
@@ -42,7 +44,7 @@
        
 
         <div class="card mb-4">
-          <div class="card-header">Thêm giáo viên</div>
+          <div class="card-header" id="typeFormTeacher">Thêm giáo viên</div>
 
           <div class="d-none" id="loadingAddTeacher" style="position: absolute; top: 41%; left:48%">
             <div class="spinner-border" role="status">
@@ -110,8 +112,8 @@
               <div class="form-row">
                 <!-- Form Group (phone number)-->
                 <div class="form-group col-md-6">
-                  <label class="small mb-1" for="inputPhone">Email</label>
-                  <input id="address" type="text" class="form-control" style="width: 100%" name="address"
+                  <label class="small mb-1" for="inputPhone">Địa thư điện tử</label>
+                  <input id="address" type="email" class="form-control" style="width: 100%" name="address"
                     placeholder="@mail" onkeyup="filterCharEmail(value,'address')" required />
                 </div>
                 <!-- Form Group (birthday)-->
@@ -172,13 +174,13 @@
         <table class="table table-bordered " id="dataTable" width="100%" style="font-size: 13px;" cellspacing="0">
           <thead>
             <tr>
-              <th>Id</th>
+              <th>Mã số</th>
               <th>Tên</th>
               <th>Giới tính</th>
               <th>Nhóm</th>
               <th>Chủ nhiệm</th>
               <th>Lớp vs Môn</th>
-              <th>@Mail</th>
+              <th>địa chỉ thư</th>
               <th>Ngày sinh</th>
               <th>Chỉnh sửa</th>
             </tr>

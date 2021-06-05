@@ -48,7 +48,19 @@ save.addEventListener("click", (e) => {
         });
     });
   } else {
-    alert("chọn lơp và id học sinh");
+
+    Swal.fire({
+      title: 'Mời chọn lớp và mã số học sinh',
+      position:"top",
+      showClass: {
+        popup: 'animate__animated animate__fadeInDown',
+        timer: 500
+      },
+      hideClass: {
+        popup: 'animate__animated animate__fadeOutUp',
+        timer: 500
+      }
+    })
   }
 });
 Webcam.set({
@@ -74,13 +86,25 @@ function take_snapshot() {
       listBase64 = [...listBase64, data_uri];
     });
   } else {
-    alert("max is 10 photo");
+    
+    Swal.fire({
+      title: 'tối đa 10 ảnh',
+      position:"top",
+      showClass: {
+        popup: 'animate__animated animate__fadeInDown',
+        timer: 500
+      },
+      hideClass: {
+        popup: 'animate__animated animate__fadeOutUp',
+        timer: 500
+      }
+    })
+
   }
   listBase64.length == 10 ? save.removeAttribute("disabled") : "";
 }
 
 ///
-
 function removeImg(id) {
   listBase64.splice(id, 1);
   var newData = "";
@@ -91,6 +115,10 @@ function removeImg(id) {
       </div>`;
   });
   var listImg = document.querySelector("#results");
+
+  
+    save.setAttribute("disabled", "");
+  
 
   listImg.innerHTML = newData;
 }

@@ -1,5 +1,7 @@
 var type = true; // xac dinh kieu  (true )add or  (false)edit
 var teacherEdit = {};
+const typeAdd='Thêm giáo viên';
+const typeEdit='Chỉnh sửa giáo viên';
 
 var btnAddTeacher=document.querySelector("#addTeacher");
 var spinnerAddTeacher=document.querySelector("#loadingAddTeacher");
@@ -181,9 +183,31 @@ function editTeacher(id, obj) {
 }
 
 //// deleteById
-function deleteById(id) {
+function deleteById(id , name ) {
   // console.log(id);
-  db.collection("Teachers")
+
+
+  Swal.fire({
+    position: 'top',
+    title: 'Bạn có chắc xóa ?',
+    text:` Giáo viên : ${name}-${id} ` ,
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    cancelButtonText: 'hủy',
+    confirmButtonText: 'Xóa',
+  }).then((result) => {
+    if (result.isConfirmed) {
+     Swal.fire({
+      position: 'top',
+      icon: 'success',
+      title: 'xóa thành công',
+      showConfirmButton: false,
+      timer: 500
+    })
+
+    db.collection("Teachers")
     .doc(id)
     .delete()
     .then(function () {
@@ -197,6 +221,14 @@ function deleteById(id) {
     .catch(function (error) {
       // console.error("Error removing document: ", error);
     });
+
+    }
+  })
+
+  
+  
+
+ 
 }
 
 // tao them form input de get data nhap cho phan nay
@@ -327,6 +359,7 @@ function getInfoTeacher() {
 
 function closeFormInput(idOfHtml) {
   // console.log("huy edit form ")
+  document.querySelector('#typeFormTeacher').innerHTML=typeAdd;
   teacherEdit = {};
   document.getElementById("myForm").reset(); 
     reNewForm();
@@ -339,8 +372,11 @@ function openFormInput(idOfHtml, teacher) {
   document.getElementById(idOfHtml).classList.remove("hide");
   document.querySelector("#allViewPage").style.opacity="0.2"
 
+
   // console.log(teacher);
   if (teacher != "") {
+  document.querySelector('#typeFormTeacher').innerHTML=typeEdit;
+
     type = false;
     // console.log(teacher);
     teacherEdit = teacher;

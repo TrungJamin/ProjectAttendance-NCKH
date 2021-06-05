@@ -84,13 +84,14 @@ function setList(group) {
 
       let id = e.target.parentElement.parentElement.getAttribute("id");
       swal({
-        title: "Are you sure ?",
-        text: `Delete ${person.name} 
+        title: "Bạn có chắc muốn xóa ?",
+        text: `Xóa ${person.name} 
         ID: ${person.id}`,
         buttons: {
-          cancel: true, // Set true to enable the Cancel button
-          confirm: "Delete",
+          cancel: 'Hủy', // Set true to enable the Cancel button
+          confirm: "Xóa",
         },
+        
         icon: "warning",
         dangerMode: true,
       }).then((val) => {
@@ -98,7 +99,7 @@ function setList(group) {
         // If we click cancel  val = null
         // if we click "submit-btn" val = true
         if (val) {
-          swal("Deleted Successfully!", { icon: "success" });
+          swal("xóa thành công!", { icon: "success" });
           db.collection("Students").doc(id).delete();
         }
       });
@@ -109,7 +110,7 @@ function setList(group) {
       e.stopPropagation();
       // OPEN EDIT FORM
       typeBoxEdit = true;
-      renderTypeBox.innerText = "Edit Information";
+      renderTypeBox.innerText = "Chỉnh sửa thông tin học sinh";
       docID = doc_ID;
       edit_form.studentID.value = tr.getElementsByTagName("td")[1].textContent;
       edit_form.fullname.value =
