@@ -1,7 +1,5 @@
-let arr = {
-  0: 1,
-  1: 2,
-  3: 3,
+const swap = (array) => {
+  for (let i = 1; i <= array.length / 2; i++) {
+    let 
+  }
 };
-
-console.log(Object.keys(arr).length);

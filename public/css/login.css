@@ -72,6 +72,7 @@ h2.inactive {
 
 h2.active {
   color: #0d0d0d;
+  margin: 20px;
   border-bottom: 2px solid #5fbae9;
 }
 

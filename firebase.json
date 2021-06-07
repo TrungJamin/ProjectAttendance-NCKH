@@ -22,7 +22,7 @@
     "rules": "storage.rules"
   },
   "firestore": {
-    "rules": "true",
+    "rules": "firestore.rules",
     "indexes": "firestore.indexes.json"
   }
 }
