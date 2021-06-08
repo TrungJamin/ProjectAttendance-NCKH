@@ -21,7 +21,6 @@ login[0].addEventListener("submit", (event) => {
         .get()
 
         .then(function (querySnapshot) {
-          console.log("run-admin");
           let check = false;
           querySnapshot.forEach(function (doc) {
             if (doc.id === response.user.uid) {
