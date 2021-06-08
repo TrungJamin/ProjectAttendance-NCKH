@@ -1,8 +1,4 @@
-console.log("chay");
-const isFaceStudent = firebase
-  .functions()
-  .httpsCallable("detectedListAttendance");
-const addImage = firebase.functions().httpsCallable("detectedListAttendance");
+const getAttendances = firebase.functions().httpsCallable("getAttendances");
 const formAdd = document.querySelector("#results");
 const save = document.querySelector(".save");
 let listBase64 = [];
@@ -14,9 +10,8 @@ save.addEventListener("click", (e) => {
   Promise.all(listBase64).then((values) => {
     console.log("loading image");
     console.log(values);
-    addImage({
-      id: "10001",
-      Class: "10A1",
+    getAttendances({
+      class: "10A1",
       listBase64: values,
     }).then((values) => {
       console.log(values);

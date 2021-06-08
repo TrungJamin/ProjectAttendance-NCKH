@@ -1,7 +1,5 @@
 const { start, faceapi, optionsSSDMobileNet } = require("../../env/env");
 const { image } = require("../../services");
-const { data1 } = require("../../data1");
-const { data } = require("../../dataOneFace");
 async function toDescriptors(listBase64) {
   let res = await listBase64.filterAndMapAsync(async (base64) => {
     const tensor = await image(base64);
@@ -28,13 +26,12 @@ async function detectFace(listBase64, id) {
     Object.assign({}, detail)
   );
   LabeledFaceDescriptorsJSON = Object.assign({}, LabeledFaceDescriptorsJSON);
-  // console.log("label", LabeledFaceDescriptorsJSON);
+
   return {
     label: id,
     descriptors: LabeledFaceDescriptorsJSON,
   };
 }
-
 Array.prototype.filterAndMapAsync = async function (callback) {
   var newArray = [];
   for (var i = 0; i < this.length; i++) {
