@@ -61,7 +61,7 @@ exports.addDescriptorsInData = functions
       .doc(id)
       .set(database, { merge: true })
       .then(() => {
-        return true;
+        return Object.values(database.descriptors).length;
       })
       .catch(function (error) {
         return error.message;

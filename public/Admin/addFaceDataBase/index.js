@@ -8,6 +8,33 @@ let index = 0;
 var valueClass = "";
 var idStudent = "";
 
+const viewNotice = (res) => {
+  if (res <= 5) {
+    swal(
+      "Nhận Diện Ảnh Không Thành Công",
+      `Số Ảnh Thành Công ${res}/10 ,
+    Bạn Vui Lòng Làm Lại
+    `,
+      "error"
+    );
+  } else {
+    if (res < 8) {
+      swal(
+        "Cảnh Báo",
+        `Số Ảnh Thành Công ${res}/10 ,
+      `,
+        "warning"
+      );
+    } else {
+      swal(
+        "Cập Nhật Ảnh Thành Công",
+        `Số Ảnh Thành Công ${res}/10 ,
+      `,
+        "success"
+      );
+    }
+  }
+};
 save.addEventListener("click", (e) => {
   e.preventDefault();
 
@@ -22,7 +49,7 @@ save.addEventListener("click", (e) => {
         Class: valueClass,
         listBase64: values,
       })
-        .then((values) => {
+        .then((res) => {
           // up lên thanh công reset form
           listBase64 = [];
           var listImg = document.querySelector("#results");
@@ -33,11 +60,8 @@ save.addEventListener("click", (e) => {
           var selectionStudent = document.querySelector("#chooseStudent");
           selectionClassLeader.value = "";
           selectionStudent.value = "";
-          swal(
-            "Dữ Liệu Đã Cập Nhật Thành Công",
-            "Cám Ơn Bạn Rất Nhiều",
-            "success"
-          );
+
+          viewNotice(res.data);
           document
             .querySelector(".container-fluid")
             .classList.remove("disabled");
