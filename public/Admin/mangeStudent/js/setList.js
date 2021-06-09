@@ -24,6 +24,7 @@ function setList(group) {
   for (const person of group) {
     const tr = document.createElement("tr");
     const td_ONumbers = document.createElement("td");
+    td_ONumbers.setAttribute("class", "serial");
     const td_Id = document.createElement("td");
     const td_Name = document.createElement("td");
     const td_DateOB = document.createElement("td");
@@ -88,10 +89,10 @@ function setList(group) {
         text: `Xóa ${person.name} 
         ID: ${person.id}`,
         buttons: {
-          cancel: 'Hủy', // Set true to enable the Cancel button
+          cancel: "Hủy", // Set true to enable the Cancel button
           confirm: "Xóa",
         },
-        
+
         icon: "warning",
         dangerMode: true,
       }).then((val) => {

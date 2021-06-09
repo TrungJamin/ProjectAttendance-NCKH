@@ -102,9 +102,3 @@ function setGradeLevel(Class) {
       total: newtotal,
     });
 }
-const script = document.createElement("script");
-script.innerHTML = `
-  let date = new Date();
-  console.log(date.getDay());
-`
-document.getElementsByTagName("body")[0].appendChild(script);

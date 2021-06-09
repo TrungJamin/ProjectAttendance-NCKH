@@ -108,8 +108,8 @@
                                 placeholder="Địa chỉ" required>
                             <br>
                             <label for="student-phone">Số Điện Thoại</label>
-                            <input name="Phone" type="text" class="form-control" id="student-phone" placeholder="Số điện thoại"
-                                onkeypress="isNumber(event)" required>
+                            <input name="Phone" type="text" class="form-control" id="student-phone"
+                                placeholder="Số điện thoại" onkeypress="isNumber(event)" required>
                             <span id="lblValue2" style="display: none; color: red; font-size: x-small;">Only numbers
                             </span>
 
@@ -180,9 +180,9 @@
                                 <table class="table table-bordered hidden" id="dataTable" width="100%" cellspacing="0">
                                     <thead style="background-color: #ffff ; color:#00000082">
                                         <tr>
-                                            <th>STT</th>
+                                            <th class="serial">STT</th>
                                             <th>MSSV</th>
-                                            <th >
+                                            <th>
                                                 Họ & Tên
                                                 <i class="fas fa-sort-up" onclick="sortAtoZ()"></i>
                                                 &thinsp;
@@ -237,11 +237,6 @@
     <script src="./js/onSnapshot.js"></script>
     <script src="./js/add.js"></script>
 
-    <!-- <script src="/js/functions/Student/setList.js"></script>
-    <script src="/js/functions/Student/onSnapshot.js"></script>
-
-    <script src="/js/functions/Student/edit.js"></script>
-    <script src="/js/events/inputEvents.js"></script> -->
 
 </body>
 

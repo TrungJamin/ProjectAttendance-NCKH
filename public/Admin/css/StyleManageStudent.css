@@ -2,5 +2,6 @@
   display: flex;
   justify-content: space-between;
 }
-
-
+.serial {
+  width: 50px;
+}
