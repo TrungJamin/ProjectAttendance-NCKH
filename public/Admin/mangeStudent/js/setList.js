@@ -29,7 +29,9 @@ function setList(group) {
     const td_Name = document.createElement("td");
     const td_DateOB = document.createElement("td");
     const td_Class = document.createElement("td");
+    td_Class.setAttribute("class", "Class");
     const td_Gender = document.createElement("td");
+    td_Gender.setAttribute("class", "gender");
     const td_Address = document.createElement("td");
     const td_PhoneNumber = document.createElement("td");
 
