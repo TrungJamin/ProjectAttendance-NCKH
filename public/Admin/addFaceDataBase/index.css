@@ -9,7 +9,7 @@ video {
   padding: 10px !important;
 }
 #my_camera {
-  height: 600px !important;
+  height: 500px !important;
   margin: auto;
 }
 
@@ -81,4 +81,7 @@ video {
 }
 canvas {
   position: absolute;
+}
+.container-fluid {
+  height: 100%;
 }
