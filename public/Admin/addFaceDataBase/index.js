@@ -8,6 +8,33 @@ let index = 0;
 var valueClass = "";
 var idStudent = "";
 
+const viewNotice = (res) => {
+  if (res <= 5) {
+    swal(
+      "Nhận Diện Ảnh Không Thành Công",
+      `Số Ảnh Thành Công ${res}/10 ,
+    Bạn Vui Lòng Làm Lại
+    `,
+      "error"
+    );
+  } else {
+    if (res < 8) {
+      swal(
+        "Cảnh Báo",
+        `Số Ảnh Thành Công ${res}/10 ,
+      `,
+        "warning"
+      );
+    } else {
+      swal(
+        "Cập Nhật Ảnh Thành Công",
+        `Số Ảnh Thành Công ${res}/10 ,
+      `,
+        "success"
+      );
+    }
+  }
+};
 save.addEventListener("click", (e) => {
   e.preventDefault();
 
@@ -22,7 +49,7 @@ save.addEventListener("click", (e) => {
         Class: valueClass,
         listBase64: values,
       })
-        .then((values) => {
+        .then((res) => {
           // up lên thanh công reset form
           listBase64 = [];
           var listImg = document.querySelector("#results");
@@ -33,11 +60,8 @@ save.addEventListener("click", (e) => {
           var selectionStudent = document.querySelector("#chooseStudent");
           selectionClassLeader.value = "";
           selectionStudent.value = "";
-          swal(
-            "Dữ Liệu Đã Cập Nhật Thành Công",
-            "Cám Ơn Bạn Rất Nhiều",
-            "success"
-          );
+
+          viewNotice(res.data);
           document
             .querySelector(".container-fluid")
             .classList.remove("disabled");
@@ -185,3 +209,38 @@ function onChangeStudent(id) {
   // test query student
   idStudent = id;
 }
+// const video = document.getElementsByTagName("video")[0];
+
+// Promise.all([
+//   faceapi.nets.tinyFaceDetector.loadFromUri("./models"),
+//   faceapi.nets.faceLandmark68Net.loadFromUri("./models"),
+//   faceapi.nets.faceRecognitionNet.loadFromUri("./models"),
+//   faceapi.nets.faceExpressionNet.loadFromUri("./models"),
+// ]).then(startVideo);
+
+// function startVideo() {
+//   navigator.getUserMedia(
+//     { video: {} },
+//     (stream) => (video.srcObject = stream),
+//     (err) => console.error(err)
+//   );
+// }
+
+// video.addEventListener("play", async () => {
+//   const canvas = faceapi.createCanvasFromMedia(video);
+//   document.body.append(canvas);
+//   const displaySize = { width: 600, height: 600 };
+//   faceapi.matchDimensions(canvas, displaySize);
+
+//   setInterval(async () => {
+//     const detections = await faceapi
+//       .detectAllFaces(video, new faceapi.TinyFaceDetectorOptions())
+//       .withFaceLandmarks()
+//       .withFaceExpressions();
+//     const resizedDetections = faceapi.resizeResults(detections, displaySize);
+//     canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
+//     faceapi.draw.drawDetections(canvas, resizedDetections);
+//     // faceapi.draw.drawFaceLandmarks(canvas, resizedDetections);
+//     // faceapi.draw.drawFaceExpressions(canvas, resizedDetections);
+//   });
+// });

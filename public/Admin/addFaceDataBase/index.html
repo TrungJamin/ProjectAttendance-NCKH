@@ -32,7 +32,23 @@
   <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-functions.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
   <script type="text/javascript" src="./js/webcam.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column
+    }
 
+    canvas {
+      position: absolute;
+      top: 100px;
+    }
+  </style>
 </head>
 
 <body id="page-top">
@@ -42,9 +58,11 @@
 
     <form>
       <div class="function d-flex justify-content-between">
-        <button type="button" style="z-index: 100;" class="btn btn-success" onClick="take_snapshot()"> <i class="fas fa-camera-retro"></i>
+        <button type="button" style="z-index: 100;" class="btn btn-success" onClick="take_snapshot()"> <i
+            class="fas fa-camera-retro"></i>
           Chụp ảnh </button>
-        <button type="submit" style="z-index: 100;"  class="save btn btn-success" disabled> <i class="far fa-save"></i>Lưu ảnh </button>
+        <button type="submit" style="z-index: 100;" class="save btn btn-success" disabled> <i
+            class="far fa-save"></i>Lưu ảnh </button>
       </div>
       <div class=" d-flex  justify-content-center">
         <div class="form-group m-2">
@@ -82,6 +100,7 @@
 <script src="./../../vendor/jquery-easing/jquery.easing.min.js"></script>
 
 <!-- Custom scripts for all pages-->
+<script src="./js/face-api.min.js"></script>
 <script src="./index.js"></script>
 
 

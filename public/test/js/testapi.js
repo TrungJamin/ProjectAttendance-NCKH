@@ -1,12 +1,6 @@
-console.log("chay");
-const isFaceStudent = firebase
-  .functions()
-  .httpsCallable("detectedListAttendance");
-const addImage = firebase.functions().httpsCallable("detectedListAttendance");
+const getAttendances = firebase.functions().httpsCallable("getAttendances");
 const formAdd = document.querySelector("#results");
 const save = document.querySelector(".save");
-let listBase64 = [];
-let index = 0;
 
 save.addEventListener("click", (e) => {
   e.preventDefault();
@@ -14,9 +8,8 @@ save.addEventListener("click", (e) => {
   Promise.all(listBase64).then((values) => {
     console.log("loading image");
     console.log(values);
-    addImage({
-      id: "10001",
-      Class: "10A1",
+    getAttendances({
+      class: "10A1",
       listBase64: values,
     }).then((values) => {
       console.log(values);
@@ -41,7 +34,8 @@ function take_snapshot() {
   });
 }
 const upload = document.querySelector(".upload");
-upload.addEventListener("change", (e) => {
+const upload1 = document.querySelector(".upload1");
+upload1.addEventListener("change", (e) => {
   const toBase64 = async (file) =>
     new Promise((resolve, reject) => {
       const reader = new FileReader();
@@ -49,19 +43,15 @@ upload.addEventListener("change", (e) => {
       reader.onload = () => resolve(reader.result);
       reader.onerror = (error) => reject(error);
     });
-  toBase64(upload.files[0]).then((result) => {
-    console.log(result);
-    console.log("loading...");
-    isFaceStudent({
-      img: result,
-      class: "10A1",
-    })
-      .then((res) => {
-        console.log("success");
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err.message);
+  Promise.all([toBase64(upload.files[0]), toBase64(upload1.files[0])]).then(
+    (values) => {
+      console.log("loading...");
+      getAttendances({
+        listBase64: values,
+        class: "10A1",
+      }).then((result) => {
+        console.log(result);
       });
-  });
+    }
+  );
 });

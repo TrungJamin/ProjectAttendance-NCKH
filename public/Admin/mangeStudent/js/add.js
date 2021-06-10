@@ -1,22 +1,9 @@
 const addStudent = document.querySelector(".add-student-button");
-let demo = {
-  morning: [
-    { status: true, note: "", asked: true, code: "" },
-    { status: true, note: "", asked: true, code: "" },
-    { status: true, note: "", asked: true, code: "" },
-    { status: true, note: "", asked: true, code: "" },
-    { status: true, note: "", asked: true, code: "" },
-  ],
-  afternoon: [
-    { status: true, note: "", asked: true, code: "" },
-    { status: true, note: "", asked: true, code: "" },
-    { status: true, note: "", asked: true, code: "" },
-    { status: true, note: "", asked: true, code: "" },
-    { status: true, note: "", asked: true, code: "" },
-  ],
-
+let attendance = {
+  morning: [],
+  afternoon: [],
   status: true,
-  asked: "",
+  asked: true,
   note: "",
 };
 
@@ -95,7 +82,7 @@ const createAttendance = (id, month) => {
       .collection("attendance")
       .doc(day)
       .set({
-        ...demo,
+        ...attendance,
         week: getWeekNow(new Date(day)),
       });
   }

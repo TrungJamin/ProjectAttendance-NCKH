@@ -16,14 +16,13 @@ function WeekNow(day1, day2) {
   let d = new Date();
   return (
     "Tuần Học Thứ " +
-    (getWeekNow(new Date())+ nextW-preW) +
+    (getWeekNow(new Date()) + nextW - preW) +
     "        : " +
     day1 +
     " -> " +
     day2
   );
 }
-
 
 for (var i = 0; i < Notes.length; i++) {
   Notes[i].addEventListener("click", (e) => {
@@ -70,17 +69,24 @@ function dateOfWeek(listStudents, weekNow) {
   return listWeek;
 }
 function renderWeek(listStudents) {
-  let database = dateOfWeek(listStudents, getWeekNow(new Date())+nextW-preW);
- 
-  weekNow.innerText = WeekNow(database[0].attendance[0].day,database[0].attendance[6].day );
+  let database = dateOfWeek(
+    listStudents,
+    getWeekNow(new Date()) + nextW - preW
+  );
+
+  weekNow.innerText = WeekNow(
+    database[0].attendance[0].day,
+    database[0].attendance[6].day
+  );
   let content = database[1].attendance.map((date) => {
-   
     let d = new Date(date.day);
     return `
-      <th class= "typeDay" id ="${date.day}"> ${getTypeDay(d.getDay())} , ${d.getDate()} </th>
+      <th class= "typeDay" id ="${date.day}"> ${getTypeDay(
+      d.getDay()
+    )} , ${d.getDate()} </th>
       `;
   });
-  
+
   const field = `<th>STT</th>
   <th>MÃ HS</th>
   <th>Họ tên đệm</th>
@@ -89,7 +95,6 @@ function renderWeek(listStudents) {
 
   let table = database.map((student, index) => {
     let atd = student.attendance.map((date) => {
-      
       return `
       <td>
       <div >${date.data.status ? "" : date.data.asked ? "P" : "V"}</div>
@@ -107,17 +112,22 @@ function renderWeek(listStudents) {
     `;
   });
   tableWeek.innerHTML = table.join(" ");
-  database[1].attendance.map((date)=>{
-    document.getElementById(date.day).addEventListener("click",(e)=>{
+  database[1].attendance.map((date) => {
+    document.getElementById(date.day).addEventListener("click", (e) => {
       e.preventDefault();
-      renderDay(listStudents,new Date(date.day).getDate(), new Date(date.day).getMonth()+1, new Date(date.day).getFullYear())
+      renderDay(
+        listStudents,
+        new Date(date.day).getDate(),
+        new Date(date.day).getMonth() + 1,
+        new Date(date.day).getFullYear()
+      );
       const open = document.querySelectorAll(".open");
       open.forEach((op) => {
-          op.classList.remove("open");
+        op.classList.remove("open");
       });
       tableADay.classList.add("open");
-    })
-  })
+    });
+  });
 }
 // const = document.querySelector("#dataTable");
 
@@ -129,23 +139,22 @@ function renderWeek(listStudents) {
 nextweek.addEventListener("click", (e) => {
   e.preventDefault();
   nextW++;
-  
+
   renderWeek(listStudents);
 });
 backweek.addEventListener("click", (e) => {
   e.preventDefault();
   preW++;
-  
+
   renderWeek(listStudents);
 });
 nowweek.addEventListener("click", (e) => {
   e.preventDefault();
   preW = 0;
   nextW = 0;
- 
+
   renderWeek(listStudents);
 });
-
 
 searchWeek.addEventListener("input", (e) => {
   let value = e.target.value;

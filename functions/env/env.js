@@ -11,5 +11,14 @@ const start = async () => {
     minConfidence: 0.5,
   });
 };
-
+Array.prototype.filterAndMapAsync = async function (callback) {
+  var newArray = [];
+  for (var i = 0; i < this.length; i++) {
+    let check = await callback(this[i], i, this);
+    if (check) {
+      newArray.push(callback(this[i], i, this));
+    }
+  }
+  return newArray;
+};
 module.exports = { faceapi, optionsSSDMobileNet, start };

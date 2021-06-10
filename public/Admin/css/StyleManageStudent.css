@@ -2,5 +2,11 @@
   display: flex;
   justify-content: space-between;
 }
+.serial {
+  width: 50px;
+}
 
-
+.gender,
+.Class {
+  width: 100px;
+}

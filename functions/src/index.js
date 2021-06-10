@@ -1,4 +1,4 @@
-const { detects, faceapi } = require("./actions/detections");
+const { detects, faceapi, detectListFile } = require("./actions/detections");
 const { detectFace } = require("./actions/detectSingleFace");
 
-module.exports = { detects, faceapi, detectFace };
+module.exports = { detects, faceapi, detectFace, detectListFile };

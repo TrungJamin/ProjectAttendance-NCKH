@@ -30,7 +30,17 @@ function getAttendanceOfDay(attendances, date, id) {
   });
   return attendance;
 }
-
+function createArrayAttendance(array) {
+  const newArray = [];
+  const item = {
+    status: true,
+    asked: true,
+  };
+  for (let i = 0; i < 5 - array.length; i++) {
+    newArray.push(item);
+  }
+  return newArray;
+}
 function renderDay(listStudents, d, m, y) {
   console.table(listStudents);
   aDay.innerText = "Ngày " + DateNowFormat(d, m, y);
@@ -40,17 +50,25 @@ function renderDay(listStudents, d, m, y) {
     const td = document.createElement("td");
     let att = getAttendanceOfDay(student.attendance, getDate(d, m, y));
     const renderMorning = () => {
-      return att.data.morning.map((item) => {
+      let renderAtt = att.data.morning.map((item) => {
         return `<td> ${item.status ? "" : item.asked ? "p" : "k"}</td>
         `;
       });
+      let renderTmp = createArrayAttendance(att.data.morning).map(
+        (item) => `<td> ${item.status ? "" : item.asked ? "p" : "k"}</td>`
+      );
+      return renderAtt.concat(renderTmp);
     };
 
     const renderAfternoon = () => {
-      return att.data.afternoon.map((item) => {
+      let renderAtt = att.data.afternoon.map((item) => {
         return `<td> ${item.status ? "" : item.asked ? "p" : "k"}</td>
         `;
       });
+      let renderTmp = createArrayAttendance(att.data.afternoon).map(
+        (item) => `<td> ${item.status ? "" : item.asked ? "p" : "k"}</td>`
+      );
+      return renderAtt.concat(renderTmp);
     };
     let contentTr = `
     <td>${index + 1}</td>
@@ -69,7 +87,8 @@ function renderDay(listStudents, d, m, y) {
     note.innerText = `"${contextNote}"`;
 
     note.addEventListener("click", (e) => {
-      document.querySelector(".panel-name").innerText = "Họ Tên: "+ student.name;
+      document.querySelector(".panel-name").innerText =
+        "Họ Tên: " + student.name;
       let length = 0;
       att.data.morning.forEach((item, index) => {
         document.getElementById(index).innerText = item.note;

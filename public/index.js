@@ -31,17 +31,21 @@ login[0].addEventListener("submit", (event) => {
           return check; // can suy nghi
         })
         .then((res) => {
+          console.log(res);
           res
             ? location.assign("./admin/")
             : location.assign("./Teacher/screen/");
           buttonlogin.classList.remove("d-none");
           loading.classList.add("d-none");
+        })
+        .catch((err) => {
+          console.log(err);
         });
     })
     .catch(function (error) {
       Swal.fire({
-        position: 'top',
-        title: 'sai mật khẩu',
+        position: "top",
+        title: "sai mật khẩu",
         showConfirmButton: true,
       });
       buttonlogin.classList.remove("d-none");

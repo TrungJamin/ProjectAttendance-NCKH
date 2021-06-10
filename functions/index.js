@@ -1,7 +1,7 @@
 const functions = require("firebase-functions");
 const admin = require("firebase-admin");
 admin.initializeApp(functions.config().firebase);
-const { detects, faceapi, detectFace } = require("./src/");
+const { detects, faceapi, detectFace, detectListFile } = require("./src/");
 const db = admin.firestore();
 const runtimeOpts = {
   timeoutSeconds: 300,
@@ -12,7 +12,7 @@ exports.detectedListAttendance = functions
   .runWith(runtimeOpts)
   .https.onCall(async (data, content) => {
     return db
-      .collection("FacesDatabase")
+      .collection("facesDatabase")
       .doc(data.class)
       .get()
       .then((doc) => {
@@ -55,23 +55,23 @@ exports.addDescriptorsInData = functions
     const { listBase64, id, Class } = data;
     const database = await detectFace(listBase64, id);
     return db
-      .collection("DataBaseFace")
+      .collection("facesDatabase")
       .doc(Class)
       .collection("data")
       .doc(id)
-      .set(database)
+      .set(database, { merge: true })
       .then(() => {
-        return true;
+        return Object.values(database.descriptors).length;
       })
       .catch(function (error) {
         return error.message;
       });
   });
-exports.getListAttendance = functions
+exports.getAttendances = functions
   .runWith(runtimeOpts)
   .https.onCall(async (data, content) => {
     return db
-      .collection("DataBaseFace")
+      .collection("facesDatabase")
       .doc(data.class)
       .collection("data")
       .get()
@@ -97,7 +97,7 @@ exports.getListAttendance = functions
         return new faceapi.FaceMatcher(result, 0.6);
       })
       .then(async (faceMatcher) => {
-        const detections = await detects(data.img);
+        const detections = await detectListFile(data.listBase64);
         const resizedDetections = await faceapi.resizeResults(
           detections,
           displaySize
@@ -106,6 +106,19 @@ exports.getListAttendance = functions
           return faceMatcher.findBestMatch(d.descriptor);
         });
         return result;
+      })
+      .then((result) => {
+        return Promise.all(result).then((values) => {
+          var obj = {};
+          var newArr = [];
+          for (let i = 0; i < values.length; i++) {
+            if (!obj[values[i]._label]) {
+              obj[values[i]._label] = 1;
+              newArr.push(values[i]);
+            }
+          }
+          return newArr;
+        });
       })
       .catch((error) => {
         return error.message;
