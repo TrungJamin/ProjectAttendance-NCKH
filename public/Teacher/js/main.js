@@ -72,15 +72,14 @@ async function getData(Promise) {
 }
 
 async function renderDatabase(listStudents) {
-  console.log();
   let day = new Date().getDate();
   let month = new Date().getMonth() + 1;
   let year = new Date().getFullYear();
   renderDay(listStudents, day, month, year);
   renderWeek(listStudents);
   renderMonth(listStudents);
+  renderSemester(listStudents);
   let dataBase = document.querySelectorAll(".database");
-
   dataBase.forEach((data) => {
     data.classList.remove("d-none");
   });

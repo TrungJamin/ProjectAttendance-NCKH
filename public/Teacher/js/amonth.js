@@ -11,7 +11,7 @@ let pre = 0;
 let next = 0;
 function MonthNow() {
   let d = new Date();
-  return " Tháng " + (d.getMonth() + 1+ next - pre) + "/" + d.getFullYear();
+  return " Tháng " + (d.getMonth() + 1 + next - pre) + "/" + d.getFullYear();
 }
 monthNow.innerText = MonthNow();
 
@@ -41,7 +41,7 @@ function renderMonth(listStudents) {
   let list = listMonth(listStudents, d.getMonth() + 1 + next - pre);
   let table = list.map((student, index) => {
     countHAbsent = 0;
-      countAbsent = 0;
+    countAbsent = 0;
     student.attendance.forEach((att) => {
       if (!att.data.status) {
         att.data.asked ? countHAbsent++ : countAbsent++;
@@ -80,7 +80,6 @@ nowMonth.addEventListener("click", (e) => {
   monthNow.innerText = MonthNow();
   renderMonth(listStudents);
 });
-
 
 searchMonth.addEventListener("input", (e) => {
   let value = e.target.value;

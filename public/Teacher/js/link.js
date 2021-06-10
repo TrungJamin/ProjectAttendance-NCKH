@@ -1,9 +1,11 @@
 const linksDay = document.querySelector(".open-view-day");
 const linksWeek = document.querySelector(".open-view-week");
 const linksMonth = document.querySelector(".open-view-month");
+const linkSemester = document.querySelector(".open-view-semester");
 const tableAWeek = document.querySelector(".table-week");
 const tableADay = document.querySelector(".table-day");
 const tableAMonth = document.querySelector(".table-month");
+const tableSemester = document.querySelector(".table-semester");
 linksDay.classList.add("active-link");
 linksDay.addEventListener("click", (e) => {
   e.preventDefault();
@@ -46,4 +48,18 @@ linksMonth.addEventListener("click", (e) => {
   tableAMonth.classList.add("open");
   document.querySelector(".active-link").classList.remove("active-link");
   linksMonth.classList.add("active-link");
+});
+linkSemester.addEventListener("click", (e) => {
+  e.preventDefault();
+  pre = 0;
+  next = 0;
+  monthNow.innerText = MonthNow();
+  renderMonth(listStudents);
+  const open = document.querySelectorAll(".open");
+  open.forEach((op) => {
+    op.classList.remove("open");
+  });
+  tableSemester.classList.add("open");
+  document.querySelector(".active-link").classList.remove("active-link");
+  linkSemester.classList.add("active-link");
 });

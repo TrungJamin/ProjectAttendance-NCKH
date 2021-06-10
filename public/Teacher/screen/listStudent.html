@@ -126,14 +126,17 @@
                 </select>
 
                 <div class="toggle-view-list">
-                    <button class="open-view-day col-4">
+                    <button class="open-view-day col-3">
                         Ngày
                     </button>
-                    <button class="open-view-week col-4">
+                    <button class="open-view-week col-3">
                         Tuần
                     </button>
-                    <button class="open-view-month col-4">
+                    <button class="open-view-month col-3">
                         Tháng
+                    </button>
+                    <button class="open-view-semester col-3">
+                        Học Kỳ
                     </button>
                 </div>
             </nav>
@@ -170,7 +173,7 @@
                                     <a class="previous-week"><i
                                             class="back-week fas fa-chevron-circle-left fa-lg"></i></a>
                                     <a class="next-week"><i class="next-week fas fa-chevron-circle-right fa-lg"></i></a>
-                                    <a class="now-week">Hôm nay</a>
+                                    <a class="now-week">Tuần Hôm Nay</a>
                                 </div>
                                 <table id="data-week" class="table table-bordered hidden data-student-view scroll-table"
                                     id="dataTable" width="100%" cellspacing="0">
@@ -204,7 +207,7 @@
                                     <h3 class="month-now">Loading</h3>
                                     <form class="d-none d-sm-inline-block form-inline navbar-search">
                                         <div class="input-group">
-                                            <input type="text" class="form-control bg-light border-0 small"
+                                            <input type="text" class="form-control border-0 small"
                                                 placeholder="Tìm kiếm học sinh..." aria-label="Search"
                                                 aria-describedby="basic-addon2" id="month-search">
 
@@ -219,7 +222,7 @@
                                             class="back-week fas fa-chevron-circle-left fa-lg"></i></a>
                                     <a class="next-month"><i
                                             class="next-week fas fa-chevron-circle-right fa-lg"></i></a>
-                                    <a class="now-month">Hôm nay</a>
+                                    <a class="now-month">Tháng Hôm Nay </a>
                                 </div>
                                 <table class="table table-bordered data-student-view scroll-table" id="dataTable"
                                     width="100%" cellspacing="0">
@@ -251,7 +254,7 @@
                                     <h3 class="day-now">Loading</h3>
                                     <form class="d-none d-sm-inline-block form-inline navbar-search">
                                         <div class="input-group">
-                                            <input type="text" class="form-control bg-light border-0 small"
+                                            <input type="text" class="form-control border-0 small"
                                                 placeholder="Tìm kiếm học sinh..." aria-label="Search"
                                                 aria-describedby="basic-addon2" id="day-search">
 
@@ -305,6 +308,54 @@
                             </div>
 
                         </div>
+
+                        <div id="data-semester" class="table-semester">
+                            <div class="table-responsive database d-none">
+                                <div class="table-header text-center">
+                                    <h3 class="semester-now">Loading</h3>
+                                    <form class=" d-sm-inline-block form-inline navbar-search">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control border-0 small"
+                                                placeholder="Tìm kiếm học sinh..." aria-label="Search"
+                                                aria-describedby="basic-addon2" id="semester-search">
+
+                                            <button class="btn btn-success" type="button">
+                                                <i class="fas fa-search fa-sm"></i>
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="multChoose">
+                                    <a class="previous-semester"><i
+                                            class="back-week fas fa-chevron-circle-left fa-lg"></i></a>
+                                    <a class="next-semester"><i
+                                            class="next-week fas fa-chevron-circle-right fa-lg"></i></a>
+                                    <a class="now-semester">Học Kỳ</a>
+                                </div>
+                                <table class="table table-bordered data-student-view scroll-table" id="dataTable"
+                                    width="100%" cellspacing="0">
+                                    <thead style="background-color: #ffff ; color:#00000082">
+
+                                        <tr class="field-one-table">
+                                            <th>STT</th>
+                                            <th>Mã HS</th>
+                                            <th>Họ tên đệm</th>
+                                            <th>Tên</th>
+                                            <th>Vắng có phép</th>
+                                            <th>Vắng không phép</th>
+
+                                        </tr>
+
+                                    </thead>
+
+                                    <tbody class="table-list-semester">
+
+                                    </tbody>
+                                </table>
+
+
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -337,6 +388,7 @@
     <script src="./../js/amonth.js"></script>
     <script src="./../js/link.js"></script>
     <script src="./../js/aday.js"></script>
+    <script src="./../js/semester.js"></script>
     <script src="./../js/main.js"></script>
 
 </body>

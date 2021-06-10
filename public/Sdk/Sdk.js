@@ -58,3 +58,19 @@ function doit(id, fn, type, dl) {
     ? XLSX.write(wb, { bookType: type, bookSST: true, type: "base64" })
     : XLSX.writeFile(wb, fn || "SheetJSTableExport." + (type || "xlsx"));
 }
+
+function getSemesterNow() {
+  let d1 = new Date("5-3-2021");
+  let d2 = new Date();
+  var d1Y = d1.getFullYear();
+  var d2Y = d2.getFullYear();
+  var d1M = d1.getMonth();
+  var d2M = d2.getMonth();
+  if (d2M + 12 * d2Y - (d1M + 12 * d1Y) > 4) {
+    return 2;
+  }
+  return 1;
+}
+function getSemester(week) {
+  return week > 8 ? 2 : 1;
+}
