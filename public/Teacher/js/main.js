@@ -20,13 +20,19 @@ const listStudents = [];
 //   note: "",
 // };
 
+
+
+
 const loadingData = document.querySelector(".loading-table");
 firebase.auth().onAuthStateChanged(function (user) {
   if (user) {
     db.collection("TeacherAdmin").onSnapshot(async function (snapshots) {
       snapshots.forEach((teacher) => {
-        if (teacher.data().email == user.email)
-          getStudents(teacher.data().class);
+        if (teacher.data().email == user.email){
+           getStudents(teacher.data().class);
+        }
+         
+         
       });
     });
   } else {

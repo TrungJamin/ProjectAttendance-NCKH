@@ -26,16 +26,30 @@ document.querySelector("#agreeLogout").addEventListener("click", () => {
     });
 });
 
+
+function setNameOfTeacher(name){
+  // remove @gmail.com
+  let nameTmp=''+name;
+  nameTmp= nameTmp.replace("@gmail.com","");
+  document.querySelector("#nameOfTeacher").innerHTML=nameTmp;
+  console.log(document.querySelector("#nameOfTeacher"));
+
+}
+
+
 firebase.auth().onAuthStateChanged((user) => {
   if (user) {
     db.collection("TeacherAdmin").onSnapshot(async function (snapshots) {
       snapshots.forEach((teacher) => {
-        if (teacher.data().email == user.email)
+        if (teacher.data().email == user.email){
           document.querySelector(
             ".page-header"
           ).innerHTML = ` <h1>Danh Sách Điểm Danh Lớp ${
             teacher.data().class
           }</h1>`;
+          setNameOfTeacher(user.email);
+        }
+          
       });
     });
   } else {

@@ -15,6 +15,19 @@ const formMakeAdmin = document.querySelector(".form-make-admin");
 const auth = firebase.auth();
 const cancelMakeAdmin = document.querySelector(".cancel-make-admin");
 
+function setNameOfTeacher(name){
+  // remove @gmail.com
+
+  console.log(name)
+  let nameTmp=''+name;
+  nameTmp= nameTmp.replace("@gmail.com","");
+  document.querySelector("#nameOfTeacher").innerHTML=nameTmp;
+  console.log(document.querySelector("#nameOfTeacher"));
+
+}
+
+
+
 const isAccountExist = (email) => {
   let isAdmin = false;
   return db
@@ -91,8 +104,10 @@ agreeLogout.addEventListener("click", (event) => {
 });
 firebase.auth().onAuthStateChanged((user) => {
   if (!user) {
+    
     location.assign("./../index.html");
   } else {
+    setNameOfTeacher(user.email)
     homepage.classList.remove("non_active");
   }
 });
