@@ -62,14 +62,20 @@ function renderDay(listStudents, d, m, y) {
 
     const renderAfternoon = () => {
       let renderAtt = att.data.afternoon.map((item) => {
-        return `<td> ${item.status ? "" : item.asked ? "p" : "k"}</td>
+        const style=item.status ? "" : item.asked ? "color:orange" : "color:red";
+        return `<td style=${style}> ${item.status ? "" : item.asked ? "Có Phép" : "Vắng"}</td>
         `;
       });
       let renderTmp = createArrayAttendance(att.data.afternoon).map(
-        (item) => `<td> ${item.status ? "" : item.asked ? "p" : "k"}</td>`
+        
+        (item) =>{
+          const style=item.status ? "" : item.asked ? "color:orange" : "color:red";
+          return `<td style=${style}> ${item.status ? "" : item.asked ? "Có Phép" : "Vắng"}</td>`;
+        } 
       );
       return renderAtt.concat(renderTmp);
     };
+
     let contentTr = `
     <td>${index + 1}</td>
     <td> ${student.id} </td>
