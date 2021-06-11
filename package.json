@@ -1,0 +1,25 @@
+{
+  "name": "smart-attendance",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TrungJamin/ProjectAttendance-NCKH.git"
+  },
+  "keywords": [
+    "123456"
+  ],
+  "author": "404",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TrungJamin/ProjectAttendance-NCKH/issues"
+  },
+  "homepage": "https://github.com/TrungJamin/ProjectAttendance-NCKH#readme",
+  "dependencies": {
+    "ci": "^2.1.1"
+  }
+}
