@@ -19,7 +19,7 @@ function WeekNow(day1, day2) {
     (getWeekNow(new Date()) + nextW - preW) +
     "        : " +
     day1 +
-    " -> " +
+    " đến " +
     day2
   );
 }
