@@ -51,7 +51,7 @@ function renderMonth(listStudents) {
     <tr>
     <td>${index + 1}</td>
     <td>${student.id}</td>
-    <td>${student.firstName}</td>
+    <td>${String(student.firstName).replaceAll(","," ")}</td>
     <td>${student.lastName}</td>
     <td>${countHAbsent}</td>
     <td>${countAbsent}</td>

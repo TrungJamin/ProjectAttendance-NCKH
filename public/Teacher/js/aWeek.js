@@ -95,9 +95,11 @@ function renderWeek(listStudents) {
 
   let table = database.map((student, index) => {
     let atd = student.attendance.map((date) => {
+
+      const style=date.data.status ? "" : date.data.asked ? "color:orange" : "color:red"
       return `
       <td>
-      <div >${date.data.status ? "" : date.data.asked ? "P" : "V"}</div>
+      <div style=${style} >${date.data.status ? "" : date.data.asked ? "Có Phép" : "Vắng"}</div>
   </td>
       `;
     });
@@ -105,7 +107,7 @@ function renderWeek(listStudents) {
     <tr>
     <td>${index + 1}</td>
     <td>${student.id}</td>
-    <td>${student.firstName}</td>
+    <td>${String(student.firstName).replaceAll(","," ")}</td>
     <td>${student.lastName}</td>
     ${atd.join(" ")}
 </tr>

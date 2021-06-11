@@ -73,7 +73,7 @@ function renderDay(listStudents, d, m, y) {
     let contentTr = `
     <td>${index + 1}</td>
     <td> ${student.id} </td>
-    <td>${student.firstName}</td>
+    <td>${String(student.firstName).replaceAll(","," ")}</td>
     <td>${student.lastName}</td>
     ${renderMorning().join("")}
     ${renderAfternoon().join("")}

@@ -1,3 +1,16 @@
+// next and previous semester 
+const previousSemester = document.querySelector(".previous-semester");
+const nextSemester=document.querySelector(".next-semester");
+const semesterNow=document.querySelector('.semester-now');
+nextSemester.addEventListener('click', ()=>{
+ semesterNow.innerHTML='Học kỳ 2';
+})
+previousSemester.addEventListener('click', ()=>{
+  semesterNow.innerHTML='Học kỳ 1';
+})
+
+
+
 const bodySemester = document.querySelector(".table-list-semester");
 function dateOfSemester(listStudents, semester = 1) {
   let listSemester = [];
@@ -25,7 +38,7 @@ function renderSemester(listStudents) {
     <tr>
     <td class="serial">${index + 1}</td>
     <td>${student.id}</td>
-    <td>${student.firstName}</td>
+    <td>${String(student.firstName).replaceAll(","," ")}</td>
     <td>${student.lastName}</td>
     <td>${absentAsked}</td>
     <td>${absentNotAsked}</td>
