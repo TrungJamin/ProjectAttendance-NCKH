@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Attendance</title>
+    <title>Duc Tri School</title>
     <link href="./css/login.css" rel="stylesheet">
     <link rel="icon" href="./img/logo.jpg">
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -42,7 +42,7 @@
                     </div>
 
                     <!-- Login Form -->
-                    <form class="login">
+                    <form class="login login-form">
                         <input type="email" id="login" class="fadeIn second email" name="email"
                             placeholder="Tên Đăng Nhập">
                         <input type="password" id="password" class="fadeIn third password" name="password"
@@ -52,20 +52,24 @@
 
                         <img src="./img/loadinglogin.gif" class="mt-2 mb-2 loading d-none">
                     </form>
-
+                    <form class="login forgot-password-form non-active" id="forgot-password">
+                        <label for="forgot-password" class="forgot-password-label">Vui lòng nhập email
+                            để tìm kiếm tài khoản của bạn và gửi mã xác nhận.</label>
+                        <input name="forgot-password" id="forgot-password-input" type="email" id="login"
+                            class="fadeIn second email" name="email" placeholder="Nhập email" required>
+                        <input type="submit" id="button-accept" class="fadeIn fourth col-10 mt-4"
+                            value="Gửi Mã Xác Nhận">
+                        <img src="./img/loadinglogin.gif" class="mt-2 mb-2 loading d-none">
+                    </form>
                     <!-- Remind Passowrd -->
                     <div id="formFooter">
-                        <a class="underlineHover" href="#">Quên Mật Khẩu?</a>
+                        <a class="underlineHover login-form next-to-forgot" href="#">Quên Mật Khẩu?</a>
+                        <a class="underlineHover forgot-password-form back-to-login non-active" href="#">Bạn Đã Có Tài
+                            Khoản</a>
                     </div>
                 </div>
             </div>
         </div>
-
-        <!-- <div class="loading">
-            <img src="./img/loadinglogin.gif" />
-        </div> -->
-
-
 
     </div>
 </body>

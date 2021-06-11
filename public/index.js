@@ -2,10 +2,8 @@ const containerLogin = document.querySelector(".containerLogin");
 const login = document.getElementsByClassName("login");
 const buttonlogin = document.querySelector(".button-login");
 const loading = document.querySelector(".loading");
-
-
-
-
+const forgotPassword = document.querySelector("#forgot-password");
+const buttonAccept = document.querySelector("#button-accept");
 login[0].addEventListener("submit", (event) => {
   event.preventDefault();
   var email = login[0]["email"].value;
@@ -34,7 +32,6 @@ login[0].addEventListener("submit", (event) => {
           return check; // can suy nghi
         })
         .then((res) => {
-          console.log(res);
           res
             ? location.assign("./admin/")
             : location.assign("./Teacher/screen/");
@@ -42,7 +39,7 @@ login[0].addEventListener("submit", (event) => {
           loading.classList.add("d-none");
         })
         .catch((err) => {
-          console.log(err);
+          console.log(err.message);
         });
     })
     .catch(function (error) {
@@ -54,4 +51,54 @@ login[0].addEventListener("submit", (event) => {
       buttonlogin.classList.remove("d-none");
       loading.classList.add("d-none");
     });
+});
+
+forgotPassword.addEventListener("submit", (e) => {
+  e.preventDefault();
+  let count = 15;
+  const email = forgotPassword["forgot-password-input"].value;
+  firebase
+    .auth()
+    .sendPasswordResetEmail(email)
+    .then(() => {
+      alert("email đã gửi thành công , vui lòng kiểm tra email của bạn");
+      buttonAccept.setAttribute("class", "disable");
+      const resetPassword = setInterval(() => {
+        if (count == 0) {
+          buttonAccept.value = `Gửi Mã Xác Nhận`;
+          buttonAccept.classList.remove("disable");
+          clearInterval(resetPassword);
+        } else {
+          buttonAccept.value = `Gửi Mã Xác Nhận (${count})`;
+        }
+        count--;
+      }, 1000);
+    })
+    .catch((error) => {
+      console.log(error.code);
+      alert(
+        "Email không tồn tại, bạn vui lòng liên hệ với admin để được cung cấp tài khoản"
+      );
+    });
+});
+
+const screenForgotPassword = document.querySelectorAll(".forgot-password-form");
+const backToLogin = document.querySelector(".back-to-login");
+const screenLogin = document.querySelectorAll(".login-form");
+const nextToForgot = document.querySelector(".next-to-forgot");
+backToLogin.addEventListener("click", () => {
+  screenForgotPassword.forEach((item) => {
+    item.classList.add("non-active");
+  });
+  screenLogin.forEach((item) => {
+    item.classList.remove("non-active");
+  });
+});
+nextToForgot.addEventListener("click", () => {
+  screenForgotPassword.forEach((item) => {
+    item.classList.remove("non-active");
+  });
+  screenLogin.forEach((item) => {
+    item.classList.add("non-active");
+  });
 });

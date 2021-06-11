@@ -83,6 +83,7 @@ input[type="submit"],
 input[type="reset"] {
   background-color: #1cc88a;
   border: none;
+  cursor: pointer;
   color: white;
   padding: 15px 80px;
   text-align: center;
@@ -290,4 +291,17 @@ a {
 img {
   width: 25%;
   height: 45%;
+}
+.forgot-password-label {
+  text-align: left;
+  width: 80%;
+  font-size: 15px;
+  margin-top: 35px;
+}
+.disable {
+  background: #1cc88a8a !important;
+  pointer-events: none;
+}
+.non-active {
+  display: none;
 }
