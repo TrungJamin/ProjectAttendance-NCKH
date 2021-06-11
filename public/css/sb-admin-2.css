@@ -11711,7 +11711,7 @@ body.sidebar-toggled footer.sticky-footer {
 .table-bordered tbody {
   display: block;
   width: 100%;
-  height: 450px;
+  height: 700px;
   overflow-y: scroll;
 }
 .table-bordered thead,
@@ -11734,4 +11734,7 @@ width: calc(100% - 17px);
 .swal-overlay--show-modal {
   position: fixed;
   top: -500px;
+}
+iframe {
+  overflow: hidden;
 }

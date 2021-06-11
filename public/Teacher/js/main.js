@@ -1,38 +1,13 @@
-const listStudents = [];
-
-// let demo = {
-//   morning: [
-//     { status: true, note: "", asked: true },
-//     { status: true, note: "", asked: true },
-//     { status: true, note: "", asked: true },
-//     { status: true, note: "", asked: true },
-//     { status: true, note: "", asked: true },
-//   ],
-//   afternoon: [
-//     { status: true, note: "", asked: true },
-//     { status: true, note: "", asked: true },
-//     { status: true, note: "", asked: true },
-//     { status: true, note: "", asked: true },
-//     { status: true, note: "", asked: true },
-//   ],
-//   status: true,
-//   asked: "",
-//   note: "",
-// };
-
-
-
+let listStudents = [];
 
 const loadingData = document.querySelector(".loading-table");
 firebase.auth().onAuthStateChanged(function (user) {
   if (user) {
     db.collection("TeacherAdmin").onSnapshot(async function (snapshots) {
       snapshots.forEach((teacher) => {
-        if (teacher.data().email == user.email){
-           getStudents(teacher.data().class);
+        if (teacher.data().email == user.email) {
+          getStudents(teacher.data().class);
         }
-         
-         
       });
     });
   } else {
@@ -41,6 +16,7 @@ firebase.auth().onAuthStateChanged(function (user) {
 });
 function getStudents(className) {
   db.collection("Students").onSnapshot(async (snapshots) => {
+    listStudents = [];
     getData(
       new Promise(async (resolve, reject) => {
         setTimeout(
