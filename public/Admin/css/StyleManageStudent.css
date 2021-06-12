@@ -10,3 +10,7 @@
 .Class {
   width: 100px;
 }
+tr th {
+  font-size: 15px;
+  color: #000000d4;
+}

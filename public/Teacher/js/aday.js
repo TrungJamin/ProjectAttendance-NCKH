@@ -62,7 +62,7 @@ function renderDay(listStudents, d, m, y) {
 
     const renderAfternoon = () => {
       let renderAtt = att.data.afternoon.map((item) => {
-        const style=item.status ? "" : item.asked ? "color:orange" : "color:red";
+        const style=item.status ? "" :( item.asked ? "color:orange" : "color:red");
         return `<td style=${style}> ${item.status ? "" : item.asked ? "Có Phép" : "Vắng"}</td>
         `;
       });
