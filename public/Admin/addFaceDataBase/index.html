@@ -28,6 +28,7 @@
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-functions.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs/dist/tf.min.js"> </script> -->
   <script type="text/javascript" src="./js/webcam.min.js"></script>
   <style>
     body {
@@ -43,7 +44,7 @@
 
     canvas {
       position: absolute;
-      top: 100px;
+      top: -6px;
     }
   </style>
 </head>
@@ -53,9 +54,7 @@
   <div class="container-fluid">
 
     <div id="my_camera" class="d-flex justify-content-center">
-      <div>
-        <h3>webcam</h3>
-      </div>
+
     </div>
 
     <form>
@@ -63,8 +62,18 @@
         <button type="button" style="z-index: 100;" class="btn btn-success" onClick="take_snapshot()"> <i
             class="fas fa-camera-retro"></i>
           Chụp ảnh </button>
-        <button type="submit" style="z-index: 100;" class="save btn btn-success" disabled> <i
-            class="far fa-save"></i>Lưu ảnh </button>
+
+
+        <label for="file-upload" class="custom-file-upload btn btn-success">
+          <i class="fas fa-upload">
+            Upload
+          </i>
+        </label>
+        <input style="height:0px; width: 0px;" accept="image/png, image/jpeg" id="file-upload" type="file"
+          name="file-upload" />
+
+        <button type="submit" style="z-index: 100;" class="save btn btn-success"> <i class="far fa-save"></i>Lưu ảnh
+        </button>
       </div>
       <div class=" d-flex">
         <div class="form-group m-2">
@@ -94,7 +103,7 @@
 
 
 <script src="./../../config/env.js"></script>
-
+<!--  -->
 <script src="./../../vendor/jquery/jquery.min.js"></script>
 <script src="./../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 

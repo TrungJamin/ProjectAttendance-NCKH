@@ -2,6 +2,7 @@ const isFaceStudent = firebase.functions().httpsCallable("getListAttendance");
 const addImage = firebase.functions().httpsCallable("addDescriptorsInData");
 const formAdd = document.querySelector("#results");
 const save = document.querySelector(".save");
+const upLoadFile = document.querySelector(".custom-file-upload");
 let listBase64 = [];
 let index = 0;
 
@@ -97,20 +98,44 @@ Webcam.set({
 });
 Webcam.attach("#my_camera");
 
+const file = document.getElementById("file-upload");
+file.addEventListener("change", function (event) {
+  const toBase64 = (file) =>
+    new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
+  toBase64(file.files[0]).then((result) => {
+    insertImage(result);
+  });
+});
+// them anh vao Khung
+function insertImage(uri) {
+  document.getElementById("results").insertAdjacentHTML(
+    "beforeend",
+    `<div class='box-img'> 
+      <i class="far fa-times-circle" onclick="removeImg('${index}')"></i>
+      <img id=${index} class="albumImg" src="${uri}"/> 
+     </div>`
+  );
+
+  index++;
+  listBase64 = [...listBase64, uri];
+  listBase64.length == 10 ? save.removeAttribute("disabled") : "";
+}
+// kiem tra xem co vuot gian han qua 10 anh k
+function checkExpireImg() {
+  return listBase64 < 10;
+}
+
+// chup anh qua webcam
 function take_snapshot() {
   // take snapshot and get image data
-  if (listBase64.length < 10) {
+  if (checkExpireImg()) {
     Webcam.snap(function (data_uri) {
-      document.getElementById("results").insertAdjacentHTML(
-        "beforeend",
-        `<div class='box-img'> 
-          <i class="far fa-times-circle" onclick="removeImg('${index}')"></i>
-          <img id=${index} class="albumImg" src="${data_uri}"/> 
-         </div>`
-      );
-
-      index++;
-      listBase64 = [...listBase64, data_uri];
+      insertImage(data_uri);
     });
   } else {
     Swal.fire({
@@ -126,10 +151,8 @@ function take_snapshot() {
       },
     });
   }
-  listBase64.length == 10 ? save.removeAttribute("disabled") : "";
 }
 
-///
 function removeImg(id) {
   listBase64.splice(id, 1);
   var newData = "";
@@ -210,35 +233,3 @@ function onChangeStudent(id) {
   idStudent = id;
 }
 const video = document.getElementsByTagName("video")[0];
-
-function startVideo() {
-  navigator.getUserMedia(
-    { video: {} },
-    (stream) => (video.srcObject = stream),
-    (err) => console.error(err)
-  );
-}
-// Promise.all([
-//   faceapi.nets.tinyFaceDetector.loadFromUri("./models"),
-//   faceapi.nets.faceLandmark68Net.loadFromUri("./models"),
-//   faceapi.nets.faceRecognitionNet.loadFromUri("./models"),
-//   faceapi.nets.faceExpressionNet.loadFromUri("./models"),
-// ]).then(startVideo);
-// video.addEventListener("play", async () => {
-//   const canvas = faceapi.createCanvasFromMedia(video);
-//   document.body.append(canvas);
-//   const displaySize = { width: 600, height: 600 };
-//   faceapi.matchDimensions(canvas, displaySize);
-
-//   // setInterval(async () => {
-//   //   const detections = await faceapi
-//   //     .detectAllFaces(video, new faceapi.TinyFaceDetectorOptions())
-//   //     .withFaceLandmarks()
-//   //     .withFaceExpressions();
-//   //   const resizedDetections = faceapi.resizeResults(detections, displaySize);
-//   //   canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
-//   //   faceapi.draw.drawDetections(canvas, resizedDetections);
-//   //   faceapi.draw.drawFaceLandmarks(canvas, resizedDetections);
-//   //   faceapi.draw.drawFaceExpressions(canvas, resizedDetections);
-//   // });
-// });

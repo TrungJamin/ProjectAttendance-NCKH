@@ -43,15 +43,15 @@ upload1.addEventListener("change", (e) => {
       reader.onload = () => resolve(reader.result);
       reader.onerror = (error) => reject(error);
     });
-  Promise.all([toBase64(upload.files[0]), toBase64(upload1.files[0])]).then(
-    (values) => {
-      console.log("loading...");
-      getAttendances({
-        listBase64: values,
-        class: "10A1",
-      }).then((result) => {
-        console.log(result);
-      });
-    }
-  );
+  Promise.all([toBase64(upload1.files[0])]).then((values) => {
+    console.log(upload1.files[0]);
+    console.log("loading...");
+    console.log(values[0]);
+    getAttendances({
+      listBase64: values,
+      class: "10A1",
+    }).then((result) => {
+      console.log(result);
+    });
+  });
 });
