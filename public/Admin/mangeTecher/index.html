@@ -30,6 +30,7 @@
   <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-firestore.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-functions.js"></script>
   <script src="./../../config/env.js"></script>
 </head>
 
@@ -41,7 +42,7 @@
       <div class="col-xl-12">
         <!-- Account details card-->
 
-       
+
 
         <div class="card mb-4">
           <div class="card-header text-center" id="typeFormTeacher">Thêm giáo viên</div>
@@ -67,7 +68,7 @@
                   <select class="form-control" name="group" id="group" required>
                     <option value="" selected>chọn</option>
                     <option value="nation">Tự nhiên</option>
-                    <option value="sociocultural" >
+                    <option value="sociocultural">
                       Xã hội
                     </option>
                   </select>
@@ -112,7 +113,7 @@
               <div class="form-row">
                 <!-- Form Group (phone number)-->
                 <div class="form-group col-md-6">
-                  <label class="small mb-1" for="inputPhone">Địa thư điện tử</label>
+                  <label id="email-form-edit" class="small mb-1" for="inputPhone">Địa thư điện tử</label>
                   <input id="address" type="email" class="form-control" style="width: 100%" name="address"
                     placeholder="@mail" onkeyup="filterCharEmail(value,'address')" required />
                 </div>
@@ -124,11 +125,11 @@
               </div>
               <!-- Save changes button-->
               <div class="d-flex justify-content-between">
-                <button type="submit" class="btn btn-success" >Lưu</button>
-                <button  class="btn btn-danger" type="reset" onclick="closeFormInput(`cover-caption`)">Hủy</button>
+                <button type="submit" class="btn btn-success">Lưu</button>
+                <button class="btn btn-danger" type="reset" onclick="closeFormInput(`cover-caption`)">Hủy</button>
               </div>
             </form>
-            
+
 
           </div>
         </div>
@@ -137,7 +138,8 @@
   </div>
 
   <div class="card shadow mb-4" style="width: 100%;" id="allViewPage">
-    <div class="card-header py-3" style="  background-image: linear-gradient(to right, rgb(64,201,126) , rgb(26,188,156))">
+    <div class="card-header py-3"
+      style="  background-image: linear-gradient(to right, rgb(64,201,126) , rgb(26,188,156))">
       <h6 class="m-0 font-weight-bold h3" style="color: aliceblue; z-index: 10000;">Danh sách giáo viên</h6>
     </div>
 
@@ -149,7 +151,7 @@
 
       <div class="form-group col-md-4">
 
-        
+
         <form class="input-group ">
           <input type="text" class="form-control bg-light border-0 small" placeholder="tìm kiếm ..." aria-label="Search"
             aria-describedby="basic-addon2" id="Teacher-search" onchange="searchAll(value)" />
@@ -163,13 +165,13 @@
           </div>
         </form>
 
-       
+
 
       </div>
 
-      
-        
-     
+
+
+
 
     </div>
 

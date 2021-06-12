@@ -124,3 +124,27 @@ exports.getAttendances = functions
         return error.message;
       });
   });
+
+exports.updateEmailAuth = functions.https.onCall((data, content) => {
+  return admin
+    .auth()
+    .getUserByEmail(data.oldEmail)
+    .then((user) => {
+      return admin
+        .auth()
+        .updateUser(user.uid, {
+          email: data.newEmail,
+        })
+        .catch((error) => error.message);
+    })
+    .catch((error) => {
+      return error.message;
+    });
+});
+
+exports.deleteUserByUID = functions.https.onCall((data,context) => {
+  return admin
+  .auth()
+  .deleteUser(data.uid)
+  .catch((error) => error.message)
+})
