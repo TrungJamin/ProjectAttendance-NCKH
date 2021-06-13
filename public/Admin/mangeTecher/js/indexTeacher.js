@@ -13,11 +13,18 @@ function formatObjectClassAndTeach(s) {
     }
   }
 
-  s.forEach((e) => {
+  s.forEach((e,index) => {
     if (e.class == "") {
       stringOut += " ; " + e.subject;
     } else {
-      stringOut += "\n" + e.class + " : " + e.subject;
+      var br=""
+      if(index==0){
+
+      }
+      else{
+        br="<br>"
+      }
+      stringOut += br + e.class + " : " + e.subject;
     }
   });
   return stringOut;
