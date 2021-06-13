@@ -68,6 +68,7 @@ function dateOfWeek(listStudents, weekNow) {
   return listWeek;
 }
 function renderWeek(listStudents) {
+  console.log("run-week");
   let database = dateOfWeek(
     listStudents,
     getWeekNow(new Date()) + nextW - preW
@@ -78,9 +79,10 @@ function renderWeek(listStudents) {
     database[0].attendance[6].day
   );
   let content = database[1].attendance.map((date) => {
+    console.log(date);
     let d = new Date(date.day);
     const dayNow = new Date();
-    const isDayNow = d.getDay() === dayNow.getDay();
+    const isDayNow = d.getDate() === dayNow.getDate();
     const styleDayNow = isDayNow ? `background-color:rgb(119,171,89)` : "";
     return `
       <th class= "typeDay" id ="${
@@ -137,6 +139,8 @@ function renderWeek(listStudents) {
         op.classList.remove("open");
       });
       tableADay.classList.add("open");
+      document.querySelector(".active-link").classList.remove("active-link");
+      linksDay.classList.add("active-link");
     });
   });
 }

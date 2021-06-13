@@ -51,8 +51,8 @@ async function renderDatabase(listStudents) {
   let month = new Date().getMonth() + 1;
   let year = new Date().getFullYear();
   renderDay(listStudents, day, month, year);
-  renderWeek(listStudents);
-  renderMonth(listStudents);
+  // renderWeek(listStudents);
+  // renderMonth(listStudents);
   renderSemester(listStudents);
   let dataBase = document.querySelectorAll(".database");
   dataBase.forEach((data) => {
