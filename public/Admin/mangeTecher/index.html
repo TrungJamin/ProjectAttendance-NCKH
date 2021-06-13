@@ -114,7 +114,7 @@
                 <!-- Form Group (phone number)-->
                 <div class="form-group col-md-6">
                   <label id="email-form-edit" class="small mb-1" for="inputPhone">Địa thư điện tử</label>
-                  <input id="address" type="email" class="form-control" style="width: 100%" name="address"
+                  <input id="address" type="email" class="form-control" style="width: 100%" name="email"
                     placeholder="@mail" onkeyup="filterCharEmail(value,'address')" required />
                 </div>
                 <!-- Form Group (birthday)-->
@@ -137,7 +137,7 @@
     </div>
   </div>
 
-  <div class="card shadow mb-4" style="width: 100%;" id="allViewPage">
+  <div class="card shadow mb-4 " style="width: 100%;" id="allViewPage">
     <div class="card-header py-3"
       style="  background-image: linear-gradient(to right, rgb(64,201,126) , rgb(26,188,156))">
       <h6 class="m-0 font-weight-bold h3" style="color: aliceblue; z-index: 10000;">Danh sách giáo viên</h6>
@@ -153,7 +153,7 @@
 
 
         <form class="input-group ">
-          <input type="text" class="form-control bg-light border-0 small" placeholder="tìm kiếm ..." aria-label="Search"
+          <input type="text" class="form-control bg-light border-0 small" placeholder="Tìm kiếm ..." aria-label="Search"
             aria-describedby="basic-addon2" id="Teacher-search" onchange="searchAll(value)" />
           <div class="input-group-append">
             <button class="btn btn-success" type="reset" style="z-index: 0 !important;">
@@ -185,8 +185,8 @@
               <th>Giới tính</th>
               <th>Nhóm</th>
               <th>Chủ nhiệm</th>
-              <th>Lớp vs Môn</th>
-              <th>email</th>
+              <th>Lớp và Môn</th>
+              <th>Email</th>
               <th>Ngày sinh</th>
               <th>Tùy chọn</th>
             </tr>

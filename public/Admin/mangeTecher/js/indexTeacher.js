@@ -55,7 +55,7 @@ function renderAddElementInTable(e) {
         <td class="text-center">${formatObjectClassAndTeach(
           e.subjectsAndClass
         )} </td>
-        <td class="text-center">${e.address}</td>
+        <td class="text-center">${e.email}</td>
         <td class="text-center">${date}</td> 
      `;
 
