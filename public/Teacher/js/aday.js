@@ -161,6 +161,7 @@ document.querySelector(".delete").addEventListener("click", (e) => {
 });
 
 searchDay.addEventListener("input", (e) => {
+  e.preventDefault();
   let value = e.target.value;
 
   if (value && value.trim().length > 0) {
@@ -182,4 +183,9 @@ searchDay.addEventListener("input", (e) => {
   } else {
     renderDay(listStudents, day, month, year);
   }
+});
+const resetTableDay = document.querySelector("#btn-refresh-day");
+resetTableDay.addEventListener("click", () => {
+  renderDay(listStudents, day, month, year);
+  searchDay.value = "";
 });
