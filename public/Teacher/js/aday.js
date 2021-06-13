@@ -42,7 +42,6 @@ function createArrayAttendance(array) {
   return newArray;
 }
 function renderDay(listStudents, d, m, y) {
-  console.table(listStudents);
   aDay.innerText = "Ngày " + DateNowFormat(d, m, y);
   tableDay.innerHTML = "";
   listStudents.map((student, index) => {
@@ -62,24 +61,33 @@ function renderDay(listStudents, d, m, y) {
 
     const renderAfternoon = () => {
       let renderAtt = att.data.afternoon.map((item) => {
-        const style=item.status ? "" :( item.asked ? "color:orange" : "color:red");
-        return `<td style=${style}> ${item.status ? "" : item.asked ? "Có Phép" : "Vắng"}</td>
+        const style = item.status
+          ? ""
+          : item.asked
+          ? "color:orange"
+          : "color:red";
+        return `<td style=${style}> ${
+          item.status ? "" : item.asked ? "Có Phép" : "Vắng"
+        }</td>
         `;
       });
-      let renderTmp = createArrayAttendance(att.data.afternoon).map(
-        
-        (item) =>{
-          const style=item.status ? "" : item.asked ? "color:orange" : "color:red";
-          return `<td style=${style}> ${item.status ? "" : item.asked ? "Có Phép" : "Vắng"}</td>`;
-        } 
-      );
+      let renderTmp = createArrayAttendance(att.data.afternoon).map((item) => {
+        const style = item.status
+          ? ""
+          : item.asked
+          ? "color:orange"
+          : "color:red";
+        return `<td style=${style}> ${
+          item.status ? "" : item.asked ? "Có Phép" : "Vắng"
+        }</td>`;
+      });
       return renderAtt.concat(renderTmp);
     };
 
     let contentTr = `
     <td>${index + 1}</td>
     <td> ${student.id} </td>
-    <td>${String(student.firstName).replaceAll(","," ")}</td>
+    <td>${String(student.firstName).replaceAll(",", " ")}</td>
     <td>${student.lastName}</td>
     ${renderMorning().join("")}
     ${renderAfternoon().join("")}
