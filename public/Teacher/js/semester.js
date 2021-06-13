@@ -1,15 +1,15 @@
-// next and previous semester 
+// next and previous semester
 const previousSemester = document.querySelector(".previous-semester");
-const nextSemester=document.querySelector(".next-semester");
-const semesterNow=document.querySelector('.semester-now');
-nextSemester.addEventListener('click', ()=>{
- semesterNow.innerHTML='Học kỳ 2';
-})
-previousSemester.addEventListener('click', ()=>{
-  semesterNow.innerHTML='Học kỳ 1';
-})
-
-
+const nextSemester = document.querySelector(".next-semester");
+const semesterNow = document.querySelector(".semester-now");
+nextSemester.addEventListener("click", () => {
+  semesterNow.innerHTML = "Học kỳ 2";
+  renderSemester(listStudents, 2);
+});
+previousSemester.addEventListener("click", () => {
+  semesterNow.innerHTML = "Học kỳ 1";
+  renderSemester(listStudents, 1);
+});
 
 const bodySemester = document.querySelector(".table-list-semester");
 function dateOfSemester(listStudents, semester = 1) {
@@ -25,8 +25,8 @@ function dateOfSemester(listStudents, semester = 1) {
   });
   return listSemester;
 }
-function renderSemester(listStudents) {
-  let content = dateOfSemester(listStudents).map((student, index) => {
+function renderSemester(listStudents, semester = 1) {
+  let content = dateOfSemester(listStudents, semester).map((student, index) => {
     let absentNotAsked;
     let absentAsked = (absentNotAsked = 0);
     student.attendance.forEach((date) => {
@@ -38,7 +38,7 @@ function renderSemester(listStudents) {
     <tr>
     <td class="serial">${index + 1}</td>
     <td>${student.id}</td>
-    <td>${String(student.firstName).replaceAll(","," ")}</td>
+    <td>${String(student.firstName).replaceAll(",", " ")}</td>
     <td>${student.lastName}</td>
     <td>${absentAsked}</td>
     <td>${absentNotAsked}</td>
