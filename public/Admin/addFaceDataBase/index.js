@@ -127,7 +127,7 @@ function insertImage(uri) {
 }
 // kiem tra xem co vuot gian han qua 10 anh k
 function checkExpireImg() {
-  return listBase64 < 10;
+  return listBase64.length < 10;
 }
 
 // chup anh qua webcam
