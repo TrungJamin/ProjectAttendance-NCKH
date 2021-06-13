@@ -136,67 +136,82 @@ function renderChooseClassLeader(arr) {
 
 // edit teacher
 function editTeacher(id, obj) {
-  // lam loading de cap nhat email nha
-  if (oldEmail.trim() != obj.email.trim()) {
-    updateEmailAuth({ oldEmail: oldEmail, NewEmail: obj.email }).then((res) => {
-      console.log(res);
-    });
-  }
-
-  let dateNow = new Date().getFullYear();
-  let dateInput = new Date(obj.dataOfBirth).getFullYear();
-
-
-  if (Number(dateNow) - Number(dateInput) < 18) {
-    spinnerAddTeacher.classList.add("d-none");
+  if (obj.subjectsAndClass.length === 0) {
     Swal.fire({
       position: "top",
-      title: "mời nhập lại năm sinh vì không phù hợp",
+      title: "mời nhập thêm danh sách môn dạy",
     });
+    spinnerAddTeacher.classList.add("d-none");
   } else {
-    // kiểm tra class leader có bị trùng hay không
-    db.collection("TeacherAdmin")
-      .get()
-      .then(function (querySnapshot) {
-        let checkClass = false;
-
-        querySnapshot.forEach(function (doc) {
-          if (doc.data().class == obj.classLeader) {
-            checkClass = true;
-          }
-        });
-
-        if (checkClass == true) {
-          // da trung class
-          // chon laij class leader
-          Swal.fire({
-            position: 'top',
-            title:"mời bạn chọn lại lớp chủ nhiệm vì lớp bạn đã chọn trước đó đã bị trùng",
-          }
-            
-          );
-          spinnerAddTeacher.classList.add("d-none");
-        } else {
-          // chinh sưa giao vien
-          db.collection("Teachers")
-            .doc(id)
-            .set(obj)
-            .then(function () {
-              type = true;
-              db.collection("TeacherAdmin")
-                .doc(id)
-                .set({ class: obj.classLeader, email: obj.email })
-                .then((res) => {
-                  reNewForm();
-                  closeFormInput("cover-caption");
-                });
-            })
-            .catch(function (error) {
-              // console.error("Error writing document: ", error);
-            });
+    // lam loading de cap nhat email nha
+    if (oldEmail.trim() != obj.email.trim()) {
+      updateEmailAuth({ oldEmail: oldEmail, NewEmail: obj.email }).then(
+        (res) => {
+          console.log(res);
         }
-      })
-      .catch(function (error) {});
+      );
+    }
+
+    let dateNow = new Date().getFullYear();
+    let dateInput = new Date(obj.dataOfBirth).getFullYear();
+
+    if (Number(dateNow) - Number(dateInput) < 18) {
+      spinnerAddTeacher.classList.add("d-none");
+      Swal.fire({
+        position: "top",
+        title: "mời nhập lại năm sinh vì không phù hợp",
+      });
+    } else {
+      // kiểm tra class leader có bị trùng hay không
+      db.collection("TeacherAdmin")
+        .get()
+        .then(function (querySnapshot) {
+          let checkClass = false;
+
+          let checkMail = false;
+          querySnapshot.forEach(function (doc) {
+            if (doc.data().class == obj.classLeader) {
+              checkClass = true;
+            }
+
+            if (doc.data().email == obj.email) {
+              checkMail = true;
+            }
+          });
+
+          console.log(checkClass, checkMail);
+
+          if (checkClass == true && checkMail == false) {
+            // da trung class
+            // chon laij class leader
+            Swal.fire({
+              position: "top",
+              title:
+                "mời bạn chọn lại lớp chủ nhiệm vì lớp bạn đã chọn trước đó đã bị trùng",
+            });
+            spinnerAddTeacher.classList.add("d-none");
+          } else {
+            // chinh sưa giao vien
+            db.collection("Teachers")
+              .doc(id)
+              .set(obj)
+              .then(function () {
+                type = true;
+                db.collection("TeacherAdmin")
+                  .doc(id)
+                  .set({ class: obj.classLeader, email: obj.email })
+                  .then((res) => {
+                    reNewForm();
+                    closeFormInput("cover-caption");
+                  });
+              })
+              .catch(function (error) {
+                // console.error("Error writing document: ", error);
+              });
+          }
+        })
+        .catch(function (error) {});
+    }
   }
 }
 
@@ -278,8 +293,9 @@ function addTeacher(obj) {
 
             // chon laij class leader
             Swal.fire({
-              position: 'top',
-              title:"mời bạn chọn lại lớp chủ nhiệm vì lớp bạn đã chọn trước đó đã bị trùng",
+              position: "top",
+              title:
+                "mời bạn chọn lại lớp chủ nhiệm vì lớp bạn đã chọn trước đó đã bị trùng",
             });
             spinnerAddTeacher.classList.add("d-none");
           } else {
