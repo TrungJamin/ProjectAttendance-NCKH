@@ -14,41 +14,34 @@ firebase.auth().onAuthStateChanged(function (user) {
     // User is signed out.
   }
 });
+let state = 0;
 function getStudents(className) {
   db.collection("Students").onSnapshot(async (snapshots) => {
     listStudents = [];
-    getData(
-      new Promise(async (resolve, reject) => {
-        setTimeout(
-          await snapshots.forEach((snapshot) => {
-            let student = snapshot.data();
-            if (student.class == className) {
-              db.collection(`Students`)
-                .doc(snapshot.id)
-                .collection("attendance")
-                .onSnapshot((snapshots) => {
-                  let attendance = [];
-                  snapshots.forEach((doc) => {
-                    attendance.push({
-                      day: doc.id,
-                      data: doc.data(),
-                    });
-                  });
-                  listStudents.push({ ...student, attendance: attendance });
-                });
-            }
-          }, 500)
-        );
-        return resolve(listStudents);
-      })
-    ).then((result) => {
+    await snapshots.forEach((snapshot) => {
+      let student = snapshot.data();
+      if (student.class == className) {
+        db.collection(`Students`)
+          .doc(snapshot.id)
+          .collection("attendance")
+          .onSnapshot((snapshots) => {
+            let attendance = [];
+            snapshots.forEach((doc) => {
+              attendance.push({
+                day: doc.id,
+                data: doc.data(),
+              });
+            });
+            listStudents.push({ ...student, attendance: attendance });
+          });
+      }
       setTimeout(() => {
-        renderDatabase(result);
+        renderDatabase(listStudents);
+        state++;
       }, 2000);
     });
   });
 }
-
 async function getData(Promise) {
   return Promise;
 }

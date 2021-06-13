@@ -31,12 +31,12 @@ video {
   border-radius: 15px;
   background-color: rgb(245, 245, 245);
 }
-.loading h3 {
-  margin: 15px;
+/* .loading h3 {
+  padding-top: 40px;
   width: 100%;
-  font-size: 15px;
+  font-size: 20px;
   color: #000;
-}
+} */
 
 .loading img {
   height: 200px;

@@ -13,7 +13,6 @@ let preW = 0;
 let nextW = 0;
 
 function WeekNow(day1, day2) {
-  let d = new Date();
   return (
     "Tuần Học Thứ " +
     (getWeekNow(new Date()) + nextW - preW) +
@@ -80,8 +79,13 @@ function renderWeek(listStudents) {
   );
   let content = database[1].attendance.map((date) => {
     let d = new Date(date.day);
+    const dayNow = new Date();
+    const isDayNow = d.getDay() === dayNow.getDay();
+    const styleDayNow = isDayNow ? `background-color:rgb(119,171,89)` : "";
     return `
-      <th class= "typeDay" id ="${date.day}"> ${getTypeDay(
+      <th class= "typeDay" id ="${
+        date.day
+      }" isday=${isDayNow} style=${styleDayNow}> ${getTypeDay(
       d.getDay()
     )} , ${d.getDate()} </th>
       `;
@@ -95,11 +99,16 @@ function renderWeek(listStudents) {
 
   let table = database.map((student, index) => {
     let atd = student.attendance.map((date) => {
-
-      const style=date.data.status ? "" : date.data.asked ? "color:orange" : "color:red"
+      const style = date.data.status
+        ? ""
+        : date.data.asked
+        ? "color:orange"
+        : "color:red";
       return `
       <td>
-      <div style=${style} >${date.data.status ? "" : date.data.asked ? "Có Phép" : "Vắng"}</div>
+      <div style=${style} >${
+        date.data.status ? "" : date.data.asked ? "Có Phép" : "Vắng"
+      }</div>
   </td>
       `;
     });
@@ -107,7 +116,7 @@ function renderWeek(listStudents) {
     <tr>
     <td>${index + 1}</td>
     <td>${student.id}</td>
-    <td>${String(student.firstName).replaceAll(","," ")}</td>
+    <td>${String(student.firstName).replaceAll(",", " ")}</td>
     <td>${student.lastName}</td>
     ${atd.join(" ")}
 </tr>

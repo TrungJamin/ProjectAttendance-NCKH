@@ -225,3 +225,9 @@ tr {
 .semester-now {
   width: 1000px;
 }
+thead tr th[type="day-now"] {
+  display: none;
+}
+table .date-of-week tr :hover {
+  background-color: rgb(201, 223, 138);
+}
