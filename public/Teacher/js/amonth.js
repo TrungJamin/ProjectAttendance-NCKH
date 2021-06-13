@@ -51,7 +51,7 @@ function renderMonth(listStudents) {
     <tr>
     <td>${index + 1}</td>
     <td>${student.id}</td>
-    <td>${String(student.firstName).replaceAll(","," ")}</td>
+    <td>${String(student.firstName).replaceAll(",", " ")}</td>
     <td>${student.lastName}</td>
     <td>${countHAbsent}</td>
     <td>${countAbsent}</td>
@@ -99,8 +99,14 @@ searchMonth.addEventListener("input", (e) => {
         student.address.toLowerCase().includes(value)
       );
     });
-    renderMonth(listStudents);
+    renderMonth(tmp);
   } else {
     renderMonth(listStudents);
   }
+});
+const resetTableMonth = document.querySelector("#btn-refresh-month");
+resetTableMonth.addEventListener("click", () => {
+  renderMonth(listStudents);
+  console.log("run");
+  searchMonth.value = "";
 });

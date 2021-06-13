@@ -50,3 +50,34 @@ function renderSemester(listStudents, semester = 1) {
 document.querySelector(".semester-now").innerText = `Học Kì ${getSemester(
   getWeekNow(new Date())
 )}`;
+const search = document.querySelector("#semester-search");
+search.addEventListener("input", (e) => {
+  e.preventDefault();
+  let value = e.target.value;
+
+  if (value && value.trim().length > 0) {
+    value = value
+      .split(" ")
+      .filter((item) => item != "")
+      .join(" ")
+      .toLowerCase();
+    let tmp = listStudents.filter((student) => {
+      return (
+        student.name.toLowerCase().includes(value) ||
+        student.id.toString().toLowerCase().includes(value) ||
+        student.gender.toLowerCase().includes(value) ||
+        student.phone.toLowerCase().includes(value) ||
+        student.address.toLowerCase().includes(value)
+      );
+    });
+    renderSemester(tmp);
+  } else {
+    renderSemester(listStudents);
+  }
+});
+const restTable = document.querySelector("#btn-search-semester");
+
+restTable.addEventListener("click", (e) => {
+  renderSemester(listStudents);
+  search.value = "";
+});
