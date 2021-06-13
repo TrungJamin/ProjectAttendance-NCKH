@@ -136,67 +136,68 @@ function renderChooseClassLeader(arr) {
 
 // edit teacher
 function editTeacher(id, obj) {
- 
- 
   // lam loading de cap nhat email nha
   if (oldEmail.trim() != obj.email.trim()) {
-    updateEmailAuth({ oldEmail: oldEmail, NewEmail: obj.email }).then(
-      (res) => {
-        console.log(res);
-      }
-    );
+    updateEmailAuth({ oldEmail: oldEmail, NewEmail: obj.email }).then((res) => {
+      console.log(res);
+    });
   }
 
+  let dateNow = new Date().getFullYear();
+  let dateInput = new Date(obj.dataOfBirth).getFullYear();
 
 
-  // kiểm tra class leader có bị trùng hay không
-  db
-  .collection("TeacherAdmin")
-  .get()
-  .then(function (querySnapshot) {
+  if (Number(dateNow) - Number(dateInput) < 18) {
+    spinnerAddTeacher.classList.add("d-none");
+    Swal.fire({
+      position: "top",
+      title: "mời nhập lại năm sinh vì không phù hợp",
+    });
+  } else {
+    // kiểm tra class leader có bị trùng hay không
+    db.collection("TeacherAdmin")
+      .get()
+      .then(function (querySnapshot) {
+        let checkClass = false;
 
-    let checkClass=false;
-
-      querySnapshot.forEach(function (doc) {
-        
-        if( doc.data().class==obj.classLeader) {
-          checkClass=true;
-        }
-       
-      });
-
-      if( checkClass==true){// da trung class 
-        // chon laij class leader
-        Swal.fire('mời bạn chọn lại lớp chủ nhiệm vì lớp bạn đã chọn trước đó đã bị trùng');
-        spinnerAddTeacher.classList.add("d-none");
-
-      }
-      else{
-        // chinh sưa giao vien
-        db.collection("Teachers")
-        .doc(id)
-        .set(obj)
-        .then(function () {
-          type = true;
-          db.collection("TeacherAdmin")
-            .doc(id)
-            .set({ class: obj.classLeader, email: obj.email })
-            .then((res) => {
-               reNewForm();
-              closeFormInput("cover-caption");});
-        })
-        .catch(function (error) {
-          // console.error("Error writing document: ", error);
+        querySnapshot.forEach(function (doc) {
+          if (doc.data().class == obj.classLeader) {
+            checkClass = true;
+          }
         });
-      }
 
-  })
-  .catch(function (error) {
-
-  })
-
-
- 
+        if (checkClass == true) {
+          // da trung class
+          // chon laij class leader
+          Swal.fire({
+            position: 'top',
+            title:"mời bạn chọn lại lớp chủ nhiệm vì lớp bạn đã chọn trước đó đã bị trùng",
+          }
+            
+          );
+          spinnerAddTeacher.classList.add("d-none");
+        } else {
+          // chinh sưa giao vien
+          db.collection("Teachers")
+            .doc(id)
+            .set(obj)
+            .then(function () {
+              type = true;
+              db.collection("TeacherAdmin")
+                .doc(id)
+                .set({ class: obj.classLeader, email: obj.email })
+                .then((res) => {
+                  reNewForm();
+                  closeFormInput("cover-caption");
+                });
+            })
+            .catch(function (error) {
+              // console.error("Error writing document: ", error);
+            });
+        }
+      })
+      .catch(function (error) {});
+  }
 }
 
 //// deleteById
@@ -242,72 +243,82 @@ function addTeacher(obj) {
 
   spinnerAddTeacher.classList.remove("d-none");
 
-  if (obj.subjectsAndClass.length === 0) {
-    alert("Thêm danh sách môn dạy");
-    spinnerAddTeacher.classList.add("d-none");
-  } else {
+  // so sanhs ngayf
 
-    // kiểm tra class leader có bị trùng hay không
-    db
-        .collection("TeacherAdmin")
+  let dateNow = new Date().getFullYear();
+  let dateInput = new Date(obj.dataOfBirth).getFullYear();
+
+  console.log(dateNow, dateInput);
+
+  if (Number(dateNow) - Number(dateInput) < 18) {
+    spinnerAddTeacher.classList.add("d-none");
+    Swal.fire({
+      position: "top",
+      title: "mời nhập lại năm sinh vì không phù hợp",
+    });
+  } else {
+    if (obj.subjectsAndClass.length === 0) {
+      Swal.fire({
+        position: "top",
+        title: "mời nhập thêm danh sách môn dạy",
+      });
+      spinnerAddTeacher.classList.add("d-none");
+    } else {
+      // kiểm tra class leader có bị trùng hay không
+      db.collection("TeacherAdmin")
         .get()
         .then(function (querySnapshot) {
+          let check = false;
+          querySnapshot.forEach(function (doc) {
+            if (doc.data().class == obj.classLeader) check = true;
+          });
 
-          let check=false;
-            querySnapshot.forEach(function (doc) {
-              
-              if( doc.data().class==obj.classLeader) check=true;
+          if (check == true) {
+            // da trung class
+
+            // chon laij class leader
+            Swal.fire({
+              position: 'top',
+              title:"mời bạn chọn lại lớp chủ nhiệm vì lớp bạn đã chọn trước đó đã bị trùng",
             });
+            spinnerAddTeacher.classList.add("d-none");
+          } else {
+            // thêm giáo viên
+            firebase
+              .auth()
+              .createUserWithEmailAndPassword(obj.email, "123456")
+              .then(function (response) {
+                // tạo 1 giáo viên
 
-            
-            if( check==true){// da trung class 
+                db.collection("Teachers")
+                  .doc(response.user.uid)
+                  .set(obj)
+                  .then(function (response) {
+                    reNewForm();
+                    closeFormInput("cover-caption");
+                    spinnerAddTeacher.classList.add("d-none");
+                  })
+                  .catch(function (error) {
+                    console.log("errr");
+                  });
 
-              // chon laij class leader
-              Swal.fire('mời bạn chọn lại lớp chủ nhiệm vì lớp bạn đã chọn trước đó đã bị trùng');
-              spinnerAddTeacher.classList.add("d-none");
-
-            }
-            else{
-
-              // thêm giáo viên
-              firebase
-                .auth()
-                .createUserWithEmailAndPassword(obj.email, "123456")
-                .then(function (response) {
-                  // tạo 1 giáo viên
-
-                  db.collection("Teachers")
-                    .doc(response.user.uid)
-                    .set(obj)
-                    .then(function (response) {
-                      reNewForm();
-                      closeFormInput("cover-caption");
-                      spinnerAddTeacher.classList.add("d-none");
-                    })
-                    .catch(function (error) {
-                      console.log("errr");
-                    });
-
-                  //
-                  if (obj.classLeader !== "") {
-                    // make addmin
-                    const classLeader = obj.classLeader;
-                    const id = response.user.uid;
-                    let email = obj.email;
-                    setClassTeacherAdmin({ classLeader, id, email });
-                  }
-                })
-                .catch(function (error) {
-                  alert(" Nhập lại email !");
-                  spinnerAddTeacher.classList.add("d-none");
-                });
-
-            }
-
+                //
+                if (obj.classLeader !== "") {
+                  // make addmin
+                  const classLeader = obj.classLeader;
+                  const id = response.user.uid;
+                  let email = obj.email;
+                  setClassTeacherAdmin({ classLeader, id, email });
+                }
+              })
+              .catch(function (error) {
+                alert(" Nhập lại email !");
+                spinnerAddTeacher.classList.add("d-none");
+              });
+          }
         })
-        .catch(function (error) {
-    
-        })
+        .catch(function (error) {});
+    }
   }
 }
 

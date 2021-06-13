@@ -22,52 +22,63 @@ edit_form.addEventListener("submit", (e) => {
   let data = edit_form.fullname.value.split(" ");
   let id = "";
 
-  if (typeBoxEdit) {
-    id = edit_form.studentID.value;
-    db.collection("Students")
-      .doc(id)
-      .set({
-        firstName: data.slice(0, data.length - 1),
-        lastName: data[data.length - 1],
-        id: id,
-        name: edit_form.fullname.value,
-        class: classSelect.value,
-        dateOfBirth: dob,
-        gender: edit_form.gender.value,
-        address: edit_form.Address.value,
-        phone: edit_form.Phone.value,
-      });
-  } else {
-    let gradeLevel = getGradeLevel(classSelect.value);
-    let total = gradeLevel.total;
-    const id = year + gender + classSelect.value + ++total;
-    db.collection("Students")
-      .doc(id)
-      .set({
-        firstName: data.slice(0, data.length - 1),
-        lastName: data[data.length - 1],
-        id: id,
-        name: edit_form.fullname.value,
-        class: classSelect.value,
-        dateOfBirth: dob,
-        gender: edit_form.gender.value,
-        address: edit_form.Address.value,
-        phone: edit_form.Phone.value,
-      })
-      .then(async (res) => {
-        for (let i = 5; i <= 7; i++) {
-          await createAttendance(id, i);
-        }
-        setGradeLevel(classSelect.value);
-        edit_form.reset();
-      })
-      .then(function () {
-        swal("Successfully!", "", "success");
-      });
-    // .catch((err) => {
-    //   alert(err.message);
-    // });
+  let dateNow = new Date().getFullYear();
+  let dateInput = new Date(edit_form.dob.value).getFullYear();
+
+
+  if (Number(dateNow) - Number(dateInput) < 10) {
+     alert("mời nhập lại tuổi")
   }
+  else{
+    if (typeBoxEdit) {
+        id = edit_form.studentID.value;
+        db.collection("Students")
+          .doc(id)
+          .set({
+            firstName: data.slice(0, data.length - 1),
+            lastName: data[data.length - 1],
+            id: id,
+            name: edit_form.fullname.value,
+            class: classSelect.value,
+            dateOfBirth: dob,
+            gender: edit_form.gender.value,
+            address: edit_form.Address.value,
+            phone: edit_form.Phone.value,
+          });
+      } else {
+        let gradeLevel = getGradeLevel(classSelect.value);
+        let total = gradeLevel.total;
+        const id = year + gender + classSelect.value + ++total;
+        db.collection("Students")
+          .doc(id)
+          .set({
+            firstName: data.slice(0, data.length - 1),
+            lastName: data[data.length - 1],
+            id: id,
+            name: edit_form.fullname.value,
+            class: classSelect.value,
+            dateOfBirth: dob,
+            gender: edit_form.gender.value,
+            address: edit_form.Address.value,
+            phone: edit_form.Phone.value,
+          })
+          .then(async (res) => {
+            for (let i = 5; i <= 7; i++) {
+              await createAttendance(id, i);
+            }
+            setGradeLevel(classSelect.value);
+            edit_form.reset();
+          })
+          .then(function () {
+            swal("Successfully!", "", "success");
+          });
+        // .catch((err) => {
+        //   alert(err.message);
+        // });
+      }
+  }
+
+  
 });
 
 const createAttendance = (id, month) => {
