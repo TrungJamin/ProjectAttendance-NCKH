@@ -6,10 +6,10 @@ let listBase64 = [];
 let index = 0;
 save.addEventListener("click", (e) => {
   e.preventDefault();
-
+  console.log("loading....");
   Promise.all(listBase64).then((values) => {
     setDatabase({
-      class: "6A",
+      Class: "6A",
       listBase64: values,
       id: "201906A2",
     }).then((values) => {
@@ -37,6 +37,7 @@ function take_snapshot() {
 const upload = document.querySelector(".upload");
 const upload1 = document.querySelector(".upload1");
 upload1.addEventListener("change", (e) => {
+  console.log("loading....");
   const toBase64 = async (file) =>
     new Promise((resolve, reject) => {
       const reader = new FileReader();

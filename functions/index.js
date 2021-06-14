@@ -54,7 +54,10 @@ exports.detectedListAttendance = functions
       });
   });
 exports.addDescriptorsInData = functions
-  .runWith(runtimeOpts)
+  .runWith({
+    timeoutSeconds: 540,
+    memory: "1GB",
+  })
   .https.onCall(async (data, content) => {
     const { listBase64, id, Class } = data;
     const database = await detectFace(listBase64, id);
@@ -153,31 +156,6 @@ exports.deleteUserByUID = functions.https.onCall((data, context) => {
     .catch((error) => error.message);
 });
 
-exports.recursiveDelete = functions
-  .runWith({
-    timeoutSeconds: 540,
-    memory: "1GB",
-  })
-  .https.onCall(async (data, context) => {
-    // Only allow admin users to execute this function.
-    try {
-      const path = data.path;
-      await firebase_tools.firestore.delete(path, {
-        project: process.env.GCLOUD_PROJECT,
-        recursive: true,
-        yes: true,
-        token:
-          "1//0eOryLxfChbenCgYIARAAGA4SNwF-L9IrTiwbfO1bVoFhUPKY0HaJurPwdg5qW0C3xkXDKTaogOabTele1sGfkmbRaZ8-Cj0Ic58",
-      });
-
-      return {
-        path: path,
-      };
-    } catch (error) {
-      return error;
-    }
-  });
-
 exports.setDescriptorsInData = functions
   .runWith({
     timeoutSeconds: 540,
@@ -188,7 +166,7 @@ exports.setDescriptorsInData = functions
     const database = await getDescriptors(listBase64);
     const oldData = await db
       .collection("facesDatabase")
-      .doc(data.class)
+      .doc(Class)
       .collection("data")
       .get()
       .then((querySnapshots) => {
@@ -204,17 +182,32 @@ exports.setDescriptorsInData = functions
           return person;
         });
       });
-    const newData = descriptorsToObject(database.concat(oldData), id);
-    return db
-      .collection("facesDatabase")
-      .doc(Class)
-      .collection("data")
-      .doc(id)
-      .set(newData, { merge: true })
-      .then(() => {
-        return Object.values(database.descriptors).length / listBase64.length;
+    return Promise.all([...database, ...oldData])
+      .then((values) => {
+        console.log(values);
+        return descriptorsToObject(values);
       })
-      .catch(function (error) {
+      .then((result) => {
+        return {
+          label: id,
+          descriptors: result,
+        };
+      })
+      .then((newData) => {
+        return db
+          .collection("facesDatabase")
+          .doc(Class)
+          .collection("data")
+          .doc(id)
+          .set(newData, { merge: true })
+          .then(() => {
+            return database.length / listBase64.length;
+          })
+          .catch(function (error) {
+            return error.message;
+          });
+      })
+      .catch((error) => {
         return error.message;
       });
   });

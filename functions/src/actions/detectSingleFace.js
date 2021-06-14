@@ -7,7 +7,6 @@ async function toDescriptors(listBase64) {
       .detectSingleFace(tensor, optionsSSDMobileNet)
       .withFaceLandmarks()
       .withFaceDescriptor();
-    // console.log("detections", detections);
     tensor.dispose();
     if (detections) {
       return detections.descriptor;

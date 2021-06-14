@@ -10,26 +10,27 @@ var valueClass = "";
 var idStudent = "";
 
 const viewNotice = (res) => {
-  if (res <= 5) {
+  const percent = res * 100;
+  if (percent <= 5) {
     swal(
       "Nhận Diện Ảnh Không Thành Công",
-      `Số Ảnh Thành Công ${res * 100}% ,
+      `Số Ảnh Thành Công ${percent}% ,
     Bạn Vui Lòng Làm Lại
     `,
       "error"
     );
   } else {
-    if (res < 8) {
+    if (percent < 8) {
       swal(
         "Cảnh Báo",
-        `Số Ảnh Thành Công  ${res * 100}%  ,
+        `Số Ảnh Thành Công  ${percent}%  ,
       `,
         "warning"
       );
     } else {
       swal(
         "Cập Nhật Ảnh Thành Công",
-        `Số Ảnh Thành Công  ${res * 100}%  ,
+        `Số Ảnh Thành Công  ${percent}%  ,
       `,
         "success"
       );
@@ -43,6 +44,7 @@ save.addEventListener("click", (e) => {
     document.querySelector(".container-fluid").classList.add("disabled");
     document.querySelector(".loading").classList.remove("d-none");
     Promise.all(listBase64).then((values) => {
+      console.log(listBase64);
       addImage({
         id: idStudent,
         Class: valueClass,

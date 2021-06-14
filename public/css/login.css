@@ -308,3 +308,23 @@ img {
 #swal2-title {
   font-size: 20px;
 }
+
+.download-android {
+  position: relative;
+  bottom: 50px;
+}
+.download-android .download-link-android {
+  position: absolute;
+
+  right: 200px;
+}
+.download-android .download-link-android img {
+  width: 180px;
+  height: 120px;
+}
+.QRCode {
+  height: 120px;
+  width: 150px;
+  position: absolute;
+  right: 20px;
+}
