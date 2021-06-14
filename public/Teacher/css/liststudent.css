@@ -213,7 +213,7 @@ tr {
 .day-now,
 .month-now,
 .week-now {
-  width: 80%;
+  width: 65%;
 }
 .table-header {
   display: flex;
@@ -235,4 +235,8 @@ table .date-of-week tr :hover {
 }
 #attendance {
   font-size: 15px;
+}
+#input-search-date {
+  cursor: pointer;
+  width: 170px;
 }

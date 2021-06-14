@@ -16,6 +16,12 @@ function DateNowFormat(day, month, year) {
   let tmp = day + "-" + month + "-" + year;
   return tmp;
 }
+function resetNote() {
+  for (let i = 0; i < 10; i++) {
+    console.log("running");
+    document.getElementById(i.toString()).innerText = "";
+  }
+}
 function getDate(day, month, year) {
   let tmp;
   if (day < 10) tmp = month + "-0" + day + "-" + year;
@@ -41,8 +47,19 @@ function createArrayAttendance(array) {
   }
   return newArray;
 }
+
+const formatNumber = (number) => {
+  if (number < 10) {
+    return "0" + number;
+  }
+  return number;
+};
+const formatDateSearch = (y, m, d) => {
+  return `${y}-${formatNumber(m)}-${formatNumber(d)}`;
+};
 function renderDay(listStudents, d, m, y) {
   aDay.innerText = "Ngày " + DateNowFormat(d, m, y);
+  inputSearchDate.value = formatDateSearch(y, m, d);
   tableDay.innerHTML = "";
   listStudents.map((student, index) => {
     const tr = document.createElement("tr");
@@ -56,12 +73,12 @@ function renderDay(listStudents, d, m, y) {
           ? "color:orange"
           : "color:red";
         return `<td id="attendance" style=${style}> ${
-          item.status ? "" : item.asked ? "Có Phép" : "Vắng"
+          item.status ? "" : item.asked ? "P" : "V"
         }</td>
       `;
       });
       let renderTmp = createArrayAttendance(att.data.morning).map(
-        (item) => `<td> ${item.status ? "" : item.asked ? "p" : "k"}</td>`
+        (item) => `<td> ${item.status ? "" : item.asked ? "P" : "V"}</td>`
       );
       return renderAtt.concat(renderTmp);
     };
@@ -74,7 +91,7 @@ function renderDay(listStudents, d, m, y) {
           ? "color:orange"
           : "color:red";
         return `<td id="attendance" style=${style}> ${
-          item.status ? "" : item.asked ? "Có Phép" : "Vắng"
+          item.status ? "" : item.asked ? "P" : "V"
         }</td>
         `;
       });
@@ -85,7 +102,7 @@ function renderDay(listStudents, d, m, y) {
           ? "color:orange"
           : "color:red";
         return `<td style=${style}> ${
-          item.status ? "" : item.asked ? "Có Phép" : "Vắng"
+          item.status ? "" : item.asked ? "P" : "V"
         }</td>`;
       });
       return renderAtt.concat(renderTmp);
@@ -99,7 +116,7 @@ function renderDay(listStudents, d, m, y) {
     ${renderMorning().join("")}
     ${renderAfternoon().join("")}
     `;
-    tr.innerHTML = contentTr; 
+    tr.innerHTML = contentTr;
     const note = document.createElement("p");
     note.setAttribute("class", "noted");
     note.setAttribute("id", student.id);
@@ -107,18 +124,20 @@ function renderDay(listStudents, d, m, y) {
     let contextNote = att.data.note + " ";
     note.innerText = `"${String(contextNote).replace(",", "")}"`;
     note.addEventListener("click", (e) => {
-      document.querySelector(".panel-name").innerHTML =
+      resetNote();
+      document.querySelector(".panel-name").innerText =
         "Họ Tên: " + student.name;
       let length = 0;
       att.data.morning.forEach((item, index) => {
         const subject = item.code.split("-")[1];
+        document.getElementById(index).innerText = "";
         document.getElementById(index).innerText =
           subject.toUpperCase() + " : " + item.note;
         length++;
       });
       att.data.afternoon.forEach((item) => {
         const subject = item.code.split("-")[1];
-        document.getElementById(length.toString()).innerHTML =
+        document.getElementById(length.toString()).innerText =
           subject.toUpperCase() + " : " + item.note;
         length++;
       });
@@ -198,4 +217,17 @@ const resetTableDay = document.querySelector("#btn-refresh-day");
 resetTableDay.addEventListener("click", () => {
   renderDay(listStudents, day, month, year);
   searchDay.value = "";
+});
+
+const inputSearchDate = document.querySelector("#input-search-date");
+
+inputSearchDate.addEventListener("change", (e) => {
+  const date = new Date(inputSearchDate.value);
+  if (date.getDate() && date.getMonth() && date.getFullYear())
+    renderDay(
+      listStudents,
+      date.getDate(),
+      date.getMonth() + 1,
+      date.getFullYear()
+    );
 });
