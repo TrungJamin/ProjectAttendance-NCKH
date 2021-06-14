@@ -81,7 +81,31 @@ const makeTeacherAdmin = async (newAccount) => {
 };
 
 btnLogout.addEventListener("click", (event) => {
-  formLogout.classList.add("open"); // hien thi forms
+  // formLogout.classList.add("open"); // hien thi forms
+
+  Swal.fire({
+    title: 'Bạn có chắc muốn đăng xuất?',
+  
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#d33',
+    cancelButtonColor: ' #3085d6',
+    confirmButtonText: 'Đăng xuất',
+    cancelButtonText:'Không'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      firebase
+    .auth()
+    .signOut()
+    .then(() => {
+      location.assign("./../index.html");
+    })
+    .catch((error) => {
+      // An error happened.
+    });
+
+    }
+  })
 
 });
 
