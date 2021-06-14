@@ -8,7 +8,30 @@ window.addEventListener("scroll", (event) => {
   }
 });
 document.querySelector("#btnLogout").addEventListener("click", () => {
-  document.querySelector(".formLogout").classList.remove("d-none");
+  
+  Swal.fire({
+    title: 'Bạn có chắc muốn đăng xuất?',
+  
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#d33',
+    cancelButtonColor: ' #3085d6',
+    confirmButtonText: 'Đăng xuất',
+    cancelButtonText:'Không'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      firebase
+    .auth()
+    .signOut()
+    .then(() => {
+      location.assign("./../index.html");
+    })
+    .catch((error) => {
+      // An error happened.
+    });
+
+    }
+  })
 });
 
 function closeFormLogout() {
