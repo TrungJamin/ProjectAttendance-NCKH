@@ -168,30 +168,25 @@ function editTeacher(id, obj) {
         .then(function (querySnapshot) {
           let checkClass = false;
 
-          let checkMail = false;
+          let check = false;
           querySnapshot.forEach(function (doc) {
-            if (doc.data().class == obj.classLeader) {
-              checkClass = true;
+            if (doc.data().class == "") {
+            } else {
+              if (doc.data().class == obj.classLeader) {
+                checkClass = true;
+              }
             }
 
-            if (doc.data().email == obj.email) {
-              checkMail = true;
+            if (
+              doc.data().email == obj.email &&
+              doc.data().class == obj.classLeader
+            ) {
+              check = true;
             }
           });
 
-          console.log(checkClass, checkMail);
-
-          if (checkClass == true && checkMail == false) {
-            // da trung class
-            // chon laij class leader
-            Swal.fire({
-              position: "top",
-              title:
-                "mời bạn chọn lại lớp chủ nhiệm vì lớp bạn đã chọn trước đó đã bị trùng",
-            });
-            spinnerAddTeacher.classList.add("d-none");
-          } else {
-            // chinh sưa giao vien
+          if (check) {
+            // chac chan là giáo viên đó vào lớp đó
             db.collection("Teachers")
               .doc(id)
               .set(obj)
@@ -208,6 +203,61 @@ function editTeacher(id, obj) {
               .catch(function (error) {
                 // console.error("Error writing document: ", error);
               });
+          } else {
+            if (checkClass == true) {
+              // da trung class
+              // chon laij class leader
+              Swal.fire({
+                title:
+                  "Lớp chủ nhiệm này đã bị trùng , bạn có chắc là chủ nhiệm thứ hai của lớp ?",
+                position: "top",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#d33",
+                cancelButtonColor: " #3085d6",
+                confirmButtonText: "Đúng",
+                cancelButtonText: "Không",
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  db.collection("Teachers")
+                    .doc(id)
+                    .set(obj)
+                    .then(function () {
+                      type = true;
+                      db.collection("TeacherAdmin")
+                        .doc(id)
+                        .set({ class: obj.classLeader, email: obj.email })
+                        .then((res) => {
+                          reNewForm();
+                          closeFormInput("cover-caption");
+                        });
+                    })
+                    .catch(function (error) {
+                      // console.error("Error writing document: ", error);
+                    });
+                }
+              });
+
+              spinnerAddTeacher.classList.add("d-none");
+            } else {
+              // chinh sưa giao vien
+              db.collection("Teachers")
+                .doc(id)
+                .set(obj)
+                .then(function () {
+                  type = true;
+                  db.collection("TeacherAdmin")
+                    .doc(id)
+                    .set({ class: obj.classLeader, email: obj.email })
+                    .then((res) => {
+                      reNewForm();
+                      closeFormInput("cover-caption");
+                    });
+                })
+                .catch(function (error) {
+                  // console.error("Error writing document: ", error);
+                });
+            }
           }
         })
         .catch(function (error) {});
@@ -293,9 +343,49 @@ function addTeacher(obj) {
 
             // chon laij class leader
             Swal.fire({
-              position: "top",
               title:
-                "mời bạn chọn lại lớp chủ nhiệm vì lớp bạn đã chọn trước đó đã bị trùng",
+                "Lớp chủ nhiệm này đã bị trùng , bạn có chắc là chủ nhiệm thứ hai của lớp ?",
+              position: "top",
+              icon: "warning",
+              showCancelButton: true,
+              confirmButtonColor: "#d33",
+              cancelButtonColor: " #3085d6",
+              confirmButtonText: "Đúng",
+              cancelButtonText: "Không",
+            }).then((result) => {
+              if (result.isConfirmed) {
+                firebase
+                  .auth()
+                  .createUserWithEmailAndPassword(obj.email, "123456")
+                  .then(function (response) {
+                    // tạo 1 giáo viên
+
+                    db.collection("Teachers")
+                      .doc(response.user.uid)
+                      .set(obj)
+                      .then(function (response) {
+                        reNewForm();
+                        closeFormInput("cover-caption");
+                        spinnerAddTeacher.classList.add("d-none");
+                      })
+                      .catch(function (error) {
+                        console.log("errr");
+                      });
+
+                    //
+                    if (obj.classLeader !== "") {
+                      // make addmin
+                      const classLeader = obj.classLeader;
+                      const id = response.user.uid;
+                      let email = obj.email;
+                      setClassTeacherAdmin({ classLeader, id, email });
+                    }
+                  })
+                  .catch(function (error) {
+                    alert(" Nhập lại email !");
+                    spinnerAddTeacher.classList.add("d-none");
+                  });
+              }
             });
             spinnerAddTeacher.classList.add("d-none");
           } else {
