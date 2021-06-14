@@ -73,12 +73,12 @@ function renderDay(listStudents, d, m, y) {
           ? "color:orange"
           : "color:red";
         return `<td id="attendance" style=${style}> ${
-          item.status ? "" : item.asked ? "Có Phép" : "Vắng"
+          item.status ? "" : item.asked ? "P" : "V"
         }</td>
       `;
       });
       let renderTmp = createArrayAttendance(att.data.morning).map(
-        (item) => `<td> ${item.status ? "" : item.asked ? "p" : "k"}</td>`
+        (item) => `<td> ${item.status ? "" : item.asked ? "P" : "V"}</td>`
       );
       return renderAtt.concat(renderTmp);
     };
@@ -91,7 +91,7 @@ function renderDay(listStudents, d, m, y) {
           ? "color:orange"
           : "color:red";
         return `<td id="attendance" style=${style}> ${
-          item.status ? "" : item.asked ? "Có Phép" : "Vắng"
+          item.status ? "" : item.asked ? "P" : "V"
         }</td>
         `;
       });
@@ -102,7 +102,7 @@ function renderDay(listStudents, d, m, y) {
           ? "color:orange"
           : "color:red";
         return `<td style=${style}> ${
-          item.status ? "" : item.asked ? "Có Phép" : "Vắng"
+          item.status ? "" : item.asked ? "P" : "V"
         }</td>`;
       });
       return renderAtt.concat(renderTmp);
