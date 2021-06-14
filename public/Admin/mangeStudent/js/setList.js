@@ -216,6 +216,22 @@ function getLastName(name) {
 
 // SEARCH
 // SEARCH
+
+function convertDate(day){
+
+  var date=new Date(day);
+  var options = {
+    year: "numeric",
+    month: "2-digit",
+    day: "numeric"
+  };
+  date=date.toLocaleDateString("en", options);
+
+  return date;
+
+}
+
+
 const search = document.getElementById("Student-search");
 
 search.addEventListener("input", (e) => {
@@ -233,7 +249,9 @@ search.addEventListener("input", (e) => {
         student.id.toString().toLowerCase().includes(value) ||
         student.class.toLowerCase().includes(value) ||
         student.gender.toLowerCase().includes(value) ||
-        student.phone.toLowerCase().includes(value)
+        student.phone.toLowerCase().includes(value) ||
+        convertDate(student.dateOfBirth).toLowerCase().includes(value)||
+        student.address.toLowerCase().includes(value) 
       );
     });
     setList(tmp);

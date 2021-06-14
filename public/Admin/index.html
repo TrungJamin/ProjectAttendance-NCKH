@@ -89,41 +89,30 @@
 
                
                 <!-- Nav Item - Pages Collapse Menu -->
-                <li class="nav-item">
+                <li class="nav-item active" id='firstTimeActive'>
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                        aria-expanded="true" aria-controls="collapseTwo">
+                        aria-expanded="true" aria-controls="collapseTwo" id="all-Teachers"
+                       >
                         <i class="fas fa-user-tie"></i>
-                        <span>Giáo Viên</span>
+                        <span>Quản Lý Giáo Viên</span>
                     </a>
-                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                            <h6 class="collapse-header">Giao Diện Quản Lý Giáo Viên</h6>
-                            <a class="collapse-item" href="#" id="all-Teachers">Quản Lý Giáo Viên</a>
-
-                        </div>
-                    </div>
                 </li>
 
                 <!-- Nav Item - Utilities Collapse Menu -->
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-                        aria-expanded="true" aria-controls="collapseUtilities">
+                        aria-expanded="true" aria-controls="collapseUtilities" id="all-Students"
+                        onclick="removeActive()">
                         <i class="fas fa-user-graduate"></i>
-                        <span>Học Sinh</span>
+                        <span>Quản Lý Học Sinh</span>
                     </a>
-                    <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
-                        data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                            <h6 class="collapse-header">Giao Diện Quản Lý Học Sinh</h6>
-                            <a class="collapse-item" href="#" id="all-Students">Quản Lý Học Sinh</a>
-                        </div>
-                    </div>
                 </li>
                
                 <li class="nav-item">
                     <a class="nav-link collapsed add-face-student" href="#" data-toggle="collapse" aria-expanded="true"
-                        aria-controls="collapsePages">
-                        <i class="fas fa-function" aria-hidden="true"></i>
+                        aria-controls="collapsePages"
+                        onclick="removeActive()">
+                        <i class="fas fa-database" aria-hidden="true"></i>
                         <span>Thêm Dữ Liệu Học sinh </span>
                     </a>
                 </li>
@@ -277,6 +266,10 @@
 </body>
 
 <script>
+    function removeActive(){
+        document.querySelector("#firstTimeActive").classList.remove("active");
+
+    }
 
 </script>
 <script src="./../config/env.js"></script>

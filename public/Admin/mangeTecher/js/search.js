@@ -26,6 +26,49 @@
 //   }
 // });
 
+function convertDate(day){
+
+  var date=new Date(day);
+  var options = {
+    year: "numeric",
+    month: "2-digit",
+    day: "numeric"
+  };
+  date=date.toLocaleDateString("en", options);
+
+  return date;
+
+}
+
+function formatObjectClassAndTeach(s) {
+  var index = 0;
+  var stringOut = "";
+  for (var i = 0; i < s.length - 1; i++) {
+    if (s[index].class == s[i + 1].class) {
+      s[i + 1].class = "";
+    } else {
+      index = i + 1;
+    }
+  }
+
+  s.forEach((e,index) => {
+    if (e.class == "") {
+      stringOut += " ; " + e.subject;
+    } else {
+      var br=""
+      if(index==0){
+
+      }
+      else{
+        br="<br>"
+      }
+      stringOut += br + e.class + " : " + e.subject;
+    }
+  });
+  return stringOut;
+}
+
+
 function searchAll(e){
   let value = e;
 
@@ -45,7 +88,11 @@ function searchAll(e){
     return (
       teacher.name.toLowerCase().includes(value) ||
       teacher.id.toString().toLowerCase().includes(value) ||
-      teacher.classLeader.toLowerCase().includes(value)
+      teacher.classLeader.toLowerCase().includes(value) ||
+      teacher.email.toLowerCase().includes(value)||
+      convertDate(teacher.dataOfBirth).toLowerCase().includes(value)||
+      formatObjectClassAndTeach(teacher.subjectsAndClass).toLowerCase().includes(value)
+
     );
   });
 
