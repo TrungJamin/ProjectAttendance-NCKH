@@ -34,31 +34,55 @@ function listMonth(listStudents, aMonth) {
 
   return listMonth;
 }
+
+const notification = document.querySelector(".container-date-off");
 function renderMonth(listStudents) {
   let d = new Date();
   countHAbsent = 0;
   countAbsent = 0;
   let list = listMonth(listStudents, d.getMonth() + 1 + next - pre);
-  let table = list.map((student, index) => {
-    countHAbsent = 0;
+
+  list.forEach((student, index) => {
+    const tr = document.createElement("tr");
+    countNotAbsent = 0;
     countAbsent = 0;
+    const listAsked = [];
+    const listNotAsked = [];
     student.attendance.forEach((att) => {
       if (!att.data.status) {
-        att.data.asked ? countHAbsent++ : countAbsent++;
+        if (att.data.asked) {
+          listAsked.push(att.day);
+          countAbsent++;
+        } else {
+          listNotAsked.push(att.day);
+          countNotAbsent++;
+        }
       }
     });
-    return `
-    <tr>
+    const content = `
     <td>${index + 1}</td>
     <td>${student.id}</td>
     <td>${String(student.firstName).replaceAll(",", " ")}</td>
     <td>${student.lastName}</td>
-    <td>${countHAbsent}</td>
-    <td>${countAbsent}</td>
-</tr>
     `;
+
+    tr.innerHTML = content;
+    const notAbsent = document.createElement("td");
+    notAbsent.innerText = countNotAbsent;
+    const absent = document.createElement("td");
+    absent.innerText = countAbsent;
+    tr.append(absent);
+    tr.append(notAbsent);
+
+    notAbsent.addEventListener("click", (e) => {
+      console.log(listNotAsked);
+      notification.classList.remove("d-none");
+    });
+    absent.addEventListener("click", (e) => {
+      console.log(listAsked);
+    });
+    tableMonth.append(tr);
   });
-  tableMonth.innerHTML = table.join(" ");
 }
 
 nextmonth.addEventListener("click", (e) => {

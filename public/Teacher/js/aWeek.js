@@ -98,12 +98,12 @@ function renderWeek(listStudents) {
         const style = date.data.status
           ? ""
           : date.data.asked
-          ? "color:orange"
+          ? "color:#06ad35"
           : "color:red";
         return `
         <td>
         <div style=${style} >${
-          date.data.status ? "" : date.data.asked ? "Có Phép" : "Vắng"
+          date.data.status ? "" : date.data.asked ? "P" : "V"
         }</div>
     </td>
         `;

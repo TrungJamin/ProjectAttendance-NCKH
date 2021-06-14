@@ -70,7 +70,7 @@ function renderDay(listStudents, d, m, y) {
         const style = item.status
           ? ""
           : item.asked
-          ? "color:orange"
+          ? "color:#06ad35"
           : "color:red";
         return `<td id="attendance" style=${style}> ${
           item.status ? "" : item.asked ? "P" : "V"
@@ -88,7 +88,7 @@ function renderDay(listStudents, d, m, y) {
         const style = item.status
           ? ""
           : item.asked
-          ? "color:orange"
+          ? "color:#06ad35"
           : "color:red";
         return `<td id="attendance" style=${style}> ${
           item.status ? "" : item.asked ? "P" : "V"
@@ -99,7 +99,7 @@ function renderDay(listStudents, d, m, y) {
         const style = item.status
           ? ""
           : item.asked
-          ? "color:orange"
+          ? "color:#06ad35"
           : "color:red";
         return `<td style=${style}> ${
           item.status ? "" : item.asked ? "P" : "V"

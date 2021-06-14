@@ -152,7 +152,6 @@ tr {
     0 12.5px 10px rgba(0, 0, 0, 0.06), 0 22.3px 17.9px rgba(0, 0, 0, 0.072),
     0 41.8px 33.4px rgba(0, 0, 0, 0.086), 0 100px 80px rgba(0, 0, 0, 0.12);
   min-height: 200px;
-  height: 500px;
   width: 68vw;
   margin: 100px auto;
   background: white;
@@ -189,7 +188,8 @@ tr {
 .delete {
   padding: 0 15px;
 }
-.note-date {
+.note-date,
+.container-date-off {
   width: 100%;
   height: 100%;
   position: fixed;
@@ -210,10 +210,12 @@ tr {
 .typeDay {
   cursor: pointer;
 }
-.day-now,
+.day-now {
+  width: 65%;
+}
 .month-now,
 .week-now {
-  width: 65%;
+  width: 80%;
 }
 .table-header {
   display: flex;
@@ -237,6 +239,5 @@ table .date-of-week tr :hover {
   font-size: 15px;
 }
 #input-search-date {
-  cursor: pointer;
-  width: 170px;
+  width: 180px;
 }
