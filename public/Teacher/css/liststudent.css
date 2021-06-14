@@ -175,14 +175,16 @@ tr {
   border-bottom: 1px solid transparent;
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
-  background-color: #4ef4a8;
+  background-color: rgb(11 82 3 / 49%);
   color: #304ca2;
 }
 
 .panel-name {
   text-align: center;
-  width: 95%;
+  margin: auto;
   font-weight: 500;
+  color: #fff;
+  font-size: 25px;
 }
 .delete {
   padding: 0 15px;
@@ -230,4 +232,7 @@ thead tr th[type="day-now"] {
 }
 table .date-of-week tr :hover {
   background-color: rgb(201, 223, 138);
+}
+#attendance {
+  font-size: 15px;
 }

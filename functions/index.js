@@ -2,6 +2,10 @@ const functions = require("firebase-functions");
 const admin = require("firebase-admin");
 admin.initializeApp(functions.config().firebase);
 const { detects, faceapi, detectFace, detectListFile } = require("./src/");
+const {
+  getDescriptors,
+  descriptorsToObject,
+} = require("./src/actions/detectSingleFace");
 const db = admin.firestore();
 const runtimeOpts = {
   timeoutSeconds: 300,
@@ -61,7 +65,7 @@ exports.addDescriptorsInData = functions
       .doc(id)
       .set(database, { merge: true })
       .then(() => {
-        return Object.values(database.descriptors).length/listBase64.length;
+        return Object.values(database.descriptors).length / listBase64.length;
       })
       .catch(function (error) {
         return error.message;
@@ -142,9 +146,75 @@ exports.updateEmailAuth = functions.https.onCall((data, content) => {
     });
 });
 
-exports.deleteUserByUID = functions.https.onCall((data,context) => {
+exports.deleteUserByUID = functions.https.onCall((data, context) => {
   return admin
-  .auth()
-  .deleteUser(data.uid)
-  .catch((error) => error.message)
-})
+    .auth()
+    .deleteUser(data.uid)
+    .catch((error) => error.message);
+});
+
+exports.recursiveDelete = functions
+  .runWith({
+    timeoutSeconds: 540,
+    memory: "1GB",
+  })
+  .https.onCall(async (data, context) => {
+    // Only allow admin users to execute this function.
+    try {
+      const path = data.path;
+      await firebase_tools.firestore.delete(path, {
+        project: process.env.GCLOUD_PROJECT,
+        recursive: true,
+        yes: true,
+        token:
+          "1//0eOryLxfChbenCgYIARAAGA4SNwF-L9IrTiwbfO1bVoFhUPKY0HaJurPwdg5qW0C3xkXDKTaogOabTele1sGfkmbRaZ8-Cj0Ic58",
+      });
+
+      return {
+        path: path,
+      };
+    } catch (error) {
+      return error;
+    }
+  });
+
+exports.setDescriptorsInData = functions
+  .runWith({
+    timeoutSeconds: 540,
+    memory: "1GB",
+  })
+  .https.onCall(async (data, content) => {
+    const { listBase64, id, Class } = data;
+    const database = await getDescriptors(listBase64);
+    const oldData = await db
+      .collection("facesDatabase")
+      .doc(data.class)
+      .collection("data")
+      .get()
+      .then((querySnapshots) => {
+        let labeledFaceDescriptorsJson2 = [];
+        querySnapshots.forEach((item) => {
+          labeledFaceDescriptorsJson2.push(item.data());
+        });
+        return labeledFaceDescriptorsJson2.map((person) => {
+          person.descriptors = Object.values(person.descriptors);
+          person.descriptors = person.descriptors.map((detail) =>
+            Object.values(detail)
+          );
+          return person;
+        });
+      });
+    const newData = descriptorsToObject(database.concat(oldData), id);
+    return db
+      .collection("facesDatabase")
+      .doc(Class)
+      .collection("data")
+      .doc(id)
+      .set(newData, { merge: true })
+      .then(() => {
+        return Object.values(database.descriptors).length / listBase64.length;
+      })
+      .catch(function (error) {
+        return error.message;
+      });
+  });

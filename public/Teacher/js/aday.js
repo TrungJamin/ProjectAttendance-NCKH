@@ -50,8 +50,15 @@ function renderDay(listStudents, d, m, y) {
     let att = getAttendanceOfDay(student.attendance, getDate(d, m, y));
     const renderMorning = () => {
       let renderAtt = att.data.morning.map((item) => {
-        return `<td> ${item.status ? "" : item.asked ? "p" : "k"}</td>
-        `;
+        const style = item.status
+          ? ""
+          : item.asked
+          ? "color:orange"
+          : "color:red";
+        return `<td id="attendance" style=${style}> ${
+          item.status ? "" : item.asked ? "Có Phép" : "Vắng"
+        }</td>
+      `;
       });
       let renderTmp = createArrayAttendance(att.data.morning).map(
         (item) => `<td> ${item.status ? "" : item.asked ? "p" : "k"}</td>`
@@ -66,7 +73,7 @@ function renderDay(listStudents, d, m, y) {
           : item.asked
           ? "color:orange"
           : "color:red";
-        return `<td style=${style}> ${
+        return `<td id="attendance" style=${style}> ${
           item.status ? "" : item.asked ? "Có Phép" : "Vắng"
         }</td>
         `;
@@ -92,24 +99,27 @@ function renderDay(listStudents, d, m, y) {
     ${renderMorning().join("")}
     ${renderAfternoon().join("")}
     `;
-    tr.innerHTML = contentTr;
-    let note = document.createElement("p");
+    tr.innerHTML = contentTr; 
+    const note = document.createElement("p");
     note.setAttribute("class", "noted");
     note.setAttribute("id", student.id);
 
     let contextNote = att.data.note + " ";
-    note.innerText = `"${contextNote}"`;
-
+    note.innerText = `"${String(contextNote).replace(",", "")}"`;
     note.addEventListener("click", (e) => {
-      document.querySelector(".panel-name").innerText =
+      document.querySelector(".panel-name").innerHTML =
         "Họ Tên: " + student.name;
       let length = 0;
       att.data.morning.forEach((item, index) => {
-        document.getElementById(index).innerText = item.note;
+        const subject = item.code.split("-")[1];
+        document.getElementById(index).innerText =
+          subject.toUpperCase() + " : " + item.note;
         length++;
       });
       att.data.afternoon.forEach((item) => {
-        document.getElementById(length.toString()).innerText = item.note;
+        const subject = item.code.split("-")[1];
+        document.getElementById(length.toString()).innerHTML =
+          subject.toUpperCase() + " : " + item.note;
         length++;
       });
       document.querySelector(".note-date").classList.remove("d-none");

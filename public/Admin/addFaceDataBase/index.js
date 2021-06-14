@@ -13,7 +13,7 @@ const viewNotice = (res) => {
   if (res <= 5) {
     swal(
       "Nhận Diện Ảnh Không Thành Công",
-      `Số Ảnh Thành Công ${res}/10 ,
+      `Số Ảnh Thành Công ${res * 100}% ,
     Bạn Vui Lòng Làm Lại
     `,
       "error"
@@ -22,14 +22,14 @@ const viewNotice = (res) => {
     if (res < 8) {
       swal(
         "Cảnh Báo",
-        `Số Ảnh Thành Công ${res}/10 ,
+        `Số Ảnh Thành Công  ${res * 100}%  ,
       `,
         "warning"
       );
     } else {
       swal(
         "Cập Nhật Ảnh Thành Công",
-        `Số Ảnh Thành Công ${res}/10 ,
+        `Số Ảnh Thành Công  ${res * 100}%  ,
       `,
         "success"
       );
@@ -43,8 +43,6 @@ save.addEventListener("click", (e) => {
     document.querySelector(".container-fluid").classList.add("disabled");
     document.querySelector(".loading").classList.remove("d-none");
     Promise.all(listBase64).then((values) => {
-      console.log("loading image");
-      console.log(values);
       addImage({
         id: idStudent,
         Class: valueClass,
@@ -78,8 +76,8 @@ save.addEventListener("click", (e) => {
     });
   } else {
     Swal.fire({
-      title: "Mời chọn lớp và mã số học sinh",
-      position: "top",
+      title: "Vui lòng chọn lớp và mã số học sinh",
+      position: "center",
       showClass: {
         popup: "animate__animated animate__fadeInDown",
         timer: 500,
@@ -107,9 +105,12 @@ file.addEventListener("change", function (event) {
       reader.onload = () => resolve(reader.result);
       reader.onerror = (error) => reject(error);
     });
-  toBase64(file.files[0]).then((result) => {
-    insertImage(result);
-  });
+  if (listBase64.length >= 10) {
+    swal("Warning!", "Tối Đa Thêm là 10 Ảnh ", "Tiếp Tục");
+  } else
+    toBase64(file.files[0]).then((result) => {
+      insertImage(result);
+    });
 });
 // them anh vao Khung
 function insertImage(uri) {
@@ -139,8 +140,8 @@ function take_snapshot() {
     });
   } else {
     Swal.fire({
-      title: "tối đa 10 ảnh",
-      position: "top",
+      title: "Ảnh Tối Đa Thêm là 10 Ảnh",
+      position: "center",
       showClass: {
         popup: "animate__animated animate__fadeInDown",
         timer: 500,

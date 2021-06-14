@@ -107,6 +107,5 @@ searchMonth.addEventListener("input", (e) => {
 const resetTableMonth = document.querySelector("#btn-refresh-month");
 resetTableMonth.addEventListener("click", () => {
   renderMonth(listStudents);
-  console.log("run");
   searchMonth.value = "";
 });

@@ -22,15 +22,25 @@ async function detectFace(listBase64, id) {
   await faceapi.tf.ready();
   await start();
   const descriptors = await toDescriptors(listBase64);
+  return {
+    label: id,
+    descriptors: descriptorsToObject(descriptors),
+  };
+}
+function descriptorsToObject(descriptors) {
   let LabeledFaceDescriptorsJSON = descriptors.map((detail) =>
     Object.assign({}, detail)
   );
-  LabeledFaceDescriptorsJSON = Object.assign({}, LabeledFaceDescriptorsJSON);
-
-  return {
-    label: id,
-    descriptors: LabeledFaceDescriptorsJSON,
-  };
+  return Object.assign({}, LabeledFaceDescriptorsJSON);
+}
+async function getDescriptors(listBase64) {
+  await faceapi.tf.setBackend("tensorflow");
+  await faceapi.tf.enableProdMode();
+  await faceapi.tf.ENV.set("DEBUG", false);
+  await faceapi.tf.ready();
+  await start();
+  const descriptors = await toDescriptors(listBase64);
+  return descriptors;
 }
 Array.prototype.filterAndMapAsync = async function (callback) {
   var newArray = [];
@@ -42,22 +52,4 @@ Array.prototype.filterAndMapAsync = async function (callback) {
   }
   return newArray;
 };
-module.exports = { detectFace };
-
-// async function test() {
-//   const abc = await [1, 2, 3].filterAndMapAsync(function (item) {
-//     if (item > 2) {
-//       return item;
-//     }
-//   });
-//   Promise.all(abc).then((res) => {
-//     console.log(res);
-//   });
-// }
-// test();
-
-// let list = [data, data1];
-
-// detectFace(list, "10A1").then((res) => {
-//   console.log(res);
-// });
+module.exports = { detectFace, getDescriptors, descriptorsToObject };

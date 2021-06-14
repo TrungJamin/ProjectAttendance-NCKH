@@ -305,3 +305,6 @@ img {
 .non-active {
   display: none;
 }
+#swal2-title {
+  font-size: 20px;
+}

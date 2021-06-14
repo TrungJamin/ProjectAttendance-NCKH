@@ -15,7 +15,6 @@ addStudent.addEventListener("click", (e) => {
 
 edit_form.addEventListener("submit", (e) => {
   e.preventDefault();
-  console.log("run");
   let dob = edit_form.dob.value.split("-").reverse().join("/");
   let year =
     gradeSelect.value == "10" ? 2021 : gradeSelect.value == "11" ? 2020 : 2019;

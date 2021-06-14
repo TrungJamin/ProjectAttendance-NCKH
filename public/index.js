@@ -44,8 +44,8 @@ login[0].addEventListener("submit", (event) => {
     })
     .catch(function (error) {
       Swal.fire({
-        position: "top",
-        title: "sai mật khẩu",
+        position: "center",
+        title: "mật khẩu hoặc email của bạn không đúng,xin vui lòng nhập lại",
         showConfirmButton: true,
       });
       buttonlogin.classList.remove("d-none");

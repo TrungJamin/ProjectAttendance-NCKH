@@ -1,16 +1,17 @@
 const getAttendances = firebase.functions().httpsCallable("getAttendances");
 const formAdd = document.querySelector("#results");
 const save = document.querySelector(".save");
-
+const setDatabase = firebase.functions().httpsCallable("setDescriptorsInData");
+let listBase64 = [];
+let index = 0;
 save.addEventListener("click", (e) => {
   e.preventDefault();
 
   Promise.all(listBase64).then((values) => {
-    console.log("loading image");
-    console.log(values);
-    getAttendances({
-      class: "10A1",
+    setDatabase({
+      class: "6A",
       listBase64: values,
+      id: "201906A2",
     }).then((values) => {
       console.log(values);
     });
@@ -44,9 +45,9 @@ upload1.addEventListener("change", (e) => {
       reader.onerror = (error) => reject(error);
     });
   Promise.all([toBase64(upload1.files[0])]).then((values) => {
-    console.log(upload1.files[0]);
-    console.log("loading...");
-    console.log(values[0]);
+    // console.log(upload1.files[0]);
+    // console.log("loading...");
+    // console.log(values[0]);
     getAttendances({
       listBase64: values,
       class: "10A1",

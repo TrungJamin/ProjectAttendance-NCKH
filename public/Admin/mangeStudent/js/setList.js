@@ -103,6 +103,7 @@ function setList(group) {
         // if we click "submit-btn" val = true
         if (val) {
           swal("xóa thành công!", { icon: "success" });
+          // db.collection("Students").doc(id).collection("data").delete();
           db.collection("Students").doc(id).delete();
         }
       });
@@ -127,11 +128,11 @@ function setList(group) {
       edit_form.gender.value = tr.getElementsByTagName("td")[4].textContent;
       edit_form.Address.value = tr.getElementsByTagName("td")[6].textContent;
       edit_form.Phone.value = tr.getElementsByTagName("td")[7].textContent;
-      let grade = tr.getElementsByTagName("td")[5].textContent.slice(0, 2);
-      if (grade == "10") {
-        edit_form.grade.value = "10";
-      } else if (grade == "11") {
-        edit_form.grade.value = "11";
+      let grade = tr.getElementsByTagName("td")[5].textContent.slice(0, 2)[0];
+      if (grade == "6") {
+        edit_form.grade.value = "6";
+      } else if (grade == "7") {
+        edit_form.grade.value = "7";
       } else {
         edit_form.grade.value = "12";
       }
