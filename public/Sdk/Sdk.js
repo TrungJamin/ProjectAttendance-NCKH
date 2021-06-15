@@ -51,12 +51,12 @@ function differentDays(date, date2) {
 function getWeekNow(date) {
   return parseInt(differentDays(new Date("5-3-2021"), date) / 7) + 1;
 }
-function doit(id, fn, type, dl) {
+function doit(id, fn = "danh-sach-diem-danh", dl) {
   var elt = document.getElementById(id);
   var wb = XLSX.utils.table_to_book(elt, { sheet: "Sheet JS" });
   return dl
-    ? XLSX.write(wb, { bookType: type, bookSST: true, type: "base64" })
-    : XLSX.writeFile(wb, fn || "SheetJSTableExport." + (type || "xlsx"));
+    ? XLSX.write(wb, { bookType: ".xlsx", bookSST: true, type: "base64" })
+    : XLSX.writeFile(wb, fn + ".xlsx");
 }
 
 function getSemesterNow() {
@@ -104,4 +104,9 @@ function isNumber(event) {
   } else {
     document.getElementById("lblValue2").style.display = "none";
   }
+}
+function replaceSpaceWithUnderline(string) {
+  let arr = string.split(" ");
+  arr = arr.filter((item) => item !== "");
+  return arr.map((item) => item + "_").join("");
 }

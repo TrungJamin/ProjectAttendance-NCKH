@@ -9,6 +9,8 @@ const backweek = document.querySelector(".previous-week");
 const nowweek = document.querySelector(".now-week");
 const searchWeek = document.getElementById("week-search");
 
+const weekExportExcel = document.querySelector("#data-week-export");
+
 let preW = 0;
 let nextW = 0;
 
@@ -73,6 +75,8 @@ function renderWeek(listStudents) {
       database[0].attendance[0].day,
       database[0].attendance[6].day
     );
+
+    weekExportExcel.setAttribute("export", weekNow.innerText.trim());
     let content = database[0].attendance.map((date) => {
       let d = new Date(date.day);
       const dayNow = new Date();

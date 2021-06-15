@@ -7,11 +7,16 @@ const backmonth = document.querySelector(".previous-month");
 const nowMonth = document.querySelector(".now-month");
 const searchMonth = document.getElementById("month-search");
 
+const setMonthExport = document.querySelector("#data-month-export");
+
 let pre = 0;
 let next = 0;
 function MonthNow() {
   let d = new Date();
-  return " Tháng " + (d.getMonth() + 1 + next - pre) + "/" + d.getFullYear();
+  const month =
+    "Tháng " + (d.getMonth() + 1 + next - pre) + "/" + d.getFullYear();
+  setMonthExport.setAttribute("export", month);
+  return month;
 }
 monthNow.innerText = MonthNow();
 

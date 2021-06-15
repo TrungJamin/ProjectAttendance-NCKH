@@ -7,6 +7,7 @@ const backday = document.querySelector(".previous-day");
 const nowday = document.querySelector(".now-day");
 
 const searchDay = document.getElementById("day-search");
+const dateExportDay = document.querySelector("#data-day-export");
 
 let day = new Date().getDate();
 let month = new Date().getMonth() + 1;
@@ -59,6 +60,7 @@ const formatDateSearch = (y, m, d) => {
 };
 function renderDay(listStudents, d, m, y) {
   aDay.innerText = "Ngày " + DateNowFormat(d, m, y);
+  dateExportDay.setAttribute("export", aDay.innerText);
   inputSearchDate.value = formatDateSearch(y, m, d);
   tableDay.innerHTML = "";
   listStudents.map((student, index) => {

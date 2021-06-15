@@ -2,6 +2,7 @@
 const previousSemester = document.querySelector(".previous-semester");
 const nextSemester = document.querySelector(".next-semester");
 const semesterNow = document.querySelector(".semester-now");
+const exportSemester = document.querySelector("#data-semester-export");
 nextSemester.addEventListener("click", () => {
   semesterNow.innerHTML = "Học kỳ 2";
   renderSemester(listStudents, 2);
@@ -26,6 +27,10 @@ function dateOfSemester(listStudents, semester = 1) {
   return listSemester;
 }
 function renderSemester(listStudents, semester = 1) {
+  exportSemester.setAttribute(
+    "export",
+    "Học Kỳ " + semester + " " + new Date().getFullYear()
+  );
   dateOfSemester(listStudents, semester).forEach((student, index) => {
     const tr = document.createElement("tr");
     countNotAbsent = 0;
