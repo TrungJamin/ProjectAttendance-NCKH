@@ -125,7 +125,7 @@ function renderDay(listStudents, d, m, y) {
     note.innerText = `"${String(contextNote).replace(",", "")}"`;
     note.addEventListener("click", (e) => {
       resetNote();
-      document.querySelector(".panel-name").innerText =
+      document.querySelector(".panel-name-note").innerText =
         "Họ Tên: " + student.name;
       let length = 0;
       att.data.morning.forEach((item, index) => {
@@ -185,9 +185,17 @@ nowday.addEventListener("click", (e) => {
   renderDay(listStudents, day, month, year);
 });
 
-document.querySelector(".delete").addEventListener("click", (e) => {
-  document.querySelector(".note-date").classList.add("d-none");
+const cancel = document.querySelectorAll(".panel-cancel");
+cancel.forEach((e) => {
+  e.addEventListener("click", (e) => {
+    document.querySelectorAll(".box-screen").forEach((e) => {
+      e.classList.add("d-none");
+    });
+  });
 });
+// document.querySelector(".panel-cancel").addEventListener("click", (e) => {
+//   document.querySelector(".note-date").classList.add("d-none");
+// });
 
 searchDay.addEventListener("input", (e) => {
   e.preventDefault();

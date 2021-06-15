@@ -185,8 +185,10 @@ tr {
   color: #fff;
   font-size: 25px;
 }
+
 .delete {
   padding: 0 15px;
+  cursor: pointer;
 }
 .note-date,
 .container-date-off {
@@ -223,9 +225,7 @@ tr {
 .bg-light {
   background-color: #e1e6f3 !important;
 }
-.delete {
-  cursor: pointer;
-}
+
 .semester-now {
   width: 1000px;
 }
@@ -240,4 +240,29 @@ table .date-of-week tr :hover {
 }
 #input-search-date {
   width: 180px;
+}
+#container-date-off-box {
+  width: 500px;
+}
+#container-date-off-box .month-title-date-off {
+  font-size: 20px;
+  line-height: 45px;
+}
+#date-off {
+  height: 50px;
+  color: rgba(247, 19, 19, 0.972);
+  border: 1.5px solid #00000017;
+}
+#table-wrapper {
+  position: relative;
+  height: 200px;
+}
+#table-scroll {
+  margin-top: 20px;
+}
+#table-wrapper table {
+  width: 100%;
+}
+#table-wrapper table * {
+  color: black;
 }

@@ -53,7 +53,7 @@ async function renderDatabase(listStudents) {
   renderDay(listStudents, day, month, year);
   // renderWeek(listStudents);
   // renderMonth(listStudents);
-  renderSemester(listStudents);
+  // renderSemester(listStudents);
   let dataBase = document.querySelectorAll(".database");
   dataBase.forEach((data) => {
     data.classList.remove("d-none");
