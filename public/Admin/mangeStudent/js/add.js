@@ -44,7 +44,7 @@ edit_form.addEventListener("submit", (e) => {
           phone: edit_form.Phone.value,
         })
         .then(function () {
-          swal("Successfully!", "", "success");
+          swal("Thành Công !", "", "success");
           edit.classList.remove("open");
         });
     } else {
@@ -106,7 +106,8 @@ function getGradeLevel(Class) {
 function setGradeLevel(Class) {
   var tmp = getGradeLevel(Class);
   let newtotal = tmp.total + 1;
-  db.collection("Classes")
+  return db
+    .collection("Classes")
     .doc(tmp.grade)
     .set({
       ...tmp,

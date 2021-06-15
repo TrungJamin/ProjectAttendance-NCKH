@@ -15,8 +15,6 @@ db.collection("Students")
       };
       studentTempList.push(_doc);
     });
-
-    console.log(studentTempList);
   });
 
 // render
@@ -104,9 +102,12 @@ function setList(group) {
         // If we click cancel  val = null
         // if we click "submit-btn" val = true
         if (val) {
-          swal("xóa thành công!", { icon: "success" });
-          // db.collection("Students").doc(id).collection("data").delete();
-          db.collection("Students").doc(id).delete();
+          db.collection("Students")
+            .doc(id)
+            .delete()
+            .then(() => {
+              swal("xóa thành công!", { icon: "success" });
+            });
         }
       });
     });
@@ -210,29 +211,18 @@ function getLastName(name) {
 
   return temp[temp.length - 1].toLowerCase().charCodeAt(0);
 }
-// let a = [5, 3, 9, 2];
-// console.log(a);
-// a.sort((a, b) => a - b);
-// console.log(a);
-// console.log(listOfStudent);
 
-// SEARCH
-// SEARCH
-
-function convertDate(day){
-
-  var date=new Date(day);
+function convertDate(day) {
+  var date = new Date(day);
   var options = {
     year: "numeric",
     month: "2-digit",
-    day: "numeric"
+    day: "numeric",
   };
-  date=date.toLocaleDateString("en", options);
+  date = date.toLocaleDateString("en", options);
 
   return date;
-
 }
-
 
 const search = document.getElementById("Student-search");
 
@@ -252,8 +242,8 @@ search.addEventListener("input", (e) => {
         student.class.toLowerCase().includes(value) ||
         student.gender.toLowerCase().includes(value) ||
         student.phone.toLowerCase().includes(value) ||
-        convertDate(student.dateOfBirth).toLowerCase().includes(value)||
-        student.address.toLowerCase().includes(value) 
+        convertDate(student.dateOfBirth).toLowerCase().includes(value) ||
+        student.address.toLowerCase().includes(value)
       );
     });
     setList(tmp);

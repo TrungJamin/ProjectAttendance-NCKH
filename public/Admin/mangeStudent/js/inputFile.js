@@ -1,136 +1,94 @@
+const newListStudent = [];
 
-let initialStudent={
-
-    address: "",
-    class: "",
-    dateOfBirth: "",
-    gender: " ",
-    id: "",
-    firstName:'',
-    lastName: " ",
-    name: "",
-    phone: "",
-
+var input = document.getElementById("inputStudents");
+function getGradeByClass(Class) {
+  return Class.trim().substring(0, 1);
 }
 
-function createId() {
-     
-    let tamp = '' ;
-    for (let i = 0; i < 5; i++) {
-      tamp += "" + Math.floor(Math.random() * 10);
-    }
-    return tamp;
-  }
-
-  async function  addATeacher(obj){
-   return    db
-          .doc("Students/"+obj.id)
-          .set(obj)
-          .then(function (response) {
-            console.log('oke')
-        })
-        .catch(function (error) {
-            console.log('err')
-        });
-  }
-
- var listStudent=[];
- var input = document.getElementById('inputStudents')
-  input.addEventListener('change', function() {
-    readXlsxFile(input.files[0]).then( async function(e) {
-      // `rows` is an array of rows
-      // each row being an array of cells.
-      console.log(e);
-
-      for( let i =1 ; i<e.length; i++){
-        let tampTeacher={};
-
-        
-        for( let j =0; j<e[0].length;j++){
-
-            if(e[0][j]=='firstName' ){
-
-                tampTeacher[e[0][j]]=e[i][j].split(' ');
-
-            }
-            else{
-                if(e[0][j]=='dateOfBirth'){
-                    var date=  new Date(e[i][j]);
-                    if(date=='Invalid Date'){
-
-                    }
-                    else{
-                        var date1=moment(date).format('DD/MM/YYYY');
-                        tampTeacher[e[0][j]]= date1; 
-                        
-                      
-                    }
-                    
-                }
-                else{
-                    tampTeacher[e[0][j]]= e[i][j]; 
-                }
-            }
-
- 
+input.addEventListener("change", function () {
+  document.querySelector(".loading-table").classList.remove("d-none");
+  document.querySelector("#dataTable").classList.add("d-none");
+  readXlsxFile(input.files[0]).then(function (rows) {
+    let newStudent = {};
+    rows[0].forEach(function (field) {
+      try {
+        switch (field.trim().toLowerCase()) {
+          case "Họ Tên Đệm".toLowerCase():
+            newStudent["firstName"] = "";
+            break;
+          case "Tên".toLowerCase():
+            newStudent["lastName"] = "";
+            break;
+          case "Ngày Sinh".toLowerCase():
+            newStudent["dateOfBirth"] = "";
+            break;
+          case "Giới Tính".toLowerCase():
+            newStudent["gender"] = "";
+            break;
+          case "Địa Chỉ".toLowerCase():
+            newStudent["address"] = "";
+            break;
+          case "Lớp".toLowerCase():
+            newStudent["class"] = "";
+            break;
+          case "số điện thoại".toLowerCase():
+            newStudent["phone"] = "";
+            break;
+          default:
+            newStudent["error"] = 1;
         }
-        tampTeacher.name=tampTeacher.firstName.join(' ').trim()+" "+tampTeacher.lastName.trim();
-        tampTeacher.gender=tampTeacher.gender.toLowerCase();
-        var id= "2019"+""+(tampTeacher.gender=='nam'?"1":"0")+tampTeacher.class.toUpperCase()+createId();
-        tampTeacher.id=id;
-        listStudent.push({...initialStudent,...tampTeacher});
-           
+      } catch (e) {
+        console.log(e.message);
       }
-     
-      console.log(listStudent);
+    });
 
-      const result=await  listStudent.map( async (obj)=>{
-        
-           return db
-            .doc("Students/"+obj.id)
-            .set(obj)
-            .then(function (response) {
-            console.log('oke')
-            })
-            .catch(function (error) {
-                console.log('err')
+    if (newStudent["error"]) {
+      swal(
+        "Vui Lòng Kiểm Tra Tệp Excel! Hoặc chọn tệp khác",
+        "Đúng Chuẩn là các trường : Họ Tên Đệm,Tên,Ngày Sinh,Giới Tính,Lớp,Địa Chỉ,số điện thoại",
+        "warning"
+      );
+      document.querySelector(".loading-table").classList.add("d-none");
+      document.querySelector("#dataTable").classList.remove("d-none");
+    } else {
+      for (var i = 1; i < rows.length; i++) {
+        const newStudent = {};
+        newStudent.firstName = rows[i][0];
+        newStudent.lastName = rows[i][1];
+        let date = new Date(rows[i][2]);
+        newStudent.dateOfBirth = moment(date).format("DD/MM/YYYY");
+        newStudent.gender = rows[i][3];
+        newStudent.class = rows[i][4];
+        newStudent.address = rows[i][5];
+        newStudent.phone = rows[i][6];
+        newStudent.name = newStudent.firstName + " " + newStudent.lastName;
+        const grade = getGradeByClass(newStudent.class);
+        const year =
+          grade === "6"
+            ? 2021
+            : grade === "7"
+            ? 2020
+            : grade === "8"
+            ? 2019
+            : 2018;
+        const total = ++getGradeLevel(newStudent.class).total;
+        const gender = newStudent.gender === "Nam" ? "1" : "0";
+        const id = year + gender + newStudent.class + total;
+        newStudent.id = id;
+        db.collection("Students")
+          .doc(id)
+          .set(newStudent)
+          .then(async function (querySnapshot) {
+            for (let i = 5; i <= 7; i++) {
+              await createAttendance(id, i);
+            }
+            setGradeLevel(newStudent.class).then(() => {
+              document.querySelector(".loading-table").classList.add("d-none");
+              document.querySelector("#dataTable").classList.remove("d-none");
             });
-       })
-
-
-    let timerInterval
-    Swal.fire({
-      title: 'Đang tải dữ liệu từ file lên',
-      html: 'Vui lòng chờ....',
-      timerProgressBar: true,
-      didOpen: () => {
-        Swal.showLoading();
-
-        Promise.all(result).then(e=>{
-            Swal.close()
-            Swal.fire({
-                position: 'top',
-                icon: 'success',
-                title: `File có ${listStudent.length} học sinh đã thêm thành công ${listStudent.length} `,
-                showConfirmButton: true,
-              })
-        });
-
-      },
-      willClose: () => {
-        clearInterval(timerInterval)
+          })
+          .catch(function (error) {});
       }
-    }).then((result) => {
-      /* Read more about handling dismissals below */
-      if (result.dismiss === Swal.DismissReason.timer) {
-        console.log('I was closed by the timer')
-      }
-    })
-        
-
-   
-      
-
-
-    })
+    }
   });
+});
