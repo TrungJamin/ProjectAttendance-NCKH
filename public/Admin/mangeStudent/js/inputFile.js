@@ -53,8 +53,8 @@ input.addEventListener("change", function () {
     } else {
       for (var i = 1; i < rows.length; i++) {
         const newStudent = {};
-        newStudent.firstName = rows[i][0];
-        newStudent.lastName = rows[i][1];
+        newStudent.firstName = rows[i][0].split(" ");
+        newStudent.lastName = rows[i][1].split(" ");
         let date = new Date(rows[i][2]);
         newStudent.dateOfBirth = moment(date).format("DD/MM/YYYY");
         newStudent.gender = rows[i][3];
