@@ -27,6 +27,7 @@ function dateOfSemester(listStudents, semester = 1) {
   return listSemester;
 }
 function renderSemester(listStudents, semester = 1) {
+  bodySemester.innerHTML = "";
   exportSemester.setAttribute(
     "export",
     "Học Kỳ " + semester + " " + new Date().getFullYear()
@@ -40,6 +41,7 @@ function renderSemester(listStudents, semester = 1) {
     student.attendance.forEach((att) => {
       if (!att.data.status) {
         if (att.data.asked) {
+          console.log(att.day, "");
           listAsked.push(att.day);
           countAbsent++;
         } else {

@@ -1,4 +1,4 @@
-let listStudents = [];
+var listStudents = [];
 
 const loadingData = document.querySelector(".loading-table");
 var myClass = "9A";
@@ -55,8 +55,8 @@ async function renderDatabase(listStudents) {
   let year = new Date().getFullYear();
   renderDay(listStudents, day, month, year);
   renderWeek(listStudents);
-  renderMonth(listStudents);
-  renderSemester(listStudents);
+  // renderMonth(listStudents);
+  // renderSemester(listStudents);
   let dataBase = document.querySelectorAll(".database");
   dataBase.forEach((data) => {
     data.classList.remove("d-none");

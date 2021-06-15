@@ -49,19 +49,22 @@ function renderMonth(listStudents) {
   countHAbsent = 0;
   countAbsent = 0;
   let list = listMonth(listStudents, d.getMonth() + 1 + next - pre);
-
+  console.log(list);
   list.forEach((student, index) => {
     const tr = document.createElement("tr");
     countNotAbsent = 0;
     countAbsent = 0;
     const listAsked = [];
     const listNotAsked = [];
+    console.log("name : ", student.name);
     student.attendance.forEach((att) => {
       if (!att.data.status) {
-        if (att.data.asked) {
+        if (att.data.asked === true) {
           listAsked.push(att.day);
           countAbsent++;
         } else {
+          // console.log("name : ", student.name);
+          // console.log(att.day);
           listNotAsked.push(att.day);
           countNotAbsent++;
         }
@@ -95,7 +98,7 @@ function renderMonth(listStudents) {
         tr.setAttribute("id", "date-off");
         const tmpDate = new Date(date);
         const month = tmpDate.getMonth() + 1;
-        const day = tmpDate.getDate() + 1;
+        const day = tmpDate.getDate();
         const year = tmpDate.getFullYear();
         tr.addEventListener("click", (e) => {
           activeDate();
@@ -117,7 +120,7 @@ function renderMonth(listStudents) {
         const tr = document.createElement("tr");
         const tmpDate = new Date(date);
         const month = tmpDate.getMonth() + 1;
-        const day = tmpDate.getDate() + 1;
+        const day = tmpDate.getDate();
         const year = tmpDate.getFullYear();
         tr.addEventListener("click", (e) => {
           activeDate();
