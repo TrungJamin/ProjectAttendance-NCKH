@@ -14,6 +14,9 @@
     <link href="./../../css/sb-admin-2.css" rel="stylesheet">
     <link rel="stylesheet" href="./../css/admin.css">
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://unpkg.com/read-excel-file@4.x/bundle/read-excel-file.min.js"></script>
+
     <script src="https://www.gstatic.com/firebasejs/8.6.3/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.3/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.3/firebase-auth.js"></script>
@@ -33,6 +36,8 @@
         crossorigin="anonymous"></script>
 
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <link rel="stylesheet" href="./../css/StyleManageStudent.css" />
     <link rel="stylesheet" href="./../../css/global.css" />
@@ -153,12 +158,23 @@
                         <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top ">
                             <!-- Sidebar Toggle (Topbar) -->
 
-                            <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                                <i class="fa fa-bars"></i>
-                            </button>
+                            <div class="d-flex justify-content-around align-baseline">
+                                <div>
+                                <button class="btn btn-success add-student-button">Thêm + </button>
 
-                            <button class="btn btn-success add-student-button">Thêm + </button>
+                                </div>
+                                <div class="pl-3">
+                                     <input type="file"  style="height: 0;
+                                     overflow: hidden;
+                                     width: 0;"  id="inputStudents" />
+                                <label for="inputStudents"  class="btn btn-success" >Thêm học sinh từ file</label>
+                                </div>
+                               
+                            </div>
 
+                            
+                            
+                           
 
                             <!-- Topbar Search -->
                             <form class="d-none d-sm-inline-block form-inline navbar-search">
@@ -243,6 +259,7 @@
     <script src="./js/sort.js"></script>
     <script src="./js/onSnapshot.js"></script>
     <script src="./js/add.js"></script>
+    <script src="./js/inputFile.js"></script>
 
 
 </body>
