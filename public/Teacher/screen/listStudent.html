@@ -19,11 +19,7 @@
     <!-- Latest compiled and minified CSS -->
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-functions.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
-
     <script src="https://kit.fontawesome.com/33d2189f35.js" crossorigin="anonymous"></script>
-
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
@@ -33,24 +29,46 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
-
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 </head>
 
 <body id="page-top">
-    <div class="note-date d-none">
+    <div class="d-none container-date-off box-screen">
+        <div class="box" id="container-date-off-box">
+            <div class="panel panel-default">
+                <div class="panel-heading ">
+                    <div class="panel-name panel-name-notice">Họ Tên </div>
+                    <div class="panel-cancel delete"><i class="fas fa-times fa-lg"></i></div>
+                </div>
+                <div id="table-wrapper" style=" overflow-y: scroll;" scrolling="no">
+                    <table class="table" id="table-scroll">
+                        <thead>
+                            <tr class="month-title-date-off">
+                                <th>Danh Sách Ngày Vắng Không Phép</th>
+                            </tr>
+                        </thead>
+                        <tbody id="list-date-off">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="box-screen note-date d-none">
         <div class="box">
 
             <div class="panel panel-default">
                 <!-- Default panel contents -->
                 <div class="panel-heading ">
-                    <div class="panel-name">Họ Tên </div>
-                    <div class="delete"><i class="fas fa-times fa-lg"></i></div>
+                    <div class="panel-name panel-name-note">Họ Tên </div>
+                    <div class="panel-cancel  delete"><i class="fas fa-times fa-lg"></i></div>
                 </div>
 
                 <!-- Table -->
                 <table class="table table-note">
+
                     <thead>
                         <tr>
                             <th>Buổi</th>
@@ -120,10 +138,10 @@
                     <option selected>Xuất file Excel
                         <i class="fa fa-download" aria-hidden="true"></i>
                     </option>
-                    <option value="data-day">Theo ngày học</option>
-                    <option value="data-week">Theo tuần học</option>
-                    <option value="data-month">Theo Tháng học</option>
-                    <option value="data-semester">Theo kì học</option>
+                    <option value="data-day" id="data-day-export">Theo ngày học</option>
+                    <option value="data-week" id="data-week-export">Theo tuần học</option>
+                    <option value="data-month" id="data-month-export">Theo Tháng học</option>
+                    <option value="data-semester" id="data-semester-export">Theo kì học</option>
                 </select>
 
                 <div class="toggle-view-list">
@@ -158,9 +176,10 @@
                             <div class="table-responsive database">
                                 <div class="table-header text-center">
                                     <h3 class="week-now pb-2">Loading...</h3>
-                                    <div class="d-none d-sm-inline-block form-inline navbar-search">
+                                    <div class="d-none d-sm-inline-block form-inline navbar-search" style="width:35%">
                                         <div class="input-group">
-                                            <input type="text" class="form-control" placeholder="Tìm kiếm học sinh..."
+                                            <input type="text" class="form-control"
+                                                placeholder="Tìm kiếm học sinh theo mssv hoặc họ tên ..."
                                                 aria-label="Search" aria-describedby="basic-addon2" id="week-search">
 
                                             <button class="btn btn-success" type="button" id="btn-refresh-week">
@@ -179,8 +198,11 @@
                                 </div>
                                 <table id="data-week" class="table table-bordered hidden data-student-view scroll-table"
                                     id="dataTable" width="100%" cellspacing="0">
-                                    <thead class="date-of-week" style="background-color: #ffff ; color:#00000082">
 
+                                    <thead class="date-of-week" style="background-color: #ffff ; color:#00000082">
+                                        <!-- <tr class="">
+                                            <th>STT</th>
+                                        </tr> -->
                                         <tr class="field-one-table">
                                             <th>STT</th>
                                             <th rowspan="2">Mã HS</th>
@@ -208,11 +230,11 @@
                             <div class="table-responsive database d-none">
                                 <div class="table-header text-center">
                                     <h3 class="month-now pb-2">Loading</h3>
-                                    <div class="d-none d-sm-inline-block form-inline navbar-search">
+                                    <div class="d-none d-sm-inline-block form-inline navbar-search" style="width:35%">
                                         <div class="input-group">
                                             <input type="text" class="form-control border-0 small"
-                                                placeholder="Tìm kiếm học sinh..." aria-label="Search"
-                                                aria-describedby="basic-addon2" id="month-search">
+                                                placeholder="Tìm kiếm học sinh theo mssv hoặc họ tên ..."
+                                                aria-label="Search" aria-describedby="basic-addon2" id="month-search">
 
                                             <button class="btn btn-success" type="button" id="btn-refresh-month">
                                                 <i class="fa fa-refresh" aria-hidden="true"></i>
@@ -263,7 +285,7 @@
 
                                         <div class="input-group">
                                             <input type="text" class="form-control border-0 small"
-                                                placeholder="Tìm kiếm học sinh theo Mssv hoặc họ tên..."
+                                                placeholder="Tìm kiếm học sinh theo mssv hoặc họ tên..."
                                                 aria-label="Search" aria-describedby="basic-addon2" id="day-search">
 
                                             <button class="btn btn-success" type="button" id="btn-refresh-day">
@@ -295,16 +317,16 @@
                                             <th rowspan="2" style="padding-bottom: 33px;">Ghi chú</th>
                                         </tr>
                                         <tr>
-                                            <th>t1</th>
-                                            <th>t2</th>
-                                            <th>t3</th>
-                                            <th>t4</th>
-                                            <th>t5</th>
-                                            <th>t1</th>
-                                            <th>t2</th>
-                                            <th>t3</th>
-                                            <th>t4</th>
-                                            <th>t5</th>
+                                            <th>T1</th>
+                                            <th>T2</th>
+                                            <th>T3</th>
+                                            <th>T4</th>
+                                            <th>T5</th>
+                                            <th>T1</th>
+                                            <th>T2</th>
+                                            <th>T3</th>
+                                            <th>T4</th>
+                                            <th>T5</th>
                                         </tr>
 
                                     </thead>
@@ -323,11 +345,12 @@
                             <div class="table-responsive database d-none">
                                 <div class="table-header text-center">
                                     <h3 class="semester-now pb-2">Loading</h3>
-                                    <div class=" d-sm-inline-block form-inline navbar-search">
+                                    <div class="d-sm-inline-block form-inline navbar-search" style="width:35%">
                                         <div class="input-group">
                                             <input type="text" class="form-control border-0 small"
-                                                placeholder="Tìm kiếm học sinh..." aria-label="Search"
-                                                aria-describedby="basic-addon2" id="semester-search" />
+                                                placeholder="Tìm kiếm học sinh theo mssv hoặc họ tên ..."
+                                                aria-label="Search" aria-describedby="basic-addon2"
+                                                id="semester-search" />
 
                                             <button class="btn btn-success" type="button" id="btn-search-semester">
                                                 <i class="fa fa-refresh" aria-hidden="true"></i>
@@ -358,7 +381,7 @@
 
                                     </thead>
 
-                                    <tbody class="table-list-semester">
+                                    <tbody class="table-list-semester" id="table-list-semester">
 
                                     </tbody>
                                 </table>

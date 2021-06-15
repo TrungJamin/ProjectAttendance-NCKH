@@ -7,6 +7,7 @@ const backday = document.querySelector(".previous-day");
 const nowday = document.querySelector(".now-day");
 
 const searchDay = document.getElementById("day-search");
+const dateExportDay = document.querySelector("#data-day-export");
 
 let day = new Date().getDate();
 let month = new Date().getMonth() + 1;
@@ -59,6 +60,7 @@ const formatDateSearch = (y, m, d) => {
 };
 function renderDay(listStudents, d, m, y) {
   aDay.innerText = "Ngày " + DateNowFormat(d, m, y);
+  dateExportDay.setAttribute("export", aDay.innerText);
   inputSearchDate.value = formatDateSearch(y, m, d);
   tableDay.innerHTML = "";
   listStudents.map((student, index) => {
@@ -70,7 +72,7 @@ function renderDay(listStudents, d, m, y) {
         const style = item.status
           ? ""
           : item.asked
-          ? "color:orange"
+          ? "color:#06ad35"
           : "color:red";
         return `<td id="attendance" style=${style}> ${
           item.status ? "" : item.asked ? "P" : "V"
@@ -88,7 +90,7 @@ function renderDay(listStudents, d, m, y) {
         const style = item.status
           ? ""
           : item.asked
-          ? "color:orange"
+          ? "color:#06ad35"
           : "color:red";
         return `<td id="attendance" style=${style}> ${
           item.status ? "" : item.asked ? "P" : "V"
@@ -99,7 +101,7 @@ function renderDay(listStudents, d, m, y) {
         const style = item.status
           ? ""
           : item.asked
-          ? "color:orange"
+          ? "color:#06ad35"
           : "color:red";
         return `<td style=${style}> ${
           item.status ? "" : item.asked ? "P" : "V"
@@ -125,7 +127,7 @@ function renderDay(listStudents, d, m, y) {
     note.innerText = `"${String(contextNote).replace(",", "")}"`;
     note.addEventListener("click", (e) => {
       resetNote();
-      document.querySelector(".panel-name").innerText =
+      document.querySelector(".panel-name-note").innerText =
         "Họ Tên: " + student.name;
       let length = 0;
       att.data.morning.forEach((item, index) => {
@@ -185,9 +187,17 @@ nowday.addEventListener("click", (e) => {
   renderDay(listStudents, day, month, year);
 });
 
-document.querySelector(".delete").addEventListener("click", (e) => {
-  document.querySelector(".note-date").classList.add("d-none");
+const cancel = document.querySelectorAll(".panel-cancel");
+cancel.forEach((e) => {
+  e.addEventListener("click", (e) => {
+    document.querySelectorAll(".box-screen").forEach((e) => {
+      e.classList.add("d-none");
+    });
+  });
 });
+// document.querySelector(".panel-cancel").addEventListener("click", (e) => {
+//   document.querySelector(".note-date").classList.add("d-none");
+// });
 
 searchDay.addEventListener("input", (e) => {
   e.preventDefault();
@@ -223,11 +233,9 @@ const inputSearchDate = document.querySelector("#input-search-date");
 
 inputSearchDate.addEventListener("change", (e) => {
   const date = new Date(inputSearchDate.value);
+  day = date.getDate();
+  month = date.getMonth() + 1;
+  year = date.getFullYear();
   if (date.getDate() && date.getMonth() && date.getFullYear())
-    renderDay(
-      listStudents,
-      date.getDate(),
-      date.getMonth() + 1,
-      date.getFullYear()
-    );
+    renderDay(listStudents, day, month, year);
 });

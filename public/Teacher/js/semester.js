@@ -2,6 +2,7 @@
 const previousSemester = document.querySelector(".previous-semester");
 const nextSemester = document.querySelector(".next-semester");
 const semesterNow = document.querySelector(".semester-now");
+const exportSemester = document.querySelector("#data-semester-export");
 nextSemester.addEventListener("click", () => {
   semesterNow.innerHTML = "Học kỳ 2";
   renderSemester(listStudents, 2);
@@ -26,25 +27,93 @@ function dateOfSemester(listStudents, semester = 1) {
   return listSemester;
 }
 function renderSemester(listStudents, semester = 1) {
-  let content = dateOfSemester(listStudents, semester).map((student, index) => {
-    let absentNotAsked;
-    let absentAsked = (absentNotAsked = 0);
-    student.attendance.forEach((date) => {
-      if (!date.data.status) {
-        date.data.asked ? absentAsked++ : absentNotAsked++;
+  bodySemester.innerHTML = "";
+  exportSemester.setAttribute(
+    "export",
+    "Học Kỳ " + semester + " " + new Date().getFullYear()
+  );
+  dateOfSemester(listStudents, semester).forEach((student, index) => {
+    const tr = document.createElement("tr");
+    countNotAbsent = 0;
+    countAbsent = 0;
+    const listAsked = [];
+    const listNotAsked = [];
+    student.attendance.forEach((att) => {
+      if (!att.data.status) {
+        if (att.data.asked) {
+          console.log(att.day, "");
+          listAsked.push(att.day);
+          countAbsent++;
+        } else {
+          listNotAsked.push(att.day);
+          countNotAbsent++;
+        }
       }
     });
-    return `
-    <tr>
-    <td class="serial">${index + 1}</td>
+    const content = `
+    <td>${index + 1}</td>
     <td>${student.id}</td>
     <td>${String(student.firstName).replaceAll(",", " ")}</td>
     <td>${student.lastName}</td>
-    <td>${absentAsked}</td>
-    <td>${absentNotAsked}</td>
-    </tr>`;
+    `;
+
+    tr.innerHTML = content;
+    const notAbsent = document.createElement("td");
+    notAbsent.innerText = countNotAbsent;
+    notAbsent.style.cursor = "pointer";
+    const absent = document.createElement("td");
+    absent.innerText = countAbsent;
+    absent.style.cursor = "pointer";
+    tr.append(absent);
+    tr.append(notAbsent);
+
+    notAbsent.addEventListener("click", (e) => {
+      notification.classList.remove("d-none");
+      nameStudentOfDayOff.innerText = "Họ Và Tên :" + student.name;
+      document.querySelector(".month-title-date-off").innerText =
+        "Danh Sách Các Ngày Vắng Không Phép";
+      listDayOff.innerHTML = "";
+      listNotAsked.forEach((date) => {
+        const tr = document.createElement("tr");
+        tr.setAttribute("id", "date-off");
+        const tmpDate = new Date(date);
+        const month = tmpDate.getMonth() + 1;
+        const day = tmpDate.getDate();
+        const year = tmpDate.getFullYear();
+        tr.addEventListener("click", (e) => {
+          activeDate();
+          document.querySelector(".container-date-off").classList.add("d-none");
+          renderDay(listStudents, day, month, year);
+        });
+        tr.innerText = DateNowFormat(day, month, year);
+        tr.style.cursor = "pointer";
+        listDayOff.append(tr);
+      });
+    });
+    absent.addEventListener("click", (e) => {
+      notification.classList.remove("d-none");
+      nameStudentOfDayOff.innerText = "Họ Và Tên :" + student.name;
+      document.querySelector(".month-title-date-off").innerText =
+        "Danh Sách Các Ngày Vắng Có Phép";
+      listDayOff.innerHTML = "";
+      listAsked.forEach((date) => {
+        const tr = document.createElement("tr");
+        const tmpDate = new Date(date);
+        const month = tmpDate.getMonth() + 1;
+        const day = tmpDate.getDate();
+        const year = tmpDate.getFullYear();
+        tr.addEventListener("click", (e) => {
+          activeDate();
+          document.querySelector(".container-date-off").classList.add("d-none");
+          renderDay(listStudents, day, month, year);
+        });
+        tr.innerText = DateNowFormat(day, month, year);
+        tr.style.cursor = "pointer";
+        listDayOff.append(tr);
+      });
+    });
+    bodySemester.append(tr);
   });
-  bodySemester.innerHTML = content.join(" ");
 }
 
 document.querySelector(".semester-now").innerText = `Học Kì ${getSemester(

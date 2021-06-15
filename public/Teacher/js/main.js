@@ -1,12 +1,15 @@
-let listStudents = [];
+var listStudents = [];
 
 const loadingData = document.querySelector(".loading-table");
+var myClass = "9A";
 firebase.auth().onAuthStateChanged(function (user) {
   if (user) {
     db.collection("TeacherAdmin").onSnapshot(async function (snapshots) {
       snapshots.forEach((teacher) => {
         if (teacher.data().email == user.email) {
           getStudents(teacher.data().class);
+          myClass = teacher.data().class;
+          return;
         }
       });
     });
@@ -51,9 +54,9 @@ async function renderDatabase(listStudents) {
   let month = new Date().getMonth() + 1;
   let year = new Date().getFullYear();
   renderDay(listStudents, day, month, year);
-  // renderWeek(listStudents);
+  renderWeek(listStudents);
   // renderMonth(listStudents);
-  renderSemester(listStudents);
+  // renderSemester(listStudents);
   let dataBase = document.querySelectorAll(".database");
   dataBase.forEach((data) => {
     data.classList.remove("d-none");
@@ -65,6 +68,32 @@ async function renderDatabase(listStudents) {
 const exportExcel = document.getElementById("export-excel");
 exportExcel.addEventListener("change", () => {
   if (exportExcel.value != "Export Excel") {
-    doit(exportExcel.value);
+    const ds = "Danh_Sach_Diem_Danh_";
+    let contentExport = "";
+    switch (exportExcel.value) {
+      case "data-day":
+        const date = dateExportDay.getAttribute("export");
+        contentExport = ds + date + "_" + myClass;
+        break;
+      case "data-week":
+        const week = replaceSpaceWithUnderline(
+          weekExportExcel.getAttribute("export")
+        );
+        contentExport = ds + week + myClass;
+        break;
+      case "data-month":
+        const month = replaceSpaceWithUnderline(
+          setMonthExport.getAttribute("export")
+        );
+        contentExport = ds + month + myClass;
+        break;
+      default:
+        const semester = replaceSpaceWithUnderline(
+          exportSemester.getAttribute("export")
+        );
+        contentExport = ds + semester + myClass;
+    }
+    doit(exportExcel.value, contentExport);
   }
+  exportExcel.selectedIndex = 0;
 });
