@@ -49,14 +49,12 @@ const setClassTeacherAdmin = (newLeader) => {
 
 // render selectionClassLeader lop hoc
 function getListClass() {
-  console.log("run");
   db.collection("Classes")
     .get()
     .then(function (querySnapshot) {
       var arr = [];
       querySnapshot.forEach(function (doc) {
         var tamp = doc.data().classes;
-        console.log(tamp);
         var gan = [];
         tamp.forEach((e) => {
           gan.push(e);

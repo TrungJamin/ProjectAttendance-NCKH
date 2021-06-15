@@ -45,7 +45,6 @@ db.collection("Teachers").onSnapshot(async function (querySnapshot) {
 
 function renderAddElementInTable(e) {
 
-  console.log(e)
 
   var date=new Date(e.dataOfBirth);
   var options = {

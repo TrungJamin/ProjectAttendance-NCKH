@@ -26,6 +26,10 @@
 
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://unpkg.com/read-excel-file@4.x/bundle/read-excel-file.min.js"></script>
+
+
   <!-- firebase -->
   <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-firestore.js"></script>
@@ -149,8 +153,20 @@
 
     <br />
     <div class="row">
-      <div class="form-group col-md-5">
-        <button type="button" class="btn btn-success" id="addTeacher">Thêm +</button>
+      <div class="form-group col-md-5 d-flex">
+
+        <div>
+          <button type="button" class="btn btn-success" id="addTeacher">Thêm +</button>
+        </div>
+        
+        <div class="pl-3">
+          <input type="file"  style="height: 0;
+          overflow: hidden;
+          width: 0;"  id="inputTeacher" />
+        <label for="inputTeacher"  class="btn btn-success" >Thêm giáo viên từ file</label>
+        </div>
+        
+
       </div>
 
       <div class="form-group col-md-6">
@@ -223,6 +239,7 @@
   <script src="./js/add_remove_editTeacher.js"></script>
   <script src="./js/search.js"></script>
   <script src="./js/lockitu.js"></script>
+  <script src="js/inportTeacher.js"></script>
   <!-- <script src="xoaKhiTuThua.js"></script> -->
 </body>
 

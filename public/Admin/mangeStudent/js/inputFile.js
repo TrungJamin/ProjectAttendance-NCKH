@@ -49,8 +49,13 @@ function createId() {
         for( let j =0; j<e[0].length;j++){
 
             if(e[0][j]=='firstName' ){
-
+                 
+              try {
                 tampTeacher[e[0][j]]=e[i][j].split(' ');
+              } catch (error) {
+                tampTeacher[e[0][j]]='';
+              }
+                
 
             }
             else{
@@ -68,7 +73,12 @@ function createId() {
                     
                 }
                 else{
+                  try {
                     tampTeacher[e[0][j]]= e[i][j]; 
+                } catch (error) {
+                    tampTeacher[e[0][j]]='';
+                }
+                
                 }
             }
 
