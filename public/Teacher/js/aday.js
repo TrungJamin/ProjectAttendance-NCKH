@@ -233,11 +233,9 @@ const inputSearchDate = document.querySelector("#input-search-date");
 
 inputSearchDate.addEventListener("change", (e) => {
   const date = new Date(inputSearchDate.value);
+  day = date.getDate();
+  month = date.getMonth() + 1;
+  year = date.getFullYear();
   if (date.getDate() && date.getMonth() && date.getFullYear())
-    renderDay(
-      listStudents,
-      date.getDate(),
-      date.getMonth() + 1,
-      date.getFullYear()
-    );
+    renderDay(listStudents, day, month, year);
 });
