@@ -78,7 +78,7 @@ function renderSemester(listStudents, semester = 1) {
         tr.setAttribute("id", "date-off");
         const tmpDate = new Date(date);
         const month = tmpDate.getMonth() + 1;
-        const day = tmpDate.getDate() + 1;
+        const day = tmpDate.getDate();
         const year = tmpDate.getFullYear();
         tr.addEventListener("click", (e) => {
           activeDate();
@@ -100,7 +100,7 @@ function renderSemester(listStudents, semester = 1) {
         const tr = document.createElement("tr");
         const tmpDate = new Date(date);
         const month = tmpDate.getMonth() + 1;
-        const day = tmpDate.getDate() + 1;
+        const day = tmpDate.getDate();
         const year = tmpDate.getFullYear();
         tr.addEventListener("click", (e) => {
           activeDate();
