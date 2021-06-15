@@ -315,8 +315,8 @@ img {
 }
 .download-android .download-link-android {
   position: absolute;
-
   right: 200px;
+  top: 40px;
 }
 .download-android .download-link-android img {
   width: 180px;
