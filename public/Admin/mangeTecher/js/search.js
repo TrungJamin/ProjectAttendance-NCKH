@@ -88,7 +88,7 @@ function searchAll(e){
     return (
       teacher.name.toLowerCase().includes(value) ||
       teacher.id.toString().toLowerCase().includes(value) ||
-      teacher.classLeader.toLowerCase().includes(value) ||
+      // teacher.classLeader.toLowerCase().includes(value) ||
       teacher.email.toLowerCase().includes(value)||
       convertDate(teacher.dataOfBirth).toLowerCase().includes(value)||
       formatObjectClassAndTeach(teacher.subjectsAndClass).toLowerCase().includes(value)
