@@ -1,14 +1,16 @@
 const newListStudent = [];
 
-var input = document.getElementById("inputStudents");
+const inputFileExcel = document.getElementById("inputStudents");
+const labelInputFile = document.getElementById("label-input-file");
 function getGradeByClass(Class) {
   return Class.trim().substring(0, 1);
 }
 
-input.addEventListener("change", function () {
+inputFileExcel.addEventListener("change", function () {
   document.querySelector(".loading-table").classList.remove("d-none");
   document.querySelector("#dataTable").classList.add("d-none");
-  readXlsxFile(input.files[0]).then(function (rows) {
+  labelInputFile.innerHTML = "Loading file...";
+  readXlsxFile(inputFileExcel.files[0]).then(function (rows) {
     let newStudent = {};
     rows[0].forEach(function (field) {
       try {
@@ -52,6 +54,7 @@ input.addEventListener("change", function () {
       document.querySelector("#dataTable").classList.remove("d-none");
     } else {
       const list = [];
+      let count = 0;
       for (var i = 1; i < rows.length; i++) {
         try {
           const newStudent = {};
@@ -95,19 +98,21 @@ input.addEventListener("change", function () {
                   "Với Tổng Số Lượng " +
                     list.length +
                     "/" +
-                    rows.length +
+                    (rows.length - 1) +
                     " học sinh",
                   "success"
                 );
                 document.querySelector("#dataTable").classList.remove("d-none");
+                labelInputFile.innerHTML = "Thêm Dữ Liệu Từ File";
               });
             })
             .then(() => {})
             .catch(function (error) {});
         } catch (error) {
+          count++;
           swal(
             "Vui Lòng Kiểm Tra File Excel",
-            "Có Học Sinh sai dữ liệu ví dự như 9D không có trong danh sách trường , hãy kiểm tra kĩ",
+            `Có ${count} Học Sinh sai dữ liệu ví dự như 9D không có trong danh sách trường , hãy kiểm tra kĩ`,
             "warning"
           );
         }
