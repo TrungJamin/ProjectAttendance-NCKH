@@ -11,6 +11,16 @@ var inititalTeacher = {
   subjectsAndClass: [],
 };
 
+var checkType = [
+  "classLeader",
+  "dataOfBirth",
+  "email",
+  "gender",
+  "group",
+  "name",
+  "subjectsAndClass",
+];
+
 function createId(year) {
   let tamp = year + "NA";
   for (let i = 0; i < 5; i++) {
@@ -25,8 +35,8 @@ async function addATeacher(obj) {
     .createUserWithEmailAndPassword(obj.email, "123456")
     .then(async function (response) {
       // tạo 1 giáo viên
-      return await db
-        .collection("Teachers")
+
+      db.collection("Teachers")
         .doc(response.user.uid)
         .set(obj)
         .then(function (response) {
@@ -51,102 +61,181 @@ input.addEventListener("change", function () {
     // `rows` is an array of rows
     // each row being an array of cells.
 
-    for (var i = 1; i < e.length; i++) {
-      let tampTeacher = {};
+    // đoạn này bắt lỗi
+    console.log(e[0]);
+    var err = false;
 
-      for (let j = 0; j < e[0].length; j++) {
-        if (e[0][j] == "gender") {
-          try {
-            let check = e[i][j].toLowerCase() == "nam" ? "true" : "false";
-            tampTeacher[e[0][j]] = check;
-          } catch (error) {
-            tampTeacher[e[0][j]] = "true";
-          }
-        } else {
-          if (e[0][j] == "dataOfBirth") {
-            var date = new Date(e[i][j]);
-            if (date == "Invalid Date") {
-            } else {
-              var date1 = moment(date).format("YYYY-MM-DD");
-              tampTeacher[e[0][j]] = date1;
+    try {
+      e[0].forEach((elem) => {
+        if (checkType.find((check) => check == elem) == undefined) {
+          err = true;
+        }
+      });
+    } catch (error) {
+      err = true;
+    }
 
-              tampTeacher.id = createId(
-                new Date().getFullYear() + "0" + date.getMonth()
-              );
+    if (err) {
+      Swal.fire({
+        position: "top",
+        title: "File của bạn chưa đúng định dạng mới nhập file khác !",
+        showConfirmButton: true,
+      });
+    } else {
+      for (var i = 1; i < e.length; i++) {
+        let tampTeacher = {};
+
+        for (let j = 0; j < e[0].length; j++) {
+          if (e[0][j] == "gender") {
+            try {
+              let check = e[i][j].toLowerCase() == "nam" ? "true" : "false";
+              tampTeacher[e[0][j]] = check;
+            } catch (error) {
+              tampTeacher[e[0][j]] = "true";
             }
           } else {
-            if (e[0][j] == "classLeader") {
-              try {
-                let check = e[i][j].toLowerCase();
-                tampTeacher[e[0][j]] = check;
-              } catch (error) {
-                tampTeacher[e[0][j]] = "";
+            if (e[0][j] == "dataOfBirth") {
+              var date = new Date(e[i][j]);
+              if (date == "Invalid Date") {
+              } else {
+                var date1 = moment(date).format("YYYY-MM-DD");
+                tampTeacher[e[0][j]] = date1;
+
+                tampTeacher.id = createId(
+                  new Date().getFullYear() + "0" + date.getMonth()
+                );
               }
             } else {
-              try {
-                tampTeacher[e[0][j]] = e[i][j];
-              } catch (error) {
-                tampTeacher[e[0][j]] = "";
+              if (e[0][j] == "classLeader") {
+                try {
+                  let check = e[i][j].toUpperCase();
+                  tampTeacher[e[0][j]] = check;
+                } catch (error) {
+                  tampTeacher[e[0][j]] = "";
+                }
+              } else {
+                try {
+                  tampTeacher[e[0][j]] = e[i][j];
+                } catch (error) {
+                  tampTeacher[e[0][j]] = "";
+                }
               }
             }
           }
         }
+
+        if (tampTeacher.id) {
+        } else {
+          tampTeacher.id = createId("2020006");
+        }
+        listTeacher.push({ ...inititalTeacher, ...tampTeacher });
       }
 
-      if (tampTeacher.id) {
-      } else {
-        tampTeacher.id = createId("2020006");
-      }
-      listTeacher.push({ ...inititalTeacher, ...tampTeacher });
-    }
+      console.log(listTeacher);
 
-    console.log(listTeacher);
+      const result = await listTeacher.map((obj) => {
+        
+        return firebase
+          .auth()
+          .createUserWithEmailAndPassword(obj.email, "123456")
+          .then(async function (response) {
+            // tạo 1 giáo viên
+            return response.user.uid;
 
-    const result = await listTeacher.map(async (e) => {
-      return await addATeacher(e);
-    });
-
-    Swal.fire({
-      title: "Đang tải dữ liệu từ file lên",
-      html: "Vui lòng chờ....",
-      timerProgressBar: true,
-      didOpen: () => {
-        Swal.showLoading();
-
-        Promise.all(result).then((e) => {
-          // xu ly dem so luong loi
-
-          var arrArr = [];
-          var addSuccess = 0;
-
-          e.forEach((e) => {
-            if (e) {
-              // có lỗi
-              arrArr.push(e.email);
-            } else {
-              addSuccess++;
-              // add thành công
-            }
+            //
+          })
+          .catch(function (error) {
+            console.log(error);
+            return { ...error, email: obj.email };
           });
+      });
 
+      Promise.all(result).then(async (id) => {
+        var addSuccess = 0;
+
+        var arrArr = [];
+
+        const addTeacher = await id.map((id, index) => {
+          if (typeof id == "string") {
+            // add teacher
+            addSuccess++;
+            setTimeout(() => {
+              db.collection("Teachers")
+                .doc(id)
+                .set(listTeacher[index])
+                .then(function (response) {
+                  console.log(response, " add oke ", listTeacher[index]);
+                })
+                .catch(function (error) {
+                  return error;
+                });
+            }, 200);
+          } else {
+            // bị lỗi ko làm gì
+            arrArr.push(id.email);
+          }
+        });
+
+        Promise.all(addTeacher).then((teacher) => {
           Swal.close();
           Swal.fire({
             position: "top",
             icon: "success",
             title: `File có ${
               listTeacher.length
-            } học sinh đã thêm thành công ${addSuccess}
-            và có ${arrArr.length} giảng viên bị lỗi do mail bị trùng
+            }giáo viên đã thêm thành công ${addSuccess}
+            và có ${
+              listTeacher.length - addSuccess
+            } giảng viên bị lỗi do mail bị trùng
             danh sánh email: ${arrArr.join(" <br> ")}`,
             showConfirmButton: true,
           });
         });
-      },
-    }).then((result) => {
-      /* Read more about handling dismissals below */
-      if (result.dismiss === Swal.DismissReason.timer) {
-        console.log("I was closed by the timer");
-      }
-    });
+      });
+
+      Swal.fire({
+        title: "Đang tải dữ liệu từ file lên",
+        html: "Vui lòng chờ....",
+        timerProgressBar: true,
+        position: "top",
+        didOpen: () => {
+          Swal.showLoading();
+        },
+      }).then((result) => {
+        /* Read more about handling dismissals below */
+        if (result.dismiss === Swal.DismissReason.timer) {
+          console.log("I was closed by the timer");
+        }
+      });
+    }
   });
 });
+
+// Promise.all(result).then((e) => {
+//   // xu ly dem so luong loi
+
+//   var arrArr = [];
+//   var addSuccess = 0;
+
+//   e.forEach((e) => {
+//     if (e) {
+//       // có lỗi
+//       arrArr.push(e.email);
+//     } else {
+//       addSuccess++;
+//       // add thành công
+//     }
+//   });
+
+//   Swal.close();
+//   Swal.fire({
+//     position: "top",
+//     icon: "success",
+//     title: `File có ${
+//       listTeacher.length
+//     } học sinh đã thêm thành công ${addSuccess}
+//     và có ${arrArr.length} giảng viên bị lỗi do mail bị trùng
+//     danh sánh email: ${arrArr.join(" <br> ")}`,
+//     showConfirmButton: true,
+//   });
+// });
