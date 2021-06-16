@@ -6,14 +6,11 @@ function isAlphabetAndSpaces(event) {
 
   if (
     /[A-Za-z\s]/.test(ch) ||
-    VIETNAMESE_DIACRITIC_CHARACTERS.toLocaleLowerCase().includes(
-      ch.toLocaleLowerCase()
-    )
+    VIETNAMESE_DIACRITIC_CHARACTERS.toLowerCase().includes(ch.toLowerCase())
   ) {
     document.getElementById("lblValue").style.display = "none";
   } else {
     document.getElementById("lblValue").style.display = "block";
-    event.preventDefault();
   }
 }
 
