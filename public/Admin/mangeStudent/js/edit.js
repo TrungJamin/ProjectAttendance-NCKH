@@ -19,7 +19,7 @@ cancelEdit.addEventListener("click", (e) => {
   edit.classList.remove("open");
 });
 
-// SET SELECT CLASS AND GRADE
+
 var listOfClasses = [];
 var totalStudent = 0;
 const gradeSelect = document.getElementById("selectGrade");

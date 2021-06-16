@@ -60,7 +60,7 @@
                         <div class="form-group">
                             <label for="student-id" id="student-id">Mã số </label>
                             <input readonly name="studentID" type="text" class="form-control" id="student-id"
-                                placeholder="Mã số...">
+                                placeholder="Mã số sinh viên sẽ được cấp tự động">
                             <label for="student-name">Họ Tên</label>
                             <input name="studentName" type="text" class="form-control" id="fullname"
                                 placeholder="Họ Tên..." onkeypress="isAlphabetAndSpaces(event)" required>
@@ -165,7 +165,11 @@
                                     <input type="file" style="height: 0;
                                      overflow: hidden;
                                      width: 0;" id="inputStudents" />
-                                    <label for="inputStudents" class="btn btn-success">Thêm học sinh từ file</label>
+                                    <label for="inputStudents" class="btn btn-success">
+                                        Thêm học sinh từ file
+                                        <i class="fas fa-upload">
+                                        </i>
+                                    </label>
                                 </div>
 
                             </div>
@@ -178,11 +182,11 @@
                             <form class="d-none d-sm-inline-block form-inline navbar-search">
                                 <div class="input-group">
                                     <input type="text" class="form-control bg-light border-0 small"
-                                        placeholder="Tìm kiếm học sinh..." aria-label="Search"
-                                        aria-describedby="basic-addon2" id="Student-search">
+                                        placeholder="Tìm kiếm học sinh theo mssv,họ tên,địa chỉ,lớp ......"
+                                        aria-label="Search" aria-describedby="basic-addon2" id="Student-search">
 
-                                    <button class="btn btn-success" type="button">
-                                        <i class="fas fa-search fa-sm"></i>
+                                    <button class="btn btn-success btn-refresh-search" type="button">
+                                        <i class="fa fa-refresh" aria-hidden="true"></i>
                                     </button>
                                 </div>
                             </form>
