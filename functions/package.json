@@ -19,9 +19,12 @@
     "@tensorflow/tfjs-node-gpu": "^3.6.1",
     "@vladmandic/face-api": "^1.2.5",
     "bcrypt": "^5.0.1",
+    "express": "^4.17.1",
     "firebase-admin": "^9.9.0",
     "firebase-functions": "^3.14.1",
+    "nodemailer": "^6.6.1",
     "path": "^0.12.7",
+    "socket.io": "^4.1.2",
     "window": "^4.2.7"
   },
   "devDependencies": {
