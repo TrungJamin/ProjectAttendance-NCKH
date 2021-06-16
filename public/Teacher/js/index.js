@@ -7,6 +7,8 @@ window.addEventListener("scroll", (event) => {
     nav.style.position = "static";
   }
 });
+
+
 document.querySelector("#btnLogout").addEventListener("click", () => {
   
   Swal.fire({
@@ -71,6 +73,30 @@ firebase.auth().onAuthStateChanged((user) => {
             teacher.data().class
           }</h1>`;
           setNameOfTeacher(user.email);
+
+
+          db
+          .collection("Teachers")
+          .where("email", "==", user.email)
+          .get()
+          .then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+              // doc.data() is never undefined for query doc snapshots
+              let profileTeacher = doc.data();
+
+              if(profileTeacher.img){
+                document.querySelector('#imgAvatar').src= profileTeacher.img;
+              }
+               
+                
+            });
+
+          })
+          .catch((error) => {
+            console.log("Error getting documents: ", error);
+          });
+
+
         }
           
       });
