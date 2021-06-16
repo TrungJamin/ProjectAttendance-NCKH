@@ -38,6 +38,8 @@ db.collection("Teachers").onSnapshot(async function (querySnapshot) {
     tamp.docId = doc.id;
     listOfTeachers.push(tamp);
   });
+
+  document.querySelector("#loadingTeacher").classList.add("d-none")
   renderTable(listOfTeachers);
 });
 

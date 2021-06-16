@@ -29,37 +29,12 @@ function createId(year) {
   return tamp;
 }
 
-async function addATeacher(obj) {
-  return await firebase
-    .auth()
-    .createUserWithEmailAndPassword(obj.email, "123456")
-    .then(async function (response) {
-      // tạo 1 giáo viên
-
-      db.collection("Teachers")
-        .doc(response.user.uid)
-        .set(obj)
-        .then(function (response) {
-          console.log(response);
-        })
-        .catch(function (error) {
-          return error;
-        });
-
-      //
-    })
-    .catch(function (error) {
-      console.log(error);
-      return { ...error, email: obj.email };
-    });
-}
-
-var listTeacher = [];
 var input = document.getElementById("inputTeacher");
 input.addEventListener("change", function () {
   readXlsxFile(input.files[0]).then(async function (e) {
     // `rows` is an array of rows
     // each row being an array of cells.
+    var listTeacher = [];
 
     // đoạn này bắt lỗi
     console.log(e[0]);
@@ -75,52 +50,62 @@ input.addEventListener("change", function () {
       err = true;
     }
 
-    if (err) {
+    if (err) {// co lỗi
       Swal.fire({
         position: "top",
         title: "File của bạn chưa đúng định dạng mới nhập file khác !",
         showConfirmButton: true,
       });
-    } else {
+    } else {// ko lỗi
       for (var i = 1; i < e.length; i++) {
         let tampTeacher = {};
 
         for (let j = 0; j < e[0].length; j++) {
-          if (e[0][j] == "gender") {
-            try {
-              let check = e[i][j].toLowerCase() == "nam" ? "true" : "false";
-              tampTeacher[e[0][j]] = check;
-            } catch (error) {
-              tampTeacher[e[0][j]] = "true";
-            }
-          } else {
-            if (e[0][j] == "dataOfBirth") {
-              var date = new Date(e[i][j]);
-              if (date == "Invalid Date") {
-              } else {
-                var date1 = moment(date).format("YYYY-MM-DD");
-                tampTeacher[e[0][j]] = date1;
-
-                tampTeacher.id = createId(
-                  new Date().getFullYear() + "0" + date.getMonth()
-                );
+          switch (e[0][j]) {
+            case "gender":
+              {
+                try {
+                  let check = e[i][j].toLowerCase() == "nam" ? "true" : "false";
+                  tampTeacher[e[0][j]] = check;
+                } catch (error) {
+                  tampTeacher[e[0][j]] = "true";
+                }
               }
-            } else {
-              if (e[0][j] == "classLeader") {
+              break;
+            case "dataOfBirth":
+              {
+                var date = new Date(e[i][j]);
+                if (date == "Invalid Date") {
+                } else {
+                  var date1 = moment(date).format("YYYY-MM-DD");
+                  tampTeacher[e[0][j]] = date1;
+
+                  tampTeacher.id = createId(
+                    new Date().getFullYear() + "0" + date.getMonth()
+                  );
+                }
+              }
+              break;
+            case "classLeader":
+              {
                 try {
                   let check = e[i][j].toUpperCase();
                   tampTeacher[e[0][j]] = check;
                 } catch (error) {
                   tampTeacher[e[0][j]] = "";
                 }
-              } else {
+              }
+              break;
+
+            default:
+              {
                 try {
                   tampTeacher[e[0][j]] = e[i][j];
                 } catch (error) {
                   tampTeacher[e[0][j]] = "";
                 }
               }
-            }
+              break;
           }
         }
 
@@ -134,14 +119,12 @@ input.addEventListener("change", function () {
       console.log(listTeacher);
 
       const result = await listTeacher.map((obj) => {
-        
         return firebase
           .auth()
           .createUserWithEmailAndPassword(obj.email, "123456")
           .then(async function (response) {
             // tạo 1 giáo viên
             return response.user.uid;
-
             //
           })
           .catch(function (error) {
@@ -152,9 +135,7 @@ input.addEventListener("change", function () {
 
       Promise.all(result).then(async (id) => {
         var addSuccess = 0;
-
         var arrArr = [];
-
         const addTeacher = await id.map((id, index) => {
           if (typeof id == "string") {
             // add teacher
@@ -177,6 +158,7 @@ input.addEventListener("change", function () {
         });
 
         Promise.all(addTeacher).then((teacher) => {
+
           Swal.close();
           Swal.fire({
             position: "top",
@@ -190,52 +172,31 @@ input.addEventListener("change", function () {
             danh sánh email: ${arrArr.join(" <br> ")}`,
             showConfirmButton: true,
           });
+          
         });
       });
 
-      Swal.fire({
-        title: "Đang tải dữ liệu từ file lên",
-        html: "Vui lòng chờ....",
-        timerProgressBar: true,
-        position: "top",
-        didOpen: () => {
-          Swal.showLoading();
-        },
-      }).then((result) => {
-        /* Read more about handling dismissals below */
-        if (result.dismiss === Swal.DismissReason.timer) {
-          console.log("I was closed by the timer");
-        }
-      });
+      ShowNotification();
+      
     }
   });
 });
 
-// Promise.all(result).then((e) => {
-//   // xu ly dem so luong loi
 
-//   var arrArr = [];
-//   var addSuccess = 0;
+function ShowNotification(){
+  Swal.fire({
+    title: "Đang tải dữ liệu từ file lên",
+    html: "Vui lòng chờ....",
+    timerProgressBar: true,
+    position: "top",
+    didOpen: () => {
+      Swal.showLoading();
+    },
+  }).then((result) => {
+    /* Read more about handling dismissals below */
+    if (result.dismiss === Swal.DismissReason.timer) {
+      console.log("I was closed by the timer");
+    }
+  });
+}
 
-//   e.forEach((e) => {
-//     if (e) {
-//       // có lỗi
-//       arrArr.push(e.email);
-//     } else {
-//       addSuccess++;
-//       // add thành công
-//     }
-//   });
-
-//   Swal.close();
-//   Swal.fire({
-//     position: "top",
-//     icon: "success",
-//     title: `File có ${
-//       listTeacher.length
-//     } học sinh đã thêm thành công ${addSuccess}
-//     và có ${arrArr.length} giảng viên bị lỗi do mail bị trùng
-//     danh sánh email: ${arrArr.join(" <br> ")}`,
-//     showConfirmButton: true,
-//   });
-// });
