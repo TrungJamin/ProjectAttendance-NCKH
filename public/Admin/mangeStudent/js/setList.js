@@ -225,7 +225,11 @@ function convertDate(day) {
 }
 
 const search = document.getElementById("Student-search");
-
+const refreshSearch = document.querySelector(".btn-refresh-search");
+refreshSearch.addEventListener("click", (e) => {
+  search.value = "";
+  setList(listOfStudent);
+});
 search.addEventListener("input", (e) => {
   let value = e.target.value;
 
@@ -240,6 +244,7 @@ search.addEventListener("input", (e) => {
         student.name.toLowerCase().includes(value) ||
         student.id.toString().toLowerCase().includes(value) ||
         student.class.toLowerCase().includes(value) ||
+        student.dateOfBirth.toLowerCase().includes(value) ||
         student.gender.toLowerCase().includes(value) ||
         student.phone.toLowerCase().includes(value) ||
         convertDate(student.dateOfBirth).toLowerCase().includes(value) ||
