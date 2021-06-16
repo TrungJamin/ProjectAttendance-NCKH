@@ -100,8 +100,6 @@ input.addEventListener("change", function () {
       listTeacher.push({ ...inititalTeacher, ...tampTeacher });
     }
 
-    console.log(listTeacher);
-
     const result = await listTeacher.map((obj) => {
       return firebase
         .auth()
@@ -119,12 +117,9 @@ input.addEventListener("change", function () {
     });
 
     Promise.all(result).then(async (id) => {
-     
-
       var addSuccess = 0;
 
-      var  arrArr=[];
-     
+      var arrArr = [];
 
       const addTeacher = await id.map((id, index) => {
         if (typeof id == "string") {
@@ -148,8 +143,6 @@ input.addEventListener("change", function () {
       });
 
       Promise.all(addTeacher).then((teacher) => {
-       
-
         Swal.close();
         Swal.fire({
           position: "top",
@@ -157,14 +150,15 @@ input.addEventListener("change", function () {
           title: `File có ${
             listTeacher.length
           } học sinh đã thêm thành công ${addSuccess}
-            và có ${listTeacher.length - addSuccess} giảng viên bị lỗi do mail bị trùng
+            và có ${
+              listTeacher.length - addSuccess
+            } giảng viên bị lỗi do mail bị trùng
             danh sánh email: ${arrArr.join(" <br> ")}`,
           showConfirmButton: true,
         });
       });
     });
 
-    
     Swal.fire({
       title: "Đang tải dữ liệu từ file lên",
       html: "Vui lòng chờ....",
@@ -172,8 +166,6 @@ input.addEventListener("change", function () {
       position: "top",
       didOpen: () => {
         Swal.showLoading();
-        
-       
       },
     }).then((result) => {
       /* Read more about handling dismissals below */
@@ -183,8 +175,6 @@ input.addEventListener("change", function () {
     });
   });
 });
-
-
 
 // Promise.all(result).then((e) => {
 //   // xu ly dem so luong loi

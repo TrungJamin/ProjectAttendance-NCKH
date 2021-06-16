@@ -52,6 +52,7 @@ inputFileExcel.addEventListener("change", function () {
       );
       document.querySelector(".loading-table").classList.add("d-none");
       document.querySelector("#dataTable").classList.remove("d-none");
+      labelInputFile.innerHTML = "Thêm Dữ Liệu Từ File";
     } else {
       const list = [];
       let count = 0;
