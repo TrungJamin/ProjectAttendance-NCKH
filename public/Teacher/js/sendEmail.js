@@ -62,19 +62,22 @@ formSendMail.addEventListener("submit", async function (event) {
   const content = formSendMail["content-send-mail"].value;
   const profile = profileTeacher;
   loadingSendEmail.classList.remove("d-none");
+  document.querySelector(".send-to").innerText = "Đang Thiết Lập Gửi email ";
   const results = await listStudents.map(async (student) => {
     return await sendMailFromTeacher({
       mailTeacher: profile.email,
       mailStudent: student.mail,
-      name: profile.name + "  Tiêu Đề:" + title,
+      name: profile.name,
+      title: title,
       content: content,
-    }).then((response) => {
+    }).then(() => {
       document.querySelector(".send-to").innerText =
         "Đang Gửi Mail Cho " + student.name;
     });
   });
   Promise.all(results).then((results) => {
     loadingSendEmail.classList.add("d-none");
+    formSendMail.reset();
     Swal.fire({
       position: "center",
       icon: "success",

@@ -49,7 +49,7 @@ function renderMonth(listStudents) {
   countHAbsent = 0;
   countAbsent = 0;
   let list = listMonth(listStudents, d.getMonth() + 1 + next - pre);
-  console.log(list);
+
   list.forEach((student, index) => {
     const tr = document.createElement("tr");
     countNotAbsent = 0;

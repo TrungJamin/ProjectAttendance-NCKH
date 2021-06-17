@@ -2,7 +2,7 @@ const editProfile = document.querySelector("#editProfile");
 var profileTeacher;
 var docId = "";
 var img = "";
-var input ;
+var input;
 
 const inputName = document.querySelector("#myForm #nameInput");
 const inputGender = document.querySelector("#myForm #gender");
@@ -11,27 +11,21 @@ const inputDob = document.querySelector("#myForm #dataOfBirth");
 const imgProfile = document.querySelector("#myForm #imgAvatarTeacher");
 
 function pushDataToForm(name, gender, mail, dob, imgData) {
-
-  if( imgData==undefined){
-  }
-  else{
+  if (imgData == undefined) {
+  } else {
     imgProfile.src = imgData;
   }
-
 
   inputName.value = name;
   inputGender.value = gender;
   inputEmail.value = mail;
   inputDob.value = dob;
-  
 }
 
 // đổ data vào form
 
 firebase.auth().onAuthStateChanged(async (user) => {
   if (user) {
-    console.log(user.email);
-
     // get all data về
     const result = await db
       .collection("Teachers")
@@ -63,9 +57,6 @@ firebase.auth().onAuthStateChanged(async (user) => {
 
 // loadingProfile( );
 
-
-
-
 function handleFiles(e) {
   var img = new Image();
   img.src = URL.createObjectURL(e.target.files[0]);
@@ -80,54 +71,48 @@ function handleFiles(e) {
 function saveProfile(e) {
   e.preventDefault();
 
-
   profileTeacher.name = inputName.value;
   profileTeacher.gender = inputGender.value;
   profileTeacher.email = inputEmail.value;
   profileTeacher.dataOfBirth = inputDob.value;
 
-
   console.log(profileTeacher);
   // // hiện loading upload
-    Swal.fire({
-      title: "Đang tải dữ liệu lên",
-      html: "Vui lòng chờ....",
-      timerProgressBar: true,
-      position: "top",
-      didOpen: () => {
-        Swal.showLoading();
-      },
-    }).then((result) => {
-      /* Read more about handling dismissals below */
-      if (result.dismiss === Swal.DismissReason.timer) {
-      }
-    });
+  Swal.fire({
+    title: "Đang tải dữ liệu lên",
+    html: "Vui lòng chờ....",
+    timerProgressBar: true,
+    position: "top",
+    didOpen: () => {
+      Swal.showLoading();
+    },
+  }).then((result) => {
+    /* Read more about handling dismissals below */
+    if (result.dismiss === Swal.DismissReason.timer) {
+    }
+  });
 
-
-  
-    db
-    .doc("Teachers/" + docId)
+  db.doc("Teachers/" + docId)
     .set(profileTeacher)
     .then(function (doc) {
-
-      console.log(profileTeacher)
+      console.log(profileTeacher);
       closeFormInput();
 
-      document.querySelector('#imgAvatar').src= profileTeacher.img;
-        Swal.close();
-          Swal.fire({
-            position: "top",
-            icon: "success",
-            title: `Chỉnh sửa thành công`,
-            showConfirmButton: true,
-          });
+      document.querySelector("#imgAvatar").src = profileTeacher.img;
+      Swal.close();
+      Swal.fire({
+        position: "top",
+        icon: "success",
+        title: `Chỉnh sửa thành công`,
+        showConfirmButton: true,
+      });
     })
     .catch(function (error) {});
 }
 
 editProfile.addEventListener("click", () => {
   // lalmf mơ
-  document.querySelector('#opacityAdd').classList.add("opacityAdd");
+  document.querySelector("#opacityAdd").classList.add("opacityAdd");
   document.querySelector("#formeditprofile").classList.remove("hidden");
   pushDataToForm(
     profileTeacher.name,
@@ -136,13 +121,10 @@ editProfile.addEventListener("click", () => {
     profileTeacher.dataOfBirth,
     profileTeacher.img
   );
-
 });
 
-
-
 function closeFormInput() {
-  document.querySelector('#opacityAdd').classList.remove("opacityAdd");
+  document.querySelector("#opacityAdd").classList.remove("opacityAdd");
   document.querySelector("#formeditprofile").classList.add("hidden");
 }
 

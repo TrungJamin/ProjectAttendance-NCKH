@@ -229,7 +229,13 @@ const oAuth2Client = new google.auth.OAuth2(
 );
 oAuth2Client.setCredentials({ refresh_token: REFRESH_TOKEN });
 
-async function sendMailFromTeacher(mailTeacher, mailStudent, name, content) {
+async function sendMailFromTeacher(
+  mailTeacher,
+  mailStudent,
+  name,
+  title,
+  content
+) {
   try {
     const accessToken = await oAuth2Client.getAccessToken();
 
@@ -250,7 +256,9 @@ async function sendMailFromTeacher(mailTeacher, mailStudent, name, content) {
       to: `${mailStudent}`,
       subject: "Trường Trung Học Cơ Sở Đức Trí",
       text: "",
-      html: `<h3>From:${name}</h3><p>${content}</p> `,
+      html: `<h1>From:${name}  || email: ${mailTeacher}</h1>
+      <h3>${title}</h3>
+      <p>${content}</p> `,
     };
 
     const result = await transport.sendMail(mailOptions);
@@ -264,6 +272,7 @@ exports.sendMailFromTeacher = functions.https.onCall((data, context) => {
     data.mailTeacher,
     data.mailStudent,
     data.name,
+    data.title,
     data.content
   );
 });
