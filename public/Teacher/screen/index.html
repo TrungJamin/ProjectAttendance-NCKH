@@ -80,41 +80,94 @@
     </div>
 
     <div class="form-send-email-all-student d-none">
-        <div class="container">
-            <div class="col-xl-12">
-                <!-- Account details card-->
-                <div class="card mb-4">
-                    <div class="card-header text-center bg-success text-white " style="font-size: 18px;"
-                        id="typeFormTeacher">Gửi Email Cho Toàn Bộ Học Sinh</div>
+        <div class="content">
+            <div class="container">
+                <div class="col-xl-12">
+                    <!-- Account details card-->
+                    <div class="card mb-4">
+                        <div class="card-header text-center bg-success text-white " style="font-size: 18px;"
+                            id="typeFormTeacher">Gửi Email Cho Toàn Bộ Học Sinh</div>
 
-                    <div class="d-none" id="loadingAddTeacher" style="position: absolute; top: 41%; left:48%">
-                        <div class="spinner-border" role="status">
+                        <div class="d-none" id="loadingAddTeacher" style="position: absolute; top: 41%; left:48%">
+                            <div class="spinner-border" role="status">
+                            </div>
+                        </div>
+
+                        <div class="card-body">
+                            <form class="justify-content-center" id="form-send-mail">
+                                <!-- Form Group (first name)-->
+                                <div class="form-group col-md-12">
+                                    <label class="small mb-1" for="title-send-email">Tiêu Đề</label>
+                                    <input id="title-send-email" type="text" name="title-send-email"
+                                        class="form-control" placeholder="xin mời bạn nhập tiêu đề" required>
+                                </div>
+                                <!-- Form Group (last name)-->
+                                <div class="form-group col-md-12">
+                                    <label class="small mb-1" for="content-send-mail">Nội Dung</label>
+                                    <textarea id="content-send-mail" type="text" name="content-send-mail"
+                                        class="form-control" placeholder="Nội Dung" required> </textarea>
+                                </div>
+
+                                <!-- Save changes button-->
+                                <div class="d-flex justify-content-between">
+                                    <button type="submit" class="btn btn-success">Gửi</button>
+                                    <button class="btn btn-danger" onclick="turnOffFormEmail()"
+                                        type="reset">Hủy</button>
+                                </div>
+                            </form>
+
+
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="update-password-screen d-none">
+        <div class="content">
+            <div class="container">
+                <div class="col-xl-12">
+                    <!-- Account details card-->
+                    <div class="card mb-4">
+                        <div class="card-header text-center bg-success text-white " style="font-size: 18px;"
+                            id="typeFormTeacher">Thay Đổi Mật Khẩu</div>
 
-                    <div class="card-body">
-                        <form class="justify-content-center" id="form-send-mail">
-                            <!-- Form Group (first name)-->
-                            <div class="form-group col-md-12">
-                                <label class="small mb-1" for="title-send-email">Tiêu Đề</label>
-                                <input id="title-send-email" type="text" name="title-send-email" class="form-control"
-                                    placeholder="xin mời bạn nhập tiêu đề" required> </textarea>
+                        <div class="d-none" id="loadingAddTeacher" style="position: absolute; top: 41%; left:48%">
+                            <div class="spinner-border" role="status">
                             </div>
-                            <!-- Form Group (last name)-->
-                            <div class="form-group col-md-12">
-                                <label class="small mb-1" for="content-send-mail">Nội Dung</label>
-                                <textarea id="content-send-mail" type="text" name="content-send-mail"
-                                    class="form-control" placeholder="Nội Dung" required> </textarea>
-                            </div>
+                        </div>
 
-                            <!-- Save changes button-->
-                            <div class="d-flex justify-content-between">
-                                <button type="submit" class="btn btn-success">Gửi</button>
-                                <button class="btn btn-danger" onclick="turnOffFormEmail()" type="reset">Hủy</button>
-                            </div>
-                        </form>
+                        <div class="card-body">
+                            <form class="justify-content-center" id="form-update-password">
+                                <!-- Form Group (first name)-->
+                                <div class="form-group col-md-12">
+                                    <label class="small mb-1" for="">Nhập Mật Khẩu Cũ</label>
+                                    <input id="old-password" type="password" class="form-control" name="old-password"
+                                        class="form-control" placeholder="nhập mật cũ ..." required>
+
+                                </div>
+                                <!-- Form Group (last name)-->
+                                <div class="form-group col-md-12">
+                                    <label class="small mb-1" for="new-password">Nhập Mật Khẩu Mới</label>
+                                    <input id="new-password" type="password" name="new-password" class="form-control"
+                                        placeholder="xác nhận mật Khẩu" required> </input>
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label class="small mb-1" for="confirm-password">Xác Nhận Mật Khẩu</label>
+                                    <input id="confirm-password" type="password" name="confirm-password"
+                                        class="form-control" placeholder="xác nhận mật khẩu" required> </input>
+                                </div>
+
+                                <!-- Save changes button-->
+                                <div class="d-flex justify-content-between">
+                                    <button type="submit" class="btn btn-success">Lưu Mật Khẩu</button>
+                                    <button class="btn btn-danger" onclick="turnOffScreenUpdatePassWord()"
+                                        type="reset">Hủy</button>
+                                </div>
+                            </form>
 
 
+                        </div>
                     </div>
                 </div>
             </div>
@@ -236,8 +289,8 @@
                 <!-- Nav Item - Utilities Collapse Menu -->
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-                        aria-expanded="true" aria-controls="collapseUtilities" id="all-Students"
-                        onclick="removeActive()">
+                        aria-expanded="true" aria-controls="collapseUtilities" onclick="turnOnUpdatePasswordScreen()"
+                        id="all-Students" onclick="removeActive()">
                         <i class="fas fa-key"></i>
                         <span>Thay Đổi Mật Khẩu</span>
                     </a>

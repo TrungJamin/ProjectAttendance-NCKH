@@ -883,11 +883,20 @@ input[type="search"] {
   z-index: 1;
 }
 .form-send-email-all-student {
+  background: rgba(0, 0, 0, 0.4);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+.form-send-email-all-student .container {
   position: absolute;
   top: 8%;
-  left: 17%;
+  left: 15%;
   width: 80%;
-  z-index: 10;
+  z-index: 3;
+}
+.form-send-email-all-student .container textarea {
+  height: 240px;
 }
 .loading-send-mail {
   position: absolute;
@@ -904,13 +913,26 @@ input[type="search"] {
   height: 200px;
   text-align: center;
   background-color: #fff;
-  top: 20%;
+  top: 15%;
   border-radius: 15px;
 }
 .container h3 {
   margin-top: 15px;
 }
 .loading-send-mail img {
-  width: 100px;
-  height: 80px;
+  width: 180px;
+  height: 100px;
+}
+.update-password-screen {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+}
+.update-password-screen .container {
+  position: absolute;
+  top: 8%;
+  left: 15%;
+  width: 80%;
+  z-index: 3;
 }

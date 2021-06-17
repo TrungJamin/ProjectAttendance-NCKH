@@ -76,13 +76,12 @@ function saveProfile(e) {
   profileTeacher.email = inputEmail.value;
   profileTeacher.dataOfBirth = inputDob.value;
 
-  console.log(profileTeacher);
   // // hiện loading upload
   Swal.fire({
     title: "Đang tải dữ liệu lên",
     html: "Vui lòng chờ....",
     timerProgressBar: true,
-    position: "top",
+    position: "center",
     didOpen: () => {
       Swal.showLoading();
     },
