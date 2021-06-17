@@ -26,7 +26,7 @@ db.collection("Students").onSnapshot(async (snapShot) => {
       childrenOf_tr[4].textContent = change.doc.data().gender;
       childrenOf_tr[5].textContent = change.doc.data().class;
       childrenOf_tr[6].textContent = change.doc.data().address;
-      childrenOf_tr[7].textContent = change.doc.data().phone;
+      childrenOf_tr[7].textContent = change.doc.data().email;
     }
 
     if (change.type === "added") {

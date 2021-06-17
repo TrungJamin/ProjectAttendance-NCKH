@@ -41,7 +41,7 @@ edit_form.addEventListener("submit", (e) => {
           dateOfBirth: dob,
           gender: edit_form.gender.value,
           address: edit_form.Address.value,
-          phone: edit_form.Phone.value,
+          email: edit_form["student-email"].value,
         })
         .then(function () {
           swal("Thành Công !", "", "success");
@@ -62,7 +62,7 @@ edit_form.addEventListener("submit", (e) => {
           dateOfBirth: dob,
           gender: edit_form.gender.value,
           address: edit_form.Address.value,
-          phone: edit_form.Phone.value,
+          email: edit_form["student-email"].value,
         })
         .then(async (res) => {
           for (let i = 5; i <= 7; i++) {

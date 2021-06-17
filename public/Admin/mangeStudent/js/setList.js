@@ -34,6 +34,7 @@ function setList(group) {
     td_Gender.setAttribute("class", "gender");
     const td_Address = document.createElement("td");
     const td_PhoneNumber = document.createElement("td");
+    td_PhoneNumber.style.width = "200px";
 
     td_Id.textContent = person.id;
     td_Name.textContent = person.name;
@@ -41,7 +42,7 @@ function setList(group) {
     td_Class.textContent = person.class;
     td_Gender.textContent = person.gender;
     td_Address.textContent = person.address;
-    td_PhoneNumber.textContent = person.phone;
+    td_PhoneNumber.textContent = person.email;
 
     let td_i = document.createElement("td");
     let i_trash = document.createElement("i");
@@ -52,7 +53,7 @@ function setList(group) {
     i_trash.setAttribute("class", "fas fa-trash");
     i_trash.setAttribute("style", "color: Tomato;");
 
-    i_edit.setAttribute("class", "fas fa-edit mr-5");
+    i_edit.setAttribute("class", "fas fa-edit mr-4");
     i_edit.setAttribute("style", "color: green;");
 
     let doc_ID;
@@ -130,7 +131,8 @@ function setList(group) {
         .join("-");
       edit_form.gender.value = tr.getElementsByTagName("td")[4].textContent;
       edit_form.Address.value = tr.getElementsByTagName("td")[6].textContent;
-      edit_form.Phone.value = tr.getElementsByTagName("td")[7].textContent;
+      edit_form["student-email"].value =
+        tr.getElementsByTagName("td")[7].textContent;
       let grade = tr.getElementsByTagName("td")[5].textContent.slice(0, 2)[0];
       if (grade == "6") {
         edit_form.grade.value = "6";
