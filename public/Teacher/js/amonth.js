@@ -56,7 +56,6 @@ function renderMonth(listStudents) {
     countAbsent = 0;
     const listAsked = [];
     const listNotAsked = [];
-    console.log("name : ", student.name);
     student.attendance.forEach((att) => {
       if (!att.data.status) {
         if (att.data.asked === true) {

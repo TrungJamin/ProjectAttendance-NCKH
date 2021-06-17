@@ -874,14 +874,7 @@ input[type="search"] {
 .non_active {
   display: none;
 }
-/* .logout {
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    background: rgba(233, 224, 224, 0.795);
-    z-index: 1;
-    display: block;
-  } */
+
 .formLogout {
   width: 100%;
   height: 100%;
@@ -889,4 +882,35 @@ input[type="search"] {
   background: rgba(0, 0, 0, 0.4);
   z-index: 1;
 }
-
+.form-send-email-all-student {
+  position: absolute;
+  top: 8%;
+  left: 17%;
+  width: 80%;
+  z-index: 10;
+}
+.loading-send-mail {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+}
+.loading-send-mail .container {
+  position: absolute;
+  color: #000;
+  width: 50%;
+  height: 200px;
+  text-align: center;
+  background-color: #fff;
+  top: 20%;
+  border-radius: 15px;
+}
+.container h3 {
+  margin-top: 15px;
+}
+.loading-send-mail img {
+  width: 100px;
+  height: 80px;
+}

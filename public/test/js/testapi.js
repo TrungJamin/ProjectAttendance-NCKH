@@ -57,3 +57,15 @@ upload1.addEventListener("change", (e) => {
     });
   });
 });
+
+const sendMailFromTeacher = firebase
+  .functions()
+  .httpsCallable("sendMailFromTeacher");
+sendMailFromTeacher({
+  mailTeacher: "truongthanhhuy08@gmail.com",
+  mailStudent: "truongthanhhuy08@gmail.com",
+  name: "truongthanhhuy08@gmail.com",
+  content: "ahihi",
+}).then((response) => {
+  console.log(response);
+});

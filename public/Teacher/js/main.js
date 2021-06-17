@@ -38,25 +38,22 @@ function getStudents(className) {
             listStudents.push({ ...student, attendance: attendance });
           });
       }
-      setTimeout(() => {
-        renderDatabase(listStudents);
-        state++;
-      }, 2000);
     });
   });
-}
-async function getData(Promise) {
-  return Promise;
+  setTimeout(() => {
+    renderDatabase(listStudents);
+    state++;
+  }, 2000);
 }
 
-async function renderDatabase(listStudents) {
+function renderDatabase(listStudents) {
   let day = new Date().getDate();
   let month = new Date().getMonth() + 1;
   let year = new Date().getFullYear();
   renderDay(listStudents, day, month, year);
   renderWeek(listStudents);
-  // renderMonth(listStudents);
-  // renderSemester(listStudents);
+  renderMonth(listStudents);
+  renderSemester(listStudents);
   let dataBase = document.querySelectorAll(".database");
   dataBase.forEach((data) => {
     data.classList.remove("d-none");
