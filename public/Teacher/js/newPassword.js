@@ -3,11 +3,18 @@ const updatePasswordScreen = document.querySelector(".update-password-screen");
 
 const turnOnUpdatePasswordScreen = () => {
   updatePasswordScreen.classList.remove("d-none");
+
+  // đông form gủi mail
+  document
+    .querySelector(".form-send-email-all-student")
+    .classList.add("d-none");
 };
 
 const turnOffScreenUpdatePassWord = () => {
   updatePasswordScreen.classList.add("d-none");
 };
+
+
 formUpdatePassword.addEventListener("submit", async function (event) {
   event.preventDefault();
   Swal.fire({

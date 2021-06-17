@@ -49,6 +49,10 @@ btnSendMail.addEventListener("click", (e) => {
   document
     .querySelector(".form-send-email-all-student")
     .classList.remove("d-none");
+
+    // đóng form thay đổi mk
+
+    turnOffScreenUpdatePassWord();
 });
 turnOffFormEmail = () => {
   document

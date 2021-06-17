@@ -131,6 +131,8 @@ tr {
   width: 20%;
 }
 
+
+
 .noted {
   overflow: hidden;
   white-space: nowrap;
@@ -158,6 +160,11 @@ tr {
   border-radius: 5px;
   /* text-align: center; */
 }
+
+table{
+  overflow: hidden;
+}
+
 .panel {
   margin-bottom: 20px;
   background-color: #fff;
@@ -256,7 +263,13 @@ table .date-of-week tr :hover {
 #table-wrapper {
   position: relative;
   height: 200px;
+  overflow-y:scroll ;
 }
+
+#table-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
 #table-scroll {
   margin-top: 20px;
 }
