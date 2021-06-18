@@ -48,12 +48,22 @@ function getStudents(className) {
 }
 const loadingSendEmail = document.querySelector(".loading-send-mail");
 btnSendMail.addEventListener("click", (e) => {
+
+  console.log(document.querySelector("#opacityAdd").classList)
+  document.querySelector("#opacityAdd").classList.add("opacityAdd");
+
+  document.querySelector('#openSendEmail').classList.add('active');
+        document.querySelector('#changerPw').classList.remove('active');
   document
     .querySelector(".form-send-email-all-student")
     .classList.remove("d-none");
+
   turnOffScreenUpdatePassWord();
 });
 turnOffFormEmail = () => {
+  document.querySelector("#opacityAdd").classList.remove("opacityAdd");
+  document.querySelector('#openSendEmail').classList.remove('active');
+  document.querySelector('#changerPw').classList.remove('active');
   renderListFiles.innerHTML = "";
   document
     .querySelector(".form-send-email-all-student")
@@ -122,6 +132,7 @@ formSendMail.addEventListener("submit", async function (event) {
     });
   });
   Promise.all(results).then((results) => {
+    document.querySelector("#opacityAdd").classList.remove("opacityAdd");
     loadingSendEmail.classList.add("d-none");
     formSendMail.reset();
     listFiles = [];

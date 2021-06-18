@@ -2,6 +2,9 @@ const formUpdatePassword = document.querySelector("#form-update-password");
 const updatePasswordScreen = document.querySelector(".update-password-screen");
 
 const turnOnUpdatePasswordScreen = () => {
+
+  document.querySelector("#opacityAdd").classList.add("opacityAdd");
+  
   updatePasswordScreen.classList.remove("d-none");
 
   // đông form gủi mail
@@ -11,6 +14,9 @@ const turnOnUpdatePasswordScreen = () => {
 };
 
 const turnOffScreenUpdatePassWord = () => {
+  document.querySelector("#opacityAdd").classList.remove("opacityAdd");
+  document.querySelector('#openSendEmail').classList.remove('active');
+  document.querySelector('#changerPw').classList.remove('active');
   updatePasswordScreen.classList.add("d-none");
 };
 
