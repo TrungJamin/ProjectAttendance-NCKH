@@ -234,7 +234,8 @@ async function sendMailFromTeacher(
   mailStudent,
   name,
   title,
-  content
+  content,
+  files
 ) {
   try {
     const accessToken = await oAuth2Client.getAccessToken();
@@ -255,10 +256,11 @@ async function sendMailFromTeacher(
       from: `Smart Attendance <${mailTeacher}>`,
       to: `${mailStudent}`,
       subject: "Trường Trung Học Cơ Sở Đức Trí",
-      text: "",
+      text: "Smart Bot",
       html: `<h1>From:${name}  || email: ${mailTeacher}</h1>
       <h3>${title}</h3>
       <p>${content}</p> `,
+      attachments: files,
     };
 
     const result = await transport.sendMail(mailOptions);
@@ -268,11 +270,13 @@ async function sendMailFromTeacher(
   }
 }
 exports.sendMailFromTeacher = functions.https.onCall((data, context) => {
+
   return sendMailFromTeacher(
     data.mailTeacher,
     data.mailStudent,
     data.name,
     data.title,
-    data.content
+    data.content,
+    data.files
   );
 });
