@@ -48,7 +48,7 @@ upload1.addEventListener("change", (e) => {
   Promise.all([toBase64(upload1.files[0])]).then((values) => {
     // console.log(upload1.files[0]);
     // console.log("loading...");
-    // console.log(values[0]);
+    console.log(values[0]);
     getAttendances({
       listBase64: values,
       class: "10A1",
@@ -58,14 +58,14 @@ upload1.addEventListener("change", (e) => {
   });
 });
 
-const sendMailFromTeacher = firebase
-  .functions()
-  .httpsCallable("sendMailFromTeacher");
-sendMailFromTeacher({
-  mailTeacher: "truongthanhhuy08@gmail.com",
-  mailStudent: "truongthanhhuy08@gmail.com",
-  name: "truongthanhhuy08@gmail.com",
-  content: "ahihi",
-}).then((response) => {
-  console.log(response);
-});
+// const sendMailFromTeacher = firebase
+//   .functions()
+//   .httpsCallable("sendMailFromTeacher");
+// sendMailFromTeacher({
+//   mailTeacher: "truongthanhhuy08@gmail.com",
+//   mailStudent: "truongthanhhuy08@gmail.com",
+//   name: "truongthanhhuy08@gmail.com",
+//   content: "ahihi",
+// }).then((response) => {
+//   console.log(response);
+// });

@@ -14,7 +14,6 @@ const turnOffScreenUpdatePassWord = () => {
   updatePasswordScreen.classList.add("d-none");
 };
 
-
 formUpdatePassword.addEventListener("submit", async function (event) {
   event.preventDefault();
   Swal.fire({
@@ -61,7 +60,15 @@ formUpdatePassword.addEventListener("submit", async function (event) {
           });
         });
     })
-    .catch(function (error) {});
+    .catch(function (error) {
+      Swal.close();
+      Swal.fire({
+        position: "center",
+        icon: "warning",
+        title: `Mật Khẩu Cũ Không Đúng`,
+        showConfirmButton: true,
+      });
+    });
 });
 function updatePassword(newPassword) {
   const user = firebase.auth().currentUser;

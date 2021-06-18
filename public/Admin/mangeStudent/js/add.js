@@ -17,7 +17,13 @@ edit_form.addEventListener("submit", (e) => {
   e.preventDefault();
   let dob = edit_form.dob.value.split("-").reverse().join("/");
   let year =
-    gradeSelect.value == "10" ? 2021 : gradeSelect.value == "11" ? 2020 : 2019;
+    gradeSelect.value == "6"
+      ? 2021
+      : gradeSelect.value == "7"
+      ? 2020
+      : gradeSelect.value == "8"
+      ? 2019
+      : 2018;
   let gender = edit_form.gender.value == "male" ? "1" : "0";
   let data = edit_form.fullname.value.split(" ");
   let id = "";

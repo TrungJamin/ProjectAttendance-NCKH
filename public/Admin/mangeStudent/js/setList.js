@@ -2,7 +2,7 @@ const body_table = document.querySelector("#body-table");
 const listOfStudent = [];
 
 // FOR SETLIST and EDIT
-var docID;
+let tmpStudent = {};
 
 const studentTempList = [];
 db.collection("Students")
@@ -133,6 +133,7 @@ function setList(group) {
       edit_form.Address.value = tr.getElementsByTagName("td")[6].textContent;
       edit_form["student-email"].value =
         tr.getElementsByTagName("td")[7].textContent;
+      tmpStudent.email = edit_form["student-email"].value;
       let grade = tr.getElementsByTagName("td")[5].textContent.slice(0, 2)[0];
       if (grade == "6") {
         edit_form.grade.value = "6";
@@ -248,7 +249,7 @@ search.addEventListener("input", (e) => {
         student.class.toLowerCase().includes(value) ||
         student.dateOfBirth.toLowerCase().includes(value) ||
         student.gender.toLowerCase().includes(value) ||
-        student.phone.toLowerCase().includes(value) ||
+        student.email.toLowerCase().includes(value) ||
         convertDate(student.dateOfBirth).toLowerCase().includes(value) ||
         student.address.toLowerCase().includes(value)
       );

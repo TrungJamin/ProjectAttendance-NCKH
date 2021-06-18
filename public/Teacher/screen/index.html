@@ -5,7 +5,6 @@
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
 
@@ -85,8 +84,9 @@
                 <div class="col-xl-12">
                     <!-- Account details card-->
                     <div class="card mb-4">
-                        <div class="card-header text-center bg-success text-white " style="font-size: 30px; font-weight: 600;"
-                            id="typeFormTeacher">Gửi Email Cho Toàn Bộ Học Sinh</div>
+                        <div class="card-header text-center bg-success text-white "
+                            style="font-size: 30px; font-weight: 600;" id="typeFormTeacher">Gửi Email Cho Toàn Bộ Học
+                            Sinh</div>
 
                         <div class="d-none" id="loadingAddTeacher" style="position: absolute; top: 41%; left:48%">
                             <div class="spinner-border" role="status">
@@ -97,7 +97,8 @@
                             <form class="justify-content-center" id="form-send-mail">
                                 <!-- Form Group (first name)-->
                                 <div class="form-group col-md-12">
-                                    <label class=" mb-1 " style="font-size: 15px; color: rgb(124, 121, 121);" for="title-send-email">Tiêu Đề</label>
+                                    <label class=" mb-1 " style="font-size: 15px; color: rgb(124, 121, 121);"
+                                        for="title-send-email">Tiêu Đề</label>
                                     <input id="title-send-email" type="text" name="title-send-email"
                                         class="form-control" placeholder="xin mời bạn nhập tiêu đề" required>
                                 </div>
@@ -106,6 +107,24 @@
                                     <label class="small mb-1" for="content-send-mail">Nội Dung</label>
                                     <textarea id="content-send-mail" type="text" name="content-send-mail"
                                         class="form-control" placeholder="Nội Dung" required> </textarea>
+                                </div>
+
+                                <div class="form-group col-md-12">
+                                    <label class="label-send-mail btn btn-success col-12" for="file-send-mail">Tải tệp
+                                        Lên
+                                        <i class="fas fa-upload"></i></label>
+                                    <input id="file-send-mail" multiple type="file" name="file-send-mail"
+                                        placeholder="Nội Dung" style="height: 0px" />
+                                    <table class="table-result-file col-12">
+                                        <thead>
+                                            <tr>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="list-file">
+
+                                        </tbody>
+
+                                    </table>
                                 </div>
 
                                 <!-- Save changes button-->
@@ -129,8 +148,8 @@
                 <div class="col-xl-12">
                     <!-- Account details card-->
                     <div class="card mb-4">
-                        <div class="card-header text-center bg-success text-white " style="font-size: 30px; font-weight: 600;"
-                            id="typeFormTeacher">Thay Đổi Mật Khẩu</div>
+                        <div class="card-header text-center bg-success text-white "
+                            style="font-size: 30px; font-weight: 600;" id="typeFormTeacher">Thay Đổi Mật Khẩu</div>
 
                         <div class="d-none" id="loadingAddTeacher" style="position: absolute; top: 41%; left:48%">
                             <div class="spinner-border" role="status">
@@ -143,14 +162,14 @@
                                 <div class="form-group col-md-12">
                                     <label class="small mb-1" for="">Nhập Mật Khẩu Cũ</label>
                                     <input id="old-password" type="password" class="form-control" name="old-password"
-                                        class="form-control" placeholder="nhập mật cũ ..." required>
+                                        class="form-control" placeholder="nhập mật khẩu cũ ..." required>
 
                                 </div>
                                 <!-- Form Group (last name)-->
                                 <div class="form-group col-md-12">
                                     <label class="small mb-1" for="new-password">Nhập Mật Khẩu Mới</label>
                                     <input id="new-password" type="password" name="new-password" class="form-control"
-                                        placeholder="xác nhận mật Khẩu" required> </input>
+                                        placeholder="nhập mẫu khẩu mới" required> </input>
                                 </div>
                                 <div class="form-group col-md-12">
                                     <label class="small mb-1" for="confirm-password">Xác Nhận Mật Khẩu</label>

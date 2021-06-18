@@ -1,10 +1,13 @@
 const formSendMail = document.querySelector("#form-send-mail");
 const btnSendMail = document.querySelector("#openSendEmail");
+var listFiles = [];
+const btnFile = document.querySelector("#file-send-mail");
 const sendMailFromTeacher = firebase
   .functions()
   .httpsCallable("sendMailFromTeacher");
 var myClass = "9A";
 var listStudents = [];
+
 firebase.auth().onAuthStateChanged(function (user) {
   if (user) {
     db.collection("TeacherAdmin").onSnapshot(async function (snapshots) {
@@ -20,7 +23,6 @@ firebase.auth().onAuthStateChanged(function (user) {
     // User is signed out.
   }
 });
-let state = 0;
 function getStudents(className) {
   db.collection("Students").onSnapshot(async (snapshots) => {
     listStudents = [];
@@ -49,39 +51,80 @@ btnSendMail.addEventListener("click", (e) => {
   document
     .querySelector(".form-send-email-all-student")
     .classList.remove("d-none");
-
-    // đóng form thay đổi mk
-
-    turnOffScreenUpdatePassWord();
+  turnOffScreenUpdatePassWord();
 });
 turnOffFormEmail = () => {
+  renderListFiles.innerHTML = "";
   document
     .querySelector(".form-send-email-all-student")
     .classList.add("d-none");
 };
+
+const renderListFiles = document.querySelector("#list-file");
+btnFile.addEventListener("change", () => {
+  listFiles.push(btnFile.files[0]);
+  renderListFiles.innerHTML = "";
+  listFiles.forEach((file, index) => {
+    const tr = document.createElement("tr");
+    const filename = document.createElement("td");
+    filename.innerText = file.name;
+    const i_trash = document.createElement("i");
+    i_trash.setAttribute("class", "ml-5 fas fa-trash");
+    i_trash.setAttribute("style", "color: Tomato;");
+    i_trash.addEventListener("click", function (e) {
+      listFiles = listFiles.filter((item, i) => i !== index);
+      tr.removeChild(filename);
+    });
+    filename.append(i_trash);
+    tr.append(filename);
+    renderListFiles.append(tr);
+  });
+});
 formSendMail.addEventListener("submit", async function (event) {
   event.preventDefault();
   turnOffFormEmail();
+  const toBase64 = async (file) =>
+    new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
+  loadingSendEmail.classList.remove("d-none");
+  document.querySelector(".send-to").innerText = "Đang Thiết Lập Gửi email ";
   const title = formSendMail["title-send-email"].value;
   const content = formSendMail["content-send-mail"].value;
   const profile = profileTeacher;
-  loadingSendEmail.classList.remove("d-none");
-  document.querySelector(".send-to").innerText = "Đang Thiết Lập Gửi email ";
+  const convertBase64 = await listFiles.map(async (file) => {
+    return {
+      filename: file.name,
+      path: await toBase64(file),
+    };
+  });
   const results = await listStudents.map(async (student) => {
-    return await sendMailFromTeacher({
-      mailTeacher: profile.email,
-      mailStudent: student.mail,
-      name: profile.name,
-      title: title,
-      content: content,
-    }).then(() => {
-      document.querySelector(".send-to").innerText =
-        "Đang Gửi Mail Cho " + student.name;
+    return Promise.all(convertBase64).then(async function (files) {
+      console.log(files);
+      return await sendMailFromTeacher({
+        mailTeacher: profile.email,
+        mailStudent: student.email,
+        name: profile.name,
+        title: title,
+        content: content,
+        files: files,
+      })
+        .then(() => {
+          document.querySelector(".send-to").innerText =
+            "Đang Gửi Mail Cho " + student.name;
+        })
+        .catch((err) => {
+          console.log(err.message);
+        });
     });
   });
   Promise.all(results).then((results) => {
     loadingSendEmail.classList.add("d-none");
     formSendMail.reset();
+    listFiles = [];
     Swal.fire({
       position: "center",
       icon: "success",
