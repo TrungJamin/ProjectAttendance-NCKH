@@ -99,7 +99,7 @@ Webcam.set({
 Webcam.attach("#my_camera");
 
 const file = document.getElementById("file-upload");
-file.addEventListener("change", function (event) {
+file.addEventListener("input", function (event) {
   const toBase64 = (file) =>
     new Promise((resolve, reject) => {
       const reader = new FileReader();
