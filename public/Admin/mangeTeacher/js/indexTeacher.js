@@ -66,7 +66,7 @@ function renderAddElementInTable(e) {
           e.subjectsAndClass
         )} </td>
         <td class="text-center">${e.email}</td>
-        <td class="text-center">${date}</td> 
+        <td class="text-center">${date=="Invalid Date"?'Chưa nhập ngày sinh':date}</td> 
      `;
 
   var td = document.createElement("td");
