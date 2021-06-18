@@ -8,13 +8,24 @@ const inputName = document.querySelector("#myForm #nameInput");
 const inputGender = document.querySelector("#myForm #gender");
 const inputEmail = document.querySelector("#myForm #inputMail");
 const inputDob = document.querySelector("#myForm #dataOfBirth");
+const inputPhone=document.querySelector("#myForm #inputPhone");
+const inputAddress=document.querySelector("#myForm #inputAddress");
 const imgProfile = document.querySelector("#myForm #imgAvatarTeacher");
 
-function pushDataToForm(name, gender, mail, dob, imgData) {
+function pushDataToForm(name, gender, mail, dob, imgData ,phone ,address1) {
   if (imgData == undefined) {
   } else {
     imgProfile.src = imgData;
   }
+
+  if( phone!=undefined){
+    inputPhone.value=phone;
+  }
+ 
+
+  if(address1!=undefined){
+    inputAddress.value=address1;
+  } 
 
   inputName.value = name;
   inputGender.value = gender;
@@ -46,7 +57,9 @@ firebase.auth().onAuthStateChanged(async (user) => {
           profileTeacher.gender,
           profileTeacher.email,
           profileTeacher.dataOfBirth,
-          profileTeacher.img
+          profileTeacher.img,
+          profileTeacher.phone,
+          profileTeacher.address
         );
       })
       .catch((error) => {
@@ -75,6 +88,9 @@ function saveProfile(e) {
   profileTeacher.gender = inputGender.value;
   profileTeacher.email = inputEmail.value;
   profileTeacher.dataOfBirth = inputDob.value;
+  profileTeacher.phone=inputPhone.value;
+  profileTeacher.address=inputAddress.value;
+
 
   // // hiện loading upload
   Swal.fire({
@@ -118,7 +134,9 @@ editProfile.addEventListener("click", () => {
     profileTeacher.gender,
     profileTeacher.email,
     profileTeacher.dataOfBirth,
-    profileTeacher.img
+    profileTeacher.img,
+    profileTeacher.phone,
+    profileTeacher.address
   );
 });
 
