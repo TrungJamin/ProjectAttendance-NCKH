@@ -50,13 +50,15 @@ input.addEventListener("change", function () {
       err = true;
     }
 
-    if (err) {// co lỗi
+    if (err) {
+      // co lỗi
       Swal.fire({
-        position: "top",
+        position: "center",
         title: "File của bạn chưa đúng định dạng mới nhập file khác !",
         showConfirmButton: true,
       });
-    } else {// ko lỗi
+    } else {
+      // ko lỗi
       for (var i = 1; i < e.length; i++) {
         let tampTeacher = {};
 
@@ -158,7 +160,6 @@ input.addEventListener("change", function () {
         });
 
         Promise.all(addTeacher).then((teacher) => {
-
           Swal.close();
           Swal.fire({
             position: "top",
@@ -172,18 +173,15 @@ input.addEventListener("change", function () {
             danh sánh email: ${arrArr.join(" <br> ")}`,
             showConfirmButton: true,
           });
-          
         });
       });
 
       ShowNotification();
-      
     }
   });
 });
 
-
-function ShowNotification(){
+function ShowNotification() {
   Swal.fire({
     title: "Đang tải dữ liệu từ file lên",
     html: "Vui lòng chờ....",
@@ -199,4 +197,3 @@ function ShowNotification(){
     }
   });
 }
-

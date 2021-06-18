@@ -33,8 +33,8 @@ inputFileExcel.addEventListener("change", function () {
           case "Lớp".toLowerCase():
             newStudent["class"] = "";
             break;
-          case "số điện thoại".toLowerCase():
-            newStudent["phone"] = "";
+          case "email".toLowerCase():
+            newStudent["email"] = "";
             break;
           default:
             newStudent["error"] = 1;
@@ -47,7 +47,7 @@ inputFileExcel.addEventListener("change", function () {
     if (newStudent["error"]) {
       swal(
         "Vui Lòng Kiểm Tra Tệp Excel! Hoặc chọn tệp khác",
-        "Đúng Chuẩn là các trường : Họ Tên Đệm,Tên,Ngày Sinh,Giới Tính,Lớp,Địa Chỉ,số điện thoại",
+        "Đúng Chuẩn là các trường : Họ Tên Đệm,Tên,Ngày Sinh,Giới Tính,Lớp,Địa Chỉ,email không bao gồm trường khác",
         "warning"
       );
       document.querySelector(".loading-table").classList.add("d-none");
@@ -66,9 +66,11 @@ inputFileExcel.addEventListener("change", function () {
           newStudent.gender = rows[i][3];
           newStudent.class = rows[i][4];
           newStudent.address = rows[i][5];
-          newStudent.phone = rows[i][6].toString();
+          newStudent.email = rows[i][6].toString();
           newStudent.name =
-            newStudent.firstName.join(" ") + " " + newStudent.lastName.join("");
+            newStudent.firstName.join(" ") +
+            " " +
+            newStudent.lastName.join(" ");
           const grade = getGradeByClass(newStudent.class);
           const year =
             grade === "6"
@@ -78,6 +80,7 @@ inputFileExcel.addEventListener("change", function () {
               : grade === "8"
               ? 2019
               : 2018;
+          console.log(newStudent.class);
           const total = ++getGradeLevel(newStudent.class).total;
           const gender = newStudent.gender === "Nam" ? "1" : "0";
           const id = year + gender + newStudent.class + total;
@@ -110,10 +113,11 @@ inputFileExcel.addEventListener("change", function () {
             .then(() => {})
             .catch(function (error) {});
         } catch (error) {
+          console.log(error.message);
           count++;
           swal(
             "Vui Lòng Kiểm Tra File Excel",
-            `Có ${count} Học Sinh sai dữ liệu ví dự như 9D không có trong danh sách trường , hãy kiểm tra kĩ`,
+            `Có ${count} Học Sinh sai dữ liệu ví dự như lớp được thêm không có trong danh sách trường , hãy kiểm tra kĩ`,
             "warning"
           );
         }
