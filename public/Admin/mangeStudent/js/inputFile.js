@@ -110,7 +110,9 @@ inputFileExcel.addEventListener("change", function () {
                 labelInputFile.innerHTML = "Thêm Dữ Liệu Từ File";
               });
             })
-            .then(() => {})
+            .then(() => {
+              setList(listOfStudent);
+            })
             .catch(function (error) {});
         } catch (error) {
           console.log(error.message);

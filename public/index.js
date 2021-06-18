@@ -34,7 +34,7 @@ login[0].addEventListener("submit", (event) => {
         .then((res) => {
           res
             ? location.assign("./admin")
-            : location.assign("./Teacher/screen");
+            : location.assign("./teacher/screen");
           buttonlogin.classList.remove("d-none");
           loading.classList.add("d-none");
         })
@@ -45,7 +45,7 @@ login[0].addEventListener("submit", (event) => {
     .catch(function (error) {
       Swal.fire({
         position: "center",
-        title: "mật khẩu hoặc email của bạn không đúng,xin vui lòng nhập lại",
+        title: "Mật khẩu hoặc email của bạn không đúng,xin vui lòng nhập lại",
         showConfirmButton: true,
       });
       buttonlogin.classList.remove("d-none");

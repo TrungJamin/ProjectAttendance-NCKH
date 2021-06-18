@@ -11,7 +11,7 @@ var idStudent = "";
 
 const viewNotice = (res) => {
   const percent = res * 100;
-  if (percent <= 5) {
+  if (percent <= 50) {
     swal(
       "Nhận Diện Ảnh Không Thành Công",
       `Số Ảnh Thành Công ${percent}% ,
@@ -20,7 +20,7 @@ const viewNotice = (res) => {
       "error"
     );
   } else {
-    if (percent < 8) {
+    if (percent < 80) {
       swal(
         "Cảnh Báo",
         `Số Ảnh Thành Công  ${percent}%  ,

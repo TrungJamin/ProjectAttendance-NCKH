@@ -139,9 +139,9 @@ function setList(group) {
         edit_form.grade.value = "6";
       } else if (grade == "7") {
         edit_form.grade.value = "7";
-      } else {
-        edit_form.grade.value = "12";
-      }
+      } else if (grade == "8") {
+        edit_form.grade.value = "8";
+      } else edit_form.grade.value = "9";
 
       let gradeTemp = [];
       gradeTemp = listOfClasses.find((item) => {

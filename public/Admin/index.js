@@ -15,18 +15,15 @@ const formMakeAdmin = document.querySelector(".form-make-admin");
 const auth = firebase.auth();
 const cancelMakeAdmin = document.querySelector(".cancel-make-admin");
 
-function setNameOfTeacher(name){
+function setNameOfTeacher(name) {
   // remove @gmail.com
 
-  console.log(name)
-  let nameTmp=''+name;
-  nameTmp= nameTmp.replace("@gmail.com","");
-  document.querySelector("#nameOfTeacher").innerHTML=nameTmp;
+  console.log(name);
+  let nameTmp = "" + name;
+  nameTmp = nameTmp.replace("@gmail.com", "");
+  document.querySelector("#nameOfTeacher").innerHTML = nameTmp;
   console.log(document.querySelector("#nameOfTeacher"));
-
 }
-
-
 
 const isAccountExist = (email) => {
   let isAdmin = false;
@@ -81,32 +78,28 @@ const makeTeacherAdmin = async (newAccount) => {
 };
 
 btnLogout.addEventListener("click", (event) => {
-  // formLogout.classList.add("open"); // hien thi forms
-
   Swal.fire({
-    title: 'Bạn có chắc muốn đăng xuất?',
-  
-    icon: 'warning',
+    title: "Bạn có chắc muốn đăng xuất?",
+
+    icon: "warning",
     showCancelButton: true,
-    confirmButtonColor: '#d33',
-    cancelButtonColor: ' #3085d6',
-    confirmButtonText: 'Đăng xuất',
-    cancelButtonText:'Không'
+    confirmButtonColor: "#d33",
+    cancelButtonColor: " #3085d6",
+    confirmButtonText: "Đăng xuất",
+    cancelButtonText: "Không",
   }).then((result) => {
     if (result.isConfirmed) {
       firebase
-    .auth()
-    .signOut()
-    .then(() => {
-      location.assign("./../index.html");
-    })
-    .catch((error) => {
-      // An error happened.
-    });
-
+        .auth()
+        .signOut()
+        .then(() => {
+          location.assign("./../index.html");
+        })
+        .catch((error) => {
+          // An error happened.
+        });
     }
-  })
-
+  });
 });
 
 function closeFormLogout() {
@@ -128,10 +121,9 @@ agreeLogout.addEventListener("click", (event) => {
 });
 firebase.auth().onAuthStateChanged((user) => {
   if (!user) {
-    
     location.assign("./../index.html");
   } else {
-    setNameOfTeacher(user.email)
+    setNameOfTeacher(user.email);
     homepage.classList.remove("non_active");
   }
 });
@@ -143,7 +135,7 @@ function refresh() {
     // neu co di theo url cu
     iFrame.src = sessionStorage.getItem("url");
   } else {
-    iFrame.src = "./mangeTecher/";
+    iFrame.src = "./mangeTeacher/";
   }
 }
 refresh();
@@ -154,9 +146,9 @@ allStudents.addEventListener("click", (event) => {
 });
 
 listTeacher.addEventListener("click", (event) => {
-  sessionStorage.setItem("url", "./mangeTecher/");
+  sessionStorage.setItem("url", "./mangeTeacher/");
 
-  iFrame.src = "./mangeTecher/";
+  iFrame.src = "./mangeTeacher/";
 });
 addFaceStudent.addEventListener("click", function (e) {
   sessionStorage.setItem("url", "./addFaceDataBase/");

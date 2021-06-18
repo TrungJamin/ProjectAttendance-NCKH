@@ -88,6 +88,7 @@ edit_form.addEventListener("submit", (e) => {
 });
 
 const createAttendance = (id, month) => {
+  
   for (let i = 1; i <= 31; i++) {
     x = i;
     if (i < 10) {
