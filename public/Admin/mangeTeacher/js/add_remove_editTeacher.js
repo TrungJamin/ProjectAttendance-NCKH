@@ -498,9 +498,12 @@ function getInfoTeacher() {
 
   if (type == false) {
     teacher.id = teacherEdit.id;
+    if(teacherEdit.img){
+      teacher.img=teacherEdit.img;
+    }
     delete teacher.undefined;
-    // console.log(teacherEdit.docId, teacher);
-    editTeacher(teacherEdit.docId, teacher);
+    console.log(teacherEdit.docId, teacher);
+    // editTeacher(teacherEdit.docId, teacher);
   }
 }
 
@@ -534,6 +537,8 @@ function openFormInput(idOfHtml, teacher) {
     myForm[4].children[1].value = teacher.classLeader;
     myForm[5].children[1].setAttribute("value", teacher.email);
     myForm[6].children[1].setAttribute("value", teacher.dataOfBirth);
+    myForm[7].children[1].setAttribute("value", teacher.phone);
+    myForm[8].children[1].setAttribute("value", teacher.address);
     oldEmail = teacher.email;
     // giai lap co data
 
@@ -590,6 +595,8 @@ function reNewForm() {
   myForm[0].children[1].setAttribute("value", "");
   myForm[5].children[1].setAttribute("value", "");
   myForm[6].children[1].setAttribute("value", "");
+  myForm[7].children[1].setAttribute("value", "");
+  myForm[8].children[1].setAttribute("value", "");
   document.getElementById("myForm").reset();
   teacherEdit = {};
 }

@@ -55,6 +55,9 @@ function renderAddElementInTable(e) {
     day: "numeric"
   };
   date=date.toLocaleDateString("en", options);
+  
+  var monday=formatObjectClassAndTeach(  e.subjectsAndClass ).trim();
+  console.log("-",monday=="   ","-")
   let node = `  
         
         <td class="text-center">${e.id}</td>
@@ -62,9 +65,7 @@ function renderAddElementInTable(e) {
         <td class="text-center">${e.gender == "true" ? "Nam" : "Nữ"}</td>
         <td class="text-center">${e.group=='nation'? "Tự nhiên" : "Xã hội"}</td>
         <td class="text-center">${e.classLeader==''?"không chủ nhiệm":e.classLeader}</td>
-        <td class="text-center">${formatObjectClassAndTeach(
-          e.subjectsAndClass
-        )} </td>
+        <td class="text-center">${monday.trim()==''?"Chưa có môn dạy":monday} </td>
         <td class="text-center">${e.email}</td>
         <td class="text-center">${date=="Invalid Date"?'Chưa nhập ngày sinh':date}</td> 
      `;
