@@ -61,9 +61,3 @@ sendMail()
   .then((result) => console.log("Email sent...", result))
   .catch((error) => console.log(error.message));
 
-// sendMailFromTeacher(
-//   "truongthanhhuy08@gmail.com",
-//   "truongthanhhuy08@gmail.com",
-//   "ahihi",
-//   "kk"
-// );

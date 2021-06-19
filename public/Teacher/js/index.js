@@ -7,7 +7,7 @@ window.addEventListener("scroll", (event) => {
     nav.style.position = "static";
   }
 });
-
+let myClass = "";
 document.querySelector("#btnLogout").addEventListener("click", () => {
   Swal.fire({
     title: "Bạn có chắc muốn đăng xuất?",
@@ -61,6 +61,7 @@ firebase.auth().onAuthStateChanged((user) => {
     db.collection("TeacherAdmin").onSnapshot(async function (snapshots) {
       snapshots.forEach((teacher) => {
         if (teacher.data().email == user.email) {
+          myClass = teacher.data().class;
           document.querySelector(
             ".page-header"
           ).innerHTML = ` <h1>Danh Sách Điểm Danh Lớp ${
@@ -95,3 +96,12 @@ firebase.auth().onAuthStateChanged((user) => {
 // attendance Screen
 const remoteScreen = document.querySelector("#remoteScreen");
 const btnAttendance = document.querySelector("#attendance");
+const contentHeader = document.querySelector("#content-header");
+const openScreenAttendance = () => {
+  contentHeader.innerHTML = ` <h1>Danh Sách Các Lớp Dạy</h1>`;
+  remoteScreen.src = "./attendance.html";
+};
+const openScreenList = () => {
+  contentHeader.innerHTML = ` <h1>Danh Sách Điểm Danh Lớp ${myClass}</h1>`;
+  remoteScreen.src = "./listStudent.html";
+};

@@ -314,9 +314,9 @@
 
                 <!-- Divider -->
                 <hr class="sidebar-divider">
-                <li class="nav-item " id='openSendEmail'>
+                <li class='nav-item'>
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                        aria-expanded="true" aria-controls="collapseTwo" id="all-Teachers">
+                        aria-expanded="true" aria-controls="collapseTwo" onClick="openScreenList()">
                         <i class="fas fa-clipboard-list"></i>
                         <span>Danh Sách Học Sinh</span>
                     </a>
@@ -342,7 +342,7 @@
                 <hr class="sidebar-divider">
                 <li class="nav-item" id="attendance">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-                        aria-expanded="true" aria-controls="collapseUtilities" onclick="turnOnUpdatePasswordScreen()"
+                        aria-expanded="true" aria-controls="collapseUtilities" onclick="openScreenAttendance()"
                         id="all-Students">
                         <i class="fas fa-users"></i>
                         <span>Điểm Danh Học Sinh</span>
@@ -462,7 +462,7 @@
                     <div class="page-header pt-2 pb-2" style="text-align: center; color: #ffff;
                      background-image: linear-gradient(to right, rgb(64,201,126) , rgb(26,188,156))
                      ; border-radius: 5px;
-                     margin-left: 5px;">
+                     margin-left: 5px;" id="content-header">
                         loading class
                     </div>
 
