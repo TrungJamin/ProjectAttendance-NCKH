@@ -26,7 +26,9 @@
 
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
+    integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://unpkg.com/read-excel-file@4.x/bundle/read-excel-file.min.js"></script>
 
 
@@ -40,15 +42,15 @@
 
 <!-- <body> -->
 
-  <style>
-   
-  </style>
+<style>
+
+</style>
 
 <body>
 
- 
 
-  
+
+
   <div id="cover-caption" class="hide">
     <div class="container">
       <div class="col-xl-12">
@@ -57,7 +59,9 @@
 
 
         <div class="card mb-4">
-          <div class="card-header text-center bg-success text-white " style="font-size: 18px;" id="typeFormTeacher">Thêm giáo viên</div>
+          <div class="card-header text-center bg-success text-white " style="font-size: 18px;" id="typeFormTeacher">Thêm
+            giáo viên <i class="fas fa-upload">
+            </i></div>
 
           <div class="d-none" id="loadingAddTeacher" style="position: absolute; top: 41%; left:48%">
             <div class="spinner-border" role="status">
@@ -139,20 +143,20 @@
               <div class="form-row">
                 <!-- Form Group (phone number)-->
                 <div class="form-group col-md-6">
-                    <label   class="small mb-1" for="inputPhone">Số điện thoai
-                    </label>
-                    <input id="inputPhone" type="tel"  class="form-control" style="width: 100%"
-                        name="phone" placeholder="Số điện thoai" required />
+                  <label class="small mb-1" for="inputPhone">Số điện thoai
+                  </label>
+                  <input id="inputPhone" type="tel" class="form-control" style="width: 100%" name="phone"
+                    placeholder="Số điện thoai" required />
                 </div>
                 <!-- Form Group (birthday)-->
                 <div class="form-group col-md-6">
-                    <label   class="small mb-1" for="inputPhone">
-                        Địa chỉ
-                    </label>
-                    <input id="inputAddress" type="text" class="form-control" style="width: 100%"
-                        name="address" placeholder=" Địa chỉ" required />
+                  <label class="small mb-1" for="inputPhone">
+                    Địa chỉ
+                  </label>
+                  <input id="inputAddress" type="text" class="form-control" style="width: 100%" name="address"
+                    placeholder=" Địa chỉ" required />
                 </div>
-            </div>
+              </div>
 
               <!-- Save changes button-->
               <div class="d-flex justify-content-between">
@@ -170,14 +174,14 @@
 
   <div class="card shadow mb-4 " style="width: 100%;" id="allViewPage">
 
-    <div style="position: absolute; top:30% ;left: 50%;" id="loadingTeacher" >
+    <div style="position: absolute; top:30% ;left: 50%;" id="loadingTeacher">
 
       <div class="d-flex justify-content-center">
         <div class="spinner-border text-success" role="status">
-         
+
         </div>
       </div>
-  
+
     </div>
 
     <div class="card-header py-3"
@@ -192,14 +196,14 @@
         <div>
           <button type="button" class="btn btn-success" id="addTeacher">Thêm +</button>
         </div>
-        
+
         <div class="pl-3">
-          <input type="file"  style="height: 0;
+          <input type="file" style="height: 0;
           overflow: hidden;
-          width: 0;"  id="inputTeacher" />
-        <label for="inputTeacher"  class="btn btn-success" >Thêm giáo viên từ file</label>
+          width: 0;" id="inputTeacher" />
+          <label for="inputTeacher" class="btn btn-success">Thêm giáo viên từ file</label>
         </div>
-        
+
 
       </div>
 
@@ -207,10 +211,11 @@
 
 
         <form class="input-group ">
-         
-          <input type="text" class="form-control bg-light border-0 small" id="inputSearch" placeholder="Tìm kiếm theo id,tên,lớp chủ nhiệm,email,ngày sinh,môn dạy" aria-label="Search"
+
+          <input type="text" class="form-control bg-light border-0 small" id="inputSearch"
+            placeholder="Tìm kiếm theo id,tên,lớp chủ nhiệm,email,ngày sinh,môn dạy" aria-label="Search"
             aria-describedby="basic-addon2" id="Teacher-search" onchange="searchAll(value)" />
-           
+
           <div class="input-group-append">
             <button class="btn btn-success" type="reset" style="z-index: 0 !important;">
               <i class="fas fa-search fa-sm" aria-hidden="true"></i>
@@ -219,7 +224,7 @@
               <i class="fas fa-redo"></i>
             </button>
           </div>
-           
+
         </form>
 
 
@@ -236,7 +241,8 @@
       <div class="table-responsive">
         <table class="table table-bordered " id="dataTable" width="100%" style="font-size: 13px;" cellspacing="0">
           <thead>
-            <tr class="text-center " style="font-size: 17px; font-weight: bold; background-image: linear-gradient(to right, rgb(64,201,126) , rgb(26,188,156)); color :white">
+            <tr class="text-center "
+              style="font-size: 17px; font-weight: bold; background-image: linear-gradient(to right, rgb(64,201,126) , rgb(26,188,156)); color :white">
               <th>Mã số</th>
               <th>Tên</th>
               <th>Giới tính</th>

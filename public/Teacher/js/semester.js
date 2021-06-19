@@ -41,7 +41,6 @@ function renderSemester(listStudents, semester = 1) {
     student.attendance.forEach((att) => {
       if (!att.data.status) {
         if (att.data.asked) {
-          console.log(att.day, "");
           listAsked.push(att.day);
           countAbsent++;
         } else {

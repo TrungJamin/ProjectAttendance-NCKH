@@ -44,7 +44,6 @@ save.addEventListener("click", (e) => {
     document.querySelector(".container-fluid").classList.add("disabled");
     document.querySelector(".loading").classList.remove("d-none");
     Promise.all(listBase64).then((values) => {
-      console.log(listBase64);
       addImage({
         id: idStudent,
         Class: valueClass,
@@ -109,10 +108,13 @@ file.addEventListener("input", function (event) {
     });
   if (listBase64.length >= 10) {
     swal("Warning!", "Tối Đa Thêm là 10 Ảnh ", "Tiếp Tục");
-  } else
-    toBase64(file.files[0]).then((result) => {
-      insertImage(result);
-    });
+  } else {
+    for (let i = 0; i < file.files.length; i++) {
+      toBase64(file.files[i]).then((result) => {
+        insertImage(result);
+      });
+    }
+  }
 });
 // them anh vao Khung
 function insertImage(uri) {

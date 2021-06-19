@@ -124,6 +124,7 @@ function renderMonth(listStudents) {
         tr.addEventListener("click", (e) => {
           activeDate();
           document.querySelector(".container-date-off").classList.add("d-none");
+
           renderDay(listStudents, day, month, year);
         });
         tr.innerText = DateNowFormat(day, month, year);

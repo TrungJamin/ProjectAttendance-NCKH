@@ -19,7 +19,6 @@ function DateNowFormat(day, month, year) {
 }
 function resetNote() {
   for (let i = 0; i < 10; i++) {
-    console.log("running");
     document.getElementById(i.toString()).innerText = "";
   }
 }
@@ -59,6 +58,9 @@ const formatDateSearch = (y, m, d) => {
   return `${y}-${formatNumber(m)}-${formatNumber(d)}`;
 };
 function renderDay(listStudents, d, m, y) {
+  day = d;
+  month = m;
+  year = y;
   aDay.innerText = "Ngày " + DateNowFormat(d, m, y);
   dateExportDay.setAttribute("export", aDay.innerText);
   inputSearchDate.value = formatDateSearch(y, m, d);
@@ -195,9 +197,6 @@ cancel.forEach((e) => {
     });
   });
 });
-// document.querySelector(".panel-cancel").addEventListener("click", (e) => {
-//   document.querySelector(".note-date").classList.add("d-none");
-// });
 
 searchDay.addEventListener("input", (e) => {
   e.preventDefault();
@@ -212,10 +211,7 @@ searchDay.addEventListener("input", (e) => {
     let tmp = listStudents.filter((student) => {
       return (
         student.name.toLowerCase().includes(value) ||
-        student.id.toString().toLowerCase().includes(value) ||
-        student.gender.toLowerCase().includes(value) ||
-        student.phone.toLowerCase().includes(value) ||
-        student.address.toLowerCase().includes(value)
+        student.id.toString().toLowerCase().includes(value)
       );
     });
     renderDay(tmp, day, month, year);
