@@ -38,6 +38,9 @@
     .opacityAdd {
         opacity: 0.4;
     }
+    #list-file::-webkit-scrollbar{
+        /* display: none; */
+    }
 </style>
 
 <body id="page-top">
@@ -115,16 +118,13 @@
                                         <i class="fas fa-upload"></i></label>
                                     <input id="file-send-mail" multiple type="file" name="file-send-mail"
                                         placeholder="Nội Dung" style="height: 0px" />
-                                    <table class="table-result-file col-12">
-                                        <thead>
-                                            <tr>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="list-file">
 
-                                        </tbody>
+                                    <div style="height: 100px; width: 100%; max-height: max-content; overflow-y: scroll; border: 1px solid rgb(28,200,138);"
+                                    id="list-file">
 
-                                    </table>
+                                        
+                                    </div>
+                                    
                                 </div>
 
                                 <!-- Save changes button-->

@@ -75,11 +75,14 @@ btnFile.addEventListener("change", () => {
   listFiles.push(btnFile.files[0]);
   renderListFiles.innerHTML = "";
   listFiles.forEach((file, index) => {
-    const tr = document.createElement("tr");
-    const filename = document.createElement("td");
+    const tr = document.createElement("div");
+    
+    const filename = document.createElement("span");
+    filename.classList.add( "d-flex" ,'justify-content-between' ,'pt-1' ,'pr-2', 'pl-2')
     filename.innerText = file.name;
     const i_trash = document.createElement("i");
-    i_trash.setAttribute("class", "ml-5 fas fa-trash");
+    i_trash.classList.add( "pr-2" )
+    i_trash.setAttribute("class", "fas fa-trash");
     i_trash.setAttribute("style", "color: Tomato;");
     i_trash.addEventListener("click", function (e) {
       listFiles = listFiles.filter((item, i) => i !== index);
