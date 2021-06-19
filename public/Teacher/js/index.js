@@ -91,3 +91,7 @@ firebase.auth().onAuthStateChanged((user) => {
     location.assign("./../../index.html");
   }
 });
+
+// attendance Screen
+const remoteScreen = document.querySelector("#remoteScreen");
+const btnAttendance = document.querySelector("#attendance");

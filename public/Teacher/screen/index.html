@@ -314,7 +314,14 @@
 
                 <!-- Divider -->
                 <hr class="sidebar-divider">
-
+                <li class="nav-item " id='openSendEmail'>
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                        aria-expanded="true" aria-controls="collapseTwo" id="all-Teachers">
+                        <i class="fas fa-clipboard-list"></i>
+                        <span>Danh Sách Học Sinh</span>
+                    </a>
+                </li>
+                <hr class="sidebar-divider">
                 <li class="nav-item " id='openSendEmail'>
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                         aria-expanded="true" aria-controls="collapseTwo" id="all-Teachers">
@@ -322,7 +329,7 @@
                         <span>Gửi Mail Cho Học Sinh</span>
                     </a>
                 </li>
-
+                <hr class="sidebar-divider">
                 <!-- Nav Item - Utilities Collapse Menu -->
                 <li class="nav-item" id="changerPw">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
@@ -332,11 +339,15 @@
                         <span>Thay Đổi Mật Khẩu</span>
                     </a>
                 </li>
-
-
-
-
-
+                <hr class="sidebar-divider">
+                <li class="nav-item" id="attendance">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+                        aria-expanded="true" aria-controls="collapseUtilities" onclick="turnOnUpdatePasswordScreen()"
+                        id="all-Students">
+                        <i class="fas fa-users"></i>
+                        <span>Điểm Danh Học Sinh</span>
+                    </a>
+                </li>
 
                 <!-- Divider -->
                 <hr class="sidebar-divider">
@@ -458,8 +469,8 @@
 
                     <!-- iFrames -->
                     <div style="width: 100%; height: 100%;" id="opacityAdd">
-                        <iframe src="./listStudent.html" class="iFrame" width="100%" height="100%" scrolling="no"
-                            style="border:none; height:1200px;overflow:hidden"></iframe>
+                        <iframe src="./listStudent.html" id="remoteScreen" class="iFrame" width="100%" height="100%"
+                            scrolling="no" style="border:none; height:1200px;overflow:hidden"></iframe>
                     </div>
                 </div>
                 <!-- Footer -->
