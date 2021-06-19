@@ -196,6 +196,13 @@ function editTeacher(id, obj) {
                   .then((res) => {
                     reNewForm();
                     closeFormInput("cover-caption");
+                    Swal.fire({
+                      position: "top",
+                      icon: "success",
+                      title: "Sửa thàng công",
+                      showConfirmButton: false,
+                      timer: 500,
+                    });
                   });
               })
               .catch(function (error) {
@@ -228,6 +235,13 @@ function editTeacher(id, obj) {
                         .then((res) => {
                           reNewForm();
                           closeFormInput("cover-caption");
+                          Swal.fire({
+                            position: "top",
+                            icon: "success",
+                            title: "Sửa thàng công",
+                            showConfirmButton: false,
+                            timer: 500,
+                          });
                         });
                     })
                     .catch(function (error) {
@@ -250,6 +264,13 @@ function editTeacher(id, obj) {
                     .then((res) => {
                       reNewForm();
                       closeFormInput("cover-caption");
+                      Swal.fire({
+                        position: "top",
+                        icon: "success",
+                        title: "Sửa thàng công",
+                        showConfirmButton: false,
+                        timer: 500,
+                      });
                     });
                 })
                 .catch(function (error) {
@@ -503,7 +524,7 @@ function getInfoTeacher() {
     }
     delete teacher.undefined;
     console.log(teacherEdit.docId, teacher);
-    // editTeacher(teacherEdit.docId, teacher);
+    editTeacher(teacherEdit.docId, teacher);
   }
 }
 
