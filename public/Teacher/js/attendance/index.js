@@ -5,7 +5,6 @@
 
 var ListClassTeaches = [];
 
-
 function getClassByClass(uid) {
   db.collection("Students")
     .get()
@@ -17,16 +16,22 @@ function getClassByClass(uid) {
 
 const DOM_Classes = document.querySelector(".classes");
 const renderListClassTeach = (classes) => {
-  DOM_Classes.innerHTML = classes
-    .map(
-      (
-        teach
-      ) => `   <button class="btn btn-success classes-teach" type="button" id = ${teach.class}>
-  <i class="fas fa-chalkboard-teacher"></i>
-  ${teach.class}  ${teach.subject}
-</button>`
-    )
-    .join(" ");
+  DOM_Classes.innerHTML = "";
+  classes.forEach((teach) => {
+    const buttonChooseClass = document.createElement("button");
+    buttonChooseClass.type = "button";
+    buttonChooseClass.setAttribute("class", "btn btn-success classes-teach");
+    const iTag = document.createElement("i");
+    iTag.setAttribute("class", "fas fa-chalkboard-teacher");
+    iTag.innerText = teach.class + " " + teach.subject;
+    buttonChooseClass.addEventListener("click", (e) => {
+      getStudents(teach.class);
+      DOM_Classes.classList.add("d-none");
+      document.getElementById("content").classList.remove("d-none");
+    });
+    buttonChooseClass.append(iTag);
+    DOM_Classes.append(buttonChooseClass);
+  });
 };
 firebase.auth().onAuthStateChanged((user) => {
   ListClassTeaches = [];
@@ -35,23 +40,10 @@ firebase.auth().onAuthStateChanged((user) => {
       .doc(user.uid)
       .get()
       .then(function (doc) {
+        console.log("run-1");
         ListClassTeaches = [...doc.data().subjectsAndClass];
         renderListClassTeach(ListClassTeaches);
-        const Classes = document.querySelectorAll(".classes-teach");
-
-        for(var i = 0 ; i < Classes.length; i++){
-          Classes[i].addEventListener('click',e=>{
-            e.preventDefault();
-            //console.log( document.querySelector("page-header"));
-            // document.getElementById("content-header").innerHTML =`Danh Sách Lớp ${e.srcElement.id}`;
-            DOM_Classes.classList.remove('open');
-            getStudents(e.srcElement.id);
-          })
-          
-        }
       })
       .catch(function (error) {});
   }
 });
-
-

@@ -32,38 +32,63 @@
 
 <body id="page-top">
 
-    <div class="classes open col-12 d-flex justify-content-around mt-3">
+    <div class="classes col-12 d-flex justify-content-around mt-3">
         <h2>Loading...</h2>
     </div>
-    <div class="active">
-        <button class="btn btn-success attendance" type="button">
-            <i class="fas fa-user-check fa-2x" style="margin: 5px 20px;"></i>
+    <div class="container-fluid d-none mt-5" id="content">
 
-          </button>
-          
-          <button class="btn btn-success attendance" type="button">
-            <i class="fas fa-clipboard-list fa-2x" style="margin: 5px 20px;"></i>
-          </button>
+        <div class="control-panel mb-5 d-flex justify-content-between">
+            <button type="button" class="btn btn-success "><i class="fas fa-angle-double-left"></i>Quay Về Danh Sách
+                Lớp Dạy</button>
+
+            <div class="active">
+
+                <input class="listStudent-date" name="listStudent-date" id="listStudent-date" type="date">
+                </input>
+
+                <button class="btn btn-success" onclick="openAttendanceScreen()" name="attendance-button"
+                    id="attendance-button" type="button">
+                    <i style="font-size:15px" class="fas fa-user-check fa-2x"></i> Điểm Danh</button>
+            </div>
+
+        </div>
+        <div class="viewList">
+            <table class="table table-bordered data-student-view scroll-table" width="100%" cellspacing="0">
+                <thead style="background-color: #ffff ; color:#00000082">
+
+                    <tr>
+                        <th>STT</th>
+                        <th>Mã HS</th>
+                        <th>Họ tên đệm</th>
+                        <th>Tên</th>
+                        <th>Trạng thái</th>
+                        <th>Ghi chú</th>
+                    </tr>
+                <tbody class='bodyList'>
+
+                </tbody>
+            </table>
+        </div>
+        <div class="remote-attendance d-flex justify-content-between d-none">
+            <button class="btn btn-success" onclick="turnOffAttendanceScreen()"> <i class="fas fa-backward"></i> Trở Về
+            </button>
+            <div class="">
+                <label class="btn btn-success" style="margin: 0px;" for="import-files"><i class="fas fa-upload"></i>Tải
+                    Ảnh Lên </label>
+                <input type="file" multiple id="import-files" name="import-files" style="width:0px" />
+                <button class="btn btn-success" name="attendance-button" id="attendance-button" type="button">
+                    <i style="font-size:15px" class="fas fa-user-check fa-2x"></i> Lưu Ảnh</button>
+            </div>
+
+        </div>
+        <div class="list-img-attendance d-none">
+
+        </div>
+
+        <!-- -->
+
     </div>
-    <div class="viewList">
-        <table class="table table-bordered data-student-view scroll-table"
-                                     width="100%" cellspacing="0">
-            <thead style="background-color: #ffff ; color:#00000082">
 
-                <tr>
-                    <th >STT</th>
-                    <th>Mã HS</th>
-                    <th>Họ tên đệm</th>
-                    <th>Tên</th>
-                    <th >Trạng thái</th>
-                    <th >Ghi chú</th>
-                </tr>
-            <tbody class='bodyList'>
-
-            </tbody>
-        </table>
-    </div>
-    
 </body>
 <script src="./../../config/env.js"></script>
 <script src="./../js/attendance/renderlist.js"></script>
