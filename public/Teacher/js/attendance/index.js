@@ -5,6 +5,7 @@
 
 var ListClassTeaches = [];
 
+
 function getClassByClass(uid) {
   db.collection("Students")
     .get()
@@ -20,7 +21,7 @@ const renderListClassTeach = (classes) => {
     .map(
       (
         teach
-      ) => `   <button class="btn btn-success classes-teach" type="button">
+      ) => `   <button class="btn btn-success classes-teach" type="button" id = ${teach.class}>
   <i class="fas fa-chalkboard-teacher"></i>
   ${teach.class}  ${teach.subject}
 </button>`
@@ -36,7 +37,21 @@ firebase.auth().onAuthStateChanged((user) => {
       .then(function (doc) {
         ListClassTeaches = [...doc.data().subjectsAndClass];
         renderListClassTeach(ListClassTeaches);
+        const Classes = document.querySelectorAll(".classes-teach");
+
+        for(var i = 0 ; i < Classes.length; i++){
+          Classes[i].addEventListener('click',e=>{
+            e.preventDefault();
+            //console.log( document.querySelector("page-header"));
+            // document.getElementById("content-header").innerHTML =`Danh Sách Lớp ${e.srcElement.id}`;
+            DOM_Classes.classList.remove('open');
+            getStudents(e.srcElement.id);
+          })
+          
+        }
       })
       .catch(function (error) {});
   }
 });
+
+
