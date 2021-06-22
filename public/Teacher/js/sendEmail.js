@@ -5,7 +5,6 @@ const btnFile = document.querySelector("#file-send-mail");
 const sendMailFromTeacher = firebase
   .functions()
   .httpsCallable("sendMailFromTeacher");
-var myClass = "9A";
 var listStudents = [];
 
 firebase.auth().onAuthStateChanged(function (user) {
@@ -48,12 +47,11 @@ function getStudents(className) {
 }
 const loadingSendEmail = document.querySelector(".loading-send-mail");
 btnSendMail.addEventListener("click", (e) => {
-
-  console.log(document.querySelector("#opacityAdd").classList)
+  console.log(document.querySelector("#opacityAdd").classList);
   document.querySelector("#opacityAdd").classList.add("opacityAdd");
 
-  document.querySelector('#openSendEmail').classList.add('active');
-        document.querySelector('#changerPw').classList.remove('active');
+  document.querySelector("#openSendEmail").classList.add("active");
+  document.querySelector("#changerPw").classList.remove("active");
   document
     .querySelector(".form-send-email-all-student")
     .classList.remove("d-none");
@@ -62,8 +60,8 @@ btnSendMail.addEventListener("click", (e) => {
 });
 turnOffFormEmail = () => {
   document.querySelector("#opacityAdd").classList.remove("opacityAdd");
-  document.querySelector('#openSendEmail').classList.remove('active');
-  document.querySelector('#changerPw').classList.remove('active');
+  document.querySelector("#openSendEmail").classList.remove("active");
+  document.querySelector("#changerPw").classList.remove("active");
   renderListFiles.innerHTML = "";
   document
     .querySelector(".form-send-email-all-student")
