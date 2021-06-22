@@ -11,14 +11,27 @@ var inititalTeacher = {
   subjectsAndClass: [],
 };
 
-var checkType = [
+var checkTypeEn = [
   "classLeader",
   "dataOfBirth",
   "email",
   "gender",
   "group",
   "name",
-  "subjectsAndClass",
+  "classAndSubject",
+  "phone",
+  "address",
+];
+var checkTypeVn = [
+  "họ và tên",
+  "giới tính",
+  "nhóm",
+  "lớp chủ nhiệm",
+  "lớp và môn dạy",
+  "ngày sinh",
+  "email",
+  "số điện thoại",
+  "địa chỉ",
 ];
 
 function createId(year) {
@@ -42,7 +55,8 @@ input.addEventListener("change", function () {
 
     try {
       e[0].forEach((elem) => {
-        if (checkType.find((check) => check == elem) == undefined) {
+        console.log(checkTypeVn.find((check) => check == elem));
+        if (checkTypeVn.find((check) => check == elem) == undefined) {
           err = true;
         }
       });
@@ -53,7 +67,7 @@ input.addEventListener("change", function () {
     if (err) {
       // co lỗi
       Swal.fire({
-        position: "center",
+        position: "top",
         title: "File của bạn chưa đúng định dạng mới nhập file khác !",
         showConfirmButton: true,
       });
@@ -64,23 +78,23 @@ input.addEventListener("change", function () {
 
         for (let j = 0; j < e[0].length; j++) {
           switch (e[0][j]) {
-            case "gender":
+            case "giới tính":
               {
                 try {
                   let check = e[i][j].toLowerCase() == "nam" ? "true" : "false";
-                  tampTeacher[e[0][j]] = check;
+                  tampTeacher.gender = check;
                 } catch (error) {
-                  tampTeacher[e[0][j]] = "true";
+                  tampTeacher.gender = "true";
                 }
               }
               break;
-            case "dataOfBirth":
+            case "ngày sinh":
               {
                 var date = new Date(e[i][j]);
                 if (date == "Invalid Date") {
                 } else {
                   var date1 = moment(date).format("YYYY-MM-DD");
-                  tampTeacher[e[0][j]] = date1;
+                  tampTeacher.dataOfBirth = date1;
 
                   tampTeacher.id = createId(
                     new Date().getFullYear() + "0" + date.getMonth()
@@ -88,25 +102,58 @@ input.addEventListener("change", function () {
                 }
               }
               break;
-            case "classLeader":
+            case "lớp chủ nhiệm":
               {
-                try {
-                  let check = e[i][j].toUpperCase();
-                  tampTeacher[e[0][j]] = check;
-                } catch (error) {
-                  tampTeacher[e[0][j]] = "";
-                }
+                tampTeacher.classLeader = e[i][j];
+              }
+              break;
+
+            case "lớp và môn dạy":
+              {
+                
+                  var res = e[i][j].replace(" ", "").split(";");
+                  var subjectsAndClass = [];
+                  res.forEach((e) => {
+                    const el = e.split(":");
+                    console.log(el[0], el[1].split(","));
+                    el[1].split(",").forEach((e) => {
+                      subjectsAndClass.push({ class: el[0], subject: e });
+                    });
+                  });
+
+                  tampTeacher.subjectsAndClass = subjectsAndClass;
+               
+              }
+              break;
+            case "họ và tên":
+              {
+                tampTeacher.name = e[i][j];
+              }
+              break;
+            case "địa chỉ":
+              {
+                tampTeacher.address = e[i][j];
+              }
+              break;
+            case "số điện thoại":
+              {
+                tampTeacher.phone = e[i][j];
+              }
+              break;
+            case "nhóm":
+              {
+                let check = e[i][j] == "tự nhiên" ? "nation" : "sociocultural";
+                tampTeacher.group = check;
+              }
+              break;
+            case "email":
+              {
+                let check = e[i][j];
+                tampTeacher.email = check;
               }
               break;
 
             default:
-              {
-                try {
-                  tampTeacher[e[0][j]] = e[i][j];
-                } catch (error) {
-                  tampTeacher[e[0][j]] = "";
-                }
-              }
               break;
           }
         }
