@@ -4,6 +4,12 @@ const buttonlogin = document.querySelector(".button-login");
 const loading = document.querySelector(".loading");
 const forgotPassword = document.querySelector("#forgot-password");
 const buttonAccept = document.querySelector("#button-accept");
+const makeAdmin = firebase.functions().httpsCallable("makeAdmin");
+// makeAdmin({
+//   email:"truongthanhhuy@gmail.com"
+// }).then((response) =>{
+//   console.log(response);
+// })
 login[0].addEventListener("submit", (event) => {
   event.preventDefault();
   var email = login[0]["email"].value;
@@ -14,34 +20,6 @@ login[0].addEventListener("submit", (event) => {
   firebase
     .auth()
     .signInWithEmailAndPassword(email, password)
-    .then(async function (response) {
-      // check admin
-      console.log(response);
-      await db
-        .collection("admin")
-        .get()
-
-        .then(function (querySnapshot) {
-          let check = false;
-          querySnapshot.forEach(function (doc) {
-            if (doc.id === response.user.uid) {
-              check = true;
-            }
-          });
-
-          return check; // can suy nghi
-        })
-        .then((res) => {
-          res
-            ? location.assign("./admin")
-            : location.assign("./teacher/screen");
-          buttonlogin.classList.remove("d-none");
-          loading.classList.add("d-none");
-        })
-        .catch((err) => {
-          console.log(err.message);
-        });
-    })
     .catch(function (error) {
       Swal.fire({
         position: "center",
@@ -102,3 +80,14 @@ nextToForgot.addEventListener("click", () => {
     item.classList.add("non-active");
   });
 });
+
+firebase.auth().onAuthStateChanged((user)=>{
+  if(user){
+    user.getIdTokenResult().then(token=>{
+      token.claims.admin ?location.assign("./admin") : location.assign("./teacher/screen");
+      }).catch(error=>{
+        console.log(error);
+      })
+  }
+
+})

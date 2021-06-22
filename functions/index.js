@@ -280,3 +280,12 @@ exports.sendMailFromTeacher = functions.https.onCall((data, context) => {
     data.files
   );
 });
+exports.makeAdmin = functions.https.onCall((data, context)=>{
+  return admin.auth().getUserByEmail(data.email).then((user)=>{
+    return admin.auth().setCustomUserClaims(user.uid,{admin:true})
+  }).then(()=>{
+    return "make admin successfully"
+  }).catch((error)=>{
+    return error.message;
+  })
+})
