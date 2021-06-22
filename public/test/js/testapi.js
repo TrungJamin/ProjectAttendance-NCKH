@@ -51,7 +51,7 @@ upload1.addEventListener("change", (e) => {
     console.log(values[0]);
     getAttendances({
       listBase64: values,
-      class: "10A1",
+      class: "8A",
     }).then((result) => {
       console.log(result);
     });

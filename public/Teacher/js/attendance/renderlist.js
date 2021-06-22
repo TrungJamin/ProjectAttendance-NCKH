@@ -13,7 +13,7 @@ const turnOffAttendanceScreen = () => {
   document.querySelector(".remote-attendance").classList.add("d-none");
   document.querySelector(".list-img-attendance").classList.add("d-none");
 };
-function getAttendanceOfDay(attendances, date, id) {
+function getAttendanceOfDay(attendances, date) {
   let attendance = {};
   attendance = attendances.find((att) => {
     return att.day == date;
@@ -33,7 +33,7 @@ function getStudents(className) {
     listStudents = [];
     await snapshots.forEach((snapshot) => {
       let student = snapshot.data();
-      if (student.class == className) {
+      if (student.class === className) {
         db.collection(`Students`)
           .doc(snapshot.id)
           .collection("attendance")

@@ -1,4 +1,5 @@
-const dataOfDay = document.querySelector(".table-day");
+// const dataOfDay = document.querySelector(".table-day");
+
 const aDay = document.querySelector(".day-now");
 const tableDay = document.querySelector(".table-list-day");
 
@@ -9,6 +10,7 @@ const nowday = document.querySelector(".now-day");
 const searchDay = document.getElementById("day-search");
 const dateExportDay = document.querySelector("#data-day-export");
 
+// lay ngay hien tai, 3 bien duoc xem state, se thay doi lien tuc
 let day = new Date().getDate();
 let month = new Date().getMonth() + 1;
 let year = new Date().getFullYear();
@@ -17,19 +19,21 @@ function DateNowFormat(day, month, year) {
   let tmp = day + "-" + month + "-" + year;
   return tmp;
 }
+
 function resetNote() {
   for (let i = 0; i < 10; i++) {
     document.getElementById(i.toString()).innerText = "";
   }
 }
+
 function getDate(day, month, year) {
   let tmp;
   if (day < 10) tmp = month + "-0" + day + "-" + year;
   else tmp = month + "-" + day + "-" + year;
   return tmp;
 }
-
-function getAttendanceOfDay(attendances, date, id) {
+// lay danh sach diem danh cua ngày cần lấy
+function getAttendanceOfDay(attendances, date) {
   let attendance = {};
   attendance = attendances.find((att) => {
     return att.day == date;
@@ -40,7 +44,7 @@ function createArrayAttendance(array) {
   const newArray = [];
   const item = {
     status: true,
-    asked: true,
+    asked: false,
   };
   for (let i = 0; i < 5 - array.length; i++) {
     newArray.push(item);
