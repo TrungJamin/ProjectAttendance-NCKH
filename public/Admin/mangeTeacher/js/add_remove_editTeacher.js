@@ -349,6 +349,8 @@ function addTeacher(obj) {
       spinnerAddTeacher.classList.add("d-none");
     } else {
       // kiểm tra class leader có bị trùng hay không
+
+      
       db.collection("TeacherAdmin")
         .get()
         .then(function (querySnapshot) {
@@ -356,6 +358,10 @@ function addTeacher(obj) {
           querySnapshot.forEach(function (doc) {
             if (doc.data().class == obj.classLeader) check = true;
           });
+
+          if(obj.classLeader==""){
+            check = false;
+          }
 
           if (check == true) {
             // da trung class
@@ -401,7 +407,14 @@ function addTeacher(obj) {
                     }
                   })
                   .catch(function (error) {
-                    alert(" Nhập lại email !");
+                    Swal.fire({
+                      title:
+                        "mời nhập lại mail",
+                      position: "top",
+                     
+                      showCancelButton: true,
+                      
+                    })
                     spinnerAddTeacher.classList.add("d-none");
                   });
               }
@@ -437,7 +450,13 @@ function addTeacher(obj) {
                 }
               })
               .catch(function (error) {
-                alert(" Nhập lại email !");
+                Swal.fire({
+                  title:
+                    "mời nhập lại mail",
+                  position: "top",
+                 
+                  
+                })
                 spinnerAddTeacher.classList.add("d-none");
               });
           }
