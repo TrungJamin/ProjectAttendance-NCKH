@@ -25,7 +25,7 @@ var checkTypeEn = [
 var checkTypeVn = [
   "họ và tên",
   "giới tính",
-  "nhóm",
+  "tổ bộ môn",
   "lớp chủ nhiệm",
   "lớp và môn dạy",
   "ngày sinh",
@@ -55,8 +55,7 @@ input.addEventListener("change", function () {
 
     try {
       e[0].forEach((elem) => {
-        console.log(checkTypeVn.find((check) => check == elem));
-        if (checkTypeVn.find((check) => check == elem) == undefined) {
+        if (checkTypeVn.find((check) => check == elem.toLowerCase()) == undefined) {
           err = true;
         }
       });
@@ -77,7 +76,7 @@ input.addEventListener("change", function () {
         let tampTeacher = {};
 
         for (let j = 0; j < e[0].length; j++) {
-          switch (e[0][j]) {
+          switch (e[0][j].toLowerCase()) {
             case "giới tính":
               {
                 try {
@@ -138,7 +137,7 @@ input.addEventListener("change", function () {
                 tampTeacher.phone = e[i][j];
               }
               break;
-            case "nhóm":
+            case "tổ bộ môn":
               {
                 let check = e[i][j] == "tự nhiên" ? "nation" : "sociocultural";
                 tampTeacher.group = check;
@@ -168,7 +167,7 @@ input.addEventListener("change", function () {
       const result = await listTeacher.map(async (obj) => {
         return await 
         createAccount({email: obj.email,
-          password: "12456",})
+          password: "123456",})
           .then(async function (response) {
             // tạo 1 giáo viên
             if(response.data){
@@ -184,45 +183,44 @@ input.addEventListener("change", function () {
       ShowNotification();
      
        await Promise.all(result).then(async (id) => {
-        console.log( id)
-        // var addSuccess = 0;
-        // var arrArr = [];
-        // const addTeacher = await id.map((id, index) => {
-        //   if (typeof id == "string") {
-        //     // add teacher
-        //     addSuccess++;
-        //     setTimeout(() => {
-        //       db.collection("Teachers")
-        //         .doc(id)
-        //         .set(listTeacher[index])
-        //         .then(function (response) {
-        //           console.log(response, " add oke ", listTeacher[index]);
-        //         })
-        //         .catch(function (error) {
-        //           return error;
-        //         });
-        //     }, 200);
-        //   } else {
-        //     // bị lỗi ko làm gì
-        //     arrArr.push(id.email);
-        //   }
-        // });
+        var addSuccess = 0;
+        var arrArr = [];
+        const addTeacher = await id.map((id, index) => {
+          if (typeof id == "string") {
+            // add teacher
+            addSuccess++;
+            setTimeout(() => {
+              db.collection("Teachers")
+                .doc(id)
+                .set(listTeacher[index])
+                .then(function (response) {
+                  console.log(response, " add oke ", listTeacher[index]);
+                })
+                .catch(function (error) {
+                  return error;
+                });
+            }, 200);
+          } else {
+            // bị lỗi ko làm gì
+            arrArr.push(id.email);
+          }
+        });
 
-      //    await Promise.all(addTeacher).then((teacher) => {
-      //   Swal.close();
-      //   Swal.fire({
-      //     position: "top",
-      //     icon: "success",
-      //     title: `File có ${
-      //       listTeacher.length
-      //     }giáo viên đã thêm thành công ${addSuccess}
-      //     và có ${
-      //       listTeacher.length - addSuccess
-      //     } giảng viên bị lỗi do mail bị trùng
-      //     danh sánh email: ${arrArr.join(" <br> ")}`,
-      //     showConfirmButton: true,
-      //   });
-      //  });
+         await Promise.all(addTeacher).then((teacher) => {
+        Swal.close();
+        Swal.fire({
+          position: "top",
+          icon: "success",
+          title: `File có ${
+            listTeacher.length
+          }giáo viên đã thêm thành công ${addSuccess}
+          và có ${
+            listTeacher.length - addSuccess
+          } giảng viên bị lỗi do mail bị trùng
+          danh sánh email: ${arrArr.join(" <br> ")}`,
+          showConfirmButton: true,
+        });
+       });
 
       });
 
