@@ -53,7 +53,6 @@ function setNameOfTeacher(name) {
   let nameTmp = "" + name;
   nameTmp = nameTmp.replace("@gmail.com", "");
   document.querySelector("#nameOfTeacher").innerHTML = nameTmp;
-  console.log(document.querySelector("#nameOfTeacher"));
 }
 
 firebase.auth().onAuthStateChanged((user) => {
@@ -85,7 +84,6 @@ firebase.auth().onAuthStateChanged((user) => {
               });
             })
             .catch((error) => {
-              console.log("Error getting documents: ", error);
             });
         }
       });

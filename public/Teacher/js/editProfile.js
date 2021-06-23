@@ -63,7 +63,6 @@ firebase.auth().onAuthStateChanged(async (user) => {
         );
       })
       .catch((error) => {
-        console.log("Error getting documents: ", error);
       });
   }
 });
@@ -110,7 +109,6 @@ function saveProfile(e) {
   db.doc("Teachers/" + docId)
     .set(profileTeacher)
     .then(function (doc) {
-      console.log(profileTeacher);
       closeFormInput();
 
       document.querySelector("#imgAvatar").src = profileTeacher.img;

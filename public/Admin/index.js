@@ -16,11 +16,9 @@ const auth = firebase.auth();
 function setNameOfTeacher(name) {
   // remove @gmail.com
 
-  console.log(name);
   let nameTmp = "" + name;
   nameTmp = nameTmp.replace("@gmail.com", "");
   document.querySelector("#nameOfTeacher").innerHTML = nameTmp;
-  console.log(document.querySelector("#nameOfTeacher"));
 }
 
 const isAccountExist = (email) => {
@@ -54,7 +52,6 @@ const setClassTeacherAdmin = (newLeader) => {
       class: classLeader,
     })
     .then((res) => {
-      console.log("success");
     });
 };
 const makeTeacherAdmin = async (newAccount) => {
@@ -121,14 +118,12 @@ firebase.auth().onAuthStateChanged((user) => {
   if (!user) {
     location.assign("./../");
   } else {
-    console.log(user.uid);
     user
       .getIdTokenResult()
       .then((token) => {
         !token.claims.admin ? location.assign("./../teacher/screen") : "";
       })
       .catch((error) => {
-        console.log(error);
       });
     setNameOfTeacher(user.email);
     homepage.classList.remove("non_active");

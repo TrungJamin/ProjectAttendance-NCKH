@@ -50,7 +50,6 @@ input.addEventListener("change", function () {
     var listTeacher = [];
 
     // đoạn này bắt lỗi
-    console.log(e[0]);
     var err = false;
 
     try {
@@ -113,7 +112,6 @@ input.addEventListener("change", function () {
                 var subjectsAndClass = [];
                 res.forEach((e) => {
                   const el = e.split(":");
-                  console.log(el[0], el[1].split(","));
                   el[1].split(",").forEach((e) => {
                     subjectsAndClass.push({ class: el[0], subject: e });
                   });
@@ -162,7 +160,6 @@ input.addEventListener("change", function () {
         listTeacher.push({ ...inititalTeacher, ...tampTeacher });
       }
 
-      console.log(listTeacher);
 
       const result = await listTeacher.map(async (obj) => {
         return await 
@@ -194,7 +191,6 @@ input.addEventListener("change", function () {
                 .doc(id)
                 .set(listTeacher[index])
                 .then(function (response) {
-                  console.log(response, " add oke ", listTeacher[index]);
                 })
                 .catch(function (error) {
                   return error;

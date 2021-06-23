@@ -57,7 +57,6 @@ function renderAddElementInTable(e) {
   date=date.toLocaleDateString("en", options);
   
   var monday=formatObjectClassAndTeach(  e.subjectsAndClass ).trim();
-  console.log("-",monday=="   ","-")
   let node = `  
         
         <td class="text-center">${e.id}</td>
