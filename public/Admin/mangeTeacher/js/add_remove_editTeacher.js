@@ -386,6 +386,13 @@ function addTeacher(obj) {
                         reNewForm();
                         closeFormInput("cover-caption");
                         spinnerAddTeacher.classList.add("d-none");
+                        Swal.fire({
+                          position: "top",
+                          icon: "success",
+                          title: "Thêm thàng công",
+                          showConfirmButton: false,
+                          timer: 500,
+                        });
                       })
                       .catch(function (error) {
                         console.log("errr");
@@ -426,6 +433,13 @@ function addTeacher(obj) {
                     reNewForm();
                     closeFormInput("cover-caption");
                     spinnerAddTeacher.classList.add("d-none");
+                    Swal.fire({
+                      position: "top",
+                      icon: "success",
+                      title: "Thêm thàng công",
+                      showConfirmButton: false,
+                      timer: 500,
+                    });
                   })
                   .catch(function (error) {
                     console.log("errr");
