@@ -85,14 +85,11 @@ function renderMuntilChoose(listClass) {
   listClass.forEach((e) => {
     e.forEach((element) => {
       node += `<div class="form-check">
-      <label class="form-check-label">
-          <input type="checkbox" class="form-check-input" value='${element}'>${element}
-      </label>
-      
-      <div class="renderMuntilChooseSubjects">
-        
-        
-      </div>
+        <label class="form-check-label">
+            <input type="checkbox" class="form-check-input" value='${element}'>${element}
+        </label>
+        <div class="renderMuntilChooseSubjects">
+        </div>
       </div>`;
     });
   });
@@ -350,7 +347,6 @@ function addTeacher(obj) {
     } else {
       // kiểm tra class leader có bị trùng hay không
 
-      
       db.collection("TeacherAdmin")
         .get()
         .then(function (querySnapshot) {
@@ -359,7 +355,7 @@ function addTeacher(obj) {
             if (doc.data().class == obj.classLeader) check = true;
           });
 
-          if(obj.classLeader==""){
+          if (obj.classLeader == "") {
             check = false;
           }
 
@@ -384,7 +380,7 @@ function addTeacher(obj) {
                   .createUserWithEmailAndPassword(obj.email, "123456")
                   .then(function (response) {
                     // tạo 1 giáo viên
-
+                    console.log("user");
                     db.collection("Teachers")
                       .doc(response.user.uid)
                       .set(obj)
@@ -408,13 +404,11 @@ function addTeacher(obj) {
                   })
                   .catch(function (error) {
                     Swal.fire({
-                      title:
-                        "mời nhập lại mail",
+                      title: "mời nhập lại mail",
                       position: "top",
-                     
+
                       showCancelButton: true,
-                      
-                    })
+                    });
                     spinnerAddTeacher.classList.add("d-none");
                   });
               }
@@ -451,12 +445,9 @@ function addTeacher(obj) {
               })
               .catch(function (error) {
                 Swal.fire({
-                  title:
-                    "mời nhập lại mail",
+                  title: "mời nhập lại mail",
                   position: "top",
-                 
-                  
-                })
+                });
                 spinnerAddTeacher.classList.add("d-none");
               });
           }
@@ -538,8 +529,8 @@ function getInfoTeacher() {
 
   if (type == false) {
     teacher.id = teacherEdit.id;
-    if(teacherEdit.img){
-      teacher.img=teacherEdit.img;
+    if (teacherEdit.img) {
+      teacher.img = teacherEdit.img;
     }
     delete teacher.undefined;
     console.log(teacherEdit.docId, teacher);

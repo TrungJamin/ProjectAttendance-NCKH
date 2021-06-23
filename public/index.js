@@ -4,12 +4,6 @@ const buttonlogin = document.querySelector(".button-login");
 const loading = document.querySelector(".loading");
 const forgotPassword = document.querySelector("#forgot-password");
 const buttonAccept = document.querySelector("#button-accept");
-const makeAdmin = firebase.functions().httpsCallable("makeAdmin");
-// makeAdmin({
-//   email:"truongthanhhuy@gmail.com"
-// }).then((response) =>{
-//   console.log(response);
-// })
 login[0].addEventListener("submit", (event) => {
   event.preventDefault();
   var email = login[0]["email"].value;

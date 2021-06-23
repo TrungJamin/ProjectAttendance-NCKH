@@ -155,16 +155,3 @@ addFaceStudent.addEventListener("click", function (e) {
 
   iFrame.src = "./addFaceDataBase";
 });
-firebase.auth().onAuthStateChanged((user)=>{
-  if(user){
-    user.getIdTokenResult().then(token=>{
-      token.claims.admin ? "" : location.assign("./../teacher/screen");
-      }).catch(error=>{
-        console.log(error);
-      })
-  }
-  else{
-    location.assign("./../")
-  }
-
-})
