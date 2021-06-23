@@ -329,9 +329,6 @@ function addTeacher(obj) {
 
   let dateNow = new Date().getFullYear();
   let dateInput = new Date(obj.dataOfBirth).getFullYear();
-
-  console.log(dateNow, dateInput);
-
   if (Number(dateNow) - Number(dateInput) < 18) {
     spinnerAddTeacher.classList.add("d-none");
     Swal.fire({
@@ -378,8 +375,9 @@ function addTeacher(obj) {
               if (result.isConfirmed) {
                 createAccount({
                   email: obj.email,
-                  password: "12456",
+                  password: "123456",
                 }).then((res) => {
+                  console.log("res", res);
                   if (res.data) {
                     db.collection("Teachers")
                       .doc(res.data.uid)
@@ -416,9 +414,11 @@ function addTeacher(obj) {
             // thêm giáo viên
             createAccount({
               email: obj.email,
-              password: "12456",
+              password: "123456",
             }).then((res) => {
               if (res.data) {
+                console.log("res", res);
+
                 db.collection("Teachers")
                   .doc(res.data.uid)
                   .set(obj)
