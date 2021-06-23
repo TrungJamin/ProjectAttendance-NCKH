@@ -12,47 +12,6 @@ const runtimeOpts = {
   memory: "1GB",
 };
 const displaySize = { width: 1000, height: 1000 };
-exports.detectedListAttendance = functions
-  .runWith(runtimeOpts)
-  .https.onCall(async (data, content) => {
-    return db
-      .collection("facesDatabase")
-      .doc(data.class)
-      .get()
-      .then((doc) => {
-        labeledFaceDescriptorsJson2 = doc.data().data;
-        return labeledFaceDescriptorsJson2.map((person) => {
-          //Convert Object to Array
-          person.descriptors = Object.values(person.descriptors);
-          person.descriptors = person.descriptors.map((detail) =>
-            Object.values(detail)
-          );
-          return person;
-        });
-      })
-      .then((labeledFaceDescriptorsJson) => {
-        return labeledFaceDescriptorsJson.map((x) =>
-          faceapi.LabeledFaceDescriptors.fromJSON(x)
-        );
-      })
-      .then((result) => {
-        return new faceapi.FaceMatcher(result, 0.6);
-      })
-      .then(async (faceMatcher) => {
-        const detections = await detects(data.img);
-        const resizedDetections = await faceapi.resizeResults(
-          detections,
-          displaySize
-        );
-        const result = await resizedDetections.map((d) => {
-          return faceMatcher.findBestMatch(d.descriptor);
-        });
-        return result;
-      })
-      .catch((error) => {
-        return error.message;
-      });
-  });
 exports.addDescriptorsInData = functions
   .runWith({
     timeoutSeconds: 540,
@@ -270,7 +229,6 @@ async function sendMailFromTeacher(
   }
 }
 exports.sendMailFromTeacher = functions.https.onCall((data, context) => {
-
   return sendMailFromTeacher(
     data.mailTeacher,
     data.mailStudent,
@@ -280,12 +238,43 @@ exports.sendMailFromTeacher = functions.https.onCall((data, context) => {
     data.files
   );
 });
-exports.makeAdmin = functions.https.onCall((data, context)=>{
-  return admin.auth().getUserByEmail(data.email).then((user)=>{
-    return admin.auth().setCustomUserClaims(user.uid,{admin:true})
-  }).then(()=>{
-    return "make admin successfully"
-  }).catch((error)=>{
-    return error.message;
-  })
-})
+exports.makeAdmin = functions.https.onCall((data, context) => {
+  return admin
+    .auth()
+    .getUserByEmail(data.email)
+    .then((user) => {
+      return admin.auth().setCustomUserClaims(user.uid, { admin: true });
+    })
+    .then(() => {
+      return "make admin successfully";
+    })
+    .catch((error) => {
+      return error.message;
+    });
+});
+exports.deleteAdmin = functions.https.onCall((data, context) => {
+  return admin
+    .auth()
+    .getUserByEmail(data.email)
+    .then((user) => {
+      return admin.auth().setCustomUserClaims(user.uid, { admin: false });
+    })
+    .then(() => {
+      return "delete admin successfully";
+    })
+    .catch((error) => {
+      return error.message;
+    });
+});
+
+exports.createAccount = functions.https.onCall((data) => {
+  return admin
+    .auth()
+    .createUser({
+      email: data.email,
+      password: data.password,
+    })
+    .catch((error) => {
+      return false;
+    });
+});

@@ -75,13 +75,25 @@ nextToForgot.addEventListener("click", () => {
   });
 });
 
-firebase.auth().onAuthStateChanged((user)=>{
-  if(user){
-    user.getIdTokenResult().then(token=>{
-      token.claims.admin ?location.assign("./admin") : location.assign("./teacher/screen");
-      }).catch(error=>{
-        console.log(error);
+firebase.auth().onAuthStateChanged((user) => {
+  if (user) {
+    user
+      .getIdTokenResult()
+      .then((token) => {
+        token.claims.admin
+          ? location.assign("./admin")
+          : location.assign("./teacher/screen");
       })
+      .catch((error) => {
+        console.log(error);
+      });
   }
-
-})
+});
+console.log("run-112");
+const createAccount = firebase.functions().httpsCallable("createAccount");
+createAccount({
+  email: "xyaass@gmail.com",
+  password: "121212111",
+}).then((response) => {
+  console.log(response);
+});

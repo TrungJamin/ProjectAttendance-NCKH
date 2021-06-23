@@ -121,8 +121,17 @@ agreeLogout.addEventListener("click", (event) => {
 });
 firebase.auth().onAuthStateChanged((user) => {
   if (!user) {
-    location.assign("./../index.html");
+    location.assign("./../");
   } else {
+    console.log(user.uid);
+    user
+      .getIdTokenResult()
+      .then((token) => {
+        !token.claims.admin ? location.assign("./../teacher/screen") : "";
+      })
+      .catch((error) => {
+        console.log(error);
+      });
     setNameOfTeacher(user.email);
     homepage.classList.remove("non_active");
   }

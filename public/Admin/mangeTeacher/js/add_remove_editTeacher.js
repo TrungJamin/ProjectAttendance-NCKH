@@ -7,6 +7,7 @@ var btnAddTeacher = document.querySelector("#addTeacher");
 var spinnerAddTeacher = document.querySelector("#loadingAddTeacher");
 const updateEmailAuth = firebase.functions().httpsCallable("updateEmailAuth");
 const deleteUserByUID = firebase.functions().httpsCallable("deleteUserByUID");
+const createAccount = firebase.functions().httpsCallable("createAccount");
 btnAddTeacher.addEventListener("click", () => {
   openFormInput("cover-caption", "");
 });
@@ -375,14 +376,13 @@ function addTeacher(obj) {
               cancelButtonText: "Không",
             }).then((result) => {
               if (result.isConfirmed) {
-                firebase
-                  .auth()
-                  .createUserWithEmailAndPassword(obj.email, "123456")
-                  .then(function (response) {
-                    // tạo 1 giáo viên
-                    console.log("user");
+                createAccount({
+                  email: obj.email,
+                  password: "12456",
+                }).then((res) => {
+                  if (res.data) {
                     db.collection("Teachers")
-                      .doc(response.user.uid)
+                      .doc(res.data.uid)
                       .set(obj)
                       .then(function (response) {
                         reNewForm();
@@ -392,8 +392,6 @@ function addTeacher(obj) {
                       .catch(function (error) {
                         console.log("errr");
                       });
-
-                    //
                     if (obj.classLeader !== "") {
                       // make addmin
                       const classLeader = obj.classLeader;
@@ -401,8 +399,7 @@ function addTeacher(obj) {
                       let email = obj.email;
                       setClassTeacherAdmin({ classLeader, id, email });
                     }
-                  })
-                  .catch(function (error) {
+                  } else {
                     Swal.fire({
                       title: "mời nhập lại mail",
                       position: "top",
@@ -410,20 +407,20 @@ function addTeacher(obj) {
                       showCancelButton: true,
                     });
                     spinnerAddTeacher.classList.add("d-none");
-                  });
+                  }
+                });
               }
             });
             spinnerAddTeacher.classList.add("d-none");
           } else {
             // thêm giáo viên
-            firebase
-              .auth()
-              .createUserWithEmailAndPassword(obj.email, "123456")
-              .then(function (response) {
-                // tạo 1 giáo viên
-
+            createAccount({
+              email: obj.email,
+              password: "12456",
+            }).then((res) => {
+              if (res.data) {
                 db.collection("Teachers")
-                  .doc(response.user.uid)
+                  .doc(res.data.uid)
                   .set(obj)
                   .then(function (response) {
                     reNewForm();
@@ -433,8 +430,6 @@ function addTeacher(obj) {
                   .catch(function (error) {
                     console.log("errr");
                   });
-
-                //
                 if (obj.classLeader !== "") {
                   // make addmin
                   const classLeader = obj.classLeader;
@@ -442,14 +437,16 @@ function addTeacher(obj) {
                   let email = obj.email;
                   setClassTeacherAdmin({ classLeader, id, email });
                 }
-              })
-              .catch(function (error) {
+              } else {
                 Swal.fire({
                   title: "mời nhập lại mail",
                   position: "top",
+
+                  showCancelButton: true,
                 });
                 spinnerAddTeacher.classList.add("d-none");
-              });
+              }
+            });
           }
         })
         .catch(function (error) {});
