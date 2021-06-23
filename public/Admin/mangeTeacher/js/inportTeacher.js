@@ -163,28 +163,27 @@ input.addEventListener("change", function () {
         listTeacher.push({ ...inititalTeacher, ...tampTeacher });
       }
 
-      console.log(listTeacher);
-
       const result = await listTeacher.map(async (obj) => {
-        return await 
-        createAccount({email: obj.email,
-          password: "12456",})
-          .then(async function (response) {
-            // tạo 1 giáo viên
-            if(response.data){
-              return response.data.uid;
-            }
-            else{
-              return {error:'err', email: obj.email };
-            }
-            //
-          })
+        console.log(obj);
+        return await createAccount({
+          email: obj.email,
+          password: "12456",
+        }).then(async function (response) {
+          // tạo 1 giáo viên
+          console.log(response);
+          if (response.data) {
+            return response.data.uid;
+          } else {
+            return { error: "err", email: obj.email };
+          }
+          //
+        });
       });
 
       ShowNotification();
-     
-       await Promise.all(result).then(async (id) => {
-        console.log( id)
+
+      await Promise.all(result).then(async (id) => {
+        console.log(id);
         // var addSuccess = 0;
         // var arrArr = [];
         // const addTeacher = await id.map((id, index) => {
@@ -208,27 +207,22 @@ input.addEventListener("change", function () {
         //   }
         // });
 
-      //    await Promise.all(addTeacher).then((teacher) => {
-      //   Swal.close();
-      //   Swal.fire({
-      //     position: "top",
-      //     icon: "success",
-      //     title: `File có ${
-      //       listTeacher.length
-      //     }giáo viên đã thêm thành công ${addSuccess}
-      //     và có ${
-      //       listTeacher.length - addSuccess
-      //     } giảng viên bị lỗi do mail bị trùng
-      //     danh sánh email: ${arrArr.join(" <br> ")}`,
-      //     showConfirmButton: true,
-      //   });
-      //  });
-
+        //    await Promise.all(addTeacher).then((teacher) => {
+        //   Swal.close();
+        //   Swal.fire({
+        //     position: "top",
+        //     icon: "success",
+        //     title: `File có ${
+        //       listTeacher.length
+        //     }giáo viên đã thêm thành công ${addSuccess}
+        //     và có ${
+        //       listTeacher.length - addSuccess
+        //     } giảng viên bị lỗi do mail bị trùng
+        //     danh sánh email: ${arrArr.join(" <br> ")}`,
+        //     showConfirmButton: true,
+        //   });
+        //  });
       });
-
-     
-
-      
     }
   });
 });

@@ -104,7 +104,7 @@ function setList(group) {
         // if we click "submit-btn" val = true
         if (val) {
           db.collection("Students")
-            .doc(id)
+            .doc(person.id)
             .delete()
             .then(() => {
               swal("xóa thành công!", { icon: "success" });

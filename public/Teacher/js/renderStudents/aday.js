@@ -99,6 +99,7 @@ function renderDay(listStudents, d, m, y) {
         }</td>
         `;
       });
+
       let renderTmp = createArrayAttendance(att.data.afternoon).map((item) => {
         const style = item.status
           ? ""
@@ -109,9 +110,9 @@ function renderDay(listStudents, d, m, y) {
           item.status ? "" : item.asked ? "P" : "V"
         }</td>`;
       });
+      console.log(renderAtt.concat(renderTmp));
       return renderAtt.concat(renderTmp);
     };
-
     let contentTr = `
     <td>${index + 1}</td>
     <td> ${student.id} </td>
