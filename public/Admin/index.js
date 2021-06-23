@@ -9,11 +9,9 @@ let url = "home";
 const formLogout = document.querySelector(".formLogout"); // form hien thi log out
 const btnLogout = document.querySelector("#btnLogout"); // button hien thi form
 const agreeLogout = document.querySelector("#agreeLogout"); // dong y dang xuat
-// const auth = firebase.auth();
-const makeAdmin = document.querySelector(".make-admin");
-const formMakeAdmin = document.querySelector(".form-make-admin");
+
+
 const auth = firebase.auth();
-const cancelMakeAdmin = document.querySelector(".cancel-make-admin");
 
 function setNameOfTeacher(name) {
   // remove @gmail.com

@@ -58,6 +58,9 @@ function setNameOfTeacher(name) {
 
 firebase.auth().onAuthStateChanged((user) => {
   if (user) {
+    user.getIdTokenResult().then((token) => {
+      token.claims.admin ? location.assign("./../../admin") : "";
+    });
     db.collection("TeacherAdmin").onSnapshot(async function (snapshots) {
       snapshots.forEach((teacher) => {
         if (teacher.data().email == user.email) {

@@ -89,11 +89,3 @@ firebase.auth().onAuthStateChanged((user) => {
       });
   }
 });
-console.log("run-112");
-const createAccount = firebase.functions().httpsCallable("createAccount");
-createAccount({
-  email: "xyaass@gmail.com",
-  password: "121212111",
-}).then((response) => {
-  console.log(response);
-});
