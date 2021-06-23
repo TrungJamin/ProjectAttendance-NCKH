@@ -48,12 +48,11 @@ function getStudents(className) {
 }
 const loadingSendEmail = document.querySelector(".loading-send-mail");
 btnSendMail.addEventListener("click", (e) => {
-
-  console.log(document.querySelector("#opacityAdd").classList)
+  console.log(document.querySelector("#opacityAdd").classList);
   document.querySelector("#opacityAdd").classList.add("opacityAdd");
 
-  document.querySelector('#openSendEmail').classList.add('active');
-        document.querySelector('#changerPw').classList.remove('active');
+  document.querySelector("#openSendEmail").classList.add("active");
+  document.querySelector("#changerPw").classList.remove("active");
   document
     .querySelector(".form-send-email-all-student")
     .classList.remove("d-none");
@@ -62,8 +61,8 @@ btnSendMail.addEventListener("click", (e) => {
 });
 turnOffFormEmail = () => {
   document.querySelector("#opacityAdd").classList.remove("opacityAdd");
-  document.querySelector('#openSendEmail').classList.remove('active');
-  document.querySelector('#changerPw').classList.remove('active');
+  document.querySelector("#openSendEmail").classList.remove("active");
+  document.querySelector("#changerPw").classList.remove("active");
   renderListFiles.innerHTML = "";
   document
     .querySelector(".form-send-email-all-student")
@@ -76,12 +75,18 @@ btnFile.addEventListener("change", () => {
   renderListFiles.innerHTML = "";
   listFiles.forEach((file, index) => {
     const tr = document.createElement("div");
-    
+
     const filename = document.createElement("span");
-    filename.classList.add( "d-flex" ,'justify-content-between' ,'pt-1' ,'pr-2', 'pl-2')
+    filename.classList.add(
+      "d-flex",
+      "justify-content-between",
+      "pt-1",
+      "pr-2",
+      "pl-2"
+    );
     filename.innerText = file.name;
     const i_trash = document.createElement("i");
-    i_trash.classList.add( "pr-2" )
+    i_trash.classList.add("pr-2");
     i_trash.setAttribute("class", "fas fa-trash");
     i_trash.setAttribute("style", "color: Tomato;");
     i_trash.addEventListener("click", function (e) {
@@ -114,9 +119,10 @@ formSendMail.addEventListener("submit", async function (event) {
       path: await toBase64(file),
     };
   });
+
+  let number = 0;
   const results = await listStudents.map(async (student) => {
     return Promise.all(convertBase64).then(async function (files) {
-      console.log(files);
       return await sendMailFromTeacher({
         mailTeacher: profile.email,
         mailStudent: student.email,
@@ -126,8 +132,9 @@ formSendMail.addEventListener("submit", async function (event) {
         files: files,
       })
         .then(() => {
+          ++number;
           document.querySelector(".send-to").innerText =
-            "Đang Gửi Mail Cho " + student.name;
+            "Đã Gửi Mail Cho " + student.name;
         })
         .catch((err) => {
           console.log(err.message);
@@ -142,8 +149,9 @@ formSendMail.addEventListener("submit", async function (event) {
     Swal.fire({
       position: "center",
       icon: "success",
-      title: `Đã Gửi Thành Công ${listStudents.length} Học Sinh`,
+      title: `Đã Gửi Thành Công ${number}/${listStudents.length} Học Sinh`,
       showConfirmButton: true,
     });
+    number = 0;
   });
 });

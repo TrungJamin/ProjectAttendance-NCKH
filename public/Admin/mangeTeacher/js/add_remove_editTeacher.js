@@ -424,8 +424,6 @@ function addTeacher(obj) {
               password: "123456",
             }).then((res) => {
               if (res.data) {
-                console.log("res", res);
-
                 db.collection("Teachers")
                   .doc(res.data.uid)
                   .set(obj)
