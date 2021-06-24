@@ -17,8 +17,6 @@ function isAlphabetAndSpaces(event) {
 // ENTER PHONe NUMBER
 function isNumber(event) {
   var ch = String.fromCharCode(event.which);
-  console.log(event.which);
-  console.log(ch);
   if (!/[0-9]/.test(ch)) {
     document.getElementById("lblValue2").style.display = "block";
     event.preventDefault();

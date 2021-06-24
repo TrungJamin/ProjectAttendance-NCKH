@@ -47,7 +47,6 @@ forgotPassword.addEventListener("submit", (e) => {
       }, 1000);
     })
     .catch((error) => {
-      console.log(error.code);
       alert(
         "Email không tồn tại, bạn vui lòng liên hệ với admin để được cung cấp tài khoản"
       );
@@ -85,7 +84,6 @@ firebase.auth().onAuthStateChanged((user) => {
           : location.assign("./teacher/screen");
       })
       .catch((error) => {
-        console.log(error);
       });
   }
 });

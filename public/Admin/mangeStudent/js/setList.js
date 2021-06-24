@@ -23,6 +23,7 @@ function setList(group) {
   clearList();
   for (const person of group) {
     const tr = document.createElement("tr");
+    tr.setAttribute("id", person.id );
     const td_ONumbers = document.createElement("td");
     td_ONumbers.setAttribute("class", "serial");
     const td_Id = document.createElement("td");

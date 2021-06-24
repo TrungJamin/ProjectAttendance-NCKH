@@ -48,7 +48,6 @@ function getStudents(className) {
 }
 const loadingSendEmail = document.querySelector(".loading-send-mail");
 btnSendMail.addEventListener("click", (e) => {
-  console.log(document.querySelector("#opacityAdd").classList);
   document.querySelector("#opacityAdd").classList.add("opacityAdd");
 
   document.querySelector("#openSendEmail").classList.add("active");

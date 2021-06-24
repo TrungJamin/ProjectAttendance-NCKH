@@ -40,7 +40,6 @@ inputFileExcel.addEventListener("change", function () {
             newStudent["error"] = 1;
         }
       } catch (e) {
-        console.log(e.message);
       }
     });
 
@@ -80,7 +79,6 @@ inputFileExcel.addEventListener("change", function () {
               : grade === "8"
               ? 2019
               : 2018;
-          console.log(newStudent.class);
           const total = ++getGradeLevel(newStudent.class).total;
           const gender = newStudent.gender === "Nam" ? "1" : "0";
           const id = year + gender + newStudent.class + total;
@@ -115,7 +113,6 @@ inputFileExcel.addEventListener("change", function () {
             })
             .catch(function (error) {});
         } catch (error) {
-          console.log(error.message);
           count++;
           swal(
             "Vui Lòng Kiểm Tra File Excel",

@@ -143,7 +143,6 @@ exports.setDescriptorsInData = functions
       });
     return Promise.all([...database, ...oldData])
       .then((values) => {
-        console.log(values);
         return descriptorsToObject(values);
       })
       .then((result) => {

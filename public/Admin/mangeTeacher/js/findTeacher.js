@@ -24,11 +24,9 @@ function renderAddElementInTableReload(){
     template.setAttribute("class","odd");
     template.setAttribute("role","row");
 
-    console.log(template);
 
     let list=document.querySelector("tbody");
     list.appendChild(template);
-    console.log(list); 
 
 }
 
@@ -201,7 +199,6 @@ function findByGroup(value){
 function findByClass(value){
 
 
-    console.log(value);
     if(value.charAt(0)==" "||value.charAt(0)==""){
         renderTable();
     }

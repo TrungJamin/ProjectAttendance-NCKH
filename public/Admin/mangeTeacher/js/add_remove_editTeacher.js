@@ -143,7 +143,6 @@ function editTeacher(id, obj) {
     if (oldEmail.trim() != obj.email.trim()) {
       updateEmailAuth({ oldEmail: oldEmail, NewEmail: obj.email }).then(
         (res) => {
-          console.log(res);
         }
       );
     }
@@ -303,7 +302,6 @@ function deleteById(id, idTeacher, name) {
         .delete()
         .then(async function () {
           await db.collection("TeacherAdmin").doc(id).delete();
-          console.log(id);
           awai;
         })
         .catch(function (error) {
@@ -377,7 +375,6 @@ function addTeacher(obj) {
                   email: obj.email,
                   password: "123456",
                 }).then((res) => {
-                  console.log("res", res);
                   if (res.data) {
                     db.collection("Teachers")
                       .doc(res.data.uid)
@@ -395,7 +392,6 @@ function addTeacher(obj) {
                         });
                       })
                       .catch(function (error) {
-                        console.log("errr");
                       });
                     if (obj.classLeader !== "") {
                       // make addmin
@@ -440,7 +436,6 @@ function addTeacher(obj) {
                     });
                   })
                   .catch(function (error) {
-                    console.log("errr");
                   });
                 if (obj.classLeader !== "") {
                   // make addmin
@@ -542,7 +537,6 @@ function getInfoTeacher() {
       teacher.img = teacherEdit.img;
     }
     delete teacher.undefined;
-    console.log(teacherEdit.docId, teacher);
     editTeacher(teacherEdit.docId, teacher);
   }
 }

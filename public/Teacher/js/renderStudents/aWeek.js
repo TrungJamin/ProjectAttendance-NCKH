@@ -142,7 +142,6 @@ function renderWeek(listStudents) {
       });
     });
   } catch (error) {
-    console.log(error);
   }
 }
 

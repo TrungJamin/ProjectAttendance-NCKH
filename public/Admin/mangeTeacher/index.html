@@ -207,7 +207,7 @@
       <div class="form-group col-md-6">
 
 
-        <form class="input-group ">
+        <form class="input-group " onsubmit="defaultForm(event)">
 
           <input type="text" class="form-control bg-light border-0 small" id="inputSearch"
             placeholder="Tìm kiếm theo id,tên,lớp chủ nhiệm,email,ngày sinh,môn dạy" aria-label="Search"
@@ -278,6 +278,11 @@
   <script src="./js/lockitu.js"></script>
   <script src="js/inportTeacher.js"></script>
   <!-- <script src="xoaKhiTuThua.js"></script> -->
+  <script>
+     function defaultForm(e){
+        e.preventDefault()
+     }
+  </script>
 </body>
 
 </html>

@@ -72,7 +72,6 @@ function formatObjectClassAndTeach(s) {
 function searchAll(e){
   let value = e;
 
-  console.log(value);
 
   if( value==""){
 
@@ -96,7 +95,6 @@ function searchAll(e){
     );
   });
 
-  console.log(tmp)
   renderTable(tmp);
   }
 }

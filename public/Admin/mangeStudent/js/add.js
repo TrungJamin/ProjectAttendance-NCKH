@@ -32,7 +32,7 @@ edit_form.addEventListener("submit", (e) => {
   let dateInput = new Date(edit_form.dob.value).getFullYear();
 
   if (Number(dateNow) - Number(dateInput) < 10) {
-    alert("mời nhập lại tuổi");
+    alert("mời nhập lại ngày sinh");
   } else {
     if (typeBoxEdit) {
       id = edit_form.studentID.value;
@@ -88,7 +88,6 @@ edit_form.addEventListener("submit", (e) => {
 });
 
 const createAttendance = (id, month) => {
-  
   for (let i = 1; i <= 31; i++) {
     x = i;
     if (i < 10) {
