@@ -142,8 +142,7 @@ function editTeacher(id, obj) {
     // lam loading de cap nhat email nha
     if (oldEmail.trim() != obj.email.trim()) {
       updateEmailAuth({ oldEmail: oldEmail, NewEmail: obj.email }).then(
-        (res) => {
-        }
+        (res) => {}
       );
     }
 
@@ -391,8 +390,7 @@ function addTeacher(obj) {
                           timer: 500,
                         });
                       })
-                      .catch(function (error) {
-                      });
+                      .catch(function (error) {});
                     if (obj.classLeader !== "") {
                       // make addmin
                       const classLeader = obj.classLeader;
@@ -435,8 +433,7 @@ function addTeacher(obj) {
                       timer: 500,
                     });
                   })
-                  .catch(function (error) {
-                  });
+                  .catch(function (error) {});
                 if (obj.classLeader !== "") {
                   // make addmin
                   const classLeader = obj.classLeader;
@@ -571,8 +568,8 @@ function openFormInput(idOfHtml, teacher) {
     myForm[4].children[1].value = teacher.classLeader;
     myForm[5].children[1].setAttribute("value", teacher.email);
     myForm[6].children[1].setAttribute("value", teacher.dataOfBirth);
-    myForm[7].children[1].setAttribute("value", teacher.phone);
-    myForm[8].children[1].setAttribute("value", teacher.address);
+    myForm[7].children[1].setAttribute("value", teacher.phone || "");
+    myForm[8].children[1].setAttribute("value", teacher.address || "");
     oldEmail = teacher.email;
     // giai lap co data
 

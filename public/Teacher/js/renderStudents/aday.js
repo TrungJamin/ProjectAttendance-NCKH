@@ -140,6 +140,7 @@ function renderDay(listStudents, d, m, y) {
           subject.toUpperCase() + " : " + item.note;
         length++;
       });
+      length = 5;
       att.data.afternoon.forEach((item) => {
         const subject = item.code.split("-")[1];
         document.getElementById(length.toString()).innerText =
