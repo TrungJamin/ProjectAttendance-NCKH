@@ -1,288 +1,427 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
 
-<head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- Latest compiled and minified CSS -->
+    <title>Admin</title>
 
-  <!-- Latest compiled and minified CSS -->
-  <title>Admin</title>
+    <link rel="stylesheet" href="./../css/teacherStyle.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+      rel="stylesheet"
+    />
 
-  <link rel="stylesheet" href="./../css/teacherStyle.css" />
-  <link
-    href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-    rel="stylesheet" />
+    <link
+      href="./.././../vendor/fontawesome-free/css/all.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <!-- Custom styles for this template -->
+    <link href="./.././../css/sb-admin-2.css" rel="stylesheet" />
 
-  <link href="./.././../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" />
-  <!-- Custom styles for this template -->
-  <link href="./.././../css/sb-admin-2.css" rel="stylesheet" />
+    <!-- Custom styles for this page -->
+    <link
+      href="./.././../vendor/datatables/dataTables.bootstrap4.min.css"
+      rel="stylesheet"
+    />
 
-  <!-- Custom styles for this page -->
-  <link href="./.././../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" />
+    <link href="./../../css/sb-admin-2.css" rel="stylesheet" />
+    <script
+      src="https://kit.fontawesome.com/2348ec6f34.js"
+      crossorigin="anonymous"
+    ></script>
 
-  <link href="./../../css/sb-admin-2.css" rel="stylesheet" />
-  <script src="https://kit.fontawesome.com/2348ec6f34.js" crossorigin="anonymous"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
+      integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="https://unpkg.com/read-excel-file@4.x/bundle/read-excel-file.min.js"></script>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
-    integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="https://unpkg.com/read-excel-file@4.x/bundle/read-excel-file.min.js"></script>
+    <!-- firebase -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-functions.js"></script>
+    <script src="./../../config/env.js"></script>
+  </head>
 
+  <!-- <body> -->
 
-  <!-- firebase -->
-  <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-firestore.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-functions.js"></script>
-  <script src="./../../config/env.js"></script>
-</head>
+  <style></style>
 
-<!-- <body> -->
+  <body>
+    <div id="cover-caption" class="hide">
+      <div class="container">
+        <div class="col-xl-12">
+          <!-- Account details card-->
 
-<style>
-
-</style>
-
-<body>
-  <div id="cover-caption" class="hide">
-    <div class="container">
-      <div class="col-xl-12">
-        <!-- Account details card-->
-
-        
-
-
-        <div class="card mb-4">
-          <div class="card-header text-center bg-success text-white " style="font-size: 18px;" id="typeFormTeacher">Thêm
-            giáo viên <i class="fas fa-upload">
-            </i></div>
-
-          <div class="d-none" id="loadingAddTeacher" style="position: absolute; top: 41%; left:48%">
-            <div class="spinner-border" role="status">
+          <div class="card mb-4">
+            <div
+              class="card-header text-center bg-success text-white"
+              style="font-size: 18px"
+              id="typeFormTeacher"
+            >
+              Thêm giáo viên <i class="fas fa-upload"> </i>
             </div>
-          </div>
 
-          <div class="card-body">
-            <form class="justify-content-center" id="myForm" onsubmit="mySubmitFunction(event)">
-              <!-- Form Group (username)-->
-              <div class="form-group">
-                <label class="small mb-1" for="inputUsername">Tên giáo viên</label>
-                <input id="nameInput" type="text" name="name" class="form-control" placeholder="Tên"
-                  onkeyup="filterCharName(value,'nameInput')" required />
-              </div>
-              <!-- Form Row-->
-              <div class="form-row">
-                <!-- Form Group (first name)-->
-                <div class="form-group col-md-6">
-                  <label class="small mb-1" for="inputFirstName">khoa giảng dạy</label>
-                  <select class="form-control" name="group" id="group" required>
-                    <option value="" selected>chọn</option>
-                    <option value="nation">Tự nhiên</option>
-                    <option value="sociocultural">
-                      Xã hội
-                    </option>
-                  </select>
+            <div
+              class="d-none"
+              id="loadingAddTeacher"
+              style="position: absolute; top: 41%; left: 48%"
+            >
+              <div class="spinner-border" role="status"></div>
+            </div>
+
+            <div class="card-body">
+              <form
+                class="justify-content-center"
+                id="myForm"
+                onsubmit="mySubmitFunction(event)"
+              >
+                <!-- Form Group (username)-->
+                <div class="form-group">
+                  <label class="small mb-1" for="inputUsername"
+                    >Tên giáo viên</label
+                  >
+                  <input
+                    id="nameInput"
+                    type="text"
+                    name="name"
+                    class="form-control"
+                    placeholder="Tên"
+                    onkeyup="filterCharName(value,'nameInput')"
+                    required
+                  />
                 </div>
-                <!-- Form Group (last name)-->
-                <div class="form-group col-md-6">
-                  <label class="small mb-1" for="inputLastName">Giới tính</label>
-                  <select class="form-control" name="gender" id="gender" required>
-                    <option value="" selected>chọn</option>
-                    <option value="true">nam</option>
-                    <option value="false">nữ</option>
-                  </select>
+                <!-- Form Row-->
+                <div class="form-row">
+                  <!-- Form Group (first name)-->
+                  <div class="form-group col-md-6">
+                    <label class="small mb-1" for="inputFirstName"
+                      >khoa giảng dạy</label
+                    >
+                    <select
+                      class="form-control"
+                      name="group"
+                      id="group"
+                      required
+                    >
+                      <option value="" selected>chọn</option>
+                      <option value="nation">Tự nhiên</option>
+                      <option value="sociocultural">Xã hội</option>
+                    </select>
+                  </div>
+                  <!-- Form Group (last name)-->
+                  <div class="form-group col-md-6">
+                    <label class="small mb-1" for="inputLastName"
+                      >Giới tính</label
+                    >
+                    <select
+                      class="form-control"
+                      name="gender"
+                      id="gender"
+                      required
+                    >
+                      <option value="" selected>chọn</option>
+                      <option value="true">nam</option>
+                      <option value="false">nữ</option>
+                    </select>
+                  </div>
                 </div>
-              </div>
-              <!-- Form Row        -->
-              <div class="row">
-                <div class="form-group col-md-12" id="khoaGiangDay">
-                  <label class="small mb-1" for="inputFirstName">khoa giảng dạy</label>
-                  <div class="dropdown">
-                    <button class="
+                <!-- Form Row        -->
+                <div class="row">
+                  <div class="form-group col-md-12" id="khoaGiangDay">
+                    <label class="small mb-1" for="inputFirstName"
+                      >khoa giảng dạy</label
+                    >
+                    <div class="dropdown">
+                      <button
+                        class="
                           btn btn-outline-success
                           dropdown-toggle
                           btn-block
-                        " type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
-                      aria-expanded="false">
-                      danh sách môn dạy
-                    </button>
-                    <div class="dropdown-menu" style="padding: 2rem" aria-labelledby="triggerId">
-                      <div id="renderMuntilChoose"></div>
+                        "
+                        type="button"
+                        id="triggerId"
+                        data-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                      >
+                        danh sách môn dạy
+                      </button>
+                      <div
+                        class="dropdown-menu"
+                        style="padding: 2rem"
+                        aria-labelledby="triggerId"
+                      >
+                        <div id="renderMuntilChoose"></div>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
 
-              <!-- Form Group (email address)-->
-              <div class="form-group">
-                <label class="small mb-1" for="inputEmailAddress">lớp chủ nhiệm</label>
-                <select class="form-control" name="classLeader" id="classLeader" aria-placeholder="chọn lớp chủ nhiệm"
-                  required></select>
-              </div>
-              <!-- Form Row-->
-              <div class="form-row">
-                <!-- Form Group (phone number)-->
-                <div class="form-group col-md-6">
-                  <label id="email-form-edit" class="small mb-1" for="inputPhone">Địa thư điện tử</label>
-                  <input id="address" type="email" class="form-control" style="width: 100%" name="email"
-                    placeholder="@mail" onkeyup="filterCharEmail(value,'address')" required />
+                <!-- Form Group (email address)-->
+                <div class="form-group">
+                  <label class="small mb-1" for="inputEmailAddress"
+                    >lớp chủ nhiệm</label
+                  >
+                  <select
+                    class="form-control"
+                    name="classLeader"
+                    id="classLeader"
+                    aria-placeholder="chọn lớp chủ nhiệm"
+                    required
+                  ></select>
                 </div>
-                <!-- Form Group (birthday)-->
-                <div class="form-group col-md-6">
-                  <label class="small mb-1" for="inputBirthday">Ngày sinh</label>
-                  <input type="date" class="form-control" name="dataOfBirth" placeholder="ngày sinh" required />
+                <!-- Form Row-->
+                <div class="form-row">
+                  <!-- Form Group (phone number)-->
+                  <div class="form-group col-md-6">
+                    <label
+                      id="email-form-edit"
+                      class="small mb-1"
+                      for="inputPhone"
+                      >Địa thư điện tử</label
+                    >
+                    <input
+                      id="address"
+                      type="email"
+                      class="form-control"
+                      style="width: 100%"
+                      name="email"
+                      placeholder="@mail"
+                      onkeyup="filterCharEmail(value,'address')"
+                      required
+                    />
+                  </div>
+                  <!-- Form Group (birthday)-->
+                  <div class="form-group col-md-6">
+                    <label class="small mb-1" for="inputBirthday"
+                      >Ngày sinh</label
+                    >
+                    <input
+                      type="date"
+                      class="form-control"
+                      name="dataOfBirth"
+                      placeholder="ngày sinh"
+                      required
+                    />
+                  </div>
                 </div>
-              </div>
 
-              <div class="form-row">
-                <!-- Form Group (phone number)-->
-                <div class="form-group col-md-6">
-                  <label class="small mb-1" for="inputPhone">Số điện thoai
-                  </label>
-                  <input id="inputPhone" type="tel" class="form-control" style="width: 100%" name="phone"
-                    placeholder="Số điện thoai" required />
+                <div class="form-row">
+                  <!-- Form Group (phone number)-->
+                  <div class="form-group col-md-6">
+                    <label class="small mb-1" for="inputPhone"
+                      >Số điện thoai
+                    </label>
+                    <input
+                      id="inputPhone"
+                      type="tel"
+                      class="form-control"
+                      style="width: 100%"
+                      name="phone"
+                      placeholder="Số điện thoai"
+                      required
+                    />
+                  </div>
+                  <!-- Form Group (birthday)-->
+                  <div class="form-group col-md-6">
+                    <label class="small mb-1" for="inputPhone"> Địa chỉ </label>
+                    <input
+                      id="inputAddress"
+                      type="text"
+                      class="form-control"
+                      style="width: 100%"
+                      name="address"
+                      placeholder=" Địa chỉ"
+                      required
+                    />
+                  </div>
                 </div>
-                <!-- Form Group (birthday)-->
-                <div class="form-group col-md-6">
-                  <label class="small mb-1" for="inputPhone">
-                    Địa chỉ
-                  </label>
-                  <input id="inputAddress" type="text" class="form-control" style="width: 100%" name="address"
-                    placeholder=" Địa chỉ" required />
+
+                <!-- Save changes button-->
+                <div class="d-flex justify-content-between">
+                  <button type="submit" class="btn btn-success">Lưu</button>
+                  <button
+                    class="btn btn-danger"
+                    type="reset"
+                    onclick="closeFormInput(`cover-caption`)"
+                  >
+                    Hủy
+                  </button>
                 </div>
-              </div>
-
-              <!-- Save changes button-->
-              <div class="d-flex justify-content-between">
-                <button type="submit" class="btn btn-success">Lưu</button>
-                <button class="btn btn-danger" type="reset" onclick="closeFormInput(`cover-caption`)">Hủy</button>
-              </div>
-            </form>
-
-
+              </form>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="card shadow mb-4 " style="width: 100%;" id="allViewPage">
-
-    <div style="position: absolute; top:30% ;left: 50%;" id="loadingTeacher">
-
-      <div class="d-flex justify-content-center">
-        <div class="spinner-border text-success" role="status">
-
+    <div class="card shadow mb-4" style="width: 100%" id="allViewPage">
+      <div style="position: absolute; top: 30%; left: 50%" id="loadingTeacher">
+        <div class="d-flex justify-content-center">
+          <div class="spinner-border text-success" role="status"></div>
         </div>
       </div>
 
-    </div>
-
-    <div class="card-header py-3"
-      style="  background-image: linear-gradient(to right, rgb(64,201,126) , rgb(26,188,156))">
-      <h6 class="m-0 font-weight-bold h3" style="color: aliceblue; z-index: 10000;">Danh sách giáo viên</h6>
-    </div>
-
-    <br />
-    <div class="row">
-      <div class="form-group col-md-5 d-flex">
-
-        <div>
-          <button type="button" class="btn btn-success" id="addTeacher">Thêm +</button>
-        </div>
-
-        <div class="pl-3">
-          <input type="file" style="height: 0;
-          overflow: hidden;
-          width: 0;" id="inputTeacher" />
-          <label for="inputTeacher" class="btn btn-success">Thêm giáo viên từ file</label>
-        </div>
-
-
+      <div
+        class="card-header py-3"
+        style="
+          background-image: linear-gradient(
+            to right,
+            rgb(64, 201, 126),
+            rgb(26, 188, 156)
+          );
+        "
+      >
+        <h6
+          class="m-0 font-weight-bold h3"
+          style="color: aliceblue; z-index: 10000"
+        >
+          Danh sách giáo viên
+        </h6>
       </div>
 
-      <div class="form-group col-md-6">
-
-
-        <form class="input-group " onsubmit="defaultForm(event)">
-
-          <input type="text" class="form-control bg-light border-0 small" id="inputSearch"
-            placeholder="Tìm kiếm theo id,tên,lớp chủ nhiệm,email,ngày sinh,môn dạy" aria-label="Search"
-            aria-describedby="basic-addon2" id="Teacher-search" onchange="searchAll(value)" />
-
-          <div class="input-group-append">
-            <button class="btn btn-success" type="reset" style="z-index: 0 !important;">
-              <i class="fas fa-search fa-sm" aria-hidden="true"></i>
-            </button>
-            <button type="reset" class="btn btn-success ml-2" onclick="reRenderNotParam()">
-              <i class="fas fa-redo"></i>
+      <br />
+      <div class="row">
+        <div class="form-group col-md-5 d-flex">
+          <div>
+            <button type="button" class="btn btn-success" id="addTeacher">
+              Thêm +
             </button>
           </div>
 
-        </form>
+          <div class="pl-3">
+            <input
+              type="file"
+              style="height: 0; overflow: hidden; width: 0"
+              id="inputTeacher"
+            />
+            <label for="inputTeacher" class="btn btn-success"
+              >Thêm giáo viên từ file</label
+            >
+          </div>
+        </div>
 
+        <div class="form-group col-md-6">
+          <form class="input-group" onsubmit="defaultForm(event)">
+            <input
+              type="text"
+              class="form-control bg-light border-0 small"
+              id="inputSearch"
+              placeholder="Tìm kiếm theo id,tên,lớp chủ nhiệm,email,ngày sinh,môn dạy"
+              aria-label="Search"
+              aria-describedby="basic-addon2"
+              id="Teacher-search"
+              onchange="searchAll(value)"
+            />
 
-
+            <div class="input-group-append">
+              <button
+                class="btn btn-success"
+                type="reset"
+                style="z-index: 0 !important"
+              >
+                <i class="fas fa-search fa-sm" aria-hidden="true"></i>
+              </button>
+              <button
+                type="reset"
+                class="btn btn-success ml-2"
+                onclick="reRenderNotParam()"
+              >
+                <i class="fas fa-redo"></i>
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
 
+      <div class="card-body">
+        <div class="table-responsive">
+          <table
+            class="table table-bordered"
+            id="dataTable"
+            width="100%"
+            style="font-size: 13px"
+            cellspacing="0"
+          >
+            <thead>
+              <tr
+                class="text-center"
+                style="
+                  font-size: 17px;
+                  font-weight: bold;
+                  background-image: linear-gradient(
+                    to right,
+                    rgb(64, 201, 126),
+                    rgb(26, 188, 156)
+                  );
+                  color: white;
+                "
+              >
+                <th>Mã số</th>
+                <th>Tên</th>
+                <th>Giới tính</th>
+                <th>Nhóm</th>
+                <th>Chủ nhiệm</th>
+                <th>Lớp và Môn</th>
+                <th>Email</th>
+                <th>Ngày sinh</th>
+                <th>Tùy chọn</th>
+              </tr>
+            </thead>
 
+            <tbody id="upload"></tbody>
+          </table>
+        </div>
 
-
-
-    </div>
-
-    <div class="card-body">
-      <div class="table-responsive">
-        <table class="table table-bordered " id="dataTable" width="100%" style="font-size: 13px;" cellspacing="0">
-          <thead>
-            <tr class="text-center "
-              style="font-size: 17px; font-weight: bold; background-image: linear-gradient(to right, rgb(64,201,126) , rgb(26,188,156)); color :white">
-              <th>Mã số</th>
-              <th>Tên</th>
-              <th>Giới tính</th>
-              <th>Nhóm</th>
-              <th>Chủ nhiệm</th>
-              <th>Lớp và Môn</th>
-              <th>Email</th>
-              <th>Ngày sinh</th>
-              <th>Tùy chọn</th>
-            </tr>
-          </thead>
-
-          <tbody id="upload"></tbody>
-        </table>
+        <div class="d-flex justify-content-center">
+          <nav aria-label="Page navigation example">
+            <ul class="pagination">
+              <li class="page-item page-link" onclick="clickPrePage()"><i class="fas fa-arrow-left"></i> </li>
+              <li class="page-item page-link" id='index-admin-teacher-info-page'> 1 </li>
+              <li class="page-item page-link" onclick="clickNextPage()"> <i class="fas fa-arrow-right"></i> </li>
+            </ul>
+          </nav>
+        </div>
       </div>
     </div>
-  </div>
-  <script src="./.././../vendor/jquery/jquery.min.js"></script>
-  <script src="./.././../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="./.././../vendor/jquery/jquery.min.js"></script>
+    <script src="./.././../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-  <!-- Core plugin JavaScript-->
-  <script src="./.././../vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="./.././../vendor/jquery-easing/jquery.easing.min.js"></script>
 
-  <!-- Custom scripts for all pages-->
-  <!-- <script src="./.././../js/sb-admin-2.min.js"></script> -->
+    <!-- Custom scripts for all pages-->
+    <!-- <script src="./.././../js/sb-admin-2.min.js"></script> -->
 
-  <!-- Page level plugins -->
-  <script src="./.././../vendor/datatables/jquery.dataTables.min.js"></script>
-  <script src="./.././../vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <!-- Page level plugins -->
+    <script src="./.././../vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="./.././../vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
-  <!-- Bootstrap core JavaScript-->
-  <!-- <script src="./../../../js/InterfaceAdmin.js"></script> -->
-  <script src="./js/indexTeacher.js"></script>
-  <script src="./js/add_remove_editTeacher.js"></script>
-  <script src="./js/search.js"></script>
-  <script src="./js/lockitu.js"></script>
-  <script src="js/inportTeacher.js"></script>
-  <!-- <script src="xoaKhiTuThua.js"></script> -->
-  <script>
-     function defaultForm(e){
-        e.preventDefault()
-     }
-  </script>
-</body>
-
+    <!-- Bootstrap core JavaScript-->
+    <!-- <script src="./../../../js/InterfaceAdmin.js"></script> -->
+    <script src="./js/indexTeacher.js"></script>
+    <script src="./js/add_remove_editTeacher.js"></script>
+    <script src="./js/search.js"></script>
+    <script src="./js/lockitu.js"></script>
+    <script src="js/inportTeacher.js"></script>
+    <!-- <script src="xoaKhiTuThua.js"></script> -->
+    <script>
+      function defaultForm(e) {
+        e.preventDefault();
+      }
+    </script>
+  </body>
 </html>

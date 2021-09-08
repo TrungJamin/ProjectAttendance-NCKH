@@ -1,6 +1,9 @@
 var body = document.querySelector("#upload");
 var listOfTeachers = [];
 
+var DefaultNumberTeacherOnePage=10;
+var indexPageOfTeacher=1;
+
 // format obj to strin chuyaarn
 function formatObjectClassAndTeach(s) {
   var index = 0;
@@ -95,10 +98,50 @@ function reRenderNotParam() {
 }
 function renderTable(list) {
   clearTable();
-  list.forEach((e) => renderAddElementInTable(e));
+  var indexStart=(indexPageOfTeacher-1)*DefaultNumberTeacherOnePage;
+  var indexStop=indexPageOfTeacher*DefaultNumberTeacherOnePage
+  /// code here
+
+  console.log(indexStart, indexStop)
+  console.log(list);
+  let tampList= list.slice(indexStart, indexStop)
+  tampList.forEach((e) => renderAddElementInTable(e));
   if (list.length == 0) {
     setNoResult();
   }
+}
+
+function clickPrePage(){
+  let maxPage=Math.ceil(listOfTeachers.length/DefaultNumberTeacherOnePage);
+
+  if( indexPageOfTeacher>1){
+    // đc pre page
+    indexPageOfTeacher--;
+
+    let indexPageShowInScreen = document.getElementById('index-admin-teacher-info-page');
+    indexPageShowInScreen.innerHTML=String(indexPageOfTeacher);
+
+    renderTable(listOfTeachers);
+
+  }
+
+}
+
+
+function clickNextPage(){
+
+  let maxPage=Math.ceil(listOfTeachers.length/DefaultNumberTeacherOnePage);
+
+  if( indexPageOfTeacher<maxPage){
+
+    indexPageOfTeacher++;
+      document.getElementById('index-admin-teacher-info-page').innerHTML=String(indexPageOfTeacher);
+    // đc next page
+    renderTable(listOfTeachers)
+  }
+  
+
+  
 }
 
 function clearTable() {
