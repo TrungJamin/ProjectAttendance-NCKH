@@ -66,7 +66,7 @@ node_modules/
 .env
 
 #enviroment firebase
-/public/config/env.js
+./public/config/env.js
 
 .firebaserc
 

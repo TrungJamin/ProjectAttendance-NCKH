@@ -1,29 +1,30 @@
-const functions = require("firebase-functions");
-const admin = require("firebase-admin");
+const functions = require('firebase-functions');
+const admin = require('firebase-admin');
 admin.initializeApp(functions.config().firebase);
-const { detects, faceapi, detectFace, detectListFile } = require("./src/");
+const { faceapi, detectFace, detectListFile } = require('./src/');
+const { getWeekNow } = require('./helpers');
 const {
   getDescriptors,
   descriptorsToObject,
-} = require("./src/actions/detectSingleFace");
+} = require('./src/actions/detectSingleFace');
 const db = admin.firestore();
 const runtimeOpts = {
   timeoutSeconds: 300,
-  memory: "1GB",
+  memory: '1GB',
 };
 const displaySize = { width: 1000, height: 1000 };
 exports.addDescriptorsInData = functions
   .runWith({
     timeoutSeconds: 540,
-    memory: "1GB",
+    memory: '1GB',
   })
   .https.onCall(async (data, content) => {
     const { listBase64, id, Class } = data;
     const database = await detectFace(listBase64, id);
     return db
-      .collection("facesDatabase")
+      .collection('facesDatabase')
       .doc(Class)
-      .collection("data")
+      .collection('data')
       .doc(id)
       .set(database, { merge: true })
       .then(() => {
@@ -37,9 +38,9 @@ exports.getAttendances = functions
   .runWith(runtimeOpts)
   .https.onCall(async (data, content) => {
     return db
-      .collection("facesDatabase")
+      .collection('facesDatabase')
       .doc(data.class)
-      .collection("data")
+      .collection('data')
       .get()
       .then((querySnapshots) => {
         let labeledFaceDescriptorsJson2 = [];
@@ -118,15 +119,15 @@ exports.deleteUserByUID = functions.https.onCall((data, context) => {
 exports.setDescriptorsInData = functions
   .runWith({
     timeoutSeconds: 540,
-    memory: "1GB",
+    memory: '1GB',
   })
   .https.onCall(async (data, content) => {
     const { listBase64, id, Class } = data;
     const database = await getDescriptors(listBase64);
     const oldData = await db
-      .collection("facesDatabase")
+      .collection('facesDatabase')
       .doc(Class)
-      .collection("data")
+      .collection('data')
       .get()
       .then((querySnapshots) => {
         let labeledFaceDescriptorsJson2 = [];
@@ -153,9 +154,9 @@ exports.setDescriptorsInData = functions
       })
       .then((newData) => {
         return db
-          .collection("facesDatabase")
+          .collection('facesDatabase')
           .doc(Class)
-          .collection("data")
+          .collection('data')
           .doc(id)
           .set(newData, { merge: true })
           .then(() => {
@@ -171,15 +172,15 @@ exports.setDescriptorsInData = functions
   });
 
 // send - email
-const nodemailer = require("nodemailer");
-const { google } = require("googleapis");
+const nodemailer = require('nodemailer');
+const { google } = require('googleapis');
 
 const CLIENT_ID =
-  "731852175479-6h6mjpc6bcrnbrpm1q640rrrvv4san0f.apps.googleusercontent.com";
-const CLIENT_SECRET = "yHrFZyT3BMuj6kSCCTLgLKL5";
-const REDIRECT_URI = "https://developers.google.com/oauthplayground";
+  '731852175479-6h6mjpc6bcrnbrpm1q640rrrvv4san0f.apps.googleusercontent.com';
+const CLIENT_SECRET = 'yHrFZyT3BMuj6kSCCTLgLKL5';
+const REDIRECT_URI = 'https://developers.google.com/oauthplayground';
 const REFRESH_TOKEN =
-  "1//0477HhK8OkJVBCgYIARAAGAQSNwF-L9IrX6RhlpKeeFap91Lf1Mgdt6I0AUWuXKoLv4RvtLT86mwWveBlYXlX2UVSgsGTCL759BE";
+  '1//0477HhK8OkJVBCgYIARAAGAQSNwF-L9IrX6RhlpKeeFap91Lf1Mgdt6I0AUWuXKoLv4RvtLT86mwWveBlYXlX2UVSgsGTCL759BE';
 const oAuth2Client = new google.auth.OAuth2(
   CLIENT_ID,
   CLIENT_SECRET,
@@ -199,10 +200,10 @@ async function sendMailFromTeacher(
     const accessToken = await oAuth2Client.getAccessToken();
 
     const transport = nodemailer.createTransport({
-      service: "gmail",
+      service: 'gmail',
       auth: {
-        type: "OAuth2",
-        user: "smartattendance01pro@gmail.com",
+        type: 'OAuth2',
+        user: 'smartattendance01pro@gmail.com',
         clientId: CLIENT_ID,
         clientSecret: CLIENT_SECRET,
         refreshToken: REFRESH_TOKEN,
@@ -213,8 +214,8 @@ async function sendMailFromTeacher(
     const mailOptions = {
       from: `Smart Attendance <${mailTeacher}>`,
       to: `${mailStudent}`,
-      subject: "Trường Trung Học Cơ Sở Đức Trí",
-      text: "Smart Bot",
+      subject: 'Trường Trung Học Cơ Sở Đức Trí',
+      text: 'Smart Bot',
       html: `<h1>From:${name}  || email: ${mailTeacher}</h1>
       <h3>${title}</h3>
       <p>${content}</p> `,
@@ -245,7 +246,7 @@ exports.makeAdmin = functions.https.onCall((data, context) => {
       return admin.auth().setCustomUserClaims(user.uid, { admin: true });
     })
     .then(() => {
-      return "make admin successfully";
+      return 'make admin successfully';
     })
     .catch((error) => {
       return error.message;
@@ -259,7 +260,7 @@ exports.deleteAdmin = functions.https.onCall((data, context) => {
       return admin.auth().setCustomUserClaims(user.uid, { admin: false });
     })
     .then(() => {
-      return "delete admin successfully";
+      return 'delete admin successfully';
     })
     .catch((error) => {
       return error.message;
@@ -277,3 +278,74 @@ exports.createAccount = functions.https.onCall((data) => {
       return false;
     });
 });
+
+const template = {
+  morning: [],
+  afternoon: [],
+  status: true,
+  asked: '',
+  note: '',
+};
+exports.updateScheduleCronjob = functions
+  .runWith({
+    timeoutSeconds: 540,
+    memory: '2GB',
+  })
+  .pubsub.schedule('0 0 1 * *')
+  .timeZone('America/New_York') // Users can choose timezone - default is America/Los_Angeles
+  .onRun(async (context) => {
+    try {
+      db.collection(`Students`).onSnapshot((snapshot) => {
+        const date = new Date();
+        const month = date.getMonth() + 1;
+        const year = date.getFullYear();
+        const maxDay = new Date(year, month, 0).getDate();
+
+        snapshot.forEach((doc) => {
+          for (let i = 1; i <= maxDay; i++) {
+            const date = new Date(`${month}-${i}-${year}`);
+            if (i < 10) {
+              db.collection('Students')
+                .doc(doc.id)
+                .collection('attendance')
+                .doc(`${month}-0${i}-${year}`)
+                .set({
+                  ...template,
+                  week: getWeekNow(date),
+                  status: false,
+                  asked: true,
+                  note: '',
+                })
+                .then(() => {
+                  console.log('success');
+                })
+                .catch((error) => {
+                  console.log(error);
+                });
+            } else {
+              db.collection('Students')
+                .doc(doc.id)
+                .collection('attendance')
+                .doc(`${month}-${i}-${year}`)
+                .set({
+                  ...template,
+                  week: getWeekNow(date),
+                  status: true,
+                  asked: true,
+                  note: '',
+                })
+                .then(() => {
+                  console.log('success');
+                })
+                .catch((error) => {
+                  console.log(error);
+                });
+            }
+          }
+        });
+      });
+      return true;
+    } catch (error) {
+      console.log(error.message);
+    }
+  });

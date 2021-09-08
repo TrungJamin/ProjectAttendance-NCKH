@@ -1,22 +1,10 @@
 let demo = {
-  morning: [
-    { status: false, note: "", code: "", asked: false },
-    { status: false, note: "", code: "", asked: false },
-    { status: true, note: "", code: "", asked: true },
-    { status: false, note: "", code: "", asked: false },
-    { status: true, note: "", code: "", asked: false },
-  ],
-  afternoon: [
-    { status: true, note: "", code: "", asked: false },
-    { status: true, note: "", code: "", asked: true },
-    { status: true, note: "", code: "", asked: false },
-    { status: true, note: "", code: "", asked: true },
-    { status: false, note: "", code: "", asked: false },
-  ],
+  morning: [],
+  afternoon: [],
 
   status: true,
-  asked: "",
-  note: "",
+  asked: '',
+  note: '',
 };
 
 // add Student database
@@ -40,38 +28,43 @@ let demo = {
 //     });
 // }
 db.collection(`Students`).onSnapshot((snapshot) => {
+  const date = new Date();
+  const month = 7;
+  const year = date.getFullYear();
+  const maxDay = new Date(year, month, 0).getDate();
+
   snapshot.forEach((doc) => {
-    for (let i = 1; i <= 30; i++) {
-      let date = new Date(`6-${i}-2021`);
+    for (let i = 1; i <= maxDay; i++) {
+      let date = new Date(`${month}-${i}-${year}`);
       if (i < 10) {
-        db.collection("Students")
+        db.collection('Students')
           .doc(doc.id)
-          .collection("attendance")
-          .doc(`6-0${i}-2021`)
+          .collection('attendance')
+          .doc(`${month}-0${i}-${year}`)
           .set({
             ...demo,
             week: getWeekNow(date),
             status: false,
             asked: true,
-            note: "không lí do",
+            note: '',
           })
           .then(() => {
-            console.log("success");
+            console.log('success');
           });
       } else {
-        db.collection("Students")
+        db.collection('Students')
           .doc(doc.id)
-          .collection("attendance")
-          .doc(`6-${i}-2021`)
+          .collection('attendance')
+          .doc(`${month}-${i}-${year}`)
           .set({
             ...demo,
             week: getWeekNow(date),
             status: true,
             asked: true,
-            note: "",
+            note: '',
           })
           .then(() => {
-            console.log("success");
+            console.log('success');
           });
       }
     }
