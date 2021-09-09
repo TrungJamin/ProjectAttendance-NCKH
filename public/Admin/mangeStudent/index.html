@@ -141,92 +141,91 @@
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
-                <div class="container-fluid">
 
-                    <div class="card-header py-3"
-                        style="text-align: center; color: aliceblue; background-image: linear-gradient(to right, rgb(64,201,126) , rgb(26,188,156))">
-                        <h6 class="m-0 font-weight-bold   h3">Danh Sách Học Sinh</h6>
-                    </div>
 
-                    <!-- DataTales of Student -->
-                    <div class="shadow mb-4 col-12">
+                <div class="card-header py-3"
+                    style="text-align: center; color: aliceblue; background-image: linear-gradient(to right, rgb(64,201,126) , rgb(26,188,156))">
+                    <h6 class="m-0 font-weight-bold   h3">Danh Sách Học Sinh</h6>
+                </div>
 
-                        <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top ">
-                            <!-- Sidebar Toggle (Topbar) -->
+                <!-- DataTales of Student -->
+                <div class="shadow mb-4 col-12">
 
-                            <div class="d-flex justify-content-around align-baseline">
-                                <div>
-                                    <button class="btn btn-success add-student-button">Thêm + </button>
+                    <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top ">
+                        <!-- Sidebar Toggle (Topbar) -->
 
-                                </div>
-                                <div class="pl-3">
-                                    <input type="file" style="height: 0;
+                        <div class="d-flex justify-content-around align-baseline">
+                            <div>
+                                <button class="btn btn-success add-student-button">Thêm + </button>
+
+                            </div>
+                            <div class="pl-3">
+                                <input type="file" style="height: 0;
                                      overflow: hidden;
                                      width: 0;" id="inputStudents" />
-                                    <label for="inputStudents" id="label-input-file" class="btn btn-success">
-                                        Thêm học sinh từ file
-                                        <i class="fas fa-upload">
-                                        </i>
-                                    </label>
-                                </div>
-
+                                <label for="inputStudents" id="label-input-file" class="btn btn-success">
+                                    Thêm học sinh từ file
+                                    <i class="fas fa-upload">
+                                    </i>
+                                </label>
                             </div>
 
-                            <!-- Topbar Search -->
-                            <form class="d-none d-sm-inline-block form-inline navbar-search">
-                                <div class="input-group">
-                                    <input type="text" class="form-control bg-light border-0 small"
-                                        placeholder="Tìm kiếm học sinh theo mssv,họ tên,địa chỉ,lớp ......"
-                                        aria-label="Search" aria-describedby="basic-addon2" id="Student-search">
-
-                                    <button class="btn btn-success btn-refresh-search" type="button">
-                                        <i class="fa fa-refresh" aria-hidden="true"></i>
-                                    </button>
-                                </div>
-                            </form>
-
-                        </nav>
-
-                        <!-- LOADING GIFT -->
-                        <div class="col-12 loading-table">
-                            <img src="./../../img/Loading-table.gif">
                         </div>
-                        <!-- End loading gift -->
-                        <div class="card-body">
-                            <div class="table-responsive">
 
-                                <table class="table table-bordered hidden" id="dataTable" width="100%" cellspacing="0">
-                                    <thead style="background-color: #ffff">
-                                        <tr
-                                            style="background-image: linear-gradient(to right, rgb(64,201,126) , rgb(26,188,156)); font-size: 12px;">
-                                            <th class="serial" style="color: white;font-size: 15px;">STT</th>
-                                            <th style="color: white;font-size: 15px;">MSSV</th>
-                                            <th style="color: white;font-size: 15px;">
-                                                Họ và Tên
+                        <!-- Topbar Search -->
+                        <form class="d-none d-sm-inline-block form-inline navbar-search">
+                            <div class="input-group">
+                                <input type="text" class="form-control bg-light border-0 small"
+                                    placeholder="Tìm kiếm học sinh theo mssv,họ tên,địa chỉ,lớp ......"
+                                    aria-label="Search" aria-describedby="basic-addon2" id="Student-search">
 
-
-                                                <!-- <button onclick="sortByName()">SORT</button> -->
-                                            </th>
-                                            <th class="dob" style="color: white;font-size: 15px;">Ngày Sinh</th>
-                                            <th class="gender" style="color: white;font-size: 15px;">Giới Tính</th>
-                                            <th class="Class" style="color: white;font-size: 15px;">Lớp</th>
-                                            <th style="color: white;font-size: 15px;">Địa Chỉ</th>
-                                            <th style="color: white;font-size: 15px; width:200px">Thư Điện Tử</th>
-                                            <th style="color: white;font-size: 15px;">Tùy Chọn</th>
-                                        </tr>
-                                    </thead>
-
-                                    <tbody id="body-table">
-
-                                    </tbody>
-                                </table>
-
-
+                                <button class="btn btn-success btn-refresh-search" type="button">
+                                    <i class="fa fa-refresh" aria-hidden="true"></i>
+                                </button>
                             </div>
+                        </form>
+
+                    </nav>
+
+                    <!-- LOADING GIFT -->
+                    <div class="col-12 loading-table">
+                        <img src="./../../img/Loading-table.gif">
+                    </div>
+                    <!-- End loading gift -->
+                    <div class="card-body">
+                        <div class="table-responsive">
+
+                            <table class="table table-bordered hidden" id="dataTable" width="100%" cellspacing="0">
+                                <thead style="background-color: #ffff">
+                                    <tr
+                                        style="background-image: linear-gradient(to right, rgb(64,201,126) , rgb(26,188,156)); font-size: 12px;">
+                                        <th class="serial" style="color: white;font-size: 15px;">STT</th>
+                                        <th style="color: white;font-size: 15px;">MSSV</th>
+                                        <th style="color: white;font-size: 15px;">
+                                            Họ và Tên
+
+
+                                            <!-- <button onclick="sortByName()">SORT</button> -->
+                                        </th>
+                                        <th class="dob" style="color: white;font-size: 15px;">Ngày Sinh</th>
+                                        <th class="gender" style="color: white;font-size: 15px;">Giới Tính</th>
+                                        <th class="Class" style="color: white;font-size: 15px;">Lớp</th>
+                                        <th style="color: white;font-size: 15px;">Địa Chỉ</th>
+                                        <th style="color: white;font-size: 15px; width:200px">Thư Điện Tử</th>
+                                        <th style="color: white;font-size: 15px;">Tùy Chọn</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody id="body-table">
+
+                                </tbody>
+                            </table>
+
+
                         </div>
                     </div>
-
                 </div>
+
             </div>
             <!-- /.container -->
 

@@ -14,3 +14,12 @@ tr th {
   font-size: 15px;
   color: #000000d4;
 }
+#body-table tr {
+  font-size: 15px;
+}
+#body-table tr:hover {
+  background-color: #1cc88a;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+}

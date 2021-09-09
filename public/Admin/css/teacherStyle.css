@@ -39,7 +39,7 @@ tfoot {
 
 /* only used for background overlay not needed for centering */
 form:before {
-  content: "";
+  content: '';
   height: 100%;
   left: 0;
   position: absolute;
@@ -48,4 +48,22 @@ form:before {
   background-color: rgba(59, 59, 59, 0.767);
   z-index: -1;
   border-radius: 10px;
+}
+#upload tr {
+  font-size: 15px;
+}
+#upload tr:hover {
+  background-color: #1cc88a;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+}
+#upload tr button {
+  background-color: #1cc88a4d;
+}
+#upload tr button .fa-edit {
+  color: #f6c23e;
+}
+#upload tr button .fa-trash-alt {
+  color: rgb(231 74 59);
 }
