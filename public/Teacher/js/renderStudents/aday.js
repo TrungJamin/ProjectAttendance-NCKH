@@ -1,31 +1,31 @@
-const dataOfDay = document.querySelector(".table-day");
-const aDay = document.querySelector(".day-now");
-const tableDay = document.querySelector(".table-list-day");
+const dataOfDay = document.querySelector('.table-day');
+const aDay = document.querySelector('.day-now');
+const tableDay = document.querySelector('.table-list-day');
 
-const nextday = document.querySelector(".next-day");
-const backday = document.querySelector(".previous-day");
-const nowday = document.querySelector(".now-day");
+const nextday = document.querySelector('.next-day');
+const backday = document.querySelector('.previous-day');
+const nowday = document.querySelector('.now-day');
 
-const searchDay = document.getElementById("day-search");
-const dateExportDay = document.querySelector("#data-day-export");
+const searchDay = document.getElementById('day-search');
+const dateExportDay = document.querySelector('#data-day-export');
 
 let day = new Date().getDate();
 let month = new Date().getMonth() + 1;
 let year = new Date().getFullYear();
 
 function DateNowFormat(day, month, year) {
-  let tmp = day + "-" + month + "-" + year;
+  let tmp = day + '-' + month + '-' + year;
   return tmp;
 }
 function resetNote() {
   for (let i = 0; i < 10; i++) {
-    document.getElementById(i.toString()).innerText = "";
+    document.getElementById(i.toString()).innerText = '';
   }
 }
 function getDate(day, month, year) {
   let tmp;
-  if (day < 10) tmp = month + "-0" + day + "-" + year;
-  else tmp = month + "-" + day + "-" + year;
+  if (day < 10) tmp = month + '-0' + day + '-' + year;
+  else tmp = month + '-' + day + '-' + year;
   return tmp;
 }
 
@@ -50,7 +50,7 @@ function createArrayAttendance(array) {
 
 const formatNumber = (number) => {
   if (number < 10) {
-    return "0" + number;
+    return '0' + number;
   }
   return number;
 };
@@ -61,28 +61,31 @@ function renderDay(listStudents, d, m, y) {
   day = d;
   month = m;
   year = y;
-  aDay.innerText = "Ngày " + DateNowFormat(d, m, y);
-  dateExportDay.setAttribute("export", aDay.innerText);
+  aDay.innerText = 'Ngày ' + DateNowFormat(d, m, y);
+  dateExportDay.setAttribute('export', aDay.innerText);
   inputSearchDate.value = formatDateSearch(y, m, d);
-  tableDay.innerHTML = "";
+  tableDay.innerHTML = '';
   listStudents.map((student, index) => {
-    const tr = document.createElement("tr");
-    const td = document.createElement("td");
+    const tr = document.createElement('tr');
+    const td = document.createElement('td');
     let att = getAttendanceOfDay(student.attendance, getDate(d, m, y));
     const renderMorning = () => {
       let renderAtt = att.data.morning.map((item) => {
         const style = item.status
-          ? ""
+          ? ''
           : item.asked
-          ? "color:#06ad35"
-          : "color:red";
+          ? 'color:#06ad35'
+          : 'color:red';
         return `<td id="attendance" style=${style}> ${
-          item.status ? "" : item.asked ? "P" : "V"
+          item.status ? '' : item.asked ? 'P' : 'V'
         }</td>
       `;
       });
       let renderTmp = createArrayAttendance(att.data.morning).map(
-        (item) => `<td> ${item.status ? "" : item.asked ? "P" : "V"}</td>`
+        (item) =>
+          `<td id="attendance"> ${
+            item.status ? '' : item.asked ? 'P' : 'V'
+          }</td>`
       );
       return renderAtt.concat(renderTmp);
     };
@@ -90,24 +93,24 @@ function renderDay(listStudents, d, m, y) {
     const renderAfternoon = () => {
       let renderAtt = att.data.afternoon.map((item) => {
         const style = item.status
-          ? ""
+          ? ''
           : item.asked
-          ? "color:#06ad35"
-          : "color:red";
+          ? 'color:#06ad35'
+          : 'color:red';
         return `<td id="attendance" style=${style}> ${
-          item.status ? "" : item.asked ? "P" : "V"
+          item.status ? '' : item.asked ? 'P' : 'V'
         }</td>
         `;
       });
 
       let renderTmp = createArrayAttendance(att.data.afternoon).map((item) => {
         const style = item.status
-          ? ""
+          ? ''
           : item.asked
-          ? "color:#06ad35"
-          : "color:red";
-        return `<td style=${style}> ${
-          item.status ? "" : item.asked ? "P" : "V"
+          ? 'color:#06ad35'
+          : 'color:red';
+        return `<td id="attendance" style=${style}> ${
+          item.status ? '' : item.asked ? 'P' : 'V'
         }</td>`;
       });
       console.log(renderAtt.concat(renderTmp));
@@ -116,45 +119,45 @@ function renderDay(listStudents, d, m, y) {
     let contentTr = `
     <td>${index + 1}</td>
     <td> ${student.id} </td>
-    <td>${String(student.firstName).replaceAll(",", " ")}</td>
+    <td>${String(student.firstName).replaceAll(',', ' ')}</td>
     <td>${student.lastName}</td>
-    ${renderMorning().join("")}
-    ${renderAfternoon().join("")}
+    ${renderMorning().join('')}
+    ${renderAfternoon().join('')}
     `;
     tr.innerHTML = contentTr;
-    const note = document.createElement("p");
-    note.setAttribute("class", "noted");
-    note.setAttribute("id", student.id);
+    const note = document.createElement('p');
+    note.setAttribute('class', 'noted');
+    note.setAttribute('id', student.id);
 
-    let contextNote = att.data.note + " ";
-    note.innerText = `"${String(contextNote).replace(",", "")}"`;
-    note.addEventListener("click", (e) => {
+    let contextNote = att.data.note + ' ';
+    note.innerText = `"${String(contextNote).replace(',', '')}"`;
+    note.addEventListener('click', (e) => {
       resetNote();
-      document.querySelector(".panel-name-note").innerText =
-        "Họ Tên: " + student.name;
+      document.querySelector('.panel-name-note').innerText =
+        'Họ Tên: ' + student.name;
       let length = 0;
       att.data.morning.forEach((item, index) => {
-        const subject = item.code.split("-")[1];
-        document.getElementById(index).innerText = "";
+        const subject = item.code.split('-')[1];
+        document.getElementById(index).innerText = '';
         document.getElementById(index).innerText =
-          subject.toUpperCase() + " : " + item.note;
+          subject.toUpperCase() + ' : ' + item.note;
         length++;
       });
       length = 5;
       att.data.afternoon.forEach((item) => {
-        const subject = item.code.split("-")[1];
+        const subject = item.code.split('-')[1];
         document.getElementById(length.toString()).innerText =
-          subject.toUpperCase() + " : " + item.note;
+          subject.toUpperCase() + ' : ' + item.note;
         length++;
       });
-      document.querySelector(".note-date").classList.remove("d-none");
+      document.querySelector('.note-date').classList.remove('d-none');
     });
-    td.insertAdjacentElement("beforeend", note);
+    td.insertAdjacentElement('beforeend', note);
     tr.append(td);
     tableDay.append(tr);
   });
 }
-nextday.addEventListener("click", (e) => {
+nextday.addEventListener('click', (e) => {
   e.preventDefault();
   day++;
   if (day > maxDay(month, year)) {
@@ -168,7 +171,7 @@ nextday.addEventListener("click", (e) => {
   }
   renderDay(listStudents, day, month, year);
 });
-backday.addEventListener("click", (e) => {
+backday.addEventListener('click', (e) => {
   e.preventDefault();
   day--;
   if (day < 1) {
@@ -183,7 +186,7 @@ backday.addEventListener("click", (e) => {
   }
   renderDay(listStudents, day, month, year);
 });
-nowday.addEventListener("click", (e) => {
+nowday.addEventListener('click', (e) => {
   e.preventDefault();
   day = new Date().getDate();
   month = new Date().getMonth() + 1;
@@ -191,24 +194,24 @@ nowday.addEventListener("click", (e) => {
   renderDay(listStudents, day, month, year);
 });
 
-const cancel = document.querySelectorAll(".panel-cancel");
+const cancel = document.querySelectorAll('.panel-cancel');
 cancel.forEach((e) => {
-  e.addEventListener("click", (e) => {
-    document.querySelectorAll(".box-screen").forEach((e) => {
-      e.classList.add("d-none");
+  e.addEventListener('click', (e) => {
+    document.querySelectorAll('.box-screen').forEach((e) => {
+      e.classList.add('d-none');
     });
   });
 });
 
-searchDay.addEventListener("input", (e) => {
+searchDay.addEventListener('input', (e) => {
   e.preventDefault();
   let value = e.target.value;
 
   if (value && value.trim().length > 0) {
     value = value
-      .split(" ")
-      .filter((item) => item != "")
-      .join(" ")
+      .split(' ')
+      .filter((item) => item != '')
+      .join(' ')
       .toLowerCase();
     let tmp = listStudents.filter((student) => {
       return (
@@ -221,15 +224,15 @@ searchDay.addEventListener("input", (e) => {
     renderDay(listStudents, day, month, year);
   }
 });
-const resetTableDay = document.querySelector("#btn-refresh-day");
-resetTableDay.addEventListener("click", () => {
+const resetTableDay = document.querySelector('#btn-refresh-day');
+resetTableDay.addEventListener('click', () => {
   renderDay(listStudents, day, month, year);
-  searchDay.value = "";
+  searchDay.value = '';
 });
 
-const inputSearchDate = document.querySelector("#input-search-date");
+const inputSearchDate = document.querySelector('#input-search-date');
 
-inputSearchDate.addEventListener("change", (e) => {
+inputSearchDate.addEventListener('change', (e) => {
   const date = new Date(inputSearchDate.value);
   day = date.getDate();
   month = date.getMonth() + 1;

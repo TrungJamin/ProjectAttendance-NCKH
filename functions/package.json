@@ -4,7 +4,7 @@
   "scripts": {
     "serve": "firebase emulators:start --only functions",
     "shell": "firebase functions:shell",
-    "start": "Node test.js",
+    "start": "Node index.js",
     "deploy": "firebase deploy --only functions",
     "logs": "firebase functions:log"
   },
