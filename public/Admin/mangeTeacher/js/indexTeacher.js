@@ -1,5 +1,6 @@
 var body = document.querySelector("#upload");
 var listOfTeachers = [];
+var listOfTeachersToSearch = [];
 var indexFirst = "";
 let changeIndexHtml= document.getElementById("index-admin-teacher-info-page");
 
@@ -33,6 +34,21 @@ function formatObjectClassAndTeach(s) {
   });
   return stringOut;
 }
+
+// get all for search 
+db.collection("Teachers")
+   
+  .onSnapshot(async function (querySnapshot) {
+    listOfTeachersToSearch = [];
+    await querySnapshot.forEach(function (doc) {
+      let tamp = doc.data();
+      tamp.docId = doc.id;
+      listOfTeachersToSearch.push(tamp);
+    });
+
+    
+    
+  });
 
 // Get data teacher and put into "listOfTeachers"
 db.collection("Teachers")
@@ -169,6 +185,7 @@ async function clickNextPage() {
     renderTable(listOfTeachers);
     
   } else {
+    document.querySelector("#loadingTeacher").classList.add("d-none");
     listOfTeachers = copyList;
   }
 

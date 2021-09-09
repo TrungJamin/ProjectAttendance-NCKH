@@ -74,7 +74,6 @@ function searchAll(e){
 
 
   if( value==""){
-
     reRenderNotParam();
   }
   else{
@@ -83,7 +82,7 @@ function searchAll(e){
     .filter((item) => item != "")
     .join(" ")
     .toLowerCase();
-  let tmp = listOfTeachers.filter((teacher) => {
+  let tmp = listOfTeachersToSearch.filter((teacher) => {
     return (
       teacher.name.toLowerCase().includes(value) ||
       teacher.id.toString().toLowerCase().includes(value) ||
