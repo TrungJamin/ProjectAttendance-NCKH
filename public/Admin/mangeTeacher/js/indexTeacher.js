@@ -1,8 +1,11 @@
 var body = document.querySelector("#upload");
 var listOfTeachers = [];
+var indexFirst = "";
+let changeIndexHtml= document.getElementById("index-admin-teacher-info-page");
 
-var DefaultNumberTeacherOnePage=10;
-var indexPageOfTeacher=1;
+
+var DefaultNumberTeacherOnePage = 5;
+let indexPageOfTeacher = 1;
 
 // format obj to strin chuyaarn
 function formatObjectClassAndTeach(s) {
@@ -16,16 +19,14 @@ function formatObjectClassAndTeach(s) {
     }
   }
 
-  s.forEach((e,index) => {
+  s.forEach((e, index) => {
     if (e.class == "") {
       stringOut += " ; " + e.subject;
     } else {
-      var br=""
-      if(index==0){
-
-      }
-      else{
-        br="<br>"
+      var br = "";
+      if (index == 0) {
+      } else {
+        br = "<br>";
       }
       stringOut += br + e.class + " : " + e.subject;
     }
@@ -34,42 +35,50 @@ function formatObjectClassAndTeach(s) {
 }
 
 // Get data teacher and put into "listOfTeachers"
-db.collection("Teachers").onSnapshot(async function (querySnapshot) {
-  listOfTeachers = [];
-  await querySnapshot.forEach(function (doc) {
-    let tamp = doc.data();
-    tamp.docId = doc.id;
-    listOfTeachers.push(tamp);
+db.collection("Teachers")
+  .limit(DefaultNumberTeacherOnePage)
+  .onSnapshot(async function (querySnapshot) {
+    listOfTeachers = [];
+    await querySnapshot.forEach(function (doc) {
+      let tamp = doc.data();
+      tamp.docId = doc.id;
+      listOfTeachers.push(tamp);
+    });
+
+    indexFirst = listOfTeachers[listOfTeachers.length - 1].id;
+
+    document.querySelector("#loadingTeacher").classList.add("d-none");
+    renderTable(listOfTeachers);
   });
 
-  document.querySelector("#loadingTeacher").classList.add("d-none")
-  renderTable(listOfTeachers);
-});
-
-
-
 function renderAddElementInTable(e) {
-
-
-  var date=new Date(e.dataOfBirth);
+  var date = new Date(e.dataOfBirth);
   var options = {
     year: "numeric",
     month: "2-digit",
-    day: "numeric"
+    day: "numeric",
   };
-  date=date.toLocaleDateString("en", options);
-  
-  var monday=formatObjectClassAndTeach(  e.subjectsAndClass ).trim();
+  date = date.toLocaleDateString("en", options);
+
+  var monday = formatObjectClassAndTeach(e.subjectsAndClass).trim();
   let node = `  
         
         <td class="text-center">${e.id}</td>
         <td class="text-center">${e.name}</td>
         <td class="text-center">${e.gender == "true" ? "Nam" : "Nữ"}</td>
-        <td class="text-center">${e.group=='nation'? "Tự nhiên" : "Xã hội"}</td>
-        <td class="text-center">${e.classLeader==''?"không chủ nhiệm":e.classLeader}</td>
-        <td class="text-center">${monday.trim()==''?"Chưa có môn dạy":monday} </td>
+        <td class="text-center">${
+          e.group == "nation" ? "Tự nhiên" : "Xã hội"
+        }</td>
+        <td class="text-center">${
+          e.classLeader == "" ? "không chủ nhiệm" : e.classLeader
+        }</td>
+        <td class="text-center">${
+          monday.trim() == "" ? "Chưa có môn dạy" : monday
+        } </td>
         <td class="text-center">${e.email}</td>
-        <td class="text-center">${date=="Invalid Date"?'Chưa nhập ngày sinh':date}</td> 
+        <td class="text-center">${
+          date == "Invalid Date" ? "Chưa nhập ngày sinh" : date
+        }</td> 
      `;
 
   var td = document.createElement("td");
@@ -98,48 +107,71 @@ function reRenderNotParam() {
 }
 function renderTable(list) {
   clearTable();
-  var indexStart=(indexPageOfTeacher-1)*DefaultNumberTeacherOnePage;
-  var indexStop=indexPageOfTeacher*DefaultNumberTeacherOnePage
-  /// code here
+   
 
-  console.log(indexStart, indexStop)
-  console.log(list);
-  let tampList= list.slice(indexStart, indexStop)
-  tampList.forEach((e) => renderAddElementInTable(e));
+  
+  list.forEach((e) => renderAddElementInTable(e));
   if (list.length == 0) {
     setNoResult();
   }
 }
 
-function clickPrePage(){
-  let maxPage=Math.ceil(listOfTeachers.length/DefaultNumberTeacherOnePage);
+async function clickPrePage() {
+   
 
-  if( indexPageOfTeacher>1){
-    // đc pre page
-    indexPageOfTeacher--;
+  if (listOfTeachers[listOfTeachers.length - 1].id !== indexFirst) {
+    document.querySelector("#loadingTeacher").classList.remove("d-none");
+    const next = db
+      .collection("Teachers")
+      .orderBy("id")
+      .endBefore(listOfTeachers[0].id)
+      .limitToLast(DefaultNumberTeacherOnePage);
 
-    let indexPageShowInScreen = document.getElementById('index-admin-teacher-info-page');
-    indexPageShowInScreen.innerHTML=String(indexPageOfTeacher);
+    const dataResult = await next.get();
 
+    listOfTeachers = [];
+    await dataResult.forEach(function (doc) {
+      let tamp = doc.data();
+      tamp.docId = doc.id;
+      listOfTeachers.push(tamp);
+    });
+
+    document.querySelector("#loadingTeacher").classList.add("d-none");
     renderTable(listOfTeachers);
-
+    indexPageOfTeacher--;
+    changeIndexHtml.innerHTML =String(indexPageOfTeacher);
   }
-
 }
 
+async function clickNextPage() {
 
-function clickNextPage(){
+    document.querySelector("#loadingTeacher").classList.remove("d-none");
+  const next = db
+    .collection("Teachers")
+    .orderBy("id")
+    .startAfter(listOfTeachers[listOfTeachers.length - 1].id)
+    .limit(DefaultNumberTeacherOnePage);
 
-  let maxPage=Math.ceil(listOfTeachers.length/DefaultNumberTeacherOnePage);
+  const dataResult = await next.get();
+  let copyList = listOfTeachers;
+  listOfTeachers = [];
 
-  if( indexPageOfTeacher<maxPage){
+  await dataResult.forEach(function (doc) {
+    let tamp = doc.data();
+    tamp.docId = doc.id;
+    listOfTeachers.push(tamp);
+  });
 
+  if (listOfTeachers.length !== 0) {
     indexPageOfTeacher++;
-      document.getElementById('index-admin-teacher-info-page').innerHTML=String(indexPageOfTeacher);
-    // đc next page
-    renderTable(listOfTeachers)
+    changeIndexHtml.innerHTML =String(indexPageOfTeacher);
+    document.querySelector("#loadingTeacher").classList.add("d-none");
+    renderTable(listOfTeachers);
+    
+  } else {
+    listOfTeachers = copyList;
   }
-  
+
 
   
 }
