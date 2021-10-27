@@ -40,8 +40,8 @@ linksWeek.addEventListener("click", (e) => {
 });
 linksMonth.addEventListener("click", (e) => {
   e.preventDefault();
-  pre = 0;
-  next = 0;
+  nYear = new Date().getFullYear();
+  nMonth = new Date().getMonth()+1;
   monthNow.innerText = MonthNow();
   renderMonth(listStudents);
   const open = document.querySelectorAll(".open");

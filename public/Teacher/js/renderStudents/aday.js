@@ -113,7 +113,7 @@ function renderDay(listStudents, d, m, y) {
           item.status ? '' : item.asked ? 'P' : 'V'
         }</td>`;
       });
-      console.log(renderAtt.concat(renderTmp));
+  
       return renderAtt.concat(renderTmp);
     };
     let contentTr = `

@@ -29,22 +29,22 @@ let demo = {
 // }
 db.collection(`Students`).onSnapshot((snapshot) => {
   const date = new Date();
-  const month = 7;
+  const month = 5;
   const year = date.getFullYear();
   const maxDay = new Date(year, month, 0).getDate();
 
   snapshot.forEach((doc) => {
-    for (let i = 1; i <= maxDay; i++) {
+    for (let i = 3; i <= maxDay; i++) {
       let date = new Date(`${month}-${i}-${year}`);
       if (i < 10) {
         db.collection('Students')
           .doc(doc.id)
           .collection('attendance')
-          .doc(`${month}-0${i}-${year}`)
+          .doc(`0${month}-0${i}-${year}`)
           .set({
             ...demo,
             week: getWeekNow(date),
-            status: false,
+            status: true,
             asked: true,
             note: '',
           })
@@ -55,7 +55,7 @@ db.collection(`Students`).onSnapshot((snapshot) => {
         db.collection('Students')
           .doc(doc.id)
           .collection('attendance')
-          .doc(`${month}-${i}-${year}`)
+          .doc(`0${month}-${i}-${year}`)
           .set({
             ...demo,
             week: getWeekNow(date),

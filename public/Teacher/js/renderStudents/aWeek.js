@@ -81,7 +81,8 @@ function renderWeek(listStudents) {
       let d = new Date(date.day);
       const dayNow = new Date();
       const isDayNow = d.getDate() === dayNow.getDate();
-      const styleDayNow = isDayNow ? `background-color:rgb(119,171,89)` : '';
+      const isMonthNow =  d.getMonth() === dayNow.getMonth();
+      const styleDayNow = (isDayNow && isMonthNow) ? `background-color:rgb(119,171,89)` : '';
       return `
         <th class= "typeDay" id ="${
           date.day
@@ -90,7 +91,7 @@ function renderWeek(listStudents) {
       )} , ${d.getDate()} </th>
         `;
     });
-
+    console.log(database[1].attendance);
     const field = `<th>STT</th>
     <th>MÃ HS</th>
     <th>Họ tên đệm</th>
@@ -166,19 +167,19 @@ nowweek.addEventListener('click', (e) => {
 searchWeek.addEventListener('input', (e) => {
   e.preventDefault();
   let value = e.target.value;
-
+  console.log(value);
   if (value && value.trim().length > 0) {
     value = value
       .split(' ')
       .filter((item) => item != '')
       .join(' ')
       .toLowerCase();
+   
     let tmp = listStudents.filter((student) => {
       return (
         student.name.toLowerCase().includes(value) ||
         student.id.toString().toLowerCase().includes(value) ||
         student.gender.toLowerCase().includes(value) ||
-        student.phone.toLowerCase().includes(value) ||
         student.address.toLowerCase().includes(value)
       );
     });

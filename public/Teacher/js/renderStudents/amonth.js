@@ -9,28 +9,28 @@ const searchMonth = document.getElementById('month-search');
 
 const setMonthExport = document.querySelector('#data-month-export');
 
-let pre = 0;
-let next = 0;
+let countHAbsent = 0;
+let countAbsent = 0;
+// tạo biến năm ; 
+let nMonth =  new Date().getMonth() + 1;
+let nYear = new Date().getFullYear();
 function MonthNow() {
-  let d = new Date();
-  const month =
-    'Tháng ' + (d.getMonth() + 1 + next - pre) + '/' + d.getFullYear();
-  setMonthExport.setAttribute('export', month);
-  return month;
+  const title =
+    'Tháng ' + nMonth + '/' + nYear ;
+  setMonthExport.setAttribute('export', title);
+  return title;
 }
 monthNow.innerText = MonthNow();
 
-let countHAbsent = 0;
-let countAbsent = 0;
-function listMonth(listStudents, aMonth) {
+
+function listMonth(listStudents, aMonth, aYear) {
   let listMonth = [];
 
   listStudents.forEach((student) => {
     let att = student.attendance.filter((atd) => {
       let month = atd.day.split('-');
-      return month[0] == aMonth;
+      return month[0] == aMonth && month[2] == aYear;
     });
-
     listMonth.push({
       ...student,
       attendance: att,
@@ -43,12 +43,12 @@ function listMonth(listStudents, aMonth) {
 const notification = document.querySelector('.container-date-off');
 const nameStudentOfDayOff = document.querySelector('.panel-name-notice');
 const listDayOff = document.querySelector('#list-date-off');
+
 function renderMonth(listStudents) {
   tableMonth.innerHTML = '';
-  let d = new Date();
   countHAbsent = 0;
   countAbsent = 0;
-  let list = listMonth(listStudents, d.getMonth() + 1 + next - pre);
+  let list = listMonth(listStudents, nMonth, nYear);
 
   list.forEach((student, index) => {
     const tr = document.createElement('tr');
@@ -141,20 +141,28 @@ function renderMonth(listStudents) {
 
 nextmonth.addEventListener('click', (e) => {
   e.preventDefault();
-  next++;
+  ++nMonth;
+  if(nMonth == 13){
+    nMonth = 1
+    nYear++;
+  }
   monthNow.innerText = MonthNow();
   renderMonth(listStudents);
 });
 backmonth.addEventListener('click', (e) => {
   e.preventDefault();
-  pre++;
+  nMonth--;
+  if(nMonth == 0){
+    nMonth = 12;
+    nYear--;
+  }
   monthNow.innerText = MonthNow();
   renderMonth(listStudents);
 });
 nowMonth.addEventListener('click', (e) => {
   e.preventDefault();
-  pre = 0;
-  next = 0;
+  nYear = new Date().getFullYear();
+  nMonth = new Date().getMonth()
   monthNow.innerText = MonthNow();
   renderMonth(listStudents);
 });
@@ -173,7 +181,6 @@ searchMonth.addEventListener('input', (e) => {
         student.name.toLowerCase().includes(value) ||
         student.id.toString().toLowerCase().includes(value) ||
         student.gender.toLowerCase().includes(value) ||
-        student.phone.toLowerCase().includes(value) ||
         student.address.toLowerCase().includes(value)
       );
     });
