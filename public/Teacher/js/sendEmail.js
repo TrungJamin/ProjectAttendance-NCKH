@@ -134,6 +134,7 @@ formSendMail.addEventListener("submit", async function (event) {
           ++number;
           document.querySelector(".send-to").innerText =
             "Đã Gửi Mail Cho " + student.name;
+            console.log(student.name);
         })
         .catch((err) => {
           console.log(err.message);

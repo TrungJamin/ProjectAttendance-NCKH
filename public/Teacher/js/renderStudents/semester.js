@@ -3,17 +3,20 @@ const previousSemester = document.querySelector('.previous-semester');
 const nextSemester = document.querySelector('.next-semester');
 const semesterNow = document.querySelector('.semester-now');
 const exportSemester = document.querySelector('#data-semester-export');
+let hk = 1;
 nextSemester.addEventListener('click', () => {
   semesterNow.innerHTML = 'Học kỳ 2';
-  renderSemester(listStudents, 2);
+  hk = 2
+  renderSemester(listStudents);
 });
 previousSemester.addEventListener('click', () => {
   semesterNow.innerHTML = 'Học kỳ 1';
-  renderSemester(listStudents, 1);
+  hk = 1;
+  renderSemester(listStudents);
 });
 
 const bodySemester = document.querySelector('.table-list-semester');
-function dateOfSemester(listStudents, semester = 1) {
+function dateOfSemester(listStudents, semester) {
   let listSemester = [];
   listStudents.forEach((student) => {
     let attendance = student.attendance.filter((att) => {
@@ -24,15 +27,18 @@ function dateOfSemester(listStudents, semester = 1) {
       attendance: attendance,
     });
   });
+ 
   return listSemester;
 }
-function renderSemester(listStudents, semester = 1) {
+function renderSemester(listStudents) {
+  let s = 'Học Kỳ ' + hk
+  semesterNow.innerHTML = s;
   bodySemester.innerHTML = '';
   exportSemester.setAttribute(
     'export',
-    'Học Kỳ ' + semester + ' ' + new Date().getFullYear()
+    'Học Kỳ ' + hk + ' ' + new Date().getFullYear()
   );
-  dateOfSemester(listStudents, semester).forEach((student, index) => {
+  dateOfSemester(listStudents, hk).forEach((student, index) => {
     const tr = document.createElement('tr');
     countNotAbsent = 0;
     countAbsent = 0;
@@ -119,9 +125,7 @@ function renderSemester(listStudents, semester = 1) {
   });
 }
 
-document.querySelector('.semester-now').innerText = `Học Kì ${getSemester(
-  getWeekNow(new Date())
-)}`;
+
 const search = document.querySelector('#semester-search');
 search.addEventListener('input', (e) => {
   e.preventDefault();
@@ -138,7 +142,6 @@ search.addEventListener('input', (e) => {
         student.name.toLowerCase().includes(value) ||
         student.id.toString().toLowerCase().includes(value) ||
         student.gender.toLowerCase().includes(value) ||
-        student.phone.toLowerCase().includes(value) ||
         student.address.toLowerCase().includes(value)
       );
     });

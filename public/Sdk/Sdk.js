@@ -34,6 +34,7 @@ function differentDays(date, date2) {
     dayOfTheYear(date.getDate(), date.getMonth() + 1, date.getFullYear()) -
       dayOfTheYear(date2.getDate(), date2.getMonth() + 1, date2.getFullYear())
   );
+ 
   if (date.getFullYear() == date2.getFullYear()) return diff;
   let sum = 0;
   let tempYear = date.getFullYear();
@@ -45,7 +46,8 @@ function differentDays(date, date2) {
   for (let i = maxYear; i > tempYear; i--) {
     sum += dayOfTheYear(31, 12, i);
   }
-  return sum + diff - 1;
+ 
+  return sum - diff ;
 }
 
 function getWeekNow(date) {

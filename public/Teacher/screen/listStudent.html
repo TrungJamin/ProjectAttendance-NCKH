@@ -65,7 +65,7 @@
                 <!-- Default panel contents -->
                 <div class="panel-heading ">
                     <div class="panel-name panel-name-note">Họ Tên </div>
-                    <div class="panel-cancel  delete"><i class="fas fa-times fa-lg"></i></div>
+                    <div class="panel-cancel delete"><i class="fas fa-times fa-lg"></i></div>
                 </div>
 
                 <!-- Table -->
@@ -135,7 +135,7 @@
 
         <div id="content" class="content none">
 
-            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+            <nav class="mb-4 bg-white shadow navbar navbar-expand navbar-light topbar static-top">
                 <select id="export-excel" class="form-control" aria-label=".form-select-lg">
                     <option selected>Xuất file Excel
                         <i class="fa fa-download" aria-hidden="true"></i>
@@ -167,17 +167,17 @@
             <div class="container-fluid">
 
                 <!-- DataTales of Student -->
-                <div class="shadow mb-4 col-12">
+                <div class="mb-4 shadow col-12">
 
 
                     <div class="card-body">
-                        <div class="loading-table col-12 m-auto">
+                        <div class="m-auto loading-table col-12">
                             <img src="./../../img/Loading-table.gif" alt="Loading" />
                         </div>
                         <div class="table-week">
                             <div class="table-responsive database">
-                                <div class="table-header text-center">
-                                    <h3 class="week-now pb-2">Loading...</h3>
+                                <div class="text-center table-header">
+                                    <h3 class="pb-2 week-now">Loading...</h3>
                                     <div class="d-none d-sm-inline-block form-inline navbar-search" style="width:35%">
                                         <div class="input-group">
                                             <input type="text" class="form-control"
@@ -198,7 +198,7 @@
                                             class="next-week fas fa-chevron-circle-right fa-lg"></i></a>
                                     <span class="now-week" style="cursor: pointer;">Tuần Hôm Nay</span>
                                 </div>
-                                <table id="data-week" class="table table-bordered hidden data-student-view scroll-table"
+                                <table id="data-week" class="hidden table table-bordered data-student-view scroll-table"
                                     id="dataTable" width="100%" cellspacing="0">
 
                                     <thead class="date-of-week" style="background-color: #ffff ; color:#00000082">
@@ -230,11 +230,11 @@
                         </div>
                         <div id="data-month" class="table-month">
                             <div class="table-responsive database d-none">
-                                <div class="table-header text-center">
-                                    <h3 class="month-now pb-2">Loading</h3>
+                                <div class="text-center table-header">
+                                    <h3 class="pb-2 month-now">Loading</h3>
                                     <div class="d-none d-sm-inline-block form-inline navbar-search" style="width:35%">
                                         <div class="input-group">
-                                            <input type="text" class="form-control border-0 small"
+                                            <input type="text" class="form-control small"
                                                 placeholder="Tìm kiếm học sinh theo mssv hoặc họ tên ..."
                                                 aria-label="Search" aria-describedby="basic-addon2" id="month-search">
 
@@ -278,15 +278,15 @@
                         </div>
                         <div class="table-day open">
                             <div class="table-responsive database d-none">
-                                <div class="table-header text-center" style="width:100%">
-                                    <input type="date" class="form-control border-0 small" aria-label="Search"
+                                <div class="text-center table-header" style="width:100%">
+                                    <input type="date" class="border-0 form-control small" aria-label="Search"
                                         aria-describedby="basic-addon2" id="input-search-date" />
-                                    <h3 class="day-now pb-2">Loading</h3>
+                                    <h3 class="pb-2 day-now">Loading</h3>
 
                                     <div class="d-none d-sm-inline-block form-inline navbar-search" style="width:35%">
 
                                         <div class="input-group">
-                                            <input type="text" class="form-control border-0 small"
+                                            <input type="text" class="form-control small"
                                                 placeholder="Tìm kiếm học sinh theo mssv hoặc họ tên..."
                                                 aria-label="Search" aria-describedby="basic-addon2" id="day-search">
 
@@ -345,11 +345,11 @@
 
                         <div id="data-semester" class="table-semester">
                             <div class="table-responsive database d-none">
-                                <div class="table-header text-center">
-                                    <h3 class="semester-now pb-2">Loading</h3>
+                                <div class="text-center table-header">
+                                    <h3 class="pb-2 semester-now">Loading</h3>
                                     <div class="d-sm-inline-block form-inline navbar-search" style="width:35%">
                                         <div class="input-group">
-                                            <input type="text" class="form-control border-0 small"
+                                            <input type="text" class="form-control small"
                                                 placeholder="Tìm kiếm học sinh theo mssv hoặc họ tên ..."
                                                 aria-label="Search" aria-describedby="basic-addon2"
                                                 id="semester-search" />
@@ -365,7 +365,7 @@
                                             class=" fas fa-chevron-circle-left fa-lg"></i></a>
                                     <a class="next-semester text-success"><i
                                             class=" fas fa-chevron-circle-right fa-lg"></i></a>
-                                    <span class="now-semester">Học Kỳ</span>
+                                   
                                 </div>
                                 <table class="table table-bordered data-student-view scroll-table" id="dataTable"
                                     width="100%" cellspacing="0">
@@ -409,7 +409,7 @@
 
 
     <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
+    <a class="rounded scroll-to-top" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
 

@@ -91,7 +91,7 @@ function renderWeek(listStudents) {
       )} , ${d.getDate()} </th>
         `;
     });
-    console.log(database[1].attendance);
+    
     const field = `<th>STT</th>
     <th>MÃ HS</th>
     <th>Họ tên đệm</th>

@@ -24,13 +24,16 @@ function resetNote() {
 }
 function getDate(day, month, year) {
   let tmp;
-  if (day < 10) tmp = month + '-0' + day + '-' + year;
-  else tmp = month + '-' + day + '-' + year;
+  tmp = (month < 10 ) ? '0'+month : ""+month;
+  tmp = (day < 10) ? tmp + '-0' + day : tmp+"-" + day
+  tmp = tmp + "-"+year;
+ 
   return tmp;
 }
 
 function getAttendanceOfDay(attendances, date, id) {
   let attendance = {};
+  
   attendance = attendances.find((att) => {
     return att.day == date;
   });
@@ -58,104 +61,108 @@ const formatDateSearch = (y, m, d) => {
   return `${y}-${formatNumber(m)}-${formatNumber(d)}`;
 };
 function renderDay(listStudents, d, m, y) {
-  day = d;
-  month = m;
-  year = y;
-  aDay.innerText = 'Ngày ' + DateNowFormat(d, m, y);
-  dateExportDay.setAttribute('export', aDay.innerText);
-  inputSearchDate.value = formatDateSearch(y, m, d);
-  tableDay.innerHTML = '';
-  listStudents.map((student, index) => {
-    const tr = document.createElement('tr');
-    const td = document.createElement('td');
-    let att = getAttendanceOfDay(student.attendance, getDate(d, m, y));
-    const renderMorning = () => {
-      let renderAtt = att.data.morning.map((item) => {
-        const style = item.status
-          ? ''
-          : item.asked
-          ? 'color:#06ad35'
-          : 'color:red';
-        return `<td id="attendance" style=${style}> ${
-          item.status ? '' : item.asked ? 'P' : 'V'
-        }</td>
-      `;
-      });
-      let renderTmp = createArrayAttendance(att.data.morning).map(
-        (item) =>
-          `<td id="attendance"> ${
+  try {
+    aDay.innerText = 'Ngày ' + DateNowFormat(d, m, y);
+    
+    dateExportDay.setAttribute('export', aDay.innerText);
+    inputSearchDate.value = formatDateSearch(y, m, d);
+    tableDay.innerHTML = '';
+    listStudents.map((student, index) => {
+      const tr = document.createElement('tr');
+      const td = document.createElement('td');
+      let att = getAttendanceOfDay(student.attendance, getDate(d, m, y));
+      
+      const renderMorning = () => {
+        let renderAtt = att.data.morning.map((item) => {
+          const style = item.status
+            ? ''
+            : item.asked
+            ? 'color:#06ad35'
+            : 'color:red';
+          return `<td id="attendance" style=${style}> ${
             item.status ? '' : item.asked ? 'P' : 'V'
-          }</td>`
-      );
-      return renderAtt.concat(renderTmp);
-    };
-
-    const renderAfternoon = () => {
-      let renderAtt = att.data.afternoon.map((item) => {
-        const style = item.status
-          ? ''
-          : item.asked
-          ? 'color:#06ad35'
-          : 'color:red';
-        return `<td id="attendance" style=${style}> ${
-          item.status ? '' : item.asked ? 'P' : 'V'
-        }</td>
+          }</td>
         `;
-      });
+        });
+        let renderTmp = createArrayAttendance(att.data.morning).map(
+          (item) =>
+            `<td id="attendance"> ${
+              item.status ? '' : item.asked ? 'P' : 'V'
+            }</td>`
+        );
+        return renderAtt.concat(renderTmp);
+      };
 
-      let renderTmp = createArrayAttendance(att.data.afternoon).map((item) => {
-        const style = item.status
-          ? ''
-          : item.asked
-          ? 'color:#06ad35'
-          : 'color:red';
-        return `<td id="attendance" style=${style}> ${
-          item.status ? '' : item.asked ? 'P' : 'V'
-        }</td>`;
-      });
-  
-      return renderAtt.concat(renderTmp);
-    };
-    let contentTr = `
-    <td>${index + 1}</td>
-    <td> ${student.id} </td>
-    <td>${String(student.firstName).replaceAll(',', ' ')}</td>
-    <td>${student.lastName}</td>
-    ${renderMorning().join('')}
-    ${renderAfternoon().join('')}
-    `;
-    tr.innerHTML = contentTr;
-    const note = document.createElement('p');
-    note.setAttribute('class', 'noted');
-    note.setAttribute('id', student.id);
+      const renderAfternoon = () => {
+        let renderAtt = att.data.afternoon.map((item) => {
+          const style = item.status
+            ? ''
+            : item.asked
+            ? 'color:#06ad35'
+            : 'color:red';
+          return `<td id="attendance" style=${style}> ${
+            item.status ? '' : item.asked ? 'P' : 'V'
+          }</td>
+          `;
+        });
 
-    let contextNote = att.data.note + ' ';
-    note.innerText = `"${String(contextNote).replace(',', '')}"`;
-    note.addEventListener('click', (e) => {
-      resetNote();
-      document.querySelector('.panel-name-note').innerText =
-        'Họ Tên: ' + student.name;
-      let length = 0;
-      att.data.morning.forEach((item, index) => {
-        const subject = item.code.split('-')[1];
-        document.getElementById(index).innerText = '';
-        document.getElementById(index).innerText =
-          subject.toUpperCase() + ' : ' + item.note;
-        length++;
+        let renderTmp = createArrayAttendance(att.data.afternoon).map((item) => {
+          const style = item.status
+            ? ''
+            : item.asked
+            ? 'color:#06ad35'
+            : 'color:red';
+          return `<td id="attendance" style=${style}> ${
+            item.status ? '' : item.asked ? 'P' : 'V'
+          }</td>`;
+        });
+    
+        return renderAtt.concat(renderTmp);
+      };
+      let contentTr = `
+      <td>${index + 1}</td>
+      <td> ${student.id} </td>
+      <td>${String(student.firstName).replaceAll(',', ' ')}</td>
+      <td>${student.lastName}</td>
+      ${renderMorning().join('')}
+      ${renderAfternoon().join('')}
+      `;
+      tr.innerHTML = contentTr;
+      const note = document.createElement('p');
+      note.setAttribute('class', 'noted');
+      note.setAttribute('id', student.id);
+
+      let contextNote = att.data.note + ' ';
+      note.innerText = `${String(contextNote).replace(',', '')}`;
+      note.addEventListener('click', (e) => {
+        resetNote();
+        document.querySelector('.panel-name-note').innerText =
+          'Họ Tên: ' + student.name;
+        let length = 0;
+        att.data.morning.forEach((item, index) => {
+          const subject = item.code.split('-')[1];
+          document.getElementById(index).innerText = '';
+          document.getElementById(index).innerText =
+            subject.toUpperCase() + ' : ' + item.note;
+          length++;
+        });
+        length = 5;
+        att.data.afternoon.forEach((item) => {
+          const subject = item.code.split('-')[1];
+          document.getElementById(length.toString()).innerText =
+            subject.toUpperCase() + ' : ' + item.note;
+          length++;
+        });
+        document.querySelector('.note-date').classList.remove('d-none');
       });
-      length = 5;
-      att.data.afternoon.forEach((item) => {
-        const subject = item.code.split('-')[1];
-        document.getElementById(length.toString()).innerText =
-          subject.toUpperCase() + ' : ' + item.note;
-        length++;
-      });
-      document.querySelector('.note-date').classList.remove('d-none');
-    });
-    td.insertAdjacentElement('beforeend', note);
-    tr.append(td);
-    tableDay.append(tr);
+      td.insertAdjacentElement('beforeend', note);
+      tr.append(td);
+      tableDay.append(tr);
   });
+  } catch (error) {
+    
+  }
+  
 }
 nextday.addEventListener('click', (e) => {
   e.preventDefault();
@@ -237,6 +244,12 @@ inputSearchDate.addEventListener('change', (e) => {
   day = date.getDate();
   month = date.getMonth() + 1;
   year = date.getFullYear();
-  if (date.getDate() && date.getMonth() && date.getFullYear())
+  
+  
+  if (date.getDate() && date.getMonth()+1 && date.getFullYear()){
+
     renderDay(listStudents, day, month, year);
+  }
+    
+
 });

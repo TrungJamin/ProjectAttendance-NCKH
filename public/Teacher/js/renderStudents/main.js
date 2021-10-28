@@ -35,6 +35,7 @@ function getStudents(className) {
                 data: doc.data(),
               });
             });
+        
             listStudents.push({ ...student, attendance: attendance });
           });
       }

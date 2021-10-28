@@ -45,98 +45,103 @@ const nameStudentOfDayOff = document.querySelector('.panel-name-notice');
 const listDayOff = document.querySelector('#list-date-off');
 
 function renderMonth(listStudents) {
-  tableMonth.innerHTML = '';
-  countHAbsent = 0;
-  countAbsent = 0;
-  let list = listMonth(listStudents, nMonth, nYear);
-
-  list.forEach((student, index) => {
-    const tr = document.createElement('tr');
-    countNotAbsent = 0;
+  try {
+    tableMonth.innerHTML = '';
+    countHAbsent = 0;
     countAbsent = 0;
-    const listAsked = [];
-    const listNotAsked = [];
-    student.attendance.forEach((att) => {
-      if (!att.data.status) {
-        if (att.data.asked === true) {
-          listAsked.push(att.day);
-          countAbsent++;
-        } else {
-          // console.log("name : ", student.name);
-          // console.log(att.day);
-          listNotAsked.push(att.day);
-          countNotAbsent++;
+    let list = listMonth(listStudents, nMonth, nYear);
+
+    list.forEach((student, index) => {
+      const tr = document.createElement('tr');
+      countNotAbsent = 0;
+      countAbsent = 0;
+      const listAsked = [];
+      const listNotAsked = [];
+      student.attendance.forEach((att) => {
+        if (!att.data.status) {
+          if (att.data.asked === true) {
+            listAsked.push(att.day);
+            countAbsent++;
+          } else {
+            // console.log("name : ", student.name);
+            // console.log(att.day);
+            listNotAsked.push(att.day);
+            countNotAbsent++;
+          }
         }
-      }
-    });
-    const content = `
-    <td>${index + 1}</td>
-    <td>${student.id}</td>
-    <td>${String(student.firstName).replaceAll(',', ' ')}</td>
-    <td>${student.lastName}</td>
-    `;
-
-    tr.innerHTML = content;
-    const notAbsent = document.createElement('td');
-    notAbsent.innerText = countNotAbsent;
-    notAbsent.style.cursor = 'pointer';
-    notAbsent.setAttribute('id', 'attendance');
-    const absent = document.createElement('td');
-    absent.innerText = countAbsent;
-    absent.style.cursor = 'pointer';
-    absent.setAttribute('id', 'attendance');
-
-    tr.append(absent);
-    tr.append(notAbsent);
-
-    notAbsent.addEventListener('click', (e) => {
-      notification.classList.remove('d-none');
-      nameStudentOfDayOff.innerText = 'Họ Và Tên :' + student.name;
-      document.querySelector('.month-title-date-off').innerText =
-        'Danh Sách Các Ngày Vắng Không Phép';
-      listDayOff.innerHTML = '';
-      listNotAsked.forEach((date) => {
-        const tr = document.createElement('tr');
-        tr.setAttribute('id', 'date-off');
-        const tmpDate = new Date(date);
-        const month = tmpDate.getMonth() + 1;
-        const day = tmpDate.getDate();
-        const year = tmpDate.getFullYear();
-        tr.addEventListener('click', (e) => {
-          activeDate();
-          document.querySelector('.container-date-off').classList.add('d-none');
-          renderDay(listStudents, day, month, year);
-        });
-        tr.innerText = DateNowFormat(day, month, year);
-        tr.style.cursor = 'pointer';
-        listDayOff.append(tr);
       });
-    });
-    absent.addEventListener('click', (e) => {
-      notification.classList.remove('d-none');
-      nameStudentOfDayOff.innerText = 'Họ Và Tên :' + student.name;
-      document.querySelector('.month-title-date-off').innerText =
-        'Danh Sách Các Ngày Vắng Có Phép';
-      listDayOff.innerHTML = '';
-      listAsked.forEach((date) => {
-        const tr = document.createElement('tr');
-        const tmpDate = new Date(date);
-        const month = tmpDate.getMonth() + 1;
-        const day = tmpDate.getDate();
-        const year = tmpDate.getFullYear();
-        tr.addEventListener('click', (e) => {
-          activeDate();
-          document.querySelector('.container-date-off').classList.add('d-none');
+      const content = `
+      <td>${index + 1}</td>
+      <td>${student.id}</td>
+      <td>${String(student.firstName).replaceAll(',', ' ')}</td>
+      <td>${student.lastName}</td>
+      `;
 
-          renderDay(listStudents, day, month, year);
+      tr.innerHTML = content;
+      const notAbsent = document.createElement('td');
+      notAbsent.innerText = countNotAbsent;
+      notAbsent.style.cursor = 'pointer';
+      notAbsent.setAttribute('id', 'attendance');
+      const absent = document.createElement('td');
+      absent.innerText = countAbsent;
+      absent.style.cursor = 'pointer';
+      absent.setAttribute('id', 'attendance');
+
+      tr.append(absent);
+      tr.append(notAbsent);
+
+      notAbsent.addEventListener('click', (e) => {
+        notification.classList.remove('d-none');
+        nameStudentOfDayOff.innerText = 'Họ Và Tên :' + student.name;
+        document.querySelector('.month-title-date-off').innerText =
+          'Danh Sách Các Ngày Vắng Không Phép';
+        listDayOff.innerHTML = '';
+        listNotAsked.forEach((date) => {
+          const tr = document.createElement('tr');
+          tr.setAttribute('id', 'date-off');
+          const tmpDate = new Date(date);
+          const month = tmpDate.getMonth() + 1;
+          const day = tmpDate.getDate();
+          const year = tmpDate.getFullYear();
+          tr.addEventListener('click', (e) => {
+            activeDate();
+            document.querySelector('.container-date-off').classList.add('d-none');
+            renderDay(listStudents, day, month, year);
+          });
+          tr.innerText = DateNowFormat(day, month, year);
+          tr.style.cursor = 'pointer';
+          listDayOff.append(tr);
         });
-        tr.innerText = DateNowFormat(day, month, year);
-        tr.style.cursor = 'pointer';
-        listDayOff.append(tr);
       });
+      absent.addEventListener('click', (e) => {
+        notification.classList.remove('d-none');
+        nameStudentOfDayOff.innerText = 'Họ Và Tên :' + student.name;
+        document.querySelector('.month-title-date-off').innerText =
+          'Danh Sách Các Ngày Vắng Có Phép';
+        listDayOff.innerHTML = '';
+        listAsked.forEach((date) => {
+          const tr = document.createElement('tr');
+          const tmpDate = new Date(date);
+          const month = tmpDate.getMonth() + 1;
+          const day = tmpDate.getDate();
+          const year = tmpDate.getFullYear();
+          tr.addEventListener('click', (e) => {
+            activeDate();
+            document.querySelector('.container-date-off').classList.add('d-none');
+
+            renderDay(listStudents, day, month, year);
+          });
+          tr.innerText = DateNowFormat(day, month, year);
+          tr.style.cursor = 'pointer';
+          listDayOff.append(tr);
+        });
+      });
+      tableMonth.append(tr);
     });
-    tableMonth.append(tr);
-  });
+  } catch (error) {
+    
+  }
+  
 }
 
 nextmonth.addEventListener('click', (e) => {

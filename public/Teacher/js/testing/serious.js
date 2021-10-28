@@ -1,7 +1,6 @@
 let demo = {
   morning: [],
   afternoon: [],
-
   status: true,
   asked: '',
   note: '',
@@ -29,12 +28,12 @@ let demo = {
 // }
 db.collection(`Students`).onSnapshot((snapshot) => {
   const date = new Date();
-  const month = 5;
+  const month = 1;
   const year = date.getFullYear();
   const maxDay = new Date(year, month, 0).getDate();
 
   snapshot.forEach((doc) => {
-    for (let i = 3; i <= maxDay; i++) {
+    for (let i = 1; i <= maxDay; i++) {
       let date = new Date(`${month}-${i}-${year}`);
       if (i < 10) {
         db.collection('Students')
@@ -43,6 +42,7 @@ db.collection(`Students`).onSnapshot((snapshot) => {
           .doc(`0${month}-0${i}-${year}`)
           .set({
             ...demo,
+            month : `${month}-${year}`,
             week: getWeekNow(date),
             status: true,
             asked: true,
@@ -58,6 +58,7 @@ db.collection(`Students`).onSnapshot((snapshot) => {
           .doc(`0${month}-${i}-${year}`)
           .set({
             ...demo,
+            month : `${month}-${year}`,
             week: getWeekNow(date),
             status: true,
             asked: true,
